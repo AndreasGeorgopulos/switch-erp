@@ -1,0 +1,60 @@
+version: '3.8'
+
+networks:
+  laravel:
+
+services:
+  php-apache:
+    #image: php:8.0-apache
+    container_name: switch-erp-web
+    build:
+      context: .
+      dockerfile: ./docker/Dockerfile
+    volumes:
+      - ./:/var/www/html
+      - ./docker/php-apache/default.conf:/etc/apache2/sites-enabled/000-default.conf
+    environment:
+      - max_execution_time=600
+    ports:
+      - "8500:80"
+    depends_on:
+      - db
+    networks:
+      - laravel
+
+  db:
+    image: mariadb:latest
+    container_name: switch-erp-db
+    restart: unless-stopped
+    environment:
+      - MYSQL_ROOT_PASSWORD=aA123456
+      - MYSQL_DATABASE=erp_db
+      - MYSQL_USER=erp_user
+      - MYSQL_PASSWORD=erp_pwd
+      - TZ=Europe/Budapest
+    ports:
+      - "8502:3306"
+    volumes:
+      - ./docker/db:/var/lib/mysql
+    networks:
+      - laravel
+    command:
+      [
+        "mysqld",
+        "--character-set-server=utf8mb4",
+        "--collation-server=utf8mb4_unicode_ci",
+      ]
+
+  adminer:
+    image: adminer
+    container_name: switch-erp-adminer
+    ports:
+      - "8501:8080"
+    restart: unless-stopped
+    depends_on:
+      - db
+    environment:
+      ADMINER_DESIGN: price
+      ADMINER_PLUGINS: dump-date edit-calendar enum-option enum-types sql-log struct-comments tables-filter
+    networks:
+      - laravel
