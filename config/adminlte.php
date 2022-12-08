@@ -120,6 +120,13 @@ return [
 			'active' => ['contents/*'],
 		],*/
 		[
+			'text' => 'Jelölt csoportok',
+			'route' => 'applicant_groups_list',
+			'role' => 'applicant-groups',
+			'icon' => 'user',
+			'active' => ['applicant_groups/*'],
+		],
+		[
 			'text' => 'Felhasználók',
 			'route' => 'users_list',
 			'role' => 'users',
