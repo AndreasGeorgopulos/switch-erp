@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
@@ -18,7 +19,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property string $updated_at
  * @property string $deleted_at
  */
-class ApplicantGroup extends Model
+class ApplicantGroup extends Model implements IModelRules
 {
 	use SoftDeletes;
 
@@ -32,4 +33,29 @@ class ApplicantGroup extends Model
 	protected $casts = [
 		'is_active' => 'boolean',
 	];
+
+	/**
+	 * @return BelongsToMany
+	 */
+	public function applicants()
+	{
+		return $this->belongsToMany( Applicant::class );
+	}
+
+	public static function rules()
+	{
+		return [
+			'name' => [
+				'required',
+				'max:100',
+			],
+		];
+	}
+
+	public static function niceNames()
+	{
+		return [
+			'name' => trans( 'Név' ),
+		];
+	}
 }

@@ -1,9 +1,7 @@
 <?php
-
 namespace App\Http\Controllers;
 
-use App\Models\ApplicantGroup;
-use Exception;
+use App\Models\Applicant;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Foundation\Application;
 use Illuminate\Http\RedirectResponse;
@@ -13,18 +11,19 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\View\View;
 
 /**
- * Applicant group management controller
+ * Applicant management controller
  *
  * @author Andreas Georgopulos andreas.georgopulos@gmail.com
  * @since 2022-12-06
  */
-class ApplicantGroupController extends Controller implements ICrudController
+class ApplicantController extends Controller implements ICrudController
 {
 	/**
 	 * @param Request $request
-	 * @return Factory|Application|View
+	 * @return Factory|Application|View|mixed
 	 */
-	public function index ( Request $request ) {
+	public function index(Request $request )
+	{
 		if ( $request->isMethod( 'post' ) ) {
 			$length = $request->get( 'length', config( 'adminlte.paginator.default_length' ) );
 			$sort = $request->get( 'sort', 'id' );
@@ -32,16 +31,16 @@ class ApplicantGroupController extends Controller implements ICrudController
 			$searchtext = $request->get( 'searchtext', '' );
 
 			if ( $searchtext != '' ) {
-				$list = ApplicantGroup::where( 'id', 'like', '%' . $searchtext . '%' )
+				$list = Applicant::where( 'id', 'like', '%' . $searchtext . '%' )
 					->orWhere( 'name', 'like', '%' . $searchtext . '%' )
 					->orderby( $sort, $direction )
 					->paginate( $length );
 			}
 			else {
-				$list = ApplicantGroup::orderby( $sort, $direction )->paginate( $length );
+				$list = Applicant::orderby( $sort, $direction )->paginate( $length );
 			}
 
-			return view( 'applicant_groups.list', [
+			return view( 'applicants.list', [
 				'list' => $list,
 				'sort' => $sort,
 				'direction' => $direction,
@@ -49,59 +48,64 @@ class ApplicantGroupController extends Controller implements ICrudController
 			] );
 		}
 
-		return view( 'applicant_groups.index' );
+		return view( 'applicants.index' );
 	}
 
 	/**
 	 * @param Request $request
 	 * @param int $id
-	 * @return Factory|Application|RedirectResponse|Redirector|View
+	 * @return Factory|Application|RedirectResponse|Redirector|View|mixed
 	 */
-	public function edit ( Request $request, int $id = 0 ) {
-		$model = ApplicantGroup::findOrNew( $id );
+	public function edit( Request $request, int $id = 0 )
+	{
+		$model = Applicant::findOrNew( $id );
 
 		if ( $request->isMethod( 'post' ) ) {
 			// validate
-			$validator = Validator::make( $request->all(), ApplicantGroup::rules() );
-			$validator->setAttributeNames( ApplicantGroup::niceNames() );
+			$validator = Validator::make( $request->all(), Applicant::rules() );
+			$validator->setAttributeNames( Applicant::niceNames() );
 			if ( $validator->fails() ) {
-				return redirect( route( 'applicant_groups_edit', ['id' => $id] ) )
+				return redirect( route( 'applicants_edit', ['id' => $id] ) )
 					->withErrors( $validator )
 					->withInput()
-					->with('form_warning_message', [
+					->with( 'form_warning_message', [
 						trans( 'Sikertelen mentés' ),
-						trans( 'A jelölt csoport adatainak rögzítése nem sikerült a következő hibák miatt:' ),
-					]);
+						trans( 'A jelölt adatainak rögzítése nem sikerült a következő hibák miatt:' ),
+					] );
 			}
 
 			// data save
 			$model->fill( $request->all() );
 			$model->save();
 
-			return redirect(route( 'applicant_groups_edit', ['id' => $model->id] ) )
+			$model->groups()->sync( $request->input( 'groups', [] ) );
+
+			return redirect( route( 'applicants_edit', ['id' => $model->id] ) )
 				->with( 'form_success_message', [
 					trans( 'Sikeres mentés' ),
-					trans( 'A jelölt csoport adatai sikeresen rögzítve lettek.' ),
-				]);
+					trans( 'A jelölt adatai sikeresen rögzítve lettek.' ),
+				] );
 		}
 
-		return view( 'applicant_groups.edit', [
+		return view( 'applicants.edit', [
 			'model' => $model,
+			'selectedGroupIds' => $model->groups()->pluck('id')->toArray(),
 		] );
 	}
 
 	/**
 	 * @param int $id
-	 * @return Application|RedirectResponse|Redirector|void
-	 * @throws Exception
+	 * @return Application|RedirectResponse|Redirector|mixed|void
+	 * @throws \Exception
 	 */
-	public function delete ( int $id ) {
-		if ( $model = ApplicantGroup::find( $id ) ) {
+	public function delete( int $id )
+	{
+		if ( $model = Applicant::find( $id ) ) {
 			$model->delete();
-			return redirect( route( 'applicant_groups_list' ) )
+			return redirect( route( 'applicants_list' ) )
 				->with( 'form_success_message', [
 					trans( 'Sikeres törlés' ),
-					trans( 'A jelölt csoport sikeresen el lett távolítva.' ),
+					trans( 'A jelölt sikeresen el lett távolítva.' ),
 				] );
 		}
 	}

@@ -1,6 +1,6 @@
 @extends('index')
 @section('content_header')
-	<h1>{{trans('Jelölt csoport')}}: @if($model->id) {{$model->title}} [{{$model->id}}] @else {{trans('Új')}} @endif</h1>
+	<h1>{{trans('Jelölt csoport')}}: @if($model->id) {{$model->name}} [{{$model->id}}] @else {{trans('Új')}} @endif</h1>
 @stop
 
 @section('content')
