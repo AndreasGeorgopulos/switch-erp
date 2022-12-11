@@ -53,6 +53,19 @@ class ApplicantGroupController extends Controller implements ICrudController
 	}
 
 	/**
+	 * @param int $id
+	 * @return mixed|void
+	 */
+	public function view(int $id )
+	{
+		$model = ApplicantGroup::findOrFail( $id );
+
+		return view('applicant_groups.view', [
+			'model' => $model,
+		]);
+	}
+
+	/**
 	 * @param Request $request
 	 * @param int $id
 	 * @return Factory|Application|RedirectResponse|Redirector|View

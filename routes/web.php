@@ -26,11 +26,13 @@ Route::group(['middleware' => ['acl', 'locale']], function () {
 
 	// applicant groups
 	Route::match(['get', 'post'], '/applicant_groups/list', 'ApplicantGroupController@index')->name('applicant_groups_list');
+	Route::match(['get'], '/applicant_groups/view/{id}', 'ApplicantGroupController@view')->name('applicant_groups_view');
 	Route::match(['get', 'post', 'put'], '/applicant_groups/edit/{id?}', 'ApplicantGroupController@edit')->name('applicant_groups_edit');
 	Route::match(['get'], '/applicant_groups/delete/{id?}', 'ApplicantGroupController@delete')->name('applicant_groups_delete');
 
 	// applicants
 	Route::match(['get', 'post'], '/applicants/list', 'ApplicantController@index')->name('applicants_list');
+	Route::match(['get'], '/applicants/view/{id}', 'ApplicantController@view')->name('applicants_view');
 	Route::match(['get', 'post', 'put'], '/applicants/edit/{id?}', 'ApplicantController@edit')->name('applicants_edit');
 	Route::match(['get'], '/applicants/delete/{id?}', 'ApplicantController@delete')->name('applicants_delete');
 });

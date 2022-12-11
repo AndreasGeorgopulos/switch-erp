@@ -31,6 +31,9 @@
 									</button>
 									<ul class="dropdown-menu" role="menu">
 										<li>
+											<a href="{{url(route('applicants_view', ['id' => $model->id]))}}"><i class="fa fa-eye"></i> {{trans('Megtekintés')}}</a>
+										</li>
+										<li>
 											<a href="{{url(route('applicants_edit', ['id' => $model->id]))}}"><i class="fa fa-edit"></i> {{trans('Szerkesztés')}}</a>
 										</li>
 										<li class="divider"></li>

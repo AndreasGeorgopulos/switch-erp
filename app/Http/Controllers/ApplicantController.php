@@ -52,6 +52,19 @@ class ApplicantController extends Controller implements ICrudController
 	}
 
 	/**
+	 * @param int $request
+	 * @return mixed|void
+	 */
+	public function view(int $id )
+	{
+		$model = Applicant::findOrFail( $id );
+
+		return view('applicants.view', [
+			'model' => $model,
+		]);
+	}
+
+	/**
 	 * @param Request $request
 	 * @param int $id
 	 * @return Factory|Application|RedirectResponse|Redirector|View|mixed
