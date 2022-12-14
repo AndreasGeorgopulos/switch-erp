@@ -35,4 +35,10 @@ Route::group(['middleware' => ['acl', 'locale']], function () {
 	Route::match(['get'], '/applicants/view/{id}', 'ApplicantController@view')->name('applicants_view');
 	Route::match(['get', 'post', 'put'], '/applicants/edit/{id?}', 'ApplicantController@edit')->name('applicants_edit');
 	Route::match(['get'], '/applicants/delete/{id?}', 'ApplicantController@delete')->name('applicants_delete');
+
+	// skills
+	Route::match(['get', 'post'], '/skills/list', 'SkillController@index')->name('skills_list');
+	Route::match(['get'], '/skills/view/{id}', 'SkillController@view')->name('skills_view');
+	Route::match(['get', 'post', 'put'], '/skills/edit/{id?}', 'SkillController@edit')->name('skills_edit');
+	Route::match(['get'], '/skills/delete/{id?}', 'SkillController@delete')->name('skills_delete');
 });

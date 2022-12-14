@@ -54,7 +54,7 @@ class Applicant extends Model implements IModelRules
 		'last_callback_date',
 		'in_english',
 		'forwarded_to_companies',
-		'employee_state',
+		'is_subcontractor',
 		'graduation',
 		'projects',
 		'salary',
@@ -65,6 +65,7 @@ class Applicant extends Model implements IModelRules
 	];
 
 	protected $casts = [
+		'is_subcontractor' => 'boolean',
 		'is_active' => 'boolean',
 	];
 
@@ -74,6 +75,11 @@ class Applicant extends Model implements IModelRules
 	public function groups()
 	{
 		return $this->belongsToMany( ApplicantGroup::class );
+	}
+
+	public function skills()
+	{
+		return $this->belongsToMany( Skill::class );
 	}
 
 	/**

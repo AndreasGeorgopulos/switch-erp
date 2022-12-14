@@ -58,12 +58,49 @@
 				<div class="col-sm-4">{{trans('Cégeknek átküldve')}}</div>
 				<div class="col-sm-8">{{$model->forwarded_to_companies}}</div>
 			</div>
+
+
+			<div class="row">
+				<div class="col-sm-4">{{trans('Végzettség')}}</div>
+				<div class="col-sm-8">{{$model->graduation}}</div>
+			</div>
+			<div class="row">
+				<div class="col-sm-4">{{trans('Fizetési igény')}}</div>
+				<div class="col-sm-8">{{$model->salary}}</div>
+			</div>
+			<div class="row">
+				<div class="col-sm-4">{{trans('Felmondási idő')}}</div>
+				<div class="col-sm-8">{{$model->notice_period}}</div>
+			</div>
+			<div class="row">
+				<div class="col-sm-4">{{trans('Alkalmazott')}}/{{trans('Alvállalkozó')}}</div>
+				<div class="col-sm-8">{{$model->is_subcontractor ? trans('Alvállalkozó') : trans('Alkalmazott')}}</div>
+			</div>
+			<div class="row">
+				<div class="col-sm-4">{{trans('Projektek')}}</div>
+				<div class="col-sm-8">{{$model->projects}}</div>
+			</div>
+			<div class="row">
+				<div class="col-sm-4">{{trans('Jegyzet')}}</div>
+				<div class="col-sm-8">{{$model->projects}}</div>
+			</div>
+
 			<div class="row">
 				<div class="col-sm-4">{{trans('Csoport(ok)')}}</div>
 				<div class="col-sm-8">
 					<ul>
 						@foreach($model->groups()->orderBy('name', 'asc')->get() as $group)
 							<li><a href="{{route('applicant_groups_view', ['id' => $group->id])}}">{{$group->name}}</a></li>
+						@endforeach
+					</ul>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-sm-4">{{trans('Technológiák, készségek')}}</div>
+				<div class="col-sm-8">
+					<ul>
+						@foreach($model->skills()->orderBy('name', 'asc')->get() as $skill)
+							<li><a href="{{route('skills_view', ['id' => $skill->id])}}">{{$skill->name}}</a></li>
 						@endforeach
 					</ul>
 				</div>

@@ -92,6 +92,7 @@ class ApplicantController extends Controller implements ICrudController
 			$model->save();
 
 			$model->groups()->sync( $request->input( 'groups', [] ) );
+			$model->skills()->sync( $request->input( 'skills', [] ) );
 
 			return redirect( route( 'applicants_edit', ['id' => $model->id] ) )
 				->with( 'form_success_message', [
@@ -103,6 +104,7 @@ class ApplicantController extends Controller implements ICrudController
 		return view( 'applicants.edit', [
 			'model' => $model,
 			'selectedGroupIds' => $model->groups()->pluck('id')->toArray(),
+			'selectedSkillIds' => $model->skills()->pluck('id')->toArray(),
 		] );
 	}
 

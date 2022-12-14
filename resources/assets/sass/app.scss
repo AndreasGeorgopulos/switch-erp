@@ -7,3 +7,11 @@
 
 // Bootstrap
 @import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap";
+
+.columns-count-3 {
+  column-count: 3;
+}
+
+.columns-count-3 label {
+  font-weight: normal !important;
+}

@@ -92,7 +92,6 @@
 							</div>
 						</div>
 
-
 						<div class="col-md-12">
 							<div class="form-group">
 								<label>{{trans('Információ a fejlesztőről')}}</label>
@@ -114,8 +113,36 @@
 
 						<div class="col-md-12">
 							<div class="form-group">
-								<label>{{trans('Megjegyzés')}}</label>
+								<label>{{trans('Jegyzet')}}</label>
 								<textarea name="note" class="form-control">{{old('note', $model->note)}}</textarea>
+							</div>
+						</div>
+
+						<div class="col-md-12">
+							<div class="form-group">
+								<label>{{trans('Csoportok')}}*</label>
+								<div class="columns-count-3">
+								@foreach(\App\Models\ApplicantGroup::where('is_active', 1)->get() as $group)
+									<div class="">
+										<input type="checkbox" id="group_{{$group->id}}" name="groups[]" value="{{$group->id}}" @if(in_array($group->id, $selectedGroupIds)) checked="checked" @endif />
+										<label for="group_{{$group->id}}">{{$group->name}}</label>
+									</div>
+								@endforeach
+								</div>
+							</div>
+						</div>
+
+						<div class="col-md-12">
+							<div class="form-group">
+								<label>{{trans('Technológiák, készségek')}}*</label>
+								<div class="columns-count-3">
+									@foreach(\App\Models\Skill::where('is_active', 1)->get() as $skill)
+										<div class="">
+											<input type="checkbox" id="skill_{{$skill->id}}" name="skills[]" value="{{$skill->id}}" @if(in_array($skill->id, $selectedSkillIds)) checked="checked" @endif />
+											<label for="skill_{{$skill->id}}">{{$skill->name}}</label>
+										</div>
+									@endforeach
+								</div>
 							</div>
 						</div>
 					</div>
@@ -127,18 +154,6 @@
 									<option value="1" @if(old('is_active', $model->is_active)) selected="selected" @endif>{{trans('Igen')}}</option>
 									<option value="0" @if(!old('is_active', $model->is_active)) selected="selected" @endif>{{trans('Nem')}}</option>
 								</select>
-							</div>
-						</div>
-
-						<div class="col-md-12">
-							<div class="form-group">
-								<label>{{trans('Csoportok')}}*</label>
-								@foreach(\App\Models\ApplicantGroup::where('is_active', 1)->get() as $group)
-									<div class="">
-										<input type="checkbox" id="group_{{$group->id}}" name="groups[]" value="{{$group->id}}" @if(in_array($group->id, $selectedGroupIds)) checked="checked" @endif />
-										<label for="group_{{$group->id}}">{{$group->name}}</label>
-									</div>
-								@endforeach
 							</div>
 						</div>
 					</div>

@@ -134,6 +134,13 @@ return [
 			'active' => ['applicant_groups/*'],
 		],
 		[
+			'text' => 'Technológiák, készségek',
+			'route' => 'skills_list',
+			'role' => 'skills',
+			'icon' => 'user',
+			'active' => ['skills/*'],
+		],
+		[
 			'text' => 'Felhasználók',
 			'route' => 'users_list',
 			'role' => 'users',
