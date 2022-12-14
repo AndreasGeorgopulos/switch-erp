@@ -15,3 +15,13 @@
 .columns-count-3 label {
   font-weight: normal !important;
 }
+
+.columns-count-3.model-view .col-sm-5 {
+  font-weight: bold;
+}
+
+.columns-count-3.applicants .col-sm-5,
+.columns-count-3.applicants .col-sm-7 {
+  padding-top: 5px;
+  padding-bottom: 5px;
+}

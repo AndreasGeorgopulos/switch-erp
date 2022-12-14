@@ -156,6 +156,15 @@
 								</select>
 							</div>
 						</div>
+						<div class="col-md-12">
+							<div class="form-group">
+								<label>{{trans('Home office igény')}}*</label>
+								<select name="home_office" class="form-control select2">
+									<option value="1" @if(old('home_office', $model->home_office)) selected="selected" @endif>{{trans('Igen')}}</option>
+									<option value="0" @if(!old('home_office', $model->home_office)) selected="selected" @endif>{{trans('Nem')}}</option>
+								</select>
+							</div>
+						</div>
 					</div>
 				</div>
 
