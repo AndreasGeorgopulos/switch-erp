@@ -35,6 +35,7 @@
 								<input type="text" name="linked_in" class="form-control" value="{{old('linked_in', $model->linked_in)}}" />
 							</div>
 						</div>
+
 						<div class="col-md-3">
 							<div class="form-group">
 								<label>{{trans('Tapasztalat')}} ({{trans('Év')}})</label>
@@ -44,13 +45,13 @@
 						<div class="col-md-3">
 							<div class="form-group">
 								<label>{{trans('Utolsó kapcsolat')}}</label>
-								<input type="text" name="last_contact_date" class="form-control" value="{{old('last_contact_date', $model->last_contact_date)}}" />
+								<input type="text" name="last_contact_date" class="form-control datetimepicker" value="{{old('last_contact_date', $model->last_contact_date)}}" />
 							</div>
 						</div>
 						<div class="col-md-3">
 							<div class="form-group">
 								<label>{{trans('Visszahívás')}}</label>
-								<input type="text" name="last_callback_date" class="form-control" value="{{old('last_callback_date', $model->last_callback_date)}}" />
+								<input type="text" name="last_callback_date" class="form-control datetimepicker" value="{{old('last_callback_date', $model->last_callback_date)}}" />
 							</div>
 						</div>
 						<div class="col-md-3">
@@ -59,6 +60,39 @@
 								<input type="text" name="in_english" class="form-control" value="{{old('in_english', $model->in_english)}}" />
 							</div>
 						</div>
+
+						<div class="col-md-3">
+							<div class="form-group">
+								<label>{{trans('Végzettség')}}</label>
+								<input type="text" name="graduation" class="form-control" value="{{old('graduation', $model->graduation)}}" />
+							</div>
+						</div>
+
+						<div class="col-md-3">
+							<div class="form-group">
+								<label>{{trans('Fizetési igény')}}</label>
+								<input type="number" name="salary" class="form-control" value="{{old('salary', $model->salary)}}" />
+							</div>
+						</div>
+
+						<div class="col-md-3">
+							<div class="form-group">
+								<label>{{trans('Felmondási idő')}} ({{trans('nap')}})</label>
+								<input type="number" name="notice_period" class="form-control" value="{{old('notice_period', $model->notice_period)}}" />
+							</div>
+						</div>
+
+						<div class="col-md-3">
+							<div class="form-group">
+								<label>{{trans('Alkalmazott')}}/{{trans('Alvállalkozó')}}</label>
+								<select name="is_subcontractor" class="form-control select2">
+									<option value="0" @if(old('is_subcontractor', $model->is_subcontractor) == 0) selected="selected" @endif>{{trans('Alkalmazott')}}</option>
+									<option value="1" @if(old('is_subcontractor', $model->is_subcontractor) == 1) selected="selected" @endif>{{trans('Alvállalkozó')}}</option>
+								</select>
+							</div>
+						</div>
+
+
 						<div class="col-md-12">
 							<div class="form-group">
 								<label>{{trans('Információ a fejlesztőről')}}</label>
@@ -71,12 +105,25 @@
 								<textarea name="forwarded_to_companies" class="form-control">{{old('forwarded_to_companies', $model->forwarded_to_companies)}}</textarea>
 							</div>
 						</div>
+						<div class="col-md-12">
+							<div class="form-group">
+								<label>{{trans('Projektek')}}</label>
+								<textarea name="projects" class="form-control">{{old('projects', $model->projects)}}</textarea>
+							</div>
+						</div>
+
+						<div class="col-md-12">
+							<div class="form-group">
+								<label>{{trans('Megjegyzés')}}</label>
+								<textarea name="note" class="form-control">{{old('note', $model->note)}}</textarea>
+							</div>
+						</div>
 					</div>
 					<div class="col-md-3">
 						<div class="col-md-12">
 							<div class="form-group">
 								<label>{{trans('Aktív')}}*</label>
-								<select name="is_active" class="form-control">
+								<select name="is_active" class="form-control select2">
 									<option value="1" @if(old('is_active', $model->is_active)) selected="selected" @endif>{{trans('Igen')}}</option>
 									<option value="0" @if(!old('is_active', $model->is_active)) selected="selected" @endif>{{trans('Nem')}}</option>
 								</select>

@@ -25,6 +25,13 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property string $last_callback_date
  * @property string $in_english
  * @property string $forwarded_to_companies
+ * @property bool $is_subcontractor
+ * @property string $graduation
+ * @property string $projects
+ * @property int $salary
+ * @property int $notice_period
+ * @property bool $home_office
+ * @property string $note
  * @property bool $is_active
  * @property string $created_at
  * @property string $updated_at
@@ -47,6 +54,13 @@ class Applicant extends Model implements IModelRules
 		'last_callback_date',
 		'in_english',
 		'forwarded_to_companies',
+		'employee_state',
+		'graduation',
+		'projects',
+		'salary',
+		'notice_period',
+		'home_office',
+		'note',
 		'is_active'
 	];
 
@@ -110,6 +124,12 @@ class Applicant extends Model implements IModelRules
 			],
 			'last_callback_date' => [
 				'date',
+			],
+			'is_subcontractor' => [
+				'boolean',
+			],
+			'home_office' => [
+				'boolean',
 			],
 			'is_active' => [
 				'boolean',

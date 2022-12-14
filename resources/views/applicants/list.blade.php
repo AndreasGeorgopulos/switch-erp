@@ -11,7 +11,7 @@
 						<th data-column="group">{{trans('Csoport')}}</th>
 						<th data-column="is_active" class="text-center">{{trans('Aktív')}}</th>
 						<th>
-							<a href="{{url(route('applicants_edit'))}}" class="btn btn-primary btn-sm pull-right"><i class="fa fa-plus"></i> {{trans('Új jelölt csoport')}}</a>
+							<a href="{{url(route('applicants_edit'))}}" class="btn btn-primary btn-sm pull-right"><i class="fa fa-plus"></i> {{trans('Új jelölt')}}</a>
 						</th>
 					</tr>
 					</thead>

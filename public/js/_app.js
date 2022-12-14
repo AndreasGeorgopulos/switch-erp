@@ -1,3 +1,5 @@
+alert('jlkasdkjlaskjdskjld');
+
 // PAGINATOR
 var Paginator = function (loadFunc) {
     this.data = [];
@@ -54,7 +56,7 @@ var Paginator = function (loadFunc) {
 };
 
 //ADMIN ANGULAR APP
-var App = angular.module('App', [], function($interpolateProvider) {
+var _app = angular.module('App', [], function($interpolateProvider) {
     $interpolateProvider.startSymbol('[[');
     $interpolateProvider.endSymbol(']]');
 });
