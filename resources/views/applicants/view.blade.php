@@ -120,9 +120,7 @@
 				<hr />
 				<div class="row">
 					<div class="col-sm-12">
-						<iframe src="{{route('applicants_download_cv', ['id' => $model->id])}}" class="cv_viewer" width="100%" height="700">
-							<p class="text-center">Önéletrajz betöltése...</p>
-						</iframe>
+						<iframe src="{{route('applicants_download_cv', ['id' => $model->id])}}" class="cv_viewer" width="100%" height="700" />
 					</div>
 				</div>
 			@endif
