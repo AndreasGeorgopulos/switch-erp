@@ -7042,7 +7042,6 @@ button.close {
   padding-bottom: 5px;
 }
 
-iframe.pdf_viewer {
-  width: 100%;
-  height: 400px;
+iframe.cv_viewer {
+  border: none;
 }

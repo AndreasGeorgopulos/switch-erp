@@ -44,7 +44,9 @@ class CreateApplicantsTable extends Migration
 	        $table->integer('notice_period')->nullable();
 			$table->boolean('home_office')->nullable();
 	        $table->longText('note')->nullable();
-	        $table->string('pdf_file')->nullable();
+	        $table->longText('report')->nullable();
+	        $table->string('cv_file')->nullable();
+	        $table->string('cv_file_mime_type')->nullable();
 	        $table->boolean('is_active');
 	        $table->timestamps();
 	        $table->softDeletes();

@@ -3,10 +3,12 @@
 namespace App\Models;
 
 use App\User;
+use Exception;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Http\UploadedFile;
 
 /**
  * Applicant management model
@@ -32,7 +34,9 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property int $notice_period
  * @property bool $home_office
  * @property string $note
- * @property string $pdf_file
+ * @property string $report
+ * @property string $cv_file
+ * @property string $cv_file_mime_type
  * @property bool $is_active
  * @property string $created_at
  * @property string $updated_at
@@ -64,10 +68,12 @@ class Applicant extends Model implements IModelRules
 		'notice_period',
 		'home_office',
 		'note',
-		'is_active'
+		'report',
+		'is_active',
 	];
 
 	protected $casts = [
+		'home_office' => 'boolean',
 		'is_subcontractor' => 'boolean',
 		'is_active' => 'boolean',
 	];
@@ -99,10 +105,10 @@ class Applicant extends Model implements IModelRules
 	/**
 	 * @return bool
 	 */
-	public function hasPdf()
+	public function hasCV()
 	{
-		$path = storage_path( static::STORAGE_PATH ) . '/' . $this->pdf_file;
-		if ( empty( $this->pdf_file ) || !file_exists( $path ) ) {
+		$path = storage_path( static::STORAGE_PATH ) . '/' . $this->cv_file;
+		if ( empty( $this->cv_file ) || !file_exists( $path ) ) {
 			return false;
 		}
 
@@ -112,9 +118,45 @@ class Applicant extends Model implements IModelRules
 	/**
 	 * @return string|null
 	 */
-	public function getPdfPath()
+	public function getCVPath()
 	{
-		return $this->hasPdf() ? ( storage_path( static::STORAGE_PATH ) . '/' . $this->pdf_file ) : null;
+		return $this->hasCV() ? ( storage_path( static::STORAGE_PATH ) . '/' . $this->cv_file ) : null;
+	}
+
+	/**
+	 * @param UploadedFile $file
+	 * @return void
+	 * @throws Exception
+	 */
+	public function uploadCV(UploadedFile $file )
+	{
+		$path = storage_path( static::STORAGE_PATH );
+		if ( !file_exists( $path) ) {
+			mkdir( $path, 0775, true );
+		}
+
+		$this->cv_file = $this->id . '-' . $file->getClientOriginalName();
+		$this->cv_file_mime_type = $file->getClientMimeType();
+
+		$file->move( $path, $this->cv_file );
+		if ( !file_exists( $path . '/' . $this->cv_file ) ) {
+			throw new Exception( trans('Az önéletrajz feltöltése sikertelen. Kérjük, ellenőrizze a file írási jogosultságokat!') );
+		}
+		chmod($path . '/' . $this->cv_file, 0775);
+		$this->save();
+	}
+
+	/**
+	 * @return void
+	 */
+	public function deleteCV()
+	{
+		if ( $path = $this->getCVPath() ) {
+			unlink( $path );
+		}
+		$this->cv_file = null;
+		$this->cv_file_mime_type = null;
+		$this->save();
 	}
 
 	/**

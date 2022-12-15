@@ -113,6 +113,13 @@
 
 						<div class="col-md-12">
 							<div class="form-group">
+								<label>{{trans('Riport')}}</label>
+								<textarea name="report" class="form-control">{{old('report', $model->report)}}</textarea>
+							</div>
+						</div>
+
+						<div class="col-md-12">
+							<div class="form-group">
 								<label>{{trans('Jegyzet')}}</label>
 								<textarea name="note" class="form-control">{{old('note', $model->note)}}</textarea>
 							</div>
@@ -146,9 +153,9 @@
 							</div>
 						</div>
 
-						@if($model->hasPdf())
+						@if($model->hasCV())
 							<div class="col-md-12">
-								<iframe src="{{route('applicants_download_pdf', ['id' => $model->id])}}" class="pdf_viewer"></iframe>
+								<iframe src="{{route('applicants_download_cv', ['id' => $model->id])}}" class="pdf_viewer"></iframe>
 							</div>
 						@endif
 					</div>
@@ -174,19 +181,19 @@
 						<div class="col-md-12">
 							<div class="form-group">
 								<label>{{trans('Önéletrajz')}} (PDF)</label>
-								<input type="file" class="form-control" name="pdf_file" accept="application/pdf" />
+								<input type="file" class="form-control" name="cv_file" accept="application/pdf" />
 							</div>
 						</div>
 
-						@if($model->hasPdf())
+						@if($model->hasCV())
 							<div class="col-md-12">
 								<div class="form-group">
 									<label>{{trans('Feltöltve')}}</label>
 									<p>
-										<a href="{{route('applicants_download_pdf', ['id' => $model->id])}}" target="_blank">{{$model->pdf_file}}</a>
+										<a href="{{route('applicants_download_cv', ['id' => $model->id])}}" target="_blank">{{$model->cv_file}}</a>
 									</p>
 									<p>
-										<input type="checkbox" name="delete_pdf_file" /> {{trans('Törlés')}}
+										<input type="checkbox" name="delete_cv_file" /> {{trans('Törlés')}}
 									</p>
 								</div>
 							</div>

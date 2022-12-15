@@ -87,7 +87,11 @@
 				</div>
 				<div class="row">
 					<div class="col-sm-5">{{trans('Jegyzet')}}</div>
-					<div class="col-sm-7">{{$model->projects}}</div>
+					<div class="col-sm-7">{{$model->note}}</div>
+				</div>
+				<div class="row">
+					<div class="col-sm-5">{{trans('Riport')}}</div>
+					<div class="col-sm-7">{{$model->report}}</div>
 				</div>
 
 				<div class="row">
@@ -111,6 +115,17 @@
 					</div>
 				</div>
 			</div>
+
+			@if($model->hasCV())
+				<hr />
+				<div class="row">
+					<div class="col-sm-12">
+						<iframe src="{{route('applicants_download_cv', ['id' => $model->id])}}" class="cv_viewer" width="100%" height="700">
+							<p class="text-center">Önéletrajz betöltése...</p>
+						</iframe>
+					</div>
+				</div>
+			@endif
 		</div>
 
 		<div class="box-footer">

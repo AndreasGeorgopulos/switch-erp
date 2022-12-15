@@ -97,22 +97,21 @@ class ApplicantController extends Controller implements ICrudController
 			$model->groups()->sync( $request->input( 'groups', [] ) );
 			$model->skills()->sync( $request->input( 'skills', [] ) );
 
-			if ( $file = $request->file('pdf_file') ) {
-				$path = storage_path( Applicant::STORAGE_PATH );
-				if ( !file_exists( $path) ) {
-					mkdir( $path, 0775, true );
+			if ( $file = $request->file('cv_file') ) {
+				try {
+					$model->uploadCV( $file );
+				} catch ( Exception $exception ) {
+					return redirect( route( 'applicants_edit', ['id' => $id] ) )
+						->withErrors( $exception->getMessage() )
+						->withInput()
+						->with( 'form_warning_message', [
+							trans( 'Sikertelen mentés' ),
+							trans( $exception->getMessage() ),
+						] );
 				}
 
-				$model->pdf_file = $model->id . '-' . $file->getClientOriginalName();
-
-				$file->move( $path, $model->pdf_file );
-				chmod($path . '/' . $model->pdf_file, 0775);
-				$model->save();
-
-			} elseif ( $request->get('delete_pdf_file') ) {
-				unlink($model->getPdfPath());
-				$model->pdf_file = null;
-				$model->save();
+			} elseif ( $request->get('delete_cv_file') ) {
+				$model->deleteCV();
 
 			}
 
@@ -151,12 +150,12 @@ class ApplicantController extends Controller implements ICrudController
 	 * @param int $id
 	 * @return BinaryFileResponse
 	 */
-	public function downloadPdf(int $id )
+	public function downloadCV(int $id )
 	{
 		if ( ($model = Applicant::find( $id) ) == null ) {
-			throw new NotFoundHttpException('Pdf file not found.');
+			throw new NotFoundHttpException('CV file not found.');
 		}
 
-		return response()->download($model->getPdfPath(), $model->pdf_file, [], 'inline');
+		return response()->download($model->getCVPath(), $model->cv_file, [], 'inline');
 	}
 }
