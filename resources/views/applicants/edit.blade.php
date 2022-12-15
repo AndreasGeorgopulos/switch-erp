@@ -4,7 +4,7 @@
 @stop
 
 @section('content')
-	<form method="post" class="">
+	<form method="post" enctype="multipart/form-data">
 		{{csrf_field()}}
 		@include('layout.messages')
 		<div class="box">
@@ -145,6 +145,12 @@
 								</div>
 							</div>
 						</div>
+
+						@if($model->hasPdf())
+							<div class="col-md-12">
+								<iframe src="{{route('applicants_download_pdf', ['id' => $model->id])}}" class="pdf_viewer"></iframe>
+							</div>
+						@endif
 					</div>
 					<div class="col-md-3">
 						<div class="col-md-12">
@@ -165,6 +171,26 @@
 								</select>
 							</div>
 						</div>
+						<div class="col-md-12">
+							<div class="form-group">
+								<label>{{trans('Önéletrajz')}} (PDF)</label>
+								<input type="file" class="form-control" name="pdf_file" accept="application/pdf" />
+							</div>
+						</div>
+
+						@if($model->hasPdf())
+							<div class="col-md-12">
+								<div class="form-group">
+									<label>{{trans('Feltöltve')}}</label>
+									<p>
+										<a href="{{route('applicants_download_pdf', ['id' => $model->id])}}" target="_blank">{{$model->pdf_file}}</a>
+									</p>
+									<p>
+										<input type="checkbox" name="delete_pdf_file" /> {{trans('Törlés')}}
+									</p>
+								</div>
+							</div>
+						@endif
 					</div>
 				</div>
 

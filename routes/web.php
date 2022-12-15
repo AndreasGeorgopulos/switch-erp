@@ -35,6 +35,7 @@ Route::group(['middleware' => ['acl', 'locale']], function () {
 	Route::match(['get'], '/applicants/view/{id}', 'ApplicantController@view')->name('applicants_view');
 	Route::match(['get', 'post', 'put'], '/applicants/edit/{id?}', 'ApplicantController@edit')->name('applicants_edit');
 	Route::match(['get'], '/applicants/delete/{id?}', 'ApplicantController@delete')->name('applicants_delete');
+	Route::match(['get'], '/applicants/download_pdf/{id}', 'ApplicantController@downloadPdf')->name('applicants_download_pdf');
 
 	// skills
 	Route::match(['get', 'post'], '/skills/list', 'SkillController@index')->name('skills_list');

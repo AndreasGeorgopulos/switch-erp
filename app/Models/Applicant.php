@@ -32,6 +32,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property int $notice_period
  * @property bool $home_office
  * @property string $note
+ * @property string $pdf_file
  * @property bool $is_active
  * @property string $created_at
  * @property string $updated_at
@@ -40,6 +41,8 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class Applicant extends Model implements IModelRules
 {
     use SoftDeletes;
+
+	const STORAGE_PATH = 'app/public/cv';
 
 	protected $table = 'applicants';
 
@@ -77,6 +80,9 @@ class Applicant extends Model implements IModelRules
 		return $this->belongsToMany( ApplicantGroup::class );
 	}
 
+	/**
+	 * @return BelongsToMany
+	 */
 	public function skills()
 	{
 		return $this->belongsToMany( Skill::class );
@@ -88,6 +94,27 @@ class Applicant extends Model implements IModelRules
 	public function user()
 	{
 		return $this->hasOne( User::class );
+	}
+
+	/**
+	 * @return bool
+	 */
+	public function hasPdf()
+	{
+		$path = storage_path( static::STORAGE_PATH ) . '/' . $this->pdf_file;
+		if ( empty( $this->pdf_file ) || !file_exists( $path ) ) {
+			return false;
+		}
+
+		return true;
+	}
+
+	/**
+	 * @return string|null
+	 */
+	public function getPdfPath()
+	{
+		return $this->hasPdf() ? ( storage_path( static::STORAGE_PATH ) . '/' . $this->pdf_file ) : null;
 	}
 
 	/**

@@ -2,6 +2,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Applicant;
+use Exception;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Foundation\Application;
 use Illuminate\Http\RedirectResponse;
@@ -9,6 +10,8 @@ use Illuminate\Http\Request;
 use Illuminate\Routing\Redirector;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\View\View;
+use Symfony\Component\HttpFoundation\BinaryFileResponse;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 /**
  * Applicant management controller
@@ -94,6 +97,25 @@ class ApplicantController extends Controller implements ICrudController
 			$model->groups()->sync( $request->input( 'groups', [] ) );
 			$model->skills()->sync( $request->input( 'skills', [] ) );
 
+			if ( $file = $request->file('pdf_file') ) {
+				$path = storage_path( Applicant::STORAGE_PATH );
+				if ( !file_exists( $path) ) {
+					mkdir( $path, 0775, true );
+				}
+
+				$model->pdf_file = $model->id . '-' . $file->getClientOriginalName();
+
+				$file->move( $path, $model->pdf_file );
+				chmod($path . '/' . $model->pdf_file, 0775);
+				$model->save();
+
+			} elseif ( $request->get('delete_pdf_file') ) {
+				unlink($model->getPdfPath());
+				$model->pdf_file = null;
+				$model->save();
+
+			}
+
 			return redirect( route( 'applicants_edit', ['id' => $model->id] ) )
 				->with( 'form_success_message', [
 					trans( 'Sikeres mentés' ),
@@ -111,7 +133,7 @@ class ApplicantController extends Controller implements ICrudController
 	/**
 	 * @param int $id
 	 * @return Application|RedirectResponse|Redirector|mixed|void
-	 * @throws \Exception
+	 * @throws Exception
 	 */
 	public function delete( int $id )
 	{
@@ -123,5 +145,18 @@ class ApplicantController extends Controller implements ICrudController
 					trans( 'A jelölt sikeresen el lett távolítva.' ),
 				] );
 		}
+	}
+
+	/**
+	 * @param int $id
+	 * @return BinaryFileResponse
+	 */
+	public function downloadPdf(int $id )
+	{
+		if ( ($model = Applicant::find( $id) ) == null ) {
+			throw new NotFoundHttpException('Pdf file not found.');
+		}
+
+		return response()->download($model->getPdfPath(), $model->pdf_file, [], 'inline');
 	}
 }
