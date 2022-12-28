@@ -47,4 +47,11 @@ Route::group(['middleware' => ['acl', 'locale']], function () {
 	Route::match(['get'], '/skills/view/{id}', 'SkillController@view')->name('skills_view');
 	Route::match(['get', 'post', 'put'], '/skills/edit/{id?}', 'SkillController@edit')->name('skills_edit');
 	Route::match(['get'], '/skills/delete/{id?}', 'SkillController@delete')->name('skills_delete');
+
+	// companies
+	Route::match(['get', 'post'], '/companies/list', 'CompanyController@index')->name('companies_list');
+	Route::match(['get'], '/companies/view/{id}', 'CompanyController@view')->name('companies_view');
+	Route::match(['get', 'post', 'put'], '/companies/edit/{id?}', 'CompanyController@edit')->name('companies_edit');
+	Route::match(['get'], '/companies/delete/{id?}', 'CompanyController@delete')->name('companies_delete');
+	Route::match(['get'], '/companies/download_pdf/{id}', 'CompanyController@downloadContract')->name('companies_download_contract');
 });

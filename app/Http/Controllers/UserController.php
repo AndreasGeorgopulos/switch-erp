@@ -4,9 +4,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Role;
-use App\Role_User;
-use App\User;
+use App\Models\Role;
+use App\Models\Role_User;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;

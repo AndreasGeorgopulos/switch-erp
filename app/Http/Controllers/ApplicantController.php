@@ -137,6 +137,7 @@ class ApplicantController extends Controller implements ICrudController
 	public function delete( int $id )
 	{
 		if ( $model = Applicant::find( $id ) ) {
+			$model->deleteCV();
 			$model->delete();
 			return redirect( route( 'applicants_list' ) )
 				->with( 'form_success_message', [

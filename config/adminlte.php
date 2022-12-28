@@ -141,6 +141,13 @@ return [
 			'active' => ['skills/*'],
 		],
 		[
+			'text' => 'Cégek',
+			'route' => 'companies_list',
+			'role' => 'companies',
+			'icon' => 'user',
+			'active' => ['companies/*'],
+		],
+		[
 			'text' => 'Felhasználók',
 			'route' => 'users_list',
 			'role' => 'users',
