@@ -39,7 +39,6 @@ class CreateApplicantsTable extends Migration
 	        $table->text('forwarded_to_companies')->nullable();
 			$table->boolean('is_subcontractor')->nullable();
 			$table->string('graduation')->nullable();
-			$table->longText('projects')->nullable();
 			$table->integer('salary')->nullable();
 	        $table->integer('notice_period')->nullable();
 			$table->boolean('home_office')->nullable();

@@ -107,7 +107,7 @@ return [
 		'FŐMENÜ',
 		[
 			'text' => 'Kezdőlap',
-			'route' => 'dashboard',
+			'route' => 'applicant_management_index',
 			'role' => 'login',
 			'icon' => 'dashboard',
 			'active' => ['admin'],
@@ -200,10 +200,10 @@ return [
         'datatables' => true,
         'select2'    => true,
 		'wysihtml5' => true,
-    ],
-	
-	'paginator' => [
+    ],'paginator' => [
 		'default_length' => 10,
 		'lengths' => [10, 25, 50, 100]
 	]
+	
+
 ];

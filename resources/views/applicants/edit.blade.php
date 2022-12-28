@@ -104,12 +104,6 @@
 								<textarea name="forwarded_to_companies" class="form-control">{{old('forwarded_to_companies', $model->forwarded_to_companies)}}</textarea>
 							</div>
 						</div>
-						<div class="col-md-12">
-							<div class="form-group">
-								<label>{{trans('Projektek')}}</label>
-								<textarea name="projects" class="form-control">{{old('projects', $model->projects)}}</textarea>
-							</div>
-						</div>
 
 						<div class="col-md-12">
 							<div class="form-group">

@@ -8,6 +8,13 @@
 // Bootstrap
 @import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap";
 
+// Select2
+@import "node_modules/select2/dist/css/select2.min";
+
+.select2-container--default .select2-selection--multiple .select2-selection__choice__remove {
+  border-right: none !important;
+}
+
 .columns-count-3 {
   column-count: 3;
 }
@@ -28,4 +35,9 @@
 
 iframe.cv_viewer {
   border: none;
+}
+
+#applicant-skill-sidebar li.active {
+  background-color: #f7f7f7;
+  font-weight: bold;
 }

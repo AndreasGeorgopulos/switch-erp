@@ -29,7 +29,6 @@ use Illuminate\Http\UploadedFile;
  * @property string $forwarded_to_companies
  * @property bool $is_subcontractor
  * @property string $graduation
- * @property string $projects
  * @property int $salary
  * @property int $notice_period
  * @property bool $home_office
@@ -63,7 +62,6 @@ class Applicant extends Model implements IModelRules
 		'forwarded_to_companies',
 		'is_subcontractor',
 		'graduation',
-		'projects',
 		'salary',
 		'notice_period',
 		'home_office',
@@ -222,6 +220,48 @@ class Applicant extends Model implements IModelRules
 			'email' => trans( 'E-mail cím' ),
 			'phone' => trans( 'Telefon' ),
 			'linked_in' => trans( 'Linked In' ),
+			'experience_year' => trans( 'Tapasztalat' ),
+			'last_contact_date' => trans( 'Utolsó kapcsolat' ),
+			'last_callback_date' => trans( 'Visszahívás' ),
 		];
+	}
+
+	/**
+	 * @param int $selected
+	 * @return array[]
+	 */
+	public static function getInEnglishDropdownOptions($selected = null)
+	{
+		return [
+			['value' => 1, 'name' => trans('Alapfok'), 'selected' => $selected == 1],
+			['value' => 2, 'name' => trans('Középfok'), 'selected' => $selected == 2],
+			['value' => 3, 'name' => trans('Felsőfok'), 'selected' => $selected == 3],
+		];
+	}
+
+	/**
+	 * @param int $selected
+	 * @return array[]
+	 */
+	public static function getIsSubcontractorDropdownOptions($selected = null)
+	{
+		return [
+			['value' => 0, 'name' => trans('Alkalmazott'), 'selected' => $selected == 0],
+			['value' => 1, 'name' => trans('Alvállalkozó'), 'selected' => $selected == 1],
+		];
+	}
+
+	/**
+	 * @param array $selectedIds
+	 * @return array|array[]
+	 */
+	public static function getSkillDropdownOptions($selectedIds = [])
+	{
+		return array_map(function ($skill) use ($selectedIds) {
+			return [
+				'name' => $skill['name'],
+				'selected' => in_array($skill['id'], $selectedIds),
+			];
+		}, Skill::select(['id', 'name'])->where('is_active', 1)->get()->toArray());
 	}
 }

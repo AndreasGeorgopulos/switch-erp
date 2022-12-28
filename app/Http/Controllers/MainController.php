@@ -31,7 +31,7 @@ class MainController extends Controller
 				return redirect(route('login'))->withErrors($validator)->withInput();
 			}
 
-			return redirect(route('dashboard'));
+			return redirect(route('applicant_management_index'));
 		}
 
 		return view('login');

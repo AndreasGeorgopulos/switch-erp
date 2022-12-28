@@ -149,7 +149,7 @@ class UserController extends Controller
     	if ($user = User::find($id)) {
 		    Auth::logout();
     		Auth::login($user);
-    		return redirect(route('dashboard'));
+    		return redirect(route('applicant_management_index'));
 		}
 	}
 }

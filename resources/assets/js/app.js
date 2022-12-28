@@ -6,9 +6,10 @@
  */
 
 require('./bootstrap');
-/*require('bootstrap-datetimepicker');*/
+
 require('select2');
+$('.select2').select2();
+
 
 require('./listTable');
-
-$('.select2').select2();
+require('./applicant_management');

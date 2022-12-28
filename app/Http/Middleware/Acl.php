@@ -26,7 +26,7 @@ class Acl
 		}
 		else if (Auth::check() && !$this->checkAccessForUri($routeName)) {
 			//abort(401);
-			return redirect()->intended(route('dashboard'));
+			return redirect()->intended(route('applicant_management_index'));
 		}
 	
 		return $next($request);

@@ -9,9 +9,14 @@ Route::match(['get', 'post'], '/logout', 'MainController@Logout')->name('logout'
 Route::group(['middleware' => ['acl', 'locale']], function () {
 	// Kezdőlap
 	Route::match(['get'], '/', function () {
-		return redirect(route('dashboard'));
+		return redirect(route('applicant_management_index'));
 	});
-	Route::match(['get'], '/dashboard', 'MainController@Dashboard')->name('dashboard');
+	//Route::match(['get'], '/dashboard', 'MainController@Dashboard')->name('dashboard');
+
+	// Management
+	Route::match(['get'], '/applicant_management/{selectedGroup?}', 'ApplicantManagementController@index')->name('applicant_management_index');
+	Route::match(['post'], '/applicant_management/save_rows/{selectedGroup?}', 'ApplicantManagementController@saveRows')->name('applicant_management_save_rows');
+	Route::match(['get', 'post'], '/applicant_management/edit/{id}/{selectedGroup?}', 'ApplicantManagementController@edit')->name('applicant_management_edit');
 
 	// users
 	Route::match(['get', 'post'], '/users/list', 'UserController@index')->name('users_list');
