@@ -7,10 +7,10 @@ use Illuminate\Database\Migrations\Migration;
 class CreateJobPositionsTable extends Migration
 {
 	const TABLE_JOB_POSITIONS = 'job_positions';
-
 	const TABLE_SKILLS = 'skills';
-
 	const TABLE_JOB_POSITION_SKILL = 'job_position_skill';
+	const TABLE_APPLICANT_JOB_POSITION = 'applicant_job_position';
+	const TABLE_APPLICANTS = 'applicants';
 
     /**
      * Run the migrations.
@@ -48,6 +48,24 @@ class CreateJobPositionsTable extends Migration
 			    ->on(self::TABLE_SKILLS)
 			    ->onDelete('cascade');
 	    });
+
+	    Schema::create(self::TABLE_APPLICANT_JOB_POSITION, function (Blueprint $table) {
+		    $table->bigInteger('applicant_id', false, true);
+		    $table->bigInteger('job_position_id', false, true);
+		    $table->text('description');
+
+		    $table->primary(['applicant_id', 'job_position_id'], 'primary_key_applicant_job_position');
+
+		    $table->foreign('applicant_id', 'foreign_key_applicant_id_applicants_02')
+			    ->references('id')
+			    ->on(self::TABLE_APPLICANTS)
+			    ->onDelete('cascade');
+
+		    $table->foreign('job_position_id', 'foreign_key_job_position_id_job_position_02')
+			    ->references('id')
+			    ->on(self::TABLE_JOB_POSITIONS)
+			    ->onDelete('cascade');
+	    });
     }
 
     /**
@@ -57,6 +75,7 @@ class CreateJobPositionsTable extends Migration
      */
     public function down()
     {
+        Schema::dropIfExists(self::TABLE_APPLICANT_JOB_POSITION);
         Schema::dropIfExists(self::TABLE_JOB_POSITION_SKILL);
         Schema::dropIfExists(self::TABLE_JOB_POSITIONS);
     }

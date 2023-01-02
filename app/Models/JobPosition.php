@@ -40,6 +40,14 @@ class JobPosition extends Model implements IModelRules
 	/**
 	 * @return BelongsToMany
 	 */
+	public function applicants()
+	{
+		return $this->belongsToMany( Applicant::class );
+	}
+
+	/**
+	 * @return BelongsToMany
+	 */
 	public function skills()
 	{
 		return $this->belongsToMany( Skill::class );
@@ -67,5 +75,19 @@ class JobPosition extends Model implements IModelRules
 	public static function niceNames()
 	{
 		return [];
+	}
+
+	/**
+	 * @param int $company_id
+	 * @return array|array[]
+	 */
+	public static function getDropdownItems($company_id)
+	{
+		return array_map(function ($item) {
+			return [
+				'value' => $item->id,
+				'name' => $item->name,
+			];
+		}, static::select(['id', 'name'])->where('is_active', 1)->where('company_id', $company_id)->get());
 	}
 }

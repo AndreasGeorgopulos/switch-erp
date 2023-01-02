@@ -92,6 +92,14 @@ class Applicant extends Model implements IModelRules
 	}
 
 	/**
+	 * @return BelongsToMany
+	 */
+	public function job_positions()
+	{
+		return $this->belongsToMany( JobPosition::class );
+	}
+
+	/**
 	 * @return HasOne
 	 */
 	public function user()

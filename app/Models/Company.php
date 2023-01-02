@@ -36,6 +36,14 @@ class Company extends Model implements IModelRules
 	];
 
 	/**
+	 * @return \Illuminate\Database\Eloquent\Relations\HasMany
+	 */
+	public function job_positions()
+	{
+		return $this->hasMany(JobPosition::class);
+	}
+
+	/**
 	 * @return bool
 	 */
 	public function hasContract()
