@@ -7,10 +7,10 @@ interface IModelRules
 	/**
 	 * @return array
 	 */
-	public static function rules();
+	public static function rules(): array;
 
 	/**
 	 * @return array
 	 */
-	public static function niceNames();
+	public static function niceNames(): array;
 }

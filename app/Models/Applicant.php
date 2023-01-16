@@ -167,7 +167,7 @@ class Applicant extends Model implements IModelRules
 	/**
 	 * @return \string[][]
 	 */
-	public static function rules()
+	public static function rules() :array
 	{
 		return [
 			'name' => [
@@ -220,7 +220,7 @@ class Applicant extends Model implements IModelRules
 	/**
 	 * @return array
 	 */
-	public static function niceNames()
+	public static function niceNames() :array
 	{
 		return [
 			'name' => trans( 'Név' ),

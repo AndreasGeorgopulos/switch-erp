@@ -14,11 +14,12 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  *
  * @property int $id
  * @property string $name
+ * @property bool $is_active
  * @property string $created_at
  * @property string $updated_at
  * @property string $deleted_at
  */
-class Skill extends Model implements IModelRules
+class Skill extends Model implements IModelRules, IModelDeletable
 {
 	use SoftDeletes;
 	protected $table = 'skills';
@@ -30,7 +31,7 @@ class Skill extends Model implements IModelRules
 	/**
 	 * @return BelongsToMany
 	 */
-	public function applicants()
+	public function applicants(): BelongsToMany
 	{
 		return $this->belongsToMany(Applicant::class);
 	}
@@ -38,7 +39,7 @@ class Skill extends Model implements IModelRules
 	/**
 	 * @return array
 	 */
-	public static function rules()
+	public static function rules() :array
 	{
 		return [
 			'name' => [
@@ -51,10 +52,30 @@ class Skill extends Model implements IModelRules
 	/**
 	 * @return array
 	 */
-	public static function niceNames()
+	public static function niceNames() :array
 	{
 		return [
 			'name' => trans( 'Név' ),
 		];
+	}
+
+	/**
+	 * @return bool
+	 */
+	public function isDeletable(): bool
+	{
+		return (bool) !$this->applicants()->count();
+	}
+
+	/**
+	 * @return bool|null
+	 * @throws \Exception
+	 */
+	public function delete(): ?bool
+	{
+		if (!$this->isDeletable()) {
+			return false;
+		}
+		return parent::delete();
 	}
 }

@@ -2,7 +2,9 @@
 
 namespace App\Models;
 
+use Exception;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Http\UploadedFile;
 
@@ -21,7 +23,7 @@ use Illuminate\Http\UploadedFile;
  * @property string $updated_at
  * @property string $deleted_at
  */
-class Company extends Model implements IModelRules
+class Company extends Model implements IModelRules, IModelDeletable
 {
 	use SoftDeletes;
 
@@ -36,9 +38,9 @@ class Company extends Model implements IModelRules
 	];
 
 	/**
-	 * @return \Illuminate\Database\Eloquent\Relations\HasMany
+	 * @return HasMany
 	 */
-	public function job_positions()
+	public function job_positions(): HasMany
 	{
 		return $this->hasMany(JobPosition::class);
 	}
@@ -46,7 +48,7 @@ class Company extends Model implements IModelRules
 	/**
 	 * @return bool
 	 */
-	public function hasContract()
+	public function hasContract(): bool
 	{
 		$path = storage_path( static::STORAGE_PATH ) . '/' . $this->contract_file;
 		if ( empty( $this->contract_file ) || !file_exists( $path ) ) {
@@ -59,7 +61,7 @@ class Company extends Model implements IModelRules
 	/**
 	 * @return string|null
 	 */
-	public function getContractPath()
+	public function getContractPath(): ?string
 	{
 		return $this->hasContract() ? ( storage_path( static::STORAGE_PATH ) . '/' . $this->contract_file ) : null;
 	}
@@ -69,7 +71,7 @@ class Company extends Model implements IModelRules
 	 * @return void
 	 * @throws Exception
 	 */
-	public function uploadContract(UploadedFile $file )
+	public function uploadContract( UploadedFile $file )
 	{
 		$path = storage_path( static::STORAGE_PATH );
 		if ( !file_exists( $path) ) {
@@ -103,7 +105,7 @@ class Company extends Model implements IModelRules
 	/**
 	 * @return array[]
 	 */
-	public static function rules()
+	public static function rules(): array
 	{
 		return [
 			'name' => [
@@ -119,7 +121,7 @@ class Company extends Model implements IModelRules
 	/**
 	 * @return array
 	 */
-	public static function niceNames()
+	public static function niceNames(): array
 	{
 		return [
 			'name' => trans( 'Név' ),
@@ -127,10 +129,10 @@ class Company extends Model implements IModelRules
 	}
 
 	/**
-	 * @param int $selected
+	 * @param int|null $selected
 	 * @return array|array[]
 	 */
-	public static function getDropdownItems($selected = null)
+	public static function getDropdownItems( int $selected = null ): array
 	{
 		return array_map(function ($item) use($selected) {
 			return [
@@ -139,5 +141,25 @@ class Company extends Model implements IModelRules
 				'selected' => $item->id == $selected,
 			];
 		}, static::select(['id', 'name'])->where('is_active', 1)->get());
+	}
+
+	/**
+	 * @return bool
+	 */
+	public function isDeletable(): bool
+	{
+		return (bool) !$this->job_positions()->count();
+	}
+
+	/**
+	 * @return bool|null
+	 * @throws Exception
+	 */
+	public function delete(): ?bool
+	{
+		if (!$this->isDeletable()) {
+			return false;
+		}
+		return parent::delete();
 	}
 }

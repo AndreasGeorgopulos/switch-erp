@@ -19,7 +19,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property string $updated_at
  * @property string $deleted_at
  */
-class ApplicantGroup extends Model implements IModelRules
+class ApplicantGroup extends Model implements IModelRules, IModelDeletable
 {
 	use SoftDeletes;
 
@@ -37,12 +37,15 @@ class ApplicantGroup extends Model implements IModelRules
 	/**
 	 * @return BelongsToMany
 	 */
-	public function applicants()
+	public function applicants(): BelongsToMany
 	{
 		return $this->belongsToMany( Applicant::class );
 	}
 
-	public static function rules()
+	/**
+	 * @return array[]
+	 */
+	public static function rules() :array
 	{
 		return [
 			'name' => [
@@ -52,10 +55,33 @@ class ApplicantGroup extends Model implements IModelRules
 		];
 	}
 
-	public static function niceNames()
+	/**
+	 * @return array
+	 */
+	public static function niceNames() :array
 	{
 		return [
 			'name' => trans( 'Név' ),
 		];
+	}
+
+	/**
+	 * @return bool
+	 */
+	public function isDeletable(): bool
+	{
+		return (bool) !$this->applicants()->count();
+	}
+
+	/**
+	 * @return bool|null
+	 * @throws Exception
+	 */
+	public function delete(): ?bool
+	{
+		if (!$this->isDeletable()) {
+			return false;
+		}
+		return parent::delete();
 	}
 }

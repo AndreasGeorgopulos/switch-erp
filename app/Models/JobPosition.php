@@ -25,7 +25,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property string $updated_at
  * @property string $deleted_at
  */
-class JobPosition extends Model implements IModelRules
+class JobPosition extends Model implements IModelRules, IModelDeletable
 {
 	use SoftDeletes;
 
@@ -64,7 +64,7 @@ class JobPosition extends Model implements IModelRules
 	/**
 	 * @return array
 	 */
-	public static function rules()
+	public static function rules(): array
 	{
 		return [];
 	}
@@ -72,7 +72,7 @@ class JobPosition extends Model implements IModelRules
 	/**
 	 * @return array
 	 */
-	public static function niceNames()
+	public static function niceNames(): array
 	{
 		return [];
 	}
@@ -89,5 +89,25 @@ class JobPosition extends Model implements IModelRules
 				'name' => $item->name,
 			];
 		}, static::select(['id', 'name'])->where('is_active', 1)->where('company_id', $company_id)->get());
+	}
+
+	/**
+	 * @return bool
+	 */
+	public function isDeletable(): bool
+	{
+		return (bool) !$this->applicants()->count();
+	}
+
+	/**
+	 * @return bool|null
+	 * @throws Exception
+	 */
+	public function delete(): ?bool
+	{
+		if (!$this->isDeletable()) {
+			return false;
+		}
+		return parent::delete();
 	}
 }
