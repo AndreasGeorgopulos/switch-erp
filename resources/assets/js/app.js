@@ -13,3 +13,19 @@ $('.select2').select2();
 
 require('./listTable');
 require('./applicant_management');
+require('./applicant_management_notes');
+require('./contract_management');
+
+$(document).on('click', 'button.btn-delete', function (e) {
+	const url = $(this).data('href');
+	const message = $(this).data('message');
+
+	if (!url || !message) {
+		alert('szarrrr');
+		return;
+	}
+
+	if (confirm(message)) {
+		document.location.href = url;
+	}
+});

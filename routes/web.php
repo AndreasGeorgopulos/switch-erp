@@ -13,10 +13,22 @@ Route::group(['middleware' => ['acl', 'locale']], function () {
 	});
 	//Route::match(['get'], '/dashboard', 'MainController@Dashboard')->name('dashboard');
 
-	// Management
+	// Applicant Management
 	Route::match(['get'], '/applicant_management/{selectedGroup?}', 'ApplicantManagementController@index')->name('applicant_management_index');
 	Route::match(['post'], '/applicant_management/save_rows/{selectedGroup?}', 'ApplicantManagementController@saveRows')->name('applicant_management_save_rows');
 	Route::match(['get', 'post'], '/applicant_management/edit/{id}/{selectedGroup?}', 'ApplicantManagementController@edit')->name('applicant_management_edit');
+	Route::match(['post'], '/applicant_management/add-note', 'ApplicantManagementController@addNote')->name('applicant_management_add_note');
+	Route::match(['get'], '/applicant_management/get-notes/{applicant_id}', 'ApplicantManagementController@getNotes')->name('applicant_management_get_notes');
+	Route::match(['get'], '/applicant_management/delete-note/{id}', 'ApplicantManagementController@deleteNote')->name('applicant_management_delete_note');
+
+	// Search management
+	Route::match(['get'], '/search_management', 'SearchManagementController@index')->name('search_management_index');
+
+	// Contract management
+	Route::match(['get'], '/contract_management', 'ContractManagementController@index')->name('contract_management_index');
+	Route::match(['post'], '/contract_management/save_rows', 'ContractManagementController@saveRows')->name('contract_management_save_rows');
+	Route::match(['get', 'post'], '/contract_management/edit/{id}', 'ContractManagementController@edit')->name('contract_management_edit');
+	Route::match(['get'], '/contract_management/delete/{id}', 'ContractManagementController@delete')->name('contract_management_delete');
 
 	// users
 	Route::match(['get', 'post'], '/users/list', 'UserController@index')->name('users_list');
@@ -54,4 +66,6 @@ Route::group(['middleware' => ['acl', 'locale']], function () {
 	Route::match(['get', 'post', 'put'], '/companies/edit/{id?}', 'CompanyController@edit')->name('companies_edit');
 	Route::match(['get'], '/companies/delete/{id?}', 'CompanyController@delete')->name('companies_delete');
 	Route::match(['get'], '/companies/download_pdf/{id}', 'CompanyController@downloadContract')->name('companies_download_contract');
+
+
 });
