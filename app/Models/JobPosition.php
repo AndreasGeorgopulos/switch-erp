@@ -58,7 +58,7 @@ class JobPosition extends Model implements IModelRules, IModelDeletable
 	 */
 	public function company()
 	{
-		return $this->hasOne(Company::class);
+		return $this->hasOne(Company::class, 'id', 'company_id');
 	}
 
 	/**
@@ -66,7 +66,30 @@ class JobPosition extends Model implements IModelRules, IModelDeletable
 	 */
 	public static function rules(): array
 	{
-		return [];
+		return [
+			'title' => [
+				'required',
+				'max:255',
+			],
+			'description' => [
+				'required',
+			],
+			'contact_name' => [
+				'required',
+				'max:255',
+			],
+			'contact_email' => [
+				'required',
+				'email',
+			],
+			'contact_phone' => [
+				'required',
+				'max:255',
+			],
+			'is_active' => [
+				'boolean',
+			],
+		];
 	}
 
 	/**
@@ -74,7 +97,13 @@ class JobPosition extends Model implements IModelRules, IModelDeletable
 	 */
 	public static function niceNames(): array
 	{
-		return [];
+		return [
+			'title' => trans('Megnevezés'),
+			'description' => trans('Leírás'),
+			'contact_name' => trans('Kapcsolattartó név'),
+			'contact_email' => trans('Kapcsolattartó email'),
+			'contact_phone' => trans('Kapcsolattartó telefon'),
+		];
 	}
 
 	/**

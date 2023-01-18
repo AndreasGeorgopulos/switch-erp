@@ -67,5 +67,9 @@ Route::group(['middleware' => ['acl', 'locale']], function () {
 	Route::match(['get'], '/companies/delete/{id?}', 'CompanyController@delete')->name('companies_delete');
 	Route::match(['get'], '/companies/download_pdf/{id}', 'CompanyController@downloadContract')->name('companies_download_contract');
 
-
+	// job positions
+	Route::match(['get', 'post'], '/job_positions/list', 'JobPositionController@index')->name('job_positions_list');
+	Route::match(['get'], '/job_positions/view/{id}', 'JobPositionController@view')->name('job_positions_view');
+	Route::match(['get', 'post', 'put'], '/job_positions/edit/{id?}', 'JobPositionController@edit')->name('job_positions_edit');
+	Route::match(['get'], '/job_positions/delete/{id?}', 'JobPositionController@delete')->name('job_positions_delete');
 });

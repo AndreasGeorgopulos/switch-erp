@@ -42,7 +42,7 @@ class Company extends Model implements IModelRules, IModelDeletable
 	 */
 	public function job_positions(): HasMany
 	{
-		return $this->hasMany(JobPosition::class);
+		return $this->hasMany(JobPosition::class, 'company_id', 'id');
 	}
 
 	/**
@@ -136,11 +136,11 @@ class Company extends Model implements IModelRules, IModelDeletable
 	{
 		return array_map(function ($item) use($selected) {
 			return [
-				'value' => $item->id,
-				'name' => $item->name,
-				'selected' => $item->id == $selected,
+				'value' => $item['id'],
+				'title' => $item['name'],
+				'selected' => $item['id'] == $selected,
 			];
-		}, static::select(['id', 'name'])->where('is_active', 1)->get());
+		}, static::select(['id', 'name'])->where('is_active', 1)->orderBy('name', 'asc')->get()->toArray());
 	}
 
 	/**

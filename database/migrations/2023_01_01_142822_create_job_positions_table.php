@@ -27,6 +27,7 @@ class CreateJobPositionsTable extends Migration
 			$table->string('contact_name');
 			$table->string('contact_email');
 			$table->string('contact_phone');
+			$table->date('expire_date');
 	        $table->boolean('is_active');
             $table->timestamps();
             $table->softDeletes();
@@ -53,6 +54,7 @@ class CreateJobPositionsTable extends Migration
 		    $table->bigInteger('applicant_id', false, true);
 		    $table->bigInteger('job_position_id', false, true);
 		    $table->text('description');
+		    $table->date('send_date');
 
 		    $table->primary(['applicant_id', 'job_position_id'], 'primary_key_applicant_job_position');
 

@@ -148,6 +148,13 @@ return [
 			'active' => ['companies/*'],
 		],
 		[
+			'text' => 'Pozíciók',
+			'route' => 'job_positions_list',
+			'role' => 'job_positions',
+			'icon' => 'user',
+			'active' => ['job_positions/*'],
+		],
+		[
 			'text' => 'Felhasználók',
 			'route' => 'users_list',
 			'role' => 'users',
