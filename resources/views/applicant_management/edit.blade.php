@@ -112,7 +112,7 @@
 
 							<div class="col-md-12">
 								<div class="form-group">
-									<label>{{trans('Információ a fejlesztőről')}}</label>
+									<label>{{trans('Információ a jelöltről')}}</label>
 									<textarea name="description" class="form-control">{{old('linked_in', $model->description)}}</textarea>
 								</div>
 							</div>
@@ -122,26 +122,17 @@
 									<textarea name="forwarded_to_companies" class="form-control">{{old('forwarded_to_companies', $model->forwarded_to_companies)}}</textarea>
 								</div>
 							</div>
-							<div class="col-md-12">
-								<div class="form-group">
-									<label>{{trans('Projektek')}}</label>
-									<textarea name="projects" class="form-control">{{old('projects', $model->projects)}}</textarea>
-								</div>
-							</div>
 						</div>
 
 						<div class="row">
 							<div class="col-sm-6">
 								<div class="form-group">
 									<label>{{trans('Riport')}}</label>
-									<textarea name="report" class="form-control">{{old('report', $model->report)}}</textarea>
+									<textarea name="report" class="form-control" rows="12">{{old('report', $model->report)}}</textarea>
 								</div>
 							</div>
 							<div class="col-sm-6">
-								<div class="form-group">
-									<label>{{trans('Jegyzet')}}</label>
-									<textarea name="note" class="form-control">{{old('note', $model->note)}}</textarea>
-								</div>
+								@include('applicant_management._notes')
 							</div>
 						</div>
 					</div>

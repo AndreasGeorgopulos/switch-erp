@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "3743a2982f5b10c73ec753a7f5eaa327",
+    "content-hash": "902c7252870a8c4e263d7d8cb90f8850",
     "packages": [
         {
             "name": "barryvdh/laravel-translation-manager",
@@ -814,6 +814,53 @@
                 }
             ],
             "time": "2022-04-17T13:12:02+00:00"
+        },
+        {
+            "name": "miroc/laravel-adminer",
+            "version": "4.5.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/miroc/Laravel-Adminer.git",
+                "reference": "d80c552dedd0311571b9b45d95a7fc438445e914"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/miroc/Laravel-Adminer/zipball/d80c552dedd0311571b9b45d95a7fc438445e914",
+                "reference": "d80c552dedd0311571b9b45d95a7fc438445e914",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/support": "5.*",
+                "php": ">=5.4.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Miroc\\LaravelAdminer\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Miroslav Svitok",
+                    "email": "mirosvitok@gmail.com"
+                }
+            ],
+            "description": "Adminer (by Jakub Vrana) wrapper for Laravel 5",
+            "keywords": [
+                "adminer",
+                "database",
+                "laravel5",
+                "management"
+            ],
+            "support": {
+                "issues": "https://github.com/miroc/Laravel-Adminer/issues",
+                "source": "https://github.com/miroc/Laravel-Adminer/tree/4.5.0"
+            },
+            "time": "2018-05-09T18:32:22+00:00"
         },
         {
             "name": "monolog/monolog",

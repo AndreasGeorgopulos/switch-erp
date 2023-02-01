@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Applicant;
 use App\Models\ApplicantGroup;
+use App\Models\ApplicantJobPosition;
+use App\Models\JobPosition;
 use App\Models\Skill;
 use Exception;
 use Illuminate\Contracts\View\Factory;
@@ -16,6 +18,7 @@ use Illuminate\Routing\Redirector;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\View\View;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use function foo\func;
 
 /**
  *
@@ -65,7 +68,10 @@ class ApplicantManagementController extends Controller
 
 		return redirect(route('applicant_management_index', [
 			'selectedGroup' => $selectedGroup,
-		]));
+		]))->with( 'form_success_message', [
+			trans( 'Sikeres mentés' ),
+			trans( 'A jelöltek sikeresen rögzítve lettek.' ),
+		] );;
 	}
 
 	/**
@@ -151,6 +157,61 @@ class ApplicantManagementController extends Controller
 		return redirect(route('index', [
 			'selectedGroup' => $selectedGroup,
 		]));
+	}
+
+	public function getNotes($applicant_id)
+	{
+		$result = [];
+		foreach (ApplicantJobPosition::where('applicant_id', $applicant_id)->get() as $model) {
+			$result[] = [
+				'job_position_id' => $model->job_position_id,
+				'applicant_id' => $model->applicant_id,
+				'job_position_title' => $model->job_position->title,
+				'company' => $model->job_position->company->name,
+				'description' => $model->description,
+				'send_date' => $model->send_date,
+			];
+		}
+
+		return view('applicant_management._note_list', [
+			'result' => $result,
+		]);
+	}
+
+	public function addNote(Request $request)
+	{
+		$model = ApplicantJobPosition::where(function($q) use($request) {
+			$q->where('applicant_id', $request->get('applicant_id'));
+			$q->where('job_position_id', $request->get('job_position_id'));
+		})->first();
+
+		if (empty($model)) {
+			$model = new ApplicantJobPosition();
+		}
+
+		$model->fill($request->all());
+		$model->send_date = date('Y-m-d');
+
+		return response()->json(['success' => (bool) $model->save()]);
+	}
+
+	public function deleteNote($applicant_id, $job_position_id)
+	{
+		$model = ApplicantJobPosition::where(function($q) use($applicant_id, $job_position_id) {
+			$q->where('applicant_id', $applicant_id);
+			$q->where('job_position_id', $job_position_id);
+		})->first();
+
+		if (!empty($model)) {
+			$model->delete();
+		}
+
+		return response()->json(['success' => true]);
+	}
+
+	public function getJobPositionOptions($company_id)
+	{
+		return response()->json(JobPosition::getDropdownItems($company_id));
 	}
 
 	/**

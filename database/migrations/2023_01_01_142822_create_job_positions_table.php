@@ -51,12 +51,13 @@ class CreateJobPositionsTable extends Migration
 	    });
 
 	    Schema::create(self::TABLE_APPLICANT_JOB_POSITION, function (Blueprint $table) {
+		    $table->bigIncrements('id');
 		    $table->bigInteger('applicant_id', false, true);
 		    $table->bigInteger('job_position_id', false, true);
 		    $table->text('description');
 		    $table->date('send_date');
-
-		    $table->primary(['applicant_id', 'job_position_id'], 'primary_key_applicant_job_position');
+		    $table->timestamps();
+		    $table->softDeletes();
 
 		    $table->foreign('applicant_id', 'foreign_key_applicant_id_applicants_02')
 			    ->references('id')

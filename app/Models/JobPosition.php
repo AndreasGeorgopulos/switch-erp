@@ -112,12 +112,21 @@ class JobPosition extends Model implements IModelRules, IModelDeletable
 	 */
 	public static function getDropdownItems($company_id)
 	{
+		$models = static::select(['id', 'title'])
+			->where(function ($q) use($company_id) {
+				$q->where('is_active', 1);
+				$q->where('company_id', $company_id);
+			})
+			->get()
+			->toArray();
+
+
 		return array_map(function ($item) {
 			return [
-				'value' => $item->id,
-				'name' => $item->name,
+				'value' => $item['id'],
+				'title' => $item['title'],
 			];
-		}, static::select(['id', 'name'])->where('is_active', 1)->where('company_id', $company_id)->get());
+		}, $models);
 	}
 
 	/**

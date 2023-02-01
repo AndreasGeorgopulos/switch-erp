@@ -2,7 +2,7 @@
 
 @section('content_header')
 	@include('../layout/management_tabs')
-@stop
+@endsection
 
 @section('content')
 	<div class="row">
@@ -11,7 +11,9 @@
 			<ul class="nav" id="applicant-skill-sidebar">
 			@foreach($applicantGroups as $group)
 				<li class="nav-item @if($selectedGroup !== null && $group->id == $selectedGroup->id) active @endif">
-					<a href="{{url(route('applicant_management_index', ['selectedGroup' => $group->id]))}}" class="nav-link">{{$group->name}}</a>
+					<a href="{{url(route('applicant_management_index', ['selectedGroup' => $group->id]))}}" class="nav-link">
+						{{$group->name}} @if($group->applicants->count()) <span class="badge pull-right">{{$group->applicants->count()}}</span> @endif
+					</a>
 				</li>
 			@endforeach
 			</ul>

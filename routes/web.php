@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 
+Route::any('adminer', '\Miroc\LaravelAdminer\AdminerController@index');
+
 Route::match(['get', 'post'], '/', 'MainController@Login')->name('index');
 Route::match(['get', 'post'], '/login', 'MainController@Login')->name('login');
 Route::match(['get', 'post'], '/logout', 'MainController@Logout')->name('logout');
@@ -19,7 +21,8 @@ Route::group(['middleware' => ['acl', 'locale']], function () {
 	Route::match(['get', 'post'], '/applicant_management/edit/{id}/{selectedGroup?}', 'ApplicantManagementController@edit')->name('applicant_management_edit');
 	Route::match(['post'], '/applicant_management/add-note', 'ApplicantManagementController@addNote')->name('applicant_management_add_note');
 	Route::match(['get'], '/applicant_management/get-notes/{applicant_id}', 'ApplicantManagementController@getNotes')->name('applicant_management_get_notes');
-	Route::match(['get'], '/applicant_management/delete-note/{id}', 'ApplicantManagementController@deleteNote')->name('applicant_management_delete_note');
+	Route::match(['get'], '/applicant_management/delete-note/{applicant_id}/{job_position_id}', 'ApplicantManagementController@deleteNote')->name('applicant_management_delete_note');
+	Route::match(['get'], '/applicant_management/get-job-position-options/{company_id}', 'ApplicantManagementController@getJobPositionOptions')->name('applicant_management_get_job_position_options');
 
 	// Search management
 	Route::match(['get'], '/search_management', 'SearchManagementController@index')->name('search_management_index');

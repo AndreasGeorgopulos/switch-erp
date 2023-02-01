@@ -1,5 +1,5 @@
 @extends('adminlte::page')
-@section('title', 'Admin zone')
+@section('title', 'Switch IT ERP')
 
 @section('modals')
     <div class="modal modal-default fade" id="confirm_modal">

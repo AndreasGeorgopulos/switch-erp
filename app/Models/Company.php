@@ -130,17 +130,26 @@ class Company extends Model implements IModelRules, IModelDeletable
 
 	/**
 	 * @param int|null $selected
+	 * @param bool $onlyHasJobPositions
 	 * @return array|array[]
 	 */
-	public static function getDropdownItems( int $selected = null ): array
+	public static function getDropdownItems( int $selected = null, bool $onlyHasJobPositions = false ): array
 	{
+		$models = static::select(['id', 'name'])
+			->where(function ($q) use($onlyHasJobPositions) {
+				$q->where('is_active', 1);
+			})
+			->orderBy('name', 'asc')
+			->get()
+			->toArray();
+
 		return array_map(function ($item) use($selected) {
 			return [
 				'value' => $item['id'],
 				'title' => $item['name'],
 				'selected' => $item['id'] == $selected,
 			];
-		}, static::select(['id', 'name'])->where('is_active', 1)->orderBy('name', 'asc')->get()->toArray());
+		}, $models);
 	}
 
 	/**

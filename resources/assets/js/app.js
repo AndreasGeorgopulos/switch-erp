@@ -21,7 +21,6 @@ $(document).on('click', 'button.btn-delete', function (e) {
 	const message = $(this).data('message');
 
 	if (!url || !message) {
-		alert('szarrrr');
 		return;
 	}
 

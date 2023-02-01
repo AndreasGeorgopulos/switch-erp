@@ -187,7 +187,7 @@
 										<a href="{{route('applicants_download_cv', ['id' => $model->id])}}" target="_blank">{{$model->cv_file}}</a>
 									</p>
 									<p>
-										<input type="checkbox" name="delete_cv_file" /> {{trans('Törlés')}}
+										<input type="checkbox" name="delete_cv_file" /> {{trans('Feltöltött file törlése')}}
 									</p>
 								</div>
 							</div>

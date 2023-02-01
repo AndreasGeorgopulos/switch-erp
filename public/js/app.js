@@ -18,6 +18,18 @@ __webpack_require__(/*! select2 */ "./node_modules/select2/dist/js/select2.js");
 $('.select2').select2();
 __webpack_require__(/*! ./listTable */ "./resources/assets/js/listTable.js");
 __webpack_require__(/*! ./applicant_management */ "./resources/assets/js/applicant_management.js");
+__webpack_require__(/*! ./applicant_management_notes */ "./resources/assets/js/applicant_management_notes.js");
+__webpack_require__(/*! ./contract_management */ "./resources/assets/js/contract_management.js");
+$(document).on('click', 'button.btn-delete', function (e) {
+  var url = $(this).data('href');
+  var message = $(this).data('message');
+  if (!url || !message) {
+    return;
+  }
+  if (confirm(message)) {
+    document.location.href = url;
+  }
+});
 
 /***/ }),
 
@@ -85,6 +97,159 @@ if ($('#applicant-table').length) {
 
 /***/ }),
 
+/***/ "./resources/assets/js/applicant_management_notes.js":
+/*!***********************************************************!*\
+  !*** ./resources/assets/js/applicant_management_notes.js ***!
+  \***********************************************************/
+/***/ (() => {
+
+if ($('#applicant-note-area').length) {
+  var ApplicantManagementNotes = {
+    applicant_id: null,
+    area_add_btn: null,
+    add_btn: null,
+    area_form: null,
+    area_list: null,
+    select_company: null,
+    select_job_positions: null,
+    init: function init() {
+      this.applicant_id = $('#applicant-note-area input.applicant-id').val();
+      this.area_add_btn = $('#applicant-note-area .area-add-btn');
+      this.area_form = $('#applicant-note-area .area-form');
+      this.area_list = $('#applicant-note-area .area-list');
+      this.select_company = $('#applicant-note-area select.select-company');
+      this.select_job_positions = $('#applicant-note-area select.select-job-position');
+      this.area_form.addClass('hidden');
+      this.loadList();
+    },
+    setEventHandlers: function setEventHandlers() {
+      var $this = this;
+      this.area_add_btn.find('button.add-btn').off('click');
+      this.area_add_btn.find('button.add-btn').on('click', function () {
+        $this.openForm();
+      });
+      this.area_form.find('button.ok-btn').off('click');
+      this.area_form.find('button.ok-btn').on('click', function (e) {
+        e.preventDefault();
+        $this.submitForm();
+      });
+      this.area_form.find('button.cancel-btn').off('click');
+      this.area_form.find('button.cancel-btn').on('click', function (e) {
+        e.preventDefault();
+        $this.closeForm();
+      });
+      this.select_company.on('change', function (e) {
+        $this.loadSelectOptions($(this).val());
+      });
+      this.area_list.find('button.btn-delete-note').off('click');
+      this.area_list.find('button.btn-delete-note').on('click', function (e) {
+        e.preventDefault();
+        if (confirm('Biztos, hogy törölni akarja ezt a bejegyzést?')) {
+          $this.deleteNote($(this).data('href'));
+        }
+      });
+    },
+    openForm: function openForm() {
+      this.select_company.val(0).trigger('change');
+      this.area_form.find('textarea[name="description"]').val('');
+      this.area_add_btn.addClass('hidden');
+      this.area_form.removeClass('hidden');
+    },
+    closeForm: function closeForm() {
+      this.area_add_btn.removeClass('hidden');
+      this.area_form.addClass('hidden');
+    },
+    submitForm: function submitForm() {
+      var $this = this;
+      var form = $this.area_form.find('form');
+      var company_id, job_position_id, description;
+      company_id = $this.select_company.find('option:selected').val();
+      if (company_id == 0) {
+        alert('Cég kiválasztása kötelező');
+        return;
+      }
+      job_position_id = $this.select_job_positions.find('option:selected').val();
+      if (job_position_id == 0) {
+        alert('Pozíció kiválasztása kötelező');
+        return;
+      }
+      description = $this.area_form.find('textarea[name="description"]').val();
+      if (description == '') {
+        alert('Jegyzet megadása kötelező');
+        return;
+      }
+      var data = {
+        _token: $this.area_form.find('input[name="_token"]').val(),
+        applicant_id: $this.applicant_id,
+        company_id: company_id,
+        job_position_id: job_position_id,
+        description: description
+      };
+      $.ajax({
+        url: '/applicant_management/add-note',
+        type: 'post',
+        dataType: 'json',
+        data: data,
+        success: function success(response) {
+          $this.loadList();
+        },
+        complete: function complete() {
+          $this.closeForm();
+        }
+      });
+    },
+    loadList: function loadList() {
+      var $this = this;
+      $this.area_list.html('<span class="text-center">Jegyzetek betöltése...</span>');
+      $.ajax({
+        url: '/applicant_management/get-notes/' + $this.applicant_id,
+        type: 'get',
+        dataType: 'html',
+        success: function success(html) {
+          $this.area_list.html(html);
+          $this.setEventHandlers();
+        }
+      });
+    },
+    loadSelectOptions: function loadSelectOptions(company_id) {
+      var $this = this;
+      if (company_id == 0) {
+        $this.select_job_positions.html('<option value="0"></option>');
+        return;
+      }
+      $this.select_company.prop('disabled', true);
+      $this.select_job_positions.prop('disabled', true);
+      $this.select_job_positions.html('<option>Betöltés...</option>');
+      $.ajax({
+        url: '/applicant_management/get-job-position-options/' + company_id,
+        type: 'get',
+        dataType: 'json',
+        success: function success(response) {
+          $this.select_job_positions.html('<option value="0"></option>');
+          $.each(response, function (index, item) {
+            $this.select_job_positions.append('<option value="' + item.value + '">' + item.title + '</option>');
+          });
+          $this.select_company.prop('disabled', false);
+          $this.select_job_positions.prop('disabled', false);
+        }
+      });
+    },
+    deleteNote: function deleteNote(url) {
+      var $this = this;
+      $.ajax({
+        url: url,
+        type: 'get',
+        success: function success() {
+          $this.loadList();
+        }
+      });
+    }
+  };
+  ApplicantManagementNotes.init();
+}
+
+/***/ }),
+
 /***/ "./resources/assets/js/bootstrap.js":
 /*!******************************************!*\
   !*** ./resources/assets/js/bootstrap.js ***!
@@ -140,6 +305,55 @@ if (token) {
 //     broadcaster: 'pusher',
 //     key: 'your-pusher-key'
 // });
+
+/***/ }),
+
+/***/ "./resources/assets/js/contract_management.js":
+/*!****************************************************!*\
+  !*** ./resources/assets/js/contract_management.js ***!
+  \****************************************************/
+/***/ (() => {
+
+if ($('#contract-table').length) {
+  var ContractManagement = {
+    table: null,
+    save_buttonbar: null,
+    button_add: null,
+    button_cancel: null,
+    init: function init() {
+      this.table = $('#contract-table');
+      this.save_buttonbar = this.table.find('tfoot td.save-buttonbar');
+      this.button_add = this.table.find('tfoot .btn-new');
+      this.button_cancel = this.table.find('tfoot .btn-cancel');
+      this.eventHandlers();
+    },
+    eventHandlers: function eventHandlers() {
+      var $this = this;
+      $this.table.find('tfoot .btn-new').off('click');
+      $this.table.find('tfoot .btn-new').on('click', function () {
+        $this.addNewRow();
+      });
+      $this.table.find('tfoot .btn-cancel').off('click');
+      $this.table.find('tfoot .btn-cancel').on('click', function () {
+        $this.cancelRows();
+      });
+    },
+    addNewRow: function addNewRow() {
+      this.save_buttonbar.removeClass('hidden');
+      var rowIndex = this.table.find('tbody tr.new-row').length;
+      var tr = $('<tr>');
+      tr.addClass('new-row');
+      tr.append($('<td><input type="text" required="required" class="form-control input-sm" name="contract[' + rowIndex + '][name]" /></td>'));
+      tr.append($('<td colspan="3"></td>'));
+      this.table.find('tbody').append(tr);
+    },
+    cancelRows: function cancelRows() {
+      this.table.find('tbody tr.new-row').remove();
+      this.save_buttonbar.addClass('hidden');
+    }
+  };
+  ContractManagement.init();
+}
 
 /***/ }),
 
