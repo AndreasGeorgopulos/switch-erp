@@ -112,6 +112,54 @@ return [
 			'icon' => 'dashboard',
 			'active' => ['admin'],
 		],
+		[
+			'text'    => 'Adminsztráció',
+			'icon'    => 'cog',
+			'submenu' => [
+				[
+					'text' => 'Jelöltek',
+					'route' => 'applicants_list',
+					'role' => 'applicants',
+					'active' => ['applicants/*'],
+				],
+				[
+					'text' => 'Jelölt csoportok',
+					'route' => 'applicant_groups_list',
+					'role' => 'applicant-groups',
+					'active' => ['applicant_groups/*'],
+				],
+				[
+					'text' => 'Technológiák, készségek',
+					'route' => 'skills_list',
+					'role' => 'skills',
+					'active' => ['skills/*'],
+				],
+				[
+					'text' => 'Cégek',
+					'route' => 'companies_list',
+					'role' => 'companies',
+					'active' => ['companies/*'],
+				],
+				[
+					'text' => 'Pozíciók',
+					'route' => 'job_positions_list',
+					'role' => 'job_positions',
+					'active' => ['job_positions/*'],
+				],
+				[
+					'text' => 'Felhasználók',
+					'route' => 'users_list',
+					'role' => 'users',
+					'active' => ['users/*'],
+				],
+				[
+					'text' => 'Jogosultságok',
+					'route' => 'roles_list',
+					'role' => 'roles',
+					'active' => ['roles/*'],
+				],
+			],
+		],
 		/*[
 			'text' => 'Tartalmak',
 			'route' => 'contents_list',
@@ -119,55 +167,7 @@ return [
 			'icon' => 'newspaper-o',
 			'active' => ['contents/*'],
 		],*/
-		[
-			'text' => 'Jelöltek',
-			'route' => 'applicants_list',
-			'role' => 'applicants',
-			'icon' => 'user',
-			'active' => ['applicants/*'],
-		],
-		[
-			'text' => 'Jelölt csoportok',
-			'route' => 'applicant_groups_list',
-			'role' => 'applicant-groups',
-			'icon' => 'user',
-			'active' => ['applicant_groups/*'],
-		],
-		[
-			'text' => 'Technológiák, készségek',
-			'route' => 'skills_list',
-			'role' => 'skills',
-			'icon' => 'user',
-			'active' => ['skills/*'],
-		],
-		[
-			'text' => 'Cégek',
-			'route' => 'companies_list',
-			'role' => 'companies',
-			'icon' => 'user',
-			'active' => ['companies/*'],
-		],
-		[
-			'text' => 'Pozíciók',
-			'route' => 'job_positions_list',
-			'role' => 'job_positions',
-			'icon' => 'user',
-			'active' => ['job_positions/*'],
-		],
-		[
-			'text' => 'Felhasználók',
-			'route' => 'users_list',
-			'role' => 'users',
-			'icon' => 'user',
-			'active' => ['users/*'],
-		],
-		[
-			'text' => 'Jogosultságok',
-			'route' => 'roles_list',
-			'role' => 'roles',
-			'active' => ['roles/*'],
-			'icon' => 'user'
-		],
+
 		/*[
 			'text' => 'Fordítások',
 			'route' => 'translation_getindex',

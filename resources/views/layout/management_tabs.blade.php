@@ -14,5 +14,3 @@
 		<a href="#" class="nav-link">{{trans('Sales')}}</a>
 	</li>
 </ul>
-
-@include('../layout/messages')
