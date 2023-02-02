@@ -6,7 +6,7 @@
 			<div class="checkbox">
 				<label>
 					<input type="checkbox" name="roles[]" value="{{$id}}" @if($role['enabled']) checked="checked" @endif>
-					{{$role['key']}}
+					{{$role['title']}}
 				</label>
 			</div>
 		@endforeach

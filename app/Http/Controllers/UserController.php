@@ -53,9 +53,9 @@ class UserController extends Controller
 		];
     	if ($model->id) {
     		// check user roles
-    		if (Auth::user()->roles()->where('key', 'superadmin')->orWhere('key', 'roles')->first()) {
+    		//if (hasRole('admin_roles')) {
 				$tabs[] = ['href' => 'role_data', 'title' => trans('Jogosultágok'), 'include' => 'users.tab_roles'];
-			}
+			//}
 		}
 		else {
     		$model->active = 1;
@@ -95,7 +95,7 @@ class UserController extends Controller
 			
 			// role settings save
 			// check user roles
-			if (Auth::user()->roles()->where('key', 'superadmin')->orWhere('key', 'roles')->first()) {
+			if (hasRole('admin_roles')) {
 				Role_User::where('user_id', $model->id)->delete();
 				foreach ($request->get('roles', []) as $roleId) {
 					$role_user = new Role_User();
@@ -115,6 +115,7 @@ class UserController extends Controller
 		foreach (Role::all() as $role) {
 			$roles[$role->id] = [
 				'key' => $role->key,
+				'title' => $role->getTitle(),
 				'enabled' => (bool) $model->roles()->where('key', $role->key)->first(),
 			];
 		}

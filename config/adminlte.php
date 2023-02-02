@@ -106,10 +106,10 @@ return [
 	'menu' => [
 		'FŐMENÜ',
 		[
-			'text' => 'Kezdőlap',
+			'text' => 'Menedzsment',
 			'route' => 'applicant_management_index',
 			'role' => 'login',
-			'icon' => 'dashboard',
+			'icon' => 'user-o',
 			'active' => ['admin'],
 		],
 		[
@@ -119,55 +119,47 @@ return [
 				[
 					'text' => 'Jelöltek',
 					'route' => 'applicants_list',
-					'role' => 'applicants',
+					'role' => 'admin_applicants',
 					'active' => ['applicants/*'],
 				],
 				[
 					'text' => 'Jelölt csoportok',
 					'route' => 'applicant_groups_list',
-					'role' => 'applicant-groups',
+					'role' => 'admin_applicant_groups',
 					'active' => ['applicant_groups/*'],
 				],
 				[
 					'text' => 'Technológiák, készségek',
 					'route' => 'skills_list',
-					'role' => 'skills',
+					'role' => 'admin_skills',
 					'active' => ['skills/*'],
 				],
 				[
 					'text' => 'Cégek',
 					'route' => 'companies_list',
-					'role' => 'companies',
+					'role' => 'admin_companies',
 					'active' => ['companies/*'],
 				],
 				[
 					'text' => 'Pozíciók',
 					'route' => 'job_positions_list',
-					'role' => 'job_positions',
+					'role' => 'admin_job_positions',
 					'active' => ['job_positions/*'],
 				],
 				[
 					'text' => 'Felhasználók',
 					'route' => 'users_list',
-					'role' => 'users',
+					'role' => 'admin_users',
 					'active' => ['users/*'],
 				],
 				[
 					'text' => 'Jogosultságok',
 					'route' => 'roles_list',
-					'role' => 'roles',
+					'role' => 'admin_roles',
 					'active' => ['roles/*'],
 				],
 			],
 		],
-		/*[
-			'text' => 'Tartalmak',
-			'route' => 'contents_list',
-			'role' => 'contents',
-			'icon' => 'newspaper-o',
-			'active' => ['contents/*'],
-		],*/
-
 		/*[
 			'text' => 'Fordítások',
 			'route' => 'translation_getindex',
