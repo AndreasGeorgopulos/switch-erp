@@ -23,6 +23,26 @@
 					<div class="col-sm-5">{{trans('Név')}}</div>
 					<div class="col-sm-7">{{$model->name}}</div>
 				</div>
+				<div class="row">
+					<div class="col-sm-5">{{trans('Sikerdíj mértéke')}}</div>
+					<div class="col-sm-7">{{$model->success_award}}</div>
+				</div>
+				<div class="row">
+					<div class="col-sm-5">{{trans('Fizetési határidő')}}</div>
+					<div class="col-sm-7">{{$model->payment_deadline}}</div>
+				</div>
+				<div class="row">
+					<div class="col-sm-5">{{trans('Kapcsolattartó')}}</div>
+					<div class="col-sm-7">{{$model->contact_name}}</div>
+				</div>
+				<div class="row">
+					<div class="col-sm-5">{{trans('E-mail')}}</div>
+					<div class="col-sm-7">{{$model->contact_email}}</div>
+				</div>
+				<div class="row">
+					<div class="col-sm-5">{{trans('Telefon')}}</div>
+					<div class="col-sm-7">{{$model->contact_phone}}</div>
+				</div>
 			</div>
 
 			@if($model->hasContract())
