@@ -16,7 +16,7 @@
     <!-- Ionicons -->
     <link rel="stylesheet" href="{{ asset('vendor/adminlte/vendor/Ionicons/css/ionicons.min.css') }}">
 
-    <link rel="stylesheet" href="{{ asset('css/app.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/app.css?t=' . time()) }}">
 
     @if(config('adminlte.plugins.select2'))
         <!-- Select2 -->
@@ -50,7 +50,7 @@
 {{csrf_field()}}
 @yield('body')
 
-<script src="{{asset('js/app.js')}}"></script>
+<script src="{{asset('js/app.js?t=' . time())}}"></script>
 <!--<script src="{{ asset('vendor/adminlte/vendor/jquery/dist/jquery.min.js') }}"></script>
 <script src="{{ asset('vendor/adminlte/vendor/bootstrap/dist/js/bootstrap.min.js') }}"></script>-->
 
