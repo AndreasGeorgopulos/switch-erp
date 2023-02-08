@@ -26,7 +26,7 @@
 						<div class="col-md-6">
 							<div class="form-group">
 								<label>{{trans('Telefon')}}*</label>
-								<input type="text" name="phone" class="form-control" value="{{old('phone', $model->phone)}}" />
+								<input type="text" name="phone" class="form-control phone-number" value="{{old('phone', $model->phone)}}" maxlength="11" />
 							</div>
 						</div>
 						<div class="col-md-6">

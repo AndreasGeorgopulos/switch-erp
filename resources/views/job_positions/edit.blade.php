@@ -84,7 +84,7 @@
 								<div class="col-sm-12">
 									<div class="form-group">
 										<label>{{trans('Telefon')}}*</label>
-										<input type="text" name="contact_phone" class="form-control" value="{{old('contact_phone', $model->contact_phone)}}" />
+										<input type="text" name="contact_phone" class="form-control phone-number" value="{{old('contact_phone', $model->contact_phone)}}" maxlength="11" />
 									</div>
 								</div>
 							</div>

@@ -20,6 +20,10 @@ __webpack_require__(/*! ./listTable */ "./resources/assets/js/listTable.js");
 __webpack_require__(/*! ./applicant_management */ "./resources/assets/js/applicant_management.js");
 __webpack_require__(/*! ./applicant_management_notes */ "./resources/assets/js/applicant_management_notes.js");
 __webpack_require__(/*! ./contract_management */ "./resources/assets/js/contract_management.js");
+
+/**
+ * Törlés gombok click esemény kezelése
+ */
 $(document).on('click', 'button.btn-delete', function (e) {
   var url = $(this).data('href');
   var message = $(this).data('message');
@@ -28,6 +32,28 @@ $(document).on('click', 'button.btn-delete', function (e) {
   }
   if (confirm(message)) {
     document.location.href = url;
+  }
+});
+
+/**
+ * Telefonszám formátum kezelés
+ */
+$(document).on('keyup', 'input.phone-number', function (e) {
+  var exceptedKeyCodes = [8, 46, 37, 38, 39, 40];
+  if (exceptedKeyCodes.indexOf(e.keyCode) !== -1) {
+    return;
+  }
+  $(this).change();
+});
+$(document).on('change', 'input.phone-number', function () {
+  var value = $(this).val();
+  if (value.length > 2 && value.indexOf('/') !== 2) {
+    value = value.slice(0, 2) + '/' + value.slice(2);
+    $(this).val(value);
+  }
+  if (value.length > 6 && value.indexOf('-') !== 6) {
+    value = value.slice(0, 6) + '-' + value.slice(6);
+    $(this).val(value);
   }
 });
 
