@@ -16,6 +16,11 @@ use Illuminate\Http\UploadedFile;
  *
  * @property int $id
  * @property string $name
+ * @property double $success_award
+ * @property string $payment_deadline
+ * @property string $contact_name
+ * @property string $contact_email
+ * @property string $contact_phone
  * @property string $contract_file
  * @property string $contract_file_mime_type
  * @property bool $is_active
@@ -31,7 +36,15 @@ class Company extends Model implements IModelRules, IModelDeletable
 
 	protected $table = 'companies';
 
-	protected $fillable = ['name', 'is_active'];
+	protected $fillable = [
+		'name',
+		'success_award',
+		'payment_deadline',
+		'contact_name',
+		'contact_email',
+		'contact_phone',
+		'is_active',
+	];
 
 	protected $casts = [
 		'is_active' => 'boolean',
@@ -112,6 +125,26 @@ class Company extends Model implements IModelRules, IModelDeletable
 				'required',
 				'max:100',
 			],
+			'success_award' => [
+				'required',
+				'numeric',
+			],
+			'payment_deadline' => [
+				'required',
+				'date',
+			],
+			'contact_name' => [
+				'required',
+				'max:100',
+			],
+			'contact_email' => [
+				'required',
+				'email',
+			],
+			'contact_phone' => [
+				'required',
+				'max:30',
+			],
 			'is_active' => [
 				'boolean',
 			],
@@ -125,6 +158,11 @@ class Company extends Model implements IModelRules, IModelDeletable
 	{
 		return [
 			'name' => trans( 'Név' ),
+			'success_award' => trans( 'Sikerdíj mértéke' ),
+			'payment_deadline' => trans( 'Fizetési határidő' ),
+			'contact_name' => trans( 'Kapcsolattartó' ),
+			'contact_email' => trans( 'E-mail' ),
+			'contact_phone' => trans( 'Telefon' ),
 		];
 	}
 

@@ -7,6 +7,7 @@
 @section('content')
 	<form method="post" enctype="multipart/form-data">
 		{{csrf_field()}}
+		@include('layout.messages')
 		<div class="box">
 			<div class="box-body">
 				<div class="row">
@@ -25,6 +26,45 @@
 										<option value="1" @if(old('is_active', $model->is_active)) selected="selected" @endif>{{trans('Igen')}}</option>
 										<option value="0" @if(!old('is_active', $model->is_active)) selected="selected" @endif>{{trans('Nem')}}</option>
 									</select>
+								</div>
+							</div>
+						</div>
+
+						<div class="row">
+							<div class="col-md-6">
+								<div class="form-group">
+									<label>{{trans('Sikerdíj mértéke')}}*</label>
+									<input type="number" name="success_award" class="form-control" value="{{old('success_award', $model->success_award)}}" />
+								</div>
+							</div>
+							<div class="col-md-6">
+								<div class="form-group">
+									<label>{{trans('Fizetési határidő')}}*</label>
+									<input type="date" name="payment_deadline" class="form-control" value="{{old('payment_deadline', $model->payment_deadline)}}" />
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-12">
+								<div class="form-group">
+									<label>{{trans('Kapcsolattartó')}}*</label>
+									<input type="text" name="contact_name" class="form-control" value="{{old('contact_name', $model->contact_name)}}" />
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-12">
+								<div class="form-group">
+									<label>{{trans('E-mail')}}*</label>
+									<input type="text" name="contact_email" class="form-control" value="{{old('contact_email', $model->contact_email)}}" />
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-12">
+								<div class="form-group">
+									<label>{{trans('Telefon')}}*</label>
+									<input type="text" name="contact_phone" class="form-control" value="{{old('contact_phone', $model->contact_phone)}}" />
 								</div>
 							</div>
 						</div>

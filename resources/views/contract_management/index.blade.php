@@ -11,7 +11,11 @@
 			<thead>
 			<tr role="row">
 				<th>{{trans('Név')}}</th>
-				<th>{{trans('Aktív')}}</th>
+				<th>{{trans('Sikerdíj mértéke')}}</th>
+				<th>{{trans('Fizetési határidő')}}</th>
+				<th>{{trans('Kapcsolattartó')}}</th>
+				<th>{{trans('E-mail')}}</th>
+				<th>{{trans('Telefonszám')}}</th>
 				<th class="text-center">{{trans('Szerződés')}}</th>
 				<th class="text-center">{{trans('Cég törlése')}}</th>
 			</tr>
@@ -21,9 +25,15 @@
 			@foreach($companies as $model)
 				<tr>
 					<td>{{$model->name}}</td>
-					<td class="text-center">
-						<i class="fa @if($model->is_active) fa-check text-green @else fa-lock text-red @endif"></i>
+					<td>{{$model->success_award}}</td>
+					<td>
+						@if(!empty($model->payment_deadline))
+						{{\Carbon\Carbon::createFromFormat('Y-m-d', $model->payment_deadline)->format('Y.m.d')}}
+						@endif
 					</td>
+					<td>{{$model->contact_name}}</td>
+					<td>{{$model->contact_email}}</td>
+					<td>{{$model->contact_phone}}</td>
 					<td class="text-center">
 						<a href="{{url(route('contract_management_edit', ['id' => $model->id]))}}">
 							<i class="fa @if($model->hasContract()) fa-edit @else fa-plus @endif"></i>

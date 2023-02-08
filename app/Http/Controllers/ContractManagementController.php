@@ -45,7 +45,7 @@ class ContractManagementController extends Controller
 					->withInput()
 					->with( 'form_warning_message', [
 						trans( 'Sikertelen mentés' ),
-						trans( 'A jelölt adatainak rögzítése nem sikerült a következő hibák miatt:' ),
+						trans( 'A cég adatainak rögzítése nem sikerült a következő hibák miatt:' ),
 					] );
 			}
 
