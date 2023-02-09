@@ -234,6 +234,8 @@ class Applicant extends Model implements IModelRules
 	}
 
 	/**
+	 * Dropdown options of english language level
+	 *
 	 * @param int $selected
 	 * @return array[]
 	 */
@@ -247,6 +249,8 @@ class Applicant extends Model implements IModelRules
 	}
 
 	/**
+	 * Dropdown options of subcontractor status
+	 *
 	 * @param int $selected
 	 * @return array[]
 	 */
@@ -259,6 +263,8 @@ class Applicant extends Model implements IModelRules
 	}
 
 	/**
+	 * Dropdown options of skills
+	 *
 	 * @param array $selectedIds
 	 * @return array|array[]
 	 */
@@ -270,5 +276,20 @@ class Applicant extends Model implements IModelRules
 				'selected' => in_array($skill['id'], $selectedIds),
 			];
 		}, Skill::select(['id', 'name'])->where('is_active', 1)->get()->toArray());
+	}
+
+	/**
+	 * Dropdown options of graduations
+	 *
+	 * @return array
+	 */
+	public static function getGraduationDropdownOptions()
+	{
+		return [
+			trans('Nincs'),
+			trans('OKJ'),
+			trans('Főiskola'),
+			trans('Egyetem'),
+		];
 	}
 }

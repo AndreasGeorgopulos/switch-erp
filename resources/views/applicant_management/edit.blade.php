@@ -70,7 +70,11 @@
 							<div class="col-md-3">
 								<div class="form-group">
 									<label>{{trans('Végzettség')}}</label>
-									<input type="text" name="graduation" class="form-control" value="{{old('graduation', $model->graduation)}}" />
+									<select name="graduation" class="form-control">
+										@foreach(\App\Models\Applicant::getGraduationDropdownOptions() as $option)
+											<option value="{{$option}}" @if($option == old('graduation', $model->graduation)) selected="selected" @endif>{{$option}}</option>
+										@endforeach
+									</select>
 								</div>
 							</div>
 
