@@ -26,7 +26,7 @@
 						<div class="col-md-6">
 							<div class="form-group">
 								<label>{{trans('Telefon')}}*</label>
-								<input type="text" name="phone" class="form-control phone-number" value="{{old('phone', $model->phone)}}" maxlength="11" />
+								<input type="text" name="phone" class="form-control phone-number" value="{{old('phone', $model->phone)}}" maxlength="11" placeholder="xx/xxx-xxxx" />
 							</div>
 						</div>
 						<div class="col-md-6">
@@ -45,13 +45,13 @@
 						<div class="col-md-3">
 							<div class="form-group">
 								<label>{{trans('Utolsó kapcsolat')}}</label>
-								<input type="text" name="last_contact_date" class="form-control datetimepicker" value="{{old('last_contact_date', $model->last_contact_date)}}" />
+								<input type="date" name="last_contact_date" class="form-control" value="{{old('last_contact_date', $model->last_contact_date)}}" />
 							</div>
 						</div>
 						<div class="col-md-3">
 							<div class="form-group">
 								<label>{{trans('Visszahívás')}}</label>
-								<input type="text" name="last_callback_date" class="form-control datetimepicker" value="{{old('last_callback_date', $model->last_callback_date)}}" />
+								<input type="date" name="last_callback_date" class="form-control" value="{{old('last_callback_date', $model->last_callback_date)}}" />
 							</div>
 						</div>
 						<div class="col-md-3">
