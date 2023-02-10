@@ -180,7 +180,7 @@ class Applicant extends Model implements IModelRules
 			],
 			'phone' => [
 				'required',
-				'max:30',
+				'regex:' . config('app.input_formats.phone_number'),
 			],
 			'linked_in' => [
 				'max:255',

@@ -64,7 +64,7 @@
 							<div class="col-md-12">
 								<div class="form-group">
 									<label>{{trans('Telefon')}}*</label>
-									<input type="text" name="contact_phone" class="form-control phone-number" value="{{old('contact_phone', $model->contact_phone)}}" maxlength="11" placeholder="xx/xxx-xxxx" />
+									<input type="text" name="contact_phone" class="form-control phone-number" value="{{old('contact_phone', $model->contact_phone)}}" maxlength="11" placeholder="##/###-####" />
 								</div>
 							</div>
 						</div>

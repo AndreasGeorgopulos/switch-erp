@@ -143,7 +143,7 @@ class Company extends Model implements IModelRules, IModelDeletable
 			],
 			'contact_phone' => [
 				'required',
-				'max:30',
+				'regex:' . config('app.input_formats.phone_number'),
 			],
 			'is_active' => [
 				'boolean',

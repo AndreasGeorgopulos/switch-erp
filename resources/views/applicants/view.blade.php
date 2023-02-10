@@ -66,7 +66,7 @@
 					<div class="col-sm-7">{{$model->graduation}}</div>
 				</div>
 				<div class="row">
-					<div class="col-sm-5">{{trans('Fizetési igény')}}</div>
+					<div class="col-sm-5">{{trans('Fizetési igénye (nettó)')}}</div>
 					<div class="col-sm-7">{{$model->salary}}</div>
 				</div>
 				<div class="row">

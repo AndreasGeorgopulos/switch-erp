@@ -5,6 +5,10 @@ return [
 	'languages' => ['hu', 'en'],
 	'language_cookie_expires' => 14440,
 
+	'input_formats' => [
+		'phone_number' => '/^\d{2}[\s.\/]?\d{3}[\s.-]?\d{4}$/',
+	],
+
     /*
     |--------------------------------------------------------------------------
     | Application Name
