@@ -67,7 +67,7 @@
 								<td>{{$applicant->description}}</td>
 								<td>{{$applicant->email}}</td>
 								<td>{{$applicant->phone}}</td>
-								<td>n/a</td>
+								<td>{{$applicant->monogram}}</td>
 								<td class="text-center">
 									@if(!empty($applicant->linked_in))
 										<a href="{{$applicant->linked_in}}" target="_blank"><i class="fa fa-linkedin"></i></a>

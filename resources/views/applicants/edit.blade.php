@@ -178,6 +178,12 @@
 						</div>
 						<div class="col-md-12">
 							<div class="form-group">
+								<label>{{trans('Intézte')}}</label>
+								<input type="text" name="monogram" value="{{old('monogram', $model->monogram)}}"  class="form-control" />
+							</div>
+						</div>
+						<div class="col-md-12">
+							<div class="form-group">
 								<label>{{trans('Önéletrajz')}} (PDF)</label>
 								<input type="file" class="form-control" name="cv_file" accept="application/pdf" />
 							</div>

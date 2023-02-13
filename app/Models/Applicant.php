@@ -17,6 +17,7 @@ use Illuminate\Http\UploadedFile;
  *
  * @property int $id
  * @property string $name
+ * @property string $monogram
  * @property string $email
  * @property string $phone
  * @property string $linked_in
@@ -50,6 +51,7 @@ class Applicant extends Model implements IModelRules
 
 	protected $fillable = [
 		'name',
+		'monogram',
 		'email',
 		'phone',
 		'linked_in',
@@ -174,6 +176,9 @@ class Applicant extends Model implements IModelRules
 				'required',
 				'max:100',
 			],
+			'monogram' => [
+				'max:4',
+			],
 			'email' => [
 				'required',
 				'email',
@@ -224,6 +229,7 @@ class Applicant extends Model implements IModelRules
 	{
 		return [
 			'name' => trans( 'Név' ),
+			'monogram' => trans( 'Intézte' ),
 			'email' => trans( 'E-mail cím' ),
 			'phone' => trans( 'Telefon' ),
 			'linked_in' => trans( 'Linked In' ),

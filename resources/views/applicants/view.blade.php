@@ -82,6 +82,10 @@
 					<div class="col-sm-7">{{$model->home_office ? trans('Igen') : trans('Nem')}}</div>
 				</div>
 				<div class="row">
+					<div class="col-sm-5">{{trans('Intézte')}}</div>
+					<div class="col-sm-7">{{$model->monogram}}</div>
+				</div>
+				<div class="row">
 					<div class="col-sm-5">{{trans('Jegyzet')}}</div>
 					<div class="col-sm-7">{{$model->note}}</div>
 				</div>

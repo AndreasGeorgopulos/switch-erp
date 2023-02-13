@@ -126,6 +126,12 @@
 									<textarea name="forwarded_to_companies" class="form-control">{{old('forwarded_to_companies', $model->forwarded_to_companies)}}</textarea>
 								</div>
 							</div>
+							<div class="col-md-12">
+								<div class="form-group">
+									<label>{{trans('Intézte')}}</label>
+									<input type="text" name="monogram" value="{{old('monogram', $model->monogram)}}"  class="form-control" />
+								</div>
+							</div>
 						</div>
 
 						<div class="row">
