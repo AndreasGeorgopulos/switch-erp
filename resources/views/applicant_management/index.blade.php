@@ -48,10 +48,31 @@
 							<th>{{trans('LinkedIn')}}</th>
 							<th>{{trans('Önéletrajz')}}</th>
 						</tr>
+						<tr>
+							<th></th>
+							<th>
+								<input type="text" name="experience_year" class="form-control input-sm search-input" value="{{$getParams['experience_year']}}" />
+							</th>
+							<th>
+								<select name="in_english" class="form-control search-input input-sm" style="width:100px">
+									@foreach(\App\Models\Applicant::getInEnglishDropdownOptions() as $item)
+										<option value="{{$item['value']}}" @if($item['value'] == $getParams['in_english']) selected="selected" @endif>{{$item['name']}}</option>
+									@endforeach
+								</select>
+							</th>
+							<th></th>
+							<th></th>
+							<th></th>
+							<th></th>
+							<th></th>
+							<th></th>
+							<th></th>
+							<th></th>
+						</tr>
 						</thead>
 
 						<tbody>
-						@foreach($selectedGroup->applicants as $applicant)
+						@foreach($applicants as $applicant)
 							<tr>
 								<td>{{$applicant->name}}</td>
 								<td>{{$applicant->experience_year}}</td>

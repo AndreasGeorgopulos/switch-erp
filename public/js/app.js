@@ -88,6 +88,37 @@ if ($('#applicant-table').length) {
       $this.table.find('tfoot .btn-cancel').on('click', function () {
         $this.cancelRows();
       });
+      $this.table.find('thead input.search-input').off('keyup keypress');
+      $this.table.find('thead input.search-input').on('keyup keypress', function (e) {
+        var keyCode = e.keyCode || e.which;
+        if (keyCode === 13) {
+          e.preventDefault();
+          $this.filterRows();
+          return false;
+        }
+      });
+      $this.table.find('thead select.search-input').off('change');
+      $this.table.find('thead select.search-input').on('change', function (e) {
+        e.preventDefault();
+        $this.filterRows();
+        return false;
+      });
+    },
+    filterRows: function filterRows() {
+      var $this = this;
+      var getItems = [];
+      $.each($this.table.find('thead .search-input'), function (index, item) {
+        if ($(item).val() != '') {
+          var option = $(item).attr('name') + '=' + $(item).val();
+          if (getItems.lastIndexOf(option) == -1) {
+            getItems.push(option);
+          }
+        }
+      });
+      if (getItems.length) {
+        var urlParts = document.location.href.split('?');
+        document.location.replace(urlParts[0] + '?' + getItems.join('&'));
+      }
     },
     addNewRow: function addNewRow() {
       this.save_buttonbar.removeClass('hidden');

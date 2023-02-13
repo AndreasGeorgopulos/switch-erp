@@ -26,14 +26,29 @@ use function foo\func;
 class ApplicantManagementController extends Controller
 {
 	/**
+	 * @param Request $request
 	 * @param int|null $selectedGroup
 	 * @return Factory|Application|View
 	 */
-	public function index(int $selectedGroup = null)
+	public function index(Request $request, int $selectedGroup = null)
     {
+	    $getParams = [
+		    'experience_year' => intval($request->get('experience_year')) ?: '',
+		    'in_english' => intval($request->get('in_english')) ?: '',
+	    ];
+
 		$applicantGroups = ApplicantGroup::where('is_active', true)->orderBy('name', 'asc')->get();
+	    $applicants = [];
 		if ($selectedGroup !== null) {
 			$selectedGroup = ApplicantGroup::find($selectedGroup);
+			$applicants = $selectedGroup->applicants()->where(function ($q) use($getParams) {
+				if (!empty($getParams['experience_year'])) {
+					$q->where('experience_year', '<=', $getParams['experience_year']);
+				}
+				if (!empty($getParams['in_english'])) {
+					$q->where('in_english', $getParams['in_english']);
+				}
+			})->get();
 		}
 
 	    return view('applicant_management.index', [
@@ -42,6 +57,8 @@ class ApplicantManagementController extends Controller
 		    'breadcrumb' => [],
 		    'selectedGroup' => $selectedGroup,
 		    'applicantGroups' => $applicantGroups,
+		    'applicants' => $applicants,
+		    'getParams' => $getParams,
 	    ]);
     }
 
