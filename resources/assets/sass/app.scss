@@ -41,3 +41,10 @@ iframe.cv_viewer {
   background-color: #f7f7f7;
   font-weight: bold;
 }
+
+.applicant-note-list {
+  height: 300px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding-right: 20px;
+}

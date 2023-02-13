@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
 class ApplicantJobPosition extends Model
 {
 	protected $table = 'applicant_job_position';
-	protected $fillable = ['applicant_id', 'job_position_id', 'description', 'send_date'];
+	protected $fillable = ['applicant_id', 'job_position_id', 'description', 'send_date', 'monogram'];
 
 	/**
 	 * @return HasOne

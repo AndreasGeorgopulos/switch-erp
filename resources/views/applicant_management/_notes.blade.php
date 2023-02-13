@@ -29,6 +29,10 @@
 			<label>{{trans('Jegyzet')}}</label>
 			<textarea name="description" class="form-control textarea-note" rows="9">{{old('note', $model->note)}}</textarea>
 		</div>
+		<div class="form-group">
+			<label>{{trans('Írta')}}</label>
+			<input name="monogram" class="form-control" value="{{old('note', $model->note)}}" />
+		</div>
 
 		<div class="text-center">
 			<button type="button" class="btn btn-success btn-sm ok-btn">

@@ -56,6 +56,7 @@ if ($('#applicant-note-area').length) {
 		openForm: function () {
 			this.select_company.val(0).trigger('change');
 			this.area_form.find('textarea[name="description"]').val('');
+			this.area_form.find('input[name="monogram"]').val('');
 			this.area_add_btn.addClass('hidden');
 			this.area_form.removeClass('hidden');
 		},
@@ -68,19 +69,19 @@ if ($('#applicant-note-area').length) {
 		submitForm: function () {
 			const $this = this;
 			const form = $this.area_form.find('form');
-			let company_id, job_position_id, description;
+			let company_id, job_position_id, description, monogram;
 
 			company_id = $this.select_company.find('option:selected').val();
-			if (company_id == 0) {
+			/*if (company_id == 0) {
 				alert('Cég kiválasztása kötelező');
 				return;
-			}
+			}*/
 
 			job_position_id = $this.select_job_positions.find('option:selected').val();
-			if (job_position_id == 0) {
+			/*if (job_position_id == 0) {
 				alert('Pozíció kiválasztása kötelező');
 				return;
-			}
+			}*/
 
 			description = $this.area_form.find('textarea[name="description"]').val();
 			if (description == '') {
@@ -88,12 +89,15 @@ if ($('#applicant-note-area').length) {
 				return;
 			}
 
+			monogram = $this.area_form.find('input[name="monogram"]').val();
+
 			const data = {
 				_token: $this.area_form.find('input[name="_token"]').val(),
 				applicant_id: $this.applicant_id,
 				company_id: company_id,
 				job_position_id: job_position_id,
 				description: description,
+				monogram: monogram,
 			};
 
 			$.ajax({

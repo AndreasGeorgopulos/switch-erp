@@ -164,12 +164,14 @@ class ApplicantManagementController extends Controller
 		$result = [];
 		foreach (ApplicantJobPosition::where('applicant_id', $applicant_id)->get() as $model) {
 			$result[] = [
+				'id' => $model->id,
 				'job_position_id' => $model->job_position_id,
 				'applicant_id' => $model->applicant_id,
-				'job_position_title' => $model->job_position->title,
-				'company' => $model->job_position->company->name,
+				'job_position_title' => $model->job_position_id ? $model->job_position->title : null,
+				'company' => $model->job_position_id ? $model->job_position->company->name : null,
 				'description' => $model->description,
 				'send_date' => $model->send_date,
+				'monogram' => $model->monogram,
 			];
 		}
 
@@ -185,22 +187,22 @@ class ApplicantManagementController extends Controller
 			$q->where('job_position_id', $request->get('job_position_id'));
 		})->first();
 
-		if (empty($model)) {
+		if (empty($model) || $model->job_position_id === null) {
 			$model = new ApplicantJobPosition();
 		}
 
 		$model->fill($request->all());
+		if (!$request->get('job_position_id')) {
+			$model->job_position_id = null;
+		}
 		$model->send_date = date('Y-m-d');
 
 		return response()->json(['success' => (bool) $model->save()]);
 	}
 
-	public function deleteNote($applicant_id, $job_position_id)
+	public function deleteNote($id)
 	{
-		$model = ApplicantJobPosition::where(function($q) use($applicant_id, $job_position_id) {
-			$q->where('applicant_id', $applicant_id);
-			$q->where('job_position_id', $job_position_id);
-		})->first();
+		$model = ApplicantJobPosition::where('id', $id)->first();
 
 		if (!empty($model)) {
 			$model->delete();
