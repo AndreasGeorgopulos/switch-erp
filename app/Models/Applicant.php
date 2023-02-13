@@ -242,6 +242,8 @@ class Applicant extends Model implements IModelRules
 	public static function getInEnglishDropdownOptions($selected = null)
 	{
 		return [
+			['value' => 0, 'name' => '', 'selected' => $selected == 0],
+			['value' => 4, 'name' => trans('Passzív'), 'selected' => $selected == 4],
 			['value' => 1, 'name' => trans('Alapfok'), 'selected' => $selected == 1],
 			['value' => 2, 'name' => trans('Középfok'), 'selected' => $selected == 2],
 			['value' => 3, 'name' => trans('Felsőfok'), 'selected' => $selected == 3],

@@ -40,7 +40,11 @@
 							<th>{{trans('Tapasztalat')}}</th>
 							<th>{{trans('Angol')}}</th>
 							<th>{{trans('Technológia')}}</th>
+							<th>{{trans('Cég')}}</th>
+							<th>{{trans('Információ')}}</th>
 							<th>{{trans('E-mail')}}</th>
+							<th>{{trans('Telefon')}}</th>
+							<th>{{trans('Intézte')}}</th>
 							<th>{{trans('LinkedIn')}}</th>
 							<th>{{trans('Önéletrajz')}}</th>
 						</tr>
@@ -55,10 +59,15 @@
 									@if($applicant->in_english == 1){{trans('Alapfok')}}
 									@elseif($applicant->in_english == 2){{trans('Középfok')}}
 									@elseif($applicant->in_english == 3){{trans('Felsőfok')}}
+									@elseif($applicant->in_english == 4){{trans('Passzív')}}
 									@endif
 								</td>
 								<td>{{$applicant->skills->pluck('name')->implode(', ')}}</td>
+								<td>n/a</td>
+								<td>{{$applicant->description}}</td>
 								<td>{{$applicant->email}}</td>
+								<td>{{$applicant->phone}}</td>
+								<td>n/a</td>
 								<td class="text-center">
 									@if(!empty($applicant->linked_in))
 										<a href="{{$applicant->linked_in}}" target="_blank"><i class="fa fa-linkedin"></i></a>
