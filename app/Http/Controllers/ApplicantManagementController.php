@@ -35,20 +35,28 @@ class ApplicantManagementController extends Controller
 	    $getParams = [
 		    'experience_year' => intval($request->get('experience_year')) ?: '',
 		    'in_english' => intval($request->get('in_english')) ?: '',
+		    'skill' => intval($request->get('skill')) ?: '',
 	    ];
 
 		$applicantGroups = ApplicantGroup::where('is_active', true)->orderBy('name', 'asc')->get();
 	    $applicants = [];
 		if ($selectedGroup !== null) {
 			$selectedGroup = ApplicantGroup::find($selectedGroup);
-			$applicants = $selectedGroup->applicants()->where(function ($q) use($getParams) {
+			$query = $selectedGroup->applicants()->where(function ($q) use($getParams) {
 				if (!empty($getParams['experience_year'])) {
 					$q->where('experience_year', '<=', $getParams['experience_year']);
 				}
 				if (!empty($getParams['in_english'])) {
 					$q->where('in_english', $getParams['in_english']);
 				}
-			})->get();
+			});
+
+			if (!empty($getParams['skill'])) {
+				$query->join('applicant_skill', 'applicant_skill.applicant_id', '=', 'applicants.id', 'inner', false);
+				$query->where('applicant_skill.skill_id', '=', $getParams['skill']);
+			}
+
+			$applicants = $query->get();
 		}
 
 	    return view('applicant_management.index', [

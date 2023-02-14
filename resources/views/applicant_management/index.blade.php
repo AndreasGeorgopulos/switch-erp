@@ -60,7 +60,14 @@
 									@endforeach
 								</select>
 							</th>
-							<th></th>
+							<th>
+								<select name="skill" class="form-control search-input input-sm">
+									<option></option>
+									@foreach(\App\Models\Applicant::getSkillDropdownOptions([$getParams['skill']]) as $item)
+										<option value="{{$item['id']}}" @if($item['selected']) selected="selected" @endif>{{$item['name']}}</option>
+									@endforeach
+								</select>
+							</th>
 							<th></th>
 							<th></th>
 							<th></th>

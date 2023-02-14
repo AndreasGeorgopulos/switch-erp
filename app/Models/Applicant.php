@@ -285,6 +285,7 @@ class Applicant extends Model implements IModelRules
 	{
 		return array_map(function ($skill) use ($selectedIds) {
 			return [
+				'id' => $skill['id'],
 				'name' => $skill['name'],
 				'selected' => in_array($skill['id'], $selectedIds),
 			];
