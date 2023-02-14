@@ -73,6 +73,16 @@
 
 						<tbody>
 						@foreach($applicants as $applicant)
+							@php
+								$companies = [];
+								foreach ($applicant->companies()->get() as $item) {
+									if (in_array($item->company->name, $companies)) {
+										continue;
+									}
+									$companies[] = $item->company->name;
+								}
+								$companies = collect($companies)->sortBy(0, SORT_REGULAR, true)->implode(', ');
+							@endphp
 							<tr>
 								<td>{{$applicant->name}}</td>
 								<td>{{$applicant->experience_year}}</td>
@@ -84,7 +94,7 @@
 									@endif
 								</td>
 								<td>{{$applicant->skills->pluck('name')->implode(', ')}}</td>
-								<td>n/a</td>
+								<td>{{$companies}}</td>
 								<td>{{$applicant->description}}</td>
 								<td>{{$applicant->email}}</td>
 								<td>{{$applicant->phone}}</td>
