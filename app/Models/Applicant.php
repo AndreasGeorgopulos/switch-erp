@@ -289,7 +289,7 @@ class Applicant extends Model implements IModelRules
 				'name' => $skill['name'],
 				'selected' => in_array($skill['id'], $selectedIds),
 			];
-		}, Skill::select(['id', 'name'])->where('is_active', 1)->get()->toArray());
+		}, Skill::select(['id', 'name'])->where('is_active', 1)->orderBy('name', 'asc')->get()->toArray());
 	}
 
 	/**
