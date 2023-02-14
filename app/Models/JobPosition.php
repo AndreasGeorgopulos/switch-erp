@@ -129,6 +129,20 @@ class JobPosition extends Model implements IModelRules, IModelDeletable
 		}, $models);
 	}
 
+	public static function getCompanyDropdownItems()
+	{
+		$models = static::with('company')
+			->where(function ($q) {
+				$q->where('is_active', 1);
+			})
+			->orderBy('title', 'asc')
+			->get();
+
+		return $models->sortBy(function ($item) {
+			return $item->company->name . ' - ' . $item->title;
+		}, SORT_REGULAR, false);
+	}
+
 	/**
 	 * @return bool
 	 */

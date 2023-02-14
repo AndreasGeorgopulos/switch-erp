@@ -105,6 +105,7 @@ class ApplicantManagementController extends Controller
 		if ( $request->isMethod( 'post' ) ) {
 			$inputSkills = $request->input('applicant.skills', []);
 			$inputGroups = $request->input('applicant.groups', []);
+			$inputCompanies = $request->input('applicant.companies', []);
 
 			// validate
 			$validator = Validator::make( $request->all(), Applicant::rules() );
@@ -124,6 +125,7 @@ class ApplicantManagementController extends Controller
 			$model->save();
 
 			$this->setSkills($model, $inputSkills);
+			$this->setCompanies($model, $inputCompanies);
 			//$this->setGroups($model, $inputGroups);
 
 			if ( $file = $request->file('cv_file') ) {
@@ -176,6 +178,10 @@ class ApplicantManagementController extends Controller
 		]));
 	}
 
+	/**
+	 * @param $applicant_id
+	 * @return Factory|Application|View
+	 */
 	public function getNotes($applicant_id)
 	{
 		$result = [];
@@ -197,6 +203,10 @@ class ApplicantManagementController extends Controller
 		]);
 	}
 
+	/**
+	 * @param Request $request
+	 * @return \Illuminate\Http\JsonResponse
+	 */
 	public function addNote(Request $request)
 	{
 		$model = ApplicantJobPosition::where(function($q) use($request) {
@@ -217,6 +227,11 @@ class ApplicantManagementController extends Controller
 		return response()->json(['success' => (bool) $model->save()]);
 	}
 
+	/**
+	 * @param $id
+	 * @return \Illuminate\Http\JsonResponse
+	 * @throws Exception
+	 */
 	public function deleteNote($id)
 	{
 		$model = ApplicantJobPosition::where('id', $id)->first();
@@ -228,6 +243,10 @@ class ApplicantManagementController extends Controller
 		return response()->json(['success' => true]);
 	}
 
+	/**
+	 * @param $company_id
+	 * @return \Illuminate\Http\JsonResponse
+	 */
 	public function getJobPositionOptions($company_id)
 	{
 		return response()->json(JobPosition::getDropdownItems($company_id));
@@ -265,6 +284,16 @@ class ApplicantManagementController extends Controller
 		}, $items);
 
 		$model->skills()->sync($ids);
+	}
+
+	/**
+	 * @param $model
+	 * @param $items
+	 * @return void
+	 */
+	private function setCompanies($model, $items)
+	{
+		$model->companies()->sync($items);
 	}
 
 	/**

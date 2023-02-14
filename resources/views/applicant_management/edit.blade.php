@@ -123,7 +123,13 @@
 							<div class="col-md-12">
 								<div class="form-group">
 									<label>{{trans('Cégeknek átküldve')}}</label>
-									<textarea name="forwarded_to_companies" class="form-control">{{old('forwarded_to_companies', $model->forwarded_to_companies)}}</textarea>
+									<select name="applicant[companies][]" class="form-control select2" multiple>
+										@foreach(\App\Models\JobPosition::getCompanyDropdownItems() as $item)
+											<option value="{{$item->id}}"
+												@if(in_array($item->id, $model->companies()->pluck('id')->toArray())) selected="selected" @endif
+											>{{$item->company->name}} - {{$item->title}}</option>
+										@endforeach
+									</select>
 								</div>
 							</div>
 							<div class="col-md-12">
@@ -138,7 +144,7 @@
 							<div class="col-sm-6">
 								<div class="form-group">
 									<label>{{trans('Riport')}}</label>
-									<textarea name="report" class="form-control" rows="12">{{old('report', $model->report)}}</textarea>
+									<textarea name="report" class="form-control" rows="17">{{old('report', $model->report)}}</textarea>
 								</div>
 							</div>
 							<div class="col-sm-6">
@@ -152,7 +158,7 @@
 							<input type="file" class="form-control" name="cv_file" accept="application/pdf" />
 						</div>
 						@if($model->hasCV())
-							<iframe src="{{route('applicants_download_cv', ['id' => $model->id])}}" class="pdf_viewer" width="100%" height="800"></iframe>
+							<iframe src="{{route('applicants_download_cv', ['id' => $model->id])}}" class="pdf_viewer" width="100%" height="1045"></iframe>
 						@endif
 					</div>
 				</div>
