@@ -42,7 +42,8 @@
 						<th>{{trans('Név')}}</th>
 						<th class="date-col">{{trans('Átküldés dátuma')}}</th>
 						<th class="status-col">{{trans('Státusz')}}</th>
-						<th></th>
+						<th class="text-center">{{trans('Bérigény')}}</th>
+						<th class="text-center">{{trans('Önéletrajz')}}</th>
 					</tr>
 					</thead>
 
@@ -60,7 +61,16 @@
 									@endforeach
 								</select>
 							</td>
-							<td></td>
+							<td class="text-center">
+								@if(is_numeric($m->applicant->salary)){{number_format($m->applicant->salary, 0, '', '.')}} Ft
+								@else<span>Nincs megadva</span>
+								@endif
+							</td>
+							<td class="text-center">
+								<a href="{{url(route('applicant_management_edit', ['id' => $m->applicant->id]))}}">
+									<i class="fa @if($m->applicant->hasCv()) fa-edit @else fa-plus @endif"></i>
+								</a>
+							</td>
 						</tr>
 					@endforeach
 					</tbody>
