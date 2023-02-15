@@ -33,32 +33,30 @@ class SearchManagementController extends Controller
 
 	public function saveData(Request $request)
 	{
-		if ($request->ajax()) {
-			try {
-				$model = ApplicantCompany::where(function ($q) use($request) {
-					$q->where('applicant_id', $request->get('applicant_id'));
-					$q->where('job_position_id', $request->get('job_position_id'));
-				})->first();
+		try {
+			$model = ApplicantCompany::where(function ($q) use($request) {
+				$q->where('applicant_id', $request->get('applicant_id'));
+				$q->where('job_position_id', $request->get('job_position_id'));
+			})->first();
 
-				if (empty($model)) {
-					throw new Exception('Model not found');
-				}
-
-				$model->status = $request->get('status');
-				if (!empty($request->get('send_date'))) {
-					$model->send_date = $request->get('send_date');
-				}
-
-				if (!$model->save()) {
-					throw new Exception(implode(';', $model->errors));
-				}
-
-				return response()->json(['success' => true], 200);
-
-			} catch (Exception $exception) {
-				return response()->json(['success' => false, 'error' => $exception->getMessage()], 500);
-
+			if (empty($model)) {
+				throw new Exception('Model not found');
 			}
+
+			$model->status = $request->get('status');
+			if (!empty($request->get('send_date'))) {
+				$model->send_date = $request->get('send_date');
+			}
+
+			if (!$model->save()) {
+				throw new Exception(implode(';', $model->errors));
+			}
+
+			return response()->json(['success' => true], 200);
+
+		} catch (Exception $exception) {
+			return response()->json(['success' => false, 'error' => $exception->getMessage()], 500);
+
 		}
 	}
 }
