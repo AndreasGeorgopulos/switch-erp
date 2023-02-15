@@ -30,7 +30,11 @@ if ($('#search-table').length) {
 					}
 				});*/
 
-				$.ajax({
+				$.post('/search_management/save_data', data, function () {
+					element.prop('disabled', false);
+				});
+
+				/*$.ajax({
 					url: '/search_management/save_data',
 					type: 'post',
 					dataType: 'json',
@@ -42,7 +46,7 @@ if ($('#search-table').length) {
 					complete: function () {
 						element.prop('disabled', false);
 					}
-				});
+				});*/
 			});
 		}
 	};
