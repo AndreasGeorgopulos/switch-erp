@@ -12,6 +12,7 @@ class VerifyCsrfToken extends BaseVerifier
      * @var array
      */
 	protected $except = [
-		'adminer'
+		'adminer',
+		'search_management/save_data'
 	];
 }

@@ -24,11 +24,11 @@ if ($('#search-table').length) {
 
 				element.prop('disabled', true);
 
-				$.ajaxSetup({
+				/*$.ajaxSetup({
 					headers: {
 						'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
 					}
-				});
+				});*/
 
 				$.ajax({
 					url: '/search_management/save_data',
