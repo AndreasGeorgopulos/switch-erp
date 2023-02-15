@@ -6,6 +6,7 @@ use App\Models\ApplicantCompany;
 use App\Models\ApplicantJobPosition;
 use App\Models\Company;
 use App\Models\JobPosition;
+use Exception;
 use Illuminate\Http\Request;
 
 class SearchManagementController extends Controller

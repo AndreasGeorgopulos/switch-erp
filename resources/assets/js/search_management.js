@@ -16,7 +16,6 @@ if ($('#search-table').length) {
 				const element = $(this);
 				const tr = $(this).parents().closest('tr');
 				const data = {
-					_token: $('input[name="_token"]').val(),
 					applicant_id: tr.data('applicant'),
 					job_position_id: tr.data('job'),
 					status: tr.find('select[name="status"] option:selected').val(),
@@ -24,6 +23,13 @@ if ($('#search-table').length) {
 				};
 
 				element.prop('disabled', true);
+
+				$.ajaxSetup({
+					headers: {
+						'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+					}
+				});
+
 				$.ajax({
 					url: '/search_management/save_data',
 					type: 'post',
