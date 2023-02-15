@@ -103,7 +103,7 @@ class Applicant extends Model implements IModelRules
 
 	public function companies()
 	{
-		return $this->belongsToMany(JobPosition::class, 'applicant_companies', 'applicant_id', 'job_position_id', 'id');
+		return $this->belongsToMany(JobPosition::class, 'applicant_companies', 'applicant_id', 'job_position_id');
 	}
 
 	/**
