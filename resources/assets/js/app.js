@@ -15,6 +15,7 @@ require('./listTable');
 require('./applicant_management');
 require('./applicant_management_notes');
 require('./contract_management');
+require('./search_management');
 
 /**
  * Törlés gombok click esemény kezelése

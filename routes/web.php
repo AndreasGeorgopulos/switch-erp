@@ -25,7 +25,8 @@ Route::group(['middleware' => ['acl', 'locale']], function () {
 	Route::match(['get'], '/applicant_management/get-job-position-options/{company_id}', 'ApplicantManagementController@getJobPositionOptions')->name('applicant_management_get_job_position_options');
 
 	// Search management
-	Route::match(['get'], '/search_management', 'SearchManagementController@index')->name('search_management_index');
+	Route::match(['get'], '/search_management/{company?}/{job?}', 'SearchManagementController@index')->name('search_management_index');
+	Route::match(['post'], '/search_management/save_data', 'SearchManagementController@saveData')->name('search_management_save_data');
 
 	// Contract management
 	Route::match(['get'], '/contract_management', 'ContractManagementController@index')->name('contract_management_index');
