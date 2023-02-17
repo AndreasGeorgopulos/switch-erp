@@ -28,7 +28,7 @@
 							<div class="col-md-6">
 								<div class="form-group">
 									<label>{{trans('Telefon')}}*</label>
-									<input type="text" name="phone" class="form-control phone-number" value="{{old('phone', $model->phone)}}" maxlength="11" placeholder="##/###-####" />
+									<input type="text" name="phone" class="form-control phone-number only-numbers" value="{{old('phone', $model->phone)}}" maxlength="11" placeholder="##/###-####" />
 								</div>
 							</div>
 							<div class="col-md-6">
@@ -81,7 +81,7 @@
 							<div class="col-md-3">
 								<div class="form-group">
 									<label>{{trans('Fizetési igénye (nettó)')}}</label>
-									<input type="number" name="salary" class="form-control" value="{{old('salary', $model->salary)}}" />
+									<input type="text" name="salary" class="form-control salary only-numbers" value="{{old('salary', $model->salary)}}" />
 								</div>
 							</div>
 

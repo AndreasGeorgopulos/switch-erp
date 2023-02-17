@@ -24,29 +24,9 @@ if ($('#search-table').length) {
 
 				element.prop('disabled', true);
 
-				/*$.ajaxSetup({
-					headers: {
-						'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-					}
-				});*/
-
 				$.post('/search_management/save_data', data, function () {
 					element.prop('disabled', false);
 				});
-
-				/*$.ajax({
-					url: '/search_management/save_data',
-					type: 'post',
-					dataType: 'json',
-					data: data,
-					error: function (xhr, ajaxOptions, thrownError) {
-						console.log('Xhr status: ' + xhr.status);
-						console.log('ThrownError: ' + thrownError);
-					},
-					complete: function () {
-						element.prop('disabled', false);
-					}
-				});*/
 			});
 		}
 	};
