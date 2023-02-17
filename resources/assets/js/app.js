@@ -87,7 +87,7 @@ $(document).on('keyup', 'input.salary', function (e) {
 
 $(document).on('change', 'input.salary', function (e) {
 	const numberWithThousands = function (number) {
-		return number.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, ("$1."));
+		return number.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1.");
 	}
 
 	let value = $(this).val().replaceAll('.', '');
