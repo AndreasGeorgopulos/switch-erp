@@ -33,6 +33,7 @@ class ApplicantManagementController extends Controller
 	public function index(Request $request, int $selectedGroup = null)
     {
 	    $getParams = [
+		    'applicant' => intval($request->get('applicant')) ?: null,
 		    'experience_year' => intval($request->get('experience_year')) ?: '',
 		    'in_english' => intval($request->get('in_english')) ?: '',
 		    'skill' => intval($request->get('skill')) ?: '',
@@ -43,11 +44,14 @@ class ApplicantManagementController extends Controller
 		if ($selectedGroup !== null) {
 			$selectedGroup = ApplicantGroup::find($selectedGroup);
 			$query = $selectedGroup->applicants()->where(function ($q) use($getParams) {
+				if (!empty($getParams['applicant'])) {
+					$q->where('id', '=', $getParams['applicant']);
+				}
 				if (!empty($getParams['experience_year'])) {
 					$q->where('experience_year', '<=', $getParams['experience_year']);
 				}
 				if (!empty($getParams['in_english'])) {
-					$q->where('in_english', $getParams['in_english']);
+					$q->where('in_english', '>=', $getParams['in_english']);
 				}
 			});
 

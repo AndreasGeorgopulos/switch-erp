@@ -259,11 +259,12 @@ class Applicant extends Model implements IModelRules
 	public static function getInEnglishDropdownOptions($selected = null)
 	{
 		return [
-			['value' => 0, 'name' => '', 'selected' => $selected == 0],
-			['value' => 4, 'name' => trans('Passzív'), 'selected' => $selected == 4],
-			['value' => 1, 'name' => trans('Alapfok'), 'selected' => $selected == 1],
-			['value' => 2, 'name' => trans('Középfok'), 'selected' => $selected == 2],
-			['value' => 3, 'name' => trans('Felsőfok'), 'selected' => $selected == 3],
+			['value' => 0, 'name' => trans('Nincs'), 'selected' => $selected == 0],
+			['value' => 1, 'name' => trans('Passzív'), 'selected' => $selected == 1],
+			['value' => 2, 'name' => trans('Írás-olvasás'), 'selected' => $selected == 2],
+			['value' => 3, 'name' => trans('Társalgási'), 'selected' => $selected == 3],
+			['value' => 4, 'name' => trans('Tárgyalási'), 'selected' => $selected == 4],
+			['value' => 5, 'name' => trans('Anyanyelvű'), 'selected' => $selected == 5],
 		];
 	}
 
@@ -311,5 +312,20 @@ class Applicant extends Model implements IModelRules
 			trans('Főiskola'),
 			trans('Egyetem'),
 		];
+	}
+
+	public static function getNameDropdownOptions($selectedGroupId)
+	{
+		return static::select(['id', 'name'])->join('applicant_applicant_group', 'applicant_applicant_group.applicant_id', '=', 'applicants.id', 'inner')->where(function ($q) use($selectedGroupId) {
+			$q->where('is_active', true);
+			$q->where('applicant_applicant_group.applicant_group_id', '=', $selectedGroupId);
+		})->orderBy('name', 'asc')->get()->toArray();
+
+		/*return static::with('groups')->where(function ($q) use($selectedGroupId) {
+			$q->where('is_active', true);
+			//$q;
+		})->whereHas('groups', function ($q) use($selectedGroupId) {
+			$q->where('applicant_groups.id', '=', $selectedGroupId);
+		})->orderBy('name', 'asc')->get()->toArray();*/
 	}
 }

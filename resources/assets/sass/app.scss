@@ -56,3 +56,15 @@ iframe.cv_viewer {
 #search-table .date-col {
   width: 100px;
 }
+
+.applicant-management {
+  h1.applicant-group-name {
+    font-size: 30px;
+    padding: 0px 0px 0px 0px !important;
+    margin: 0px 0px 15px 0px !important;
+  }
+
+  .table-area {
+    overflow-x: scroll !important;
+  }
+}
