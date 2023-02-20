@@ -41,14 +41,12 @@ class ApplicantCompany extends Model
 	{
 		return [
 			1 => ['value' => 1, 'title' => trans('Átküldve'), 'selected' => (bool) ($selected === 1)],
-			2 => ['value' => 2, 'title' => trans('Elutasítva (sokat kér)'), 'selected' => (bool) ($selected === 2)],
-			3 => ['value' => 3, 'title' => trans('Elutasítva (kevés tapasztalat)'), 'selected' => (bool) ($selected === 3)],
-			4 => ['value' => 4, 'title' => trans('Időközben elhelyezkedett'), 'selected' => (bool) ($selected === 4)],
-			5 => ['value' => 5, 'title' => trans('Ajánlatot kapott, nem fogadta el'), 'selected' => (bool) ($selected === 5)],
-			6 => ['value' => 6, 'title' => trans('Interjú'), 'selected' => (bool) ($selected === 6)],
-			7 => ['value' => 7, 'title' => trans('2. Interjú'), 'selected' => (bool) ($selected === 7)],
-			8 => ['value' => 8, 'title' => trans('Ajánlattétel'), 'selected' => (bool) ($selected === 8)],
-			9 => ['value' => 9, 'title' => trans('Elhelyezve'), 'selected' => (bool) ($selected === 9)],
+			2 => ['value' => 2, 'title' => trans('Elutasítva'), 'selected' => (bool) ($selected === 2)],
+			3 => ['value' => 3, 'title' => trans('Időközben elhelyezkedett'), 'selected' => (bool) ($selected === 3)],
+			4 => ['value' => 4, 'title' => trans('Interjú'), 'selected' => (bool) ($selected === 4)],
+			5 => ['value' => 5, 'title' => trans('2. Interjú'), 'selected' => (bool) ($selected === 5)],
+			6 => ['value' => 6, 'title' => trans('Ajánlatot kapott'), 'selected' => (bool) ($selected === 6)],
+			7 => ['value' => 7, 'title' => trans('Elhelyezve'), 'selected' => (bool) ($selected === 7)],
 		];
 	}
 
