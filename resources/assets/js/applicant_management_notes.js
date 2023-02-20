@@ -83,13 +83,13 @@ if ($('#applicant-note-area').length) {
 				return;
 			}*/
 
-			description = $this.area_form.find('textarea[name="description"]').val();
+			description = $this.area_form.find('textarea[name="note_description"]').val();
 			if (description == '') {
 				alert('Jegyzet megadása kötelező');
 				return;
 			}
 
-			monogram = $this.area_form.find('input[name="monogram"]').val();
+			monogram = $this.area_form.find('input[name="note_monogram"]').val();
 
 			const data = {
 				_token: $this.area_form.find('input[name="_token"]').val(),

@@ -27,11 +27,11 @@
 		</div>
 		<div class="form-group">
 			<label>{{trans('Jegyzet')}}</label>
-			<textarea name="description" class="form-control textarea-note" rows="9">{{old('note', $model->note)}}</textarea>
+			<textarea name="note_description" class="form-control textarea-note" rows="9"></textarea>
 		</div>
 		<div class="form-group">
 			<label>{{trans('Írta')}}</label>
-			<input name="monogram" class="form-control" value="{{old('note', $model->note)}}" />
+			<input name="note_monogram" class="form-control" value="" />
 		</div>
 
 		<div class="text-center">
