@@ -308,6 +308,8 @@ class Applicant extends Model implements IModelRules
 	{
 		return [
 			trans('Nincs'),
+			trans('Online kurzus'),
+			trans('Bootcamp'),
 			trans('OKJ'),
 			trans('Főiskola'),
 			trans('Egyetem'),
