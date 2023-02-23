@@ -197,7 +197,10 @@ class ApplicantManagementController extends Controller
 	public function getNotes($applicant_id)
 	{
 		$result = [];
-		foreach (ApplicantJobPosition::where('applicant_id', $applicant_id)->get() as $model) {
+		$models = ApplicantJobPosition::where('applicant_id', $applicant_id)
+			->orderBy('created_at', 'desc')
+			->get();
+		foreach ($models as $model) {
 			$result[] = [
 				'id' => $model->id,
 				'job_position_id' => $model->job_position_id,
