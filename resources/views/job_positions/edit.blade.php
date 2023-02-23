@@ -54,8 +54,20 @@
 					<div class="row">
 						<div class="col-sm-12">
 							<div class="form-group">
+								<label>{{trans('Felhasználók')}}</label>
+								<select required="required" name="users[]" class="form-control select2" multiple>
+									@foreach(\App\Models\User::getDropdownItems($selectedUserIds) as $item)
+										<option value="{{$item['value']}}" @if($item['selected']) selected="selected" @endif>{{$item['title']}}</option>
+									@endforeach
+								</select>
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-sm-12">
+							<div class="form-group">
 								<label>{{trans('Leírás')}}*</label>
-								<textarea name="description" class="form-control">{{old('description', $model->description)}}</textarea>
+								<textarea name="description" class="form-control" rows="12">{{old('description', $model->description)}}</textarea>
 							</div>
 						</div>
 					</div>

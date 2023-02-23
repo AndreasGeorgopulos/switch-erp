@@ -97,6 +97,7 @@ class JobPositionController extends Controller implements ICrudController
 			$model->save();
 
 			$this->setSkills($model, $request->input('skills'));
+			$this->setUsers($model, $request->input('users'));
 
 			return redirect( route( 'job_positions_edit', ['id' => $model->id] ) )
 				->with( 'form_success_message', [
@@ -110,6 +111,7 @@ class JobPositionController extends Controller implements ICrudController
 		return view( 'job_positions.edit', [
 			'model' => $model,
 			'selectedSkillIds' => $model->skills()->pluck('id')->toArray(),
+			'selectedUserIds' => $model->users()->pluck('id')->toArray(),
 		] );
 	}
 
@@ -163,5 +165,10 @@ class JobPositionController extends Controller implements ICrudController
 		}, $items);
 
 		$model->skills()->sync($ids);
+	}
+
+	private function setUsers($model, $items)
+	{
+		$model->users()->sync($items);
 	}
 }

@@ -62,6 +62,14 @@ class JobPosition extends Model implements IModelRules, IModelDeletable
 	}
 
 	/**
+	 * @return BelongsToMany
+	 */
+	public function users()
+	{
+		return $this->belongsToMany(User::class);
+	}
+
+	/**
 	 * @return array
 	 */
 	public static function rules(): array
@@ -129,6 +137,9 @@ class JobPosition extends Model implements IModelRules, IModelDeletable
 		}, $models);
 	}
 
+	/**
+	 * @return JobPosition[]|\Illuminate\Database\Eloquent\Builder[]|\Illuminate\Database\Eloquent\Collection|\Illuminate\Database\Query\Builder[]|\Illuminate\Support\Collection
+	 */
 	public static function getCompanyDropdownItems()
 	{
 		$models = static::with('company')

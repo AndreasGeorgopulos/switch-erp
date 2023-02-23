@@ -7,6 +7,9 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
+/**
+ *
+ */
 class User extends Authenticatable
 {
     use Notifiable, SoftDeletes;
@@ -33,4 +36,34 @@ class User extends Authenticatable
     {
         return $this->belongsToMany('App\Models\Role');
     }
+
+	/**
+	 * @return BelongsToMany
+	 */
+	public function job_positions()
+	{
+		return $this->belongsToMany(JobPosition::class);
+	}
+
+	/**
+	 * @return array|array[]
+	 */
+	public static function getDropdownItems($selectedIds = [])
+	{
+		$models = static::select(['id', 'name'])
+			->where('active', true)
+			/*->whereHas('roles', function ($q) {
+				$q->where('roles.key', '<>', 'superadmin');
+			})*/
+			->orderBy('name', 'asc')
+			->get();
+
+		return array_map(function ($item) use($selectedIds) {
+			return [
+				'value' => $item['id'],
+				'title' => $item['name'],
+				'selected' => (bool) (in_array($item['id'], $selectedIds)),
+			];
+		}, collect($models)->toArray());
+	}
 }
