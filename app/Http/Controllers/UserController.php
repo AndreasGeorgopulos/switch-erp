@@ -91,7 +91,7 @@ class UserController extends Controller
 			
 			// form data save
 			$model->fill($request->all());
-			if ($request->input('password', '') !== '') {
+			if (!empty($request->input('password'))) {
 				$model->password = bcrypt($request->input('password'));
 			}
 			$model->save();
