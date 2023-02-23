@@ -55,7 +55,7 @@
 						<div class="col-sm-12">
 							<div class="form-group">
 								<label>{{trans('Felhasználók')}}</label>
-								<select required="required" name="users[]" class="form-control select2" multiple>
+								<select name="users[]" class="form-control select2" multiple>
 									@foreach(\App\Models\User::getDropdownItems($selectedUserIds) as $item)
 										<option value="{{$item['value']}}" @if($item['selected']) selected="selected" @endif>{{$item['title']}}</option>
 									@endforeach
