@@ -15,7 +15,7 @@ class ApplicantCompany extends Model
 
 	public $incrementing = false;
 
-	protected $fillable = ['applicant_id', 'job_position_id', 'status', 'send_date'];
+	protected $fillable = ['applicant_id', 'job_position_id', 'status', 'send_date', 'information', 'interview_time'];
 
 	/**
 	 * @return HasOne

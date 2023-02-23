@@ -44,6 +44,8 @@ class SearchManagementController extends Controller
 			}
 
 			$model->status = $request->get('status');
+			$model->information = $request->get('information');
+			$model->interview_time = $request->get('interview_time');
 			if (!empty($request->get('send_date'))) {
 				$model->send_date = $request->get('send_date');
 			}

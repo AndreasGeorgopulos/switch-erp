@@ -42,6 +42,8 @@
 						<th>{{trans('Név')}}</th>
 						<th class="date-col">{{trans('Átküldés dátuma')}}</th>
 						<th class="status-col">{{trans('Státusz')}}</th>
+						<th class="">{{trans('Információ')}}</th>
+						<th class="date-col">{{trans('Interjú időpont')}}</th>
 						<th class="text-center">{{trans('Bérigény')}}</th>
 						<th class="text-center">{{trans('Önéletrajz')}}</th>
 					</tr>
@@ -60,6 +62,12 @@
 										<option value="{{$item['value']}}" @if($item['selected'] === true) selected="selected" @endif>{{$item['title']}}</option>
 									@endforeach
 								</select>
+							</td>
+							<td>
+								<textarea name="information" class="form-control input-sm input-data">{{$m->information}}</textarea>
+							</td>
+							<td>
+								<input type="datetime-local" name="interview_time" value="{{$m->interview_time}}" class="form-control input-sm input-data" />
 							</td>
 							<td class="text-center">
 								@if(is_numeric($m->applicant->salary)){{number_format($m->applicant->salary, 0, '', '.')}} Ft

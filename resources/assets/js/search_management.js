@@ -20,6 +20,8 @@ if ($('#search-table').length) {
 					job_position_id: tr.data('job'),
 					status: tr.find('select[name="status"] option:selected').val(),
 					send_date: tr.find('input[name="send_date"]').val(),
+					information: tr.find('textarea[name="information"]').val(),
+					interview_time: tr.find('input[name="interview_time"]').val(),
 				};
 
 				element.prop('disabled', true);
