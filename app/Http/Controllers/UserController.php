@@ -46,18 +46,8 @@ class UserController extends Controller
     public function edit (Request $request, $id = 0) {
     	// model
     	$model = User::findOrNew($id);
-    	
-    	// tabs
-    	$tabs = [
-    		['href' => 'general_data', 'title' => trans('Általános adatok'), 'include' => 'users.tab_general']
-		];
-    	if ($model->id) {
-    		// check user roles
-    		//if (hasRole('admin_roles')) {
-				$tabs[] = ['href' => 'role_data', 'title' => trans('Jogosultágok'), 'include' => 'users.tab_roles'];
-			//}
-		}
-		else {
+
+    	if (!$model->id) {
     		$model->active = 1;
 		}
   
@@ -74,8 +64,8 @@ class UserController extends Controller
     		$rules = [
     			'email' => 'required|email|unique:users,email,' . $model->id,
 				'name' => 'required',
-				'password' => !$model->id || $request->get('password') ? 'required|min:6|confirmed' : '',
-				'password_confirmation' => !$model->id || $request->get('password') ? 'required|min:6' : '',
+				'password' => !$model->id || !empty($request->get('password')) ? 'required|min:6|confirmed' : '',
+				'password_confirmation' => !$model->id || !empty($request->get('password')) ? 'required|min:6' : '',
 				'active' => ''
 			];
     		
@@ -95,6 +85,8 @@ class UserController extends Controller
 				$model->password = bcrypt($request->input('password'));
 			}
 			$model->save();
+
+			$model->job_positions()->sync($request->get('job_positions', []));
 			
 			// role settings save
 			// check user roles
@@ -123,10 +115,12 @@ class UserController extends Controller
 			];
 		}
 
+		$jobPositionIds = $model->job_positions()->pluck('id')->toArray();
+
 		return view('users.edit', [
 			'model' => $model,
 			'roles' => $roles,
-			'tabs' => $tabs
+			'jobPositionIds' => $jobPositionIds,
 		]);
 	}
 	
