@@ -10,6 +10,7 @@
 						<th data-column="title">{{trans('Megnevezés')}}</th>
 						<th>{{trans('Cég')}}</th>
 						<th>{{trans('Technológiák')}}</th>
+						<th>{{trans('Felhasználók')}}</th>
 						<th data-column="is_active" class="text-center">{{trans('Aktív')}}</th>
 						<th class="text-center">{{trans('Utolsó módosítás')}}</th>
 						<th>
@@ -24,6 +25,7 @@
 							<td>{{$model->title}}</td>
 							<td>{{$model->company->name}}</td>
 							<td>{{$model->skills()->orderBy('name', 'asc')->pluck('name')->implode(', ')}}</td>
+							<td>{{$model->users()->orderBy('name', 'asc')->pluck('name')->implode(', ')}}</td>
 							<td class="text-center"><i class="fa {{$model->is_active ? 'fa-check text-green' : 'fa-ban text-red'}}"></i></td>
 							<td class="text-center">{{date('Y.m.d H:i', strtotime($model->updated_at))}}</td>
 							<td>
