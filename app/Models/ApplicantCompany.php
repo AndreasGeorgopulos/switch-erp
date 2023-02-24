@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\Auth;
 
 class ApplicantCompany extends Model
 {
@@ -55,9 +56,11 @@ class ApplicantCompany extends Model
 	 */
 	public static function getCompanies()
 	{
+		$authJobPositionIds = (User::find(Auth::user()->id))->job_positions()->pluck('id')->toArray();
 		$companies = [];
-		/** @var $model static */
-		foreach (static::all() as $model) {
+		$models = hasRole('superadministrator') ? static::all() : static::whereIn('job_position_id', $authJobPositionIds)->get();
+
+		foreach ($models as $model) {
 			$companyModel = $model->job_position->company;
 			if (isset($companies[$companyModel->id]) || !$companyModel->is_active) {
 				continue;
@@ -74,8 +77,12 @@ class ApplicantCompany extends Model
 	 */
 	public static function getJobPositions($company_id)
 	{
+		$authJobPositionIds = (User::find(Auth::user()->id))->job_positions()->pluck('id')->toArray();
 		$job_positions = [];
-		foreach (static::all() as $model) {
+		$companies = [];
+		$models = hasRole('superadministrator') ? static::all() : static::whereIn('job_position_id', $authJobPositionIds)->get();
+
+		foreach ($models as $model) {
 			$companyModel = $model->job_position->company;
 			if ($companyModel->id != $company_id || !$companyModel->is_active || isset($job_positions[$model->job_position->id])) {
 				continue;
