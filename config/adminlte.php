@@ -45,7 +45,7 @@ return [
     |
     */
 
-    'skin' => 'purple',
+    'skin' => 'switch-blue',
 
     /*
     |--------------------------------------------------------------------------
@@ -207,7 +207,7 @@ return [
         'select2'    => true,
 		'wysihtml5' => true,
     ],'paginator' => [
-		'default_length' => 10,
+		'default_length' => 50,
 		'lengths' => [10, 25, 50, 100]
 	]
 	
