@@ -56,9 +56,9 @@ class ApplicantCompany extends Model
 	 */
 	public static function getCompanies()
 	{
-		$authJobPositionIds = (User::find(Auth::user()->id))->job_positions()->pluck('id')->toArray();
+		$authJobPositionIds = Auth::user()->job_positions()->pluck('id')->toArray();
 		$companies = [];
-		$models = hasRole('superadministrator') ? static::all() : static::whereIn('job_position_id', $authJobPositionIds)->get();
+		$models = !hasRole('superadministrator') && count($authJobPositionIds) ? static::whereIn('job_position_id', $authJobPositionIds)->get() : static::all();
 
 		foreach ($models as $model) {
 			$companyModel = $model->job_position->company;
@@ -77,10 +77,10 @@ class ApplicantCompany extends Model
 	 */
 	public static function getJobPositions($company_id)
 	{
-		$authJobPositionIds = (User::find(Auth::user()->id))->job_positions()->pluck('id')->toArray();
+		$authJobPositionIds = Auth::user()->job_positions()->pluck('id')->toArray();
 		$job_positions = [];
 		$companies = [];
-		$models = hasRole('superadministrator') ? static::all() : static::whereIn('job_position_id', $authJobPositionIds)->get();
+		$models = !hasRole('superadministrator') && count($authJobPositionIds) ? static::whereIn('job_position_id', $authJobPositionIds)->get() : static::all();
 
 		foreach ($models as $model) {
 			$companyModel = $model->job_position->company;

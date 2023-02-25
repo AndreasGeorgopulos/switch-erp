@@ -43,6 +43,14 @@ class ApplicantGroup extends Model implements IModelRules, IModelDeletable
 	}
 
 	/**
+	 * @return BelongsToMany
+	 */
+	public function users()
+	{
+		return $this->belongsToMany(User::class);
+	}
+
+	/**
 	 * @return array[]
 	 */
 	public static function rules() :array
@@ -83,5 +91,28 @@ class ApplicantGroup extends Model implements IModelRules, IModelDeletable
 			return false;
 		}
 		return parent::delete();
+	}
+
+	/**
+	 * @param array $selectedIds
+	 * @return array|array[]
+	 */
+	public static function getDropdownItems($selectedIds = [])
+	{
+		$models = static::select(['id', 'name'])
+			->where(function ($q) {
+				$q->where('is_active', 1);
+			})
+			->orderBy('name')
+			->get()
+			->toArray();
+
+		return array_map(function ($item) use($selectedIds) {
+			return [
+				'value' => $item['id'],
+				'title' => $item['name'],
+				'selected' => (bool) (in_array($item['id'], $selectedIds)),
+			];
+		}, $models);
 	}
 }

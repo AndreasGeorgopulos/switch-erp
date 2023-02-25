@@ -87,7 +87,8 @@ class UserController extends Controller
 			$model->save();
 
 			$model->job_positions()->sync($request->get('job_positions', []));
-			
+			$model->applicant_groups()->sync($request->get('applicant_groups', []));
+
 			// role settings save
 			// check user roles
 			if (hasRole('admin_roles')) {
@@ -116,11 +117,13 @@ class UserController extends Controller
 		}
 
 		$jobPositionIds = $model->job_positions()->pluck('id')->toArray();
+	    $applicantGroupIds = $model->applicant_groups()->pluck('id')->toArray();
 
 		return view('users.edit', [
 			'model' => $model,
 			'roles' => $roles,
 			'jobPositionIds' => $jobPositionIds,
+			'applicantGroupIds' => $applicantGroupIds,
 		]);
 	}
 	

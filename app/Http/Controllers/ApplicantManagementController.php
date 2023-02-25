@@ -7,6 +7,7 @@ use App\Models\ApplicantGroup;
 use App\Models\ApplicantJobPosition;
 use App\Models\JobPosition;
 use App\Models\Skill;
+use App\Models\User;
 use Exception;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Database\Eloquent\Collection;
@@ -15,6 +16,7 @@ use Illuminate\Foundation\Application;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Redirector;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\View\View;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
@@ -39,8 +41,19 @@ class ApplicantManagementController extends Controller
 		    'skill' => intval($request->get('skill')) ?: '',
 	    ];
 
-		$applicantGroups = ApplicantGroup::where('is_active', true)->orderBy('name', 'asc')->get();
+	    $applicantGroups = ApplicantGroup::select(['id', 'name'])
+		    ->where(function ($q) {
+		        $applicantGroupIds = Auth::user()->applicant_groups()->pluck('id')->toArray();
+				$q->where('is_active', true);
+				if (!hasRole('superadmin') && count($applicantGroupIds)) {
+					$q->whereIn('id', $applicantGroupIds);
+				}
+			})
+		    ->orderBy('name', 'asc')
+		    ->get();
+
 	    $applicants = [];
+
 		if ($selectedGroup !== null) {
 			$selectedGroup = ApplicantGroup::find($selectedGroup);
 			$query = $selectedGroup->applicants()->where(function ($q) use($getParams) {

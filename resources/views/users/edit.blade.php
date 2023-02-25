@@ -49,7 +49,7 @@
                         @endif
 
                         <div class="form-group">
-                            <label>{{trans('Pozíciók')}}</label>
+                            <label>{{trans('Szűrés: pozíciók')}}</label>
                             <select name="job_positions[]" class="form-control select2" multiple>
                                 @foreach(\App\Models\JobPosition::getCompanyDropdownItems() as $item)
                                     <option value="{{$item->id}}"
@@ -57,6 +57,17 @@
                                     >{{$item->company->name}} - {{$item->title}}</option>
                                 @endforeach
                             </select>
+                            <div class="hint">{{trans('Ha nincs egy elem sem kiválasztva, a Keresés modulban az összes cég és pozíció megjelenik.')}}</div>
+                        </div>
+
+                        <div class="form-group">
+                            <label>{{trans('Szűrés: jelölt csoportok')}}</label>
+                            <select name="applicant_groups[]" class="form-control select2" multiple>
+                                @foreach(\App\Models\ApplicantGroup::getDropdownItems($applicantGroupIds) as $item)
+                                    <option value="{{$item['value']}}" @if($item['selected']) selected="selected" @endif>{{$item['title']}}</option>
+                                @endforeach
+                            </select>
+                            <div class="hint">{{trans('Ha nincs egy elem sem kiválasztva, az Adatbázis modulban az összes jelölt csoport megjelenik.')}}</div>
                         </div>
                     </div>
                 </div>

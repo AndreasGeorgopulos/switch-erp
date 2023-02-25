@@ -32,7 +32,10 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
-    public function roles(): BelongsToMany
+	/**
+	 * @return BelongsToMany
+	 */
+	public function roles(): BelongsToMany
     {
         return $this->belongsToMany('App\Models\Role');
     }
@@ -43,6 +46,14 @@ class User extends Authenticatable
 	public function job_positions()
 	{
 		return $this->belongsToMany(JobPosition::class);
+	}
+
+	/**
+	 * @return BelongsToMany
+	 */
+	public function applicant_groups()
+	{
+		return $this->belongsToMany(ApplicantGroup::class);
 	}
 
 	/**
