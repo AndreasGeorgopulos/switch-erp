@@ -286,17 +286,29 @@ class Applicant extends Model implements IModelRules
 	 * Dropdown options of skills
 	 *
 	 * @param array $selectedIds
+	 * @param null $applicant_group_id
 	 * @return array|array[]
 	 */
-	public static function getSkillDropdownOptions($selectedIds = [])
+	public static function getSkillDropdownOptions($selectedIds = [], $applicant_group_id = null)
 	{
+		$models = Skill::select(['id', 'name'])
+			->whereHas('applicants', function ($q) use($applicant_group_id) {
+				$q->whereHas('groups', function ($q) use($applicant_group_id) {
+					$q->where('id', $applicant_group_id);
+				});
+			})
+			->where('is_active', 1)
+			->orderBy('name', 'asc')
+			->get()
+			->toArray();
+
 		return array_map(function ($skill) use ($selectedIds) {
 			return [
 				'id' => $skill['id'],
 				'name' => $skill['name'],
 				'selected' => in_array($skill['id'], $selectedIds),
 			];
-		}, Skill::select(['id', 'name'])->where('is_active', 1)->orderBy('name', 'asc')->get()->toArray());
+		}, $models);
 	}
 
 	/**

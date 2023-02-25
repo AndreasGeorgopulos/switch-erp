@@ -61,19 +61,19 @@
 									</select>
 								</th>
 								<th>
-									<input type="text" name="experience_year" class="form-control search-input" value="{{$getParams['experience_year']}}" />
+									<input type="text" name="experience_year" class="form-control search-input" value="{{$getParams['experience_year']}}" style="width: 100px;" />
 								</th>
 								<th>
-									<select name="in_english" class="form-control search-input select2" style="width: 100px;">
+									<select name="in_english" class="form-control search-input select2" style="width: 110px;">
 										@foreach(\App\Models\Applicant::getInEnglishDropdownOptions() as $item)
 											<option value="{{$item['value']}}" @if($item['value'] == $getParams['in_english']) selected="selected" @endif>{{$item['name']}}</option>
 										@endforeach
 									</select>
 								</th>
 								<th>
-									<select name="skill" class="form-control search-input select2" style="width: 150px;">
+									<select name="skill" class="form-control search-input select2" style="width: 210px;">
 										<option></option>
-										@foreach(\App\Models\Applicant::getSkillDropdownOptions([$getParams['skill']]) as $item)
+										@foreach(\App\Models\Applicant::getSkillDropdownOptions([$getParams['skill']], $selectedGroup->id) as $item)
 											<option value="{{$item['id']}}" @if($item['selected']) selected="selected" @endif>{{$item['name']}}</option>
 										@endforeach
 									</select>
