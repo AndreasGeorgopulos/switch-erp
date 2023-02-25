@@ -131,7 +131,7 @@ class Company extends Model implements IModelRules, IModelDeletable
 			],
 			'payment_deadline' => [
 				'required',
-				'date',
+				'numeric',
 			],
 			'contact_name' => [
 				'required',
