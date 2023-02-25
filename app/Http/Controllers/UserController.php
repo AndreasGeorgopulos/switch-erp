@@ -108,17 +108,15 @@ class UserController extends Controller
 			$model->job_positions()->sync($request->get('job_positions', []));
 			$model->applicant_groups()->sync($request->get('applicant_groups', []));
 
-			// role settings save
-			// check user roles
-			if (hasRole('admin_roles')) {
-				Role_User::where('user_id', $model->id)->delete();
-				foreach ($request->get('roles', []) as $roleId) {
-					$role_user = new Role_User();
-					$role_user->user_id = $model->id;
-					$role_user->role_id = $roleId;
-					$role_user->save();
+		    if (hasRole('admin_roles')) {
+				$inputRoles = $request->input('roles', []);
+				foreach ($requiredRoleIds as $item) {
+					if (!in_array($item, $inputRoles)) {
+						$inputRoles[] = $item;
+					}
 				}
-			}
+				$model->roles()->sync($inputRoles);
+		    }
 		
 			return redirect(route('users_edit', ['id' => $model->id]))->with('form_success_message', [
 				trans('Sikeres mentés'),

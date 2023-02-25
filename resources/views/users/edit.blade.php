@@ -45,6 +45,7 @@
                                         <option value="{{$id}}" @if($role['enabled']) selected="selected" @endif>{{$role['title']}}</option>
                                     @endforeach
                                 </select>
+                                <div class="hint">{{trans('A Bejelentkezés és Adatbázis jogosultságok kiválasztása szükséges')}}</div>
                             </div>
                         @endif
 
