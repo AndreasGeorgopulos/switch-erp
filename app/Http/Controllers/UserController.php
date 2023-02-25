@@ -44,7 +44,7 @@ class UserController extends Controller
     }
     
     public function edit (Request $request, $id = 0) {
-    	// model
+	    $requiredRoleIds = [2, 3];
     	$model = User::findOrNew($id);
 
     	if (!$model->id) {
@@ -112,7 +112,7 @@ class UserController extends Controller
 			$roles[$role->id] = [
 				'key' => $role->key,
 				'title' => $role->getTitle(),
-				'enabled' => (bool) $model->roles()->where('key', $role->key)->first(),
+				'enabled' => (bool) ($model->roles()->where('key', $role->key)->first() || (!$model->id && in_array($role->id, $requiredRoleIds))),
 			];
 		}
 
