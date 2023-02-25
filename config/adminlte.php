@@ -109,8 +109,15 @@ return [
 			'text' => 'Menedzsment',
 			'route' => 'applicant_management_index',
 			'role' => 'login',
-			'icon' => 'user-o',
+			'icon' => 'user',
 			'active' => ['admin'],
+		],
+		[
+			'text' => 'Profilom',
+			'route' => 'users_profile',
+			'role' => 'login',
+			'icon' => 'user-o',
+			'active' => ['users_profile'],
 		],
 		[
 			'text'    => 'Adminsztráció',

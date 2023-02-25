@@ -39,6 +39,7 @@ Route::group(['middleware' => ['acl', 'locale']], function () {
 	Route::match(['get', 'post', 'put'], '/users/edit/{id?}', 'UserController@edit')->name('users_edit');
 	Route::match(['get'], '/users/delete/{id?}', 'UserController@delete')->name('users_delete');
 	Route::match(['get'], '/users/force_login/{id?}', 'UserController@forceLogin')->name('users_force_login');
+	Route::match(['get', 'post'], '/users/profile', 'UserController@profile')->name('users_profile');
 
 	// roles
 	Route::match(['get', 'post'], '/roles/list', 'RoleController@index')->name('roles_list');
