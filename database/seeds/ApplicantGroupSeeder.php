@@ -57,6 +57,7 @@ class ApplicantGroupSeeder extends Seeder
 		50 => 'Villanyszerelők',
 		51 => 'Windows-Linux rendszergazdák, rendszermérnökök',
 		52 => 'WordPress fejlesztők',
+		53 => 'Audit menedzserek',
 	];
 
     /**

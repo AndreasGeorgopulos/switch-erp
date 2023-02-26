@@ -26,6 +26,7 @@ class ApplicantSeeder extends Seeder
 				'last_callback_date' => 7,
 				'technologies' => 1,
 				'companies' => 6,
+				'monogram' => 9,
 			],
 		],
 		[
@@ -43,6 +44,7 @@ class ApplicantSeeder extends Seeder
 				'last_callback_date' => 5,
 				'technologies' => 1,
 				'companies' => 5,
+				'monogram' => 7,
 			],
 		],
 		[
@@ -58,6 +60,25 @@ class ApplicantSeeder extends Seeder
 				'description' => 8,
 				'last_contact_date' => 6,
 				'companies' => 7,
+				'monogram' => 9,
+			],
+		],
+		[
+			'group_id' => 4,
+			'filename' => '04_alvallalkozok.csv',
+			'columnIndexes' => [
+				'name' => 0,
+				'phone' => 9,
+				'email' => 10,
+				'in_english' => 3,
+				'experience_year' => 4,
+				'linked_in' => 11,
+				'description' => 7,
+				'last_contact_date' => 5,
+				'technologies' => 1,
+				'companies' => 6,
+				'monogram' => 8,
+				'is_subcontractor' => 2,
 			],
 		],
 		[
@@ -75,6 +96,7 @@ class ApplicantSeeder extends Seeder
 				'last_callback_date' => 5,
 				'technologies' => 1,
 				'companies' => 7,
+				'monogram' => 9,
 			],
 		],
 		[
@@ -92,6 +114,20 @@ class ApplicantSeeder extends Seeder
 				//'last_callback_date' => 5,
 				'technologies' => 1,
 				'companies' => 4,
+				'monogram' => 7,
+			],
+		],
+		[
+			'group_id' => 8,
+			'filename' => '08_biztonsag.csv',
+			'columnIndexes' => [
+				'name' => 0,
+				'phone' => 9,
+				'email' => 10,
+				'description' => 8,
+				'last_contact_date' => 5,
+				'last_callback_date' => 7,
+				'companies' => 6,
 			],
 		],
 		[
@@ -109,6 +145,7 @@ class ApplicantSeeder extends Seeder
 				//'last_callback_date' => 5,
 				//'technologies' => 1,
 				'companies' => 9,
+				'monogram' => 15,
 			],
 		],
 		[
@@ -126,6 +163,7 @@ class ApplicantSeeder extends Seeder
 				//'last_callback_date' => 6,
 				//'technologies' => 1,
 				'companies' => 7,
+				'monogram' => 9,
 			],
 		],
 		[
@@ -143,6 +181,7 @@ class ApplicantSeeder extends Seeder
 				//'last_callback_date' => 6,
 				//'technologies' => 1,
 				'companies' => 5,
+				'monogram' => 7,
 			],
 		],
 		[
@@ -160,6 +199,7 @@ class ApplicantSeeder extends Seeder
 				//'last_callback_date' => 6,
 				'technologies' => 1,
 				//'companies' => 5,
+				'monogram' => 8,
 			],
 		],
 		[
@@ -167,16 +207,17 @@ class ApplicantSeeder extends Seeder
 			'filename' => '13_devops.csv',
 			'columnIndexes' => [
 				'name' => 0,
-				'phone' => 13,
-				'email' => 14,
-				'in_english' => 2,
-				'experience_year' => 3,
-				'linked_in' => 15,
-				'description' => 12,
-				'last_contact_date' => 10,
+				'phone' => 14,
+				'email' => 15,
+				'in_english' => 1,
+				'experience_year' => 2,
+				'linked_in' => 16,
+				'description' => 13,
+				'last_contact_date' => 11,
 				//'last_callback_date' => 6,
 				//'technologies' => 1,
-				'companies' => 11,
+				'companies' => 12,
+				'monogram' => 17,
 			],
 		],
 		[
@@ -194,6 +235,7 @@ class ApplicantSeeder extends Seeder
 				//'last_callback_date' => 6,
 				//'technologies' => 1,
 				//'companies' => 11,
+				'monogram' => 5,
 			],
 		],
 		[
@@ -228,6 +270,7 @@ class ApplicantSeeder extends Seeder
 				//'last_callback_date' => 1,
 				//'technologies' => 1,
 				'companies' => 5,
+				'monogram' => 10,
 			],
 		],
 		[
@@ -244,6 +287,7 @@ class ApplicantSeeder extends Seeder
 				'last_contact_date' => 5,
 				'technologies' => 1,
 				'companies' => 6,
+				'monogram' => 12,
 			],
 		],
 		[
@@ -262,8 +306,8 @@ class ApplicantSeeder extends Seeder
 			],
 		],
 		[
-			'group_id' => 19,
-			'filename' => '19_hegeszto.csv',
+			'group_id' => 20,
+			'filename' => '20_hegesztomernokok.csv',
 			'columnIndexes' => [
 				'name' => 0,
 				'phone' => 7,
@@ -286,6 +330,7 @@ class ApplicantSeeder extends Seeder
 				'description' => 6,
 				'last_contact_date' => 4,
 				'companies' => 5,
+				'monogram' => 7,
 			],
 		],
 		[
@@ -300,22 +345,38 @@ class ApplicantSeeder extends Seeder
 				'description' => 5,
 				'last_contact_date' => 3,
 				'companies' => 4,
+				'monogram' => 6,
 			],
 		],
-		/*[
+		[
 			'group_id' => 23,
-			'filename' => '23_java.csv',
+			'filename' => '23_java_01.csv',
 			'columnIndexes' => [
 				'name' => 0,
-				'email' => 7,
-				'in_english' => 1,
-				'experience_year' => 2,
-				'linked_in' => 8,
-				'description' => 5,
-				'last_contact_date' => 3,
-				'companies' => 4,
+				'phone' => 9,
+				'email' => 10,
+				'linked_in' => 12,
+				'in_english' => 3,
+				'experience_year' => 4,
+				'description' => 8,
+				'last_contact_date' => 5,
+				'last_callback_date' => 7,
+				'companies' => 6,
+				'monogram' => 11,
 			],
-		],*/
+		],
+		[
+			'group_id' => 23,
+			'filename' => '23_java_02.csv',
+			'columnIndexes' => [
+				'name' => 0,
+				'phone' => 9,
+				'email' => 10,
+				'in_english' => 3,
+				'experience_year' => 4,
+				'description' => 8,
+			],
+		],
 		[
 			'group_id' => 24,
 			'filename' => '24_jogaszok.csv',
@@ -326,6 +387,7 @@ class ApplicantSeeder extends Seeder
 				'description' => 6,
 				'last_contact_date' => 4,
 				'companies' => 5,
+				'monogram' => 7,
 			],
 		],
 		[
@@ -339,6 +401,7 @@ class ApplicantSeeder extends Seeder
 				'description' => 7,
 				'last_contact_date' => 5,
 				'companies' => 6,
+				'monogram' => 8,
 			],
 		],
 		[
@@ -352,6 +415,7 @@ class ApplicantSeeder extends Seeder
 				'description' => 4,
 				'last_contact_date' => 2,
 				'companies' => 3,
+				'monogram' => 5,
 			],
 		],
 		[
@@ -367,6 +431,7 @@ class ApplicantSeeder extends Seeder
 				'description' => 5,
 				'last_contact_date' => 3,
 				'companies' => 4,
+				'monogram' => 6,
 			],
 		],
 		[
@@ -382,6 +447,7 @@ class ApplicantSeeder extends Seeder
 				'description' => 5,
 				'last_contact_date' => 3,
 				'companies' => 4,
+				'monogram' => 6,
 			],
 		],
 		[
@@ -397,6 +463,7 @@ class ApplicantSeeder extends Seeder
 				'description' => 5,
 				'last_contact_date' => 3,
 				'companies' => 4,
+				'monogram' => 6,
 			],
 		],
 		[
@@ -412,6 +479,7 @@ class ApplicantSeeder extends Seeder
 				'description' => 6,
 				'last_contact_date' => 4,
 				'companies' => 5,
+				'monogram' => 7,
 			],
 		],
 		[
@@ -425,6 +493,7 @@ class ApplicantSeeder extends Seeder
 				'last_contact_date' => 4,
 				'companies' => 5,
 				'report' => 10,
+				'monogram' => 7,
 			],
 		],
 		[
@@ -439,6 +508,7 @@ class ApplicantSeeder extends Seeder
 				'last_contact_date' => 4,
 				'companies' => 5,
 				'linked_in' => 8,
+				'monogram' => 7,
 			],
 		],
 		[
@@ -454,6 +524,7 @@ class ApplicantSeeder extends Seeder
 				'last_contact_date' => 3,
 				'last_callback_date' => 5,
 				'companies' => 4,
+				'monogram' => 7,
 			],
 		],
 		[
@@ -470,6 +541,7 @@ class ApplicantSeeder extends Seeder
 				'last_contact_date' => 3,
 				'last_callback_date' => 4,
 				'companies' => 4,
+				'monogram' => 7,
 			],
 		],
 		[
@@ -486,6 +558,7 @@ class ApplicantSeeder extends Seeder
 				'last_contact_date' => 3,
 				//'last_callback_date' => 4,
 				'companies' => 4,
+				'monogram' => 8,
 			],
 		],
 		[
@@ -502,6 +575,7 @@ class ApplicantSeeder extends Seeder
 				'last_contact_date' => 5,
 				'last_callback_date' => 6,
 				'companies' => 7,
+				'monogram' => 9,
 			],
 		],
 		[
@@ -512,12 +586,13 @@ class ApplicantSeeder extends Seeder
 				'email' => 9,
 				'phone' => 8,
 				'linked_in' => 10,
-				//'in_english' => 3,
-				//'experience_year' => 4,
+				'in_english' => 1,
+				'experience_year' => 2,
 				'description' => 6,
 				'last_contact_date' => 3,
 				'last_callback_date' => 5,
-				'companies' => 7,
+				'companies' => 4,
+				'monogram' => 7,
 			],
 		],
 		[
@@ -533,7 +608,8 @@ class ApplicantSeeder extends Seeder
 				'description' => 6,
 				'last_contact_date' => 3,
 				'last_callback_date' => 5,
-				//'companies' => 7,
+				'companies' => 4,
+				'monogram' => 7,
 			],
 		],
 		[
@@ -550,6 +626,7 @@ class ApplicantSeeder extends Seeder
 				'last_contact_date' => 3,
 				//'last_callback_date' => 5,
 				//'companies' => 7,
+				'monogram' => 6,
 			],
 		],
 		[
@@ -566,6 +643,7 @@ class ApplicantSeeder extends Seeder
 				'last_contact_date' => 3,
 				//'last_callback_date' => 5,
 				'companies' => 4,
+				'monogram' => 9,
 			],
 		],
 		[
@@ -583,6 +661,7 @@ class ApplicantSeeder extends Seeder
 				//'last_callback_date' => 5,
 				'companies' => 4,
 				'technologies' => 2,
+				'monogram' => 9,
 			],
 		],
 		[
@@ -600,6 +679,7 @@ class ApplicantSeeder extends Seeder
 				//'last_callback_date' => 5,
 				//'companies' => 4,
 				//'technologies' => 2,
+				'monogram' => 7,
 			],
 		],
 		[
@@ -617,6 +697,7 @@ class ApplicantSeeder extends Seeder
 				'last_callback_date' => 7,
 				'companies' => 6,
 				//'technologies' => 2,
+				'monogram' => 12,
 			],
 		],
 		[
@@ -634,6 +715,7 @@ class ApplicantSeeder extends Seeder
 				//'last_callback_date' => 7,
 				'companies' => 4,
 				//'technologies' => 2,
+				'monogram' => 6,
 			],
 		],
 		[
@@ -641,16 +723,17 @@ class ApplicantSeeder extends Seeder
 			'filename' => '47_tesztelok.csv',
 			'columnIndexes' => [
 				'name' => 0,
-				'email' => 10,
-				'phone' => 9,
-				'linked_in' => 11,
+				'email' => 11,
+				'phone' => 10,
+				'linked_in' => 12,
 				'in_english' => 3,
 				'experience_year' => 4,
-				'description' => 8,
+				'description' => 9,
 				'last_contact_date' => 6,
-				//'last_callback_date' => 7,
+				'last_callback_date' => 8,
 				'companies' => 7,
 				'technologies' => 2,
+				'monogram' => 13,
 			],
 		],
 		[
@@ -668,6 +751,7 @@ class ApplicantSeeder extends Seeder
 				//'last_callback_date' => 7,
 				'companies' => 8,
 				//'technologies' => 2,
+				'monogram' => 14,
 			],
 		],
 		[
@@ -685,6 +769,7 @@ class ApplicantSeeder extends Seeder
 				//'last_callback_date' => 7,
 				'companies' => 7,
 				'technologies' => 1,
+				'monogram' => 9,
 			],
 		],
 		[
@@ -702,6 +787,7 @@ class ApplicantSeeder extends Seeder
 				'last_callback_date' => 3,
 				'companies' => 4,
 				//'technologies' => 1,
+				'monogram' => 6,
 			],
 		],
 		[
@@ -709,16 +795,17 @@ class ApplicantSeeder extends Seeder
 			'filename' => '51_rendszergazdak.csv',
 			'columnIndexes' => [
 				'name' => 0,
-				'email' => 11,
-				'phone' => 10,
-				'linked_in' => 12,
-				'in_english' => 5,
-				'experience_year' => 6,
-				'description' => 9,
-				'last_contact_date' => 7,
+				'email' => 12,
+				'phone' => 11,
+				'linked_in' => 13,
+				'in_english' => 6,
+				'experience_year' => 7,
+				'description' => 10,
+				'last_contact_date' => 8,
 				//'last_callback_date' => 3,
-				'companies' => 8,
+				'companies' => 9,
 				//'technologies' => 1,
+				'monogram' => 14,
 			],
 		],
 		[
@@ -736,6 +823,24 @@ class ApplicantSeeder extends Seeder
 				//'last_callback_date' => 3,
 				'companies' => 5,
 				//'technologies' => 1,
+				'monogram' => 7,
+			],
+		],
+		[
+			'group_id' => 53,
+			'filename' => '53_audit_menedzserek.csv',
+			'columnIndexes' => [
+				'name' => 0,
+				'email' => 9,
+				'phone' => 8,
+				'linked_in' => 10,
+				'in_english' => 1,
+				'experience_year' => 2,
+				'description' => 6,
+				'last_contact_date' => 3,
+				'last_callback_date' => 5,
+				'companies' => 4,
+				'monogram' => 7,
 			],
 		],
 	];
@@ -748,7 +853,9 @@ class ApplicantSeeder extends Seeder
     public function run(): void
     {
 	    foreach ($this->data as $data) {
-		    $fp = fopen(storage_path('app/public/csv/') . $data['filename'], 'r');
+		    if (!($fp = fopen(database_path('seeds/data/applicants/') . $data['filename'], 'r'))) {
+				continue;
+		    }
 
 		    $i = 0;
 		    while($row = fgetcsv($fp, 0, ';')) {
@@ -764,12 +871,20 @@ class ApplicantSeeder extends Seeder
 			    foreach ($data['columnIndexes'] as $field => $columnIndex) {
 				    $value = trim($row[$columnIndex]);
 
+					if ($field == 'name' && empty($value)) {
+						break;
+					}
+
 					if (in_array($field, ['last_contact_date', 'last_callback_date'])) {
 						$time = strtotime(str_replace(['.'], ['-'], $row[$columnIndex]) . ' 00:00:00');
 						$value = !empty($time) && !empty($row[$columnIndex]) ? date('Y-m-d', $time) : null;
 
 					} elseif ($field == 'in_english') {
-						$value = intval($row[$columnIndex]) ?: null;
+						if (in_array(strtolower($row[$columnIndex]), ['passzív'])) {
+							$value = 1;
+						} else {
+							$value = intval($row[$columnIndex]);
+						}
 
 					} elseif ($field == 'experience_year') {
 						$value = intval($row[$columnIndex]) ?: null;
@@ -779,12 +894,18 @@ class ApplicantSeeder extends Seeder
 
 					} elseif ($field == 'linked_in' && !empty($value) && !Str::startsWith($value, 'https://')) {
 						$value = 'https://' . str_replace('http://', '', $value);
+						if (!Str::contains($value, 'linkedin.com')) {
+							$value = null;
+						}
 
 					} elseif ($field == 'email') {
 						$value = $row[$columnIndex];
 						if (!preg_match(self::EMAIL_PATTERN, $value)) {
 							$value = '';
 						}
+
+					} elseif ($field == 'is_subcontractor') {
+						$value = 1;
 
 					} elseif ($field == 'technologies') {
 						$technologies = explode(',', $row[$columnIndex]);
@@ -798,6 +919,10 @@ class ApplicantSeeder extends Seeder
 					}
 
 				    $applicantModel->$field = $value;
+				}
+
+				if (empty($applicantModel->name)) {
+					continue;
 				}
 
 			    $applicantModel->save();
