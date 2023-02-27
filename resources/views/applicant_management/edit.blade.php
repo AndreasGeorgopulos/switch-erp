@@ -16,7 +16,7 @@
 							<div class="col-md-6">
 								<div class="form-group">
 									<label>{{trans('Név')}}*</label>
-									<input type="text" name="name" class="form-control" value="{{old('name', $model->name)}} tabindex="1" />
+									<input type="text" name="name" class="form-control" value="{{old('name', $model->name)}}" tabindex="1" />
 								</div>
 							</div>
 							<div class="col-md-6">
