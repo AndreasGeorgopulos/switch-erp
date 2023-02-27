@@ -41,7 +41,7 @@ use Illuminate\Http\UploadedFile;
  * @property string $updated_at
  * @property string $deleted_at
  */
-class Applicant extends Model implements IModelRules
+class Applicant extends Model implements IModelRules, IModelSortable
 {
     use SoftDeletes;
 
@@ -292,12 +292,16 @@ class Applicant extends Model implements IModelRules
 	public static function getSkillDropdownOptions($selectedIds = [], $applicant_group_id = null)
 	{
 		$models = Skill::select(['id', 'name'])
-			->whereHas('applicants', function ($q) use($applicant_group_id) {
-				$q->whereHas('groups', function ($q) use($applicant_group_id) {
-					$q->where('id', $applicant_group_id);
-				});
+			->where(function ($q) use($applicant_group_id) {
+				$q->where('is_active', 1);
+				if ($applicant_group_id !== null) {
+					$q->whereHas('applicants', function ($q) use($applicant_group_id) {
+						$q->whereHas('groups', function ($q) use($applicant_group_id) {
+							$q->where('id', $applicant_group_id);
+						});
+					});
+				}
 			})
-			->where('is_active', 1)
 			->orderBy('name', 'asc')
 			->get()
 			->toArray();
@@ -341,5 +345,18 @@ class Applicant extends Model implements IModelRules
 		})->whereHas('groups', function ($q) use($selectedGroupId) {
 			$q->where('applicant_groups.id', '=', $selectedGroupId);
 		})->orderBy('name', 'asc')->get()->toArray();*/
+	}
+
+	/**
+	 * @param int $applicantGroupId
+	 * @return void
+	 */
+	public function setNextSortValue(int $applicantGroupId)
+	{
+		if (!($model = ApplicantGroup::find($applicantGroupId))) {
+			throw new Exception('Model (' . ApplicantGroup::class . '#' . $applicantGroupId . ') not found');
+		}
+
+		$this->sort = $model->applicants()->count() + 1;
 	}
 }

@@ -73,7 +73,7 @@ class ApplicantManagementController extends Controller
 				$query->where('applicant_skill.skill_id', '=', $getParams['skill']);
 			}
 
-			$applicants = $query->get();
+			$applicants = $query->orderBy('sort', 'desc')->get();
 		}
 
 	    return view('applicant_management.index', [
@@ -91,17 +91,20 @@ class ApplicantManagementController extends Controller
 	 * @param Request $request
 	 * @param $selectedGroup
 	 * @return Application|RedirectResponse|Redirector
+	 * @throws Exception
 	 */
 	public function saveRows(Request $request, $selectedGroup)
 	{
 		$selectedGroup = ApplicantGroup::find($selectedGroup);
-
+//dd($request->all());
 		if ( ( $applicants = $request->get('applicant', null) ) === null ) {
 			throw new NotFoundHttpException('Model not found');
 		}
 
 		foreach ($applicants as $item) {
 			$model = new Applicant();
+			$model->setNextSortValue($selectedGroup->id);
+			$model->is_active = true;
 			$model->fill($item)->save();
 
 			$this->setSkills($model, $item['skills']);
