@@ -16,38 +16,38 @@
 							<div class="col-md-6">
 								<div class="form-group">
 									<label>{{trans('Név')}}*</label>
-									<input type="text" name="name" class="form-control" value="{{old('name', $model->name)}}" />
+									<input type="text" name="name" class="form-control" value="{{old('name', $model->name)}} tabindex="1" />
 								</div>
 							</div>
 							<div class="col-md-6">
 								<div class="form-group">
 									<label>{{trans('E-mail cím')}}*</label>
-									<input type="text" name="email" class="form-control" value="{{old('email', $model->email)}}" />
+									<input type="text" name="email" class="form-control" value="{{old('email', $model->email)}}" tabindex="2" />
 								</div>
 							</div>
 							<div class="col-md-6">
 								<div class="form-group">
 									<label>{{trans('Telefon')}}*</label>
-									<input type="text" name="phone" class="form-control phone-number only-numbers" value="{{old('phone', $model->phone)}}" maxlength="11" placeholder="##/###-####" />
+									<input type="text" name="phone" class="form-control phone-number only-numbers" value="{{old('phone', $model->phone)}}" maxlength="11" placeholder="##/###-####" tabindex="3" />
 								</div>
 							</div>
 							<div class="col-md-6">
 								<div class="form-group">
 									<label>{{trans('Linked In')}}</label>
-									<input type="text" name="linked_in" class="form-control" value="{{old('linked_in', $model->linked_in)}}" />
+									<input type="text" name="linked_in" class="form-control" value="{{old('linked_in', $model->linked_in)}}" tabindex="4" />
 								</div>
 							</div>
 
 							<div class="col-md-3">
 								<div class="form-group">
 									<label>{{trans('Tapasztalat')}} ({{trans('Év')}})</label>
-									<input type="number" name="experience_year" class="form-control" value="{{old('experience_year', $model->experience_year)}}" />
+									<input type="number" name="experience_year" class="form-control" value="{{old('experience_year', $model->experience_year)}}" tabindex="5" />
 								</div>
 							</div>
 							<div class="col-md-3">
 								<div class="form-group">
 									<label>{{trans('Angol szóbeli')}}</label>
-									<select name="in_english" class="form-control select2">
+									<select name="in_english" class="form-control select2" tabindex="6">
 										@foreach(\App\Models\Applicant::getInEnglishDropdownOptions($model->in_english) as $item)
 											<option value="{{$item['value']}}" @if($item['selected'] === true) selected="selected" @endif>{{$item['name']}}</option>
 										@endforeach
@@ -57,20 +57,20 @@
 							<div class="col-md-3">
 								<div class="form-group">
 									<label>{{trans('Utolsó kapcsolat')}}</label>
-									<input type="date" name="last_contact_date" class="form-control" value="{{old('last_contact_date', $model->last_contact_date)}}" />
+									<input type="date" name="last_contact_date" class="form-control" value="{{old('last_contact_date', $model->last_contact_date)}}" tabindex="7" />
 								</div>
 							</div>
 							<div class="col-md-3">
 								<div class="form-group">
 									<label>{{trans('Visszahívás')}}</label>
-									<input type="date" name="last_callback_date" class="form-control" value="{{old('last_callback_date', $model->last_callback_date)}}" />
+									<input type="date" name="last_callback_date" class="form-control" value="{{old('last_callback_date', $model->last_callback_date)}}" tabindex="8" />
 								</div>
 							</div>
 
 							<div class="col-md-3">
 								<div class="form-group">
 									<label>{{trans('Végzettség')}}</label>
-									<select name="graduation" class="form-control">
+									<select name="graduation" class="form-control" tabindex="9">
 										@foreach(\App\Models\Applicant::getGraduationDropdownOptions() as $option)
 											<option value="{{$option}}" @if($option == old('graduation', $model->graduation)) selected="selected" @endif>{{$option}}</option>
 										@endforeach
@@ -81,21 +81,21 @@
 							<div class="col-md-3">
 								<div class="form-group">
 									<label>{{trans('Fizetési igénye (nettó)')}}</label>
-									<input type="text" name="salary" class="form-control salary only-numbers" value="{{old('salary', $model->salary)}}" />
+									<input type="text" name="salary" class="form-control salary only-numbers" value="{{old('salary', $model->salary)}}" tabindex="10" />
 								</div>
 							</div>
 
 							<div class="col-md-3">
 								<div class="form-group">
 									<label>{{trans('Felmondási idő')}} ({{trans('nap')}})</label>
-									<input type="number" name="notice_period" class="form-control" value="{{old('notice_period', $model->notice_period)}}" />
+									<input type="number" name="notice_period" class="form-control" value="{{old('notice_period', $model->notice_period)}}" tabindex="11" />
 								</div>
 							</div>
 
 							<div class="col-md-3">
 								<div class="form-group">
 									<label>{{trans('Alkalmazott')}}/{{trans('Alvállalkozó')}}</label>
-									<select name="is_subcontractor" class="form-control select2">
+									<select name="is_subcontractor" class="form-control select2" tabindex="12">
 										@foreach(\App\Models\Applicant::getIsSubcontractorDropdownOptions($model->is_subcontractor) as $key => $item)
 											<option value="{{$item['value']}}" @if($item['selected']) selected="selected" @endif>{{$item['name']}}</option>
 										@endforeach
@@ -106,7 +106,7 @@
 							<div class="col-md-12">
 								<div class="form-group">
 									<label>{{trans('Technológiák, készségek')}}*</label>
-									<select required="required" name="applicant[skills][]" class="form-control select2" multiple>
+									<select required="required" name="applicant[skills][]" class="form-control select2" multiple tabindex="13">
 										@foreach(\App\Models\Applicant::getSkillDropdownOptions($selectedSkillIds) as $item)
 											<option @if($item['selected']) selected="selected" @endif>{{$item['name']}}</option>
 										@endforeach
@@ -117,13 +117,13 @@
 							<div class="col-md-12">
 								<div class="form-group">
 									<label>{{trans('Információ a jelöltről')}}</label>
-									<textarea name="description" class="form-control">{{old('linked_in', $model->description)}}</textarea>
+									<textarea name="description" class="form-control" tabindex="14">{{old('linked_in', $model->description)}}</textarea>
 								</div>
 							</div>
 							<div class="col-md-12">
 								<div class="form-group">
 									<label>{{trans('Cégeknek átküldve')}}</label>
-									<select name="applicant[companies][]" class="form-control select2" multiple>
+									<select name="applicant[companies][]" class="form-control select2" multiple tabindex="15">
 										@foreach(\App\Models\JobPosition::getCompanyDropdownItems() as $item)
 											<option value="{{$item->id}}"
 												@if(in_array($item->id, $model->companies()->pluck('id')->toArray())) selected="selected" @endif
@@ -135,7 +135,7 @@
 							<div class="col-md-12">
 								<div class="form-group">
 									<label>{{trans('Intézte')}}</label>
-									<input type="text" name="monogram" value="{{old('monogram', $model->monogram)}}"  class="form-control" />
+									<input type="text" name="monogram" value="{{old('monogram', $model->monogram)}}"  class="form-control" tabindex="16" />
 								</div>
 							</div>
 						</div>

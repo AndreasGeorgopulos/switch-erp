@@ -81,18 +81,79 @@ $(document).on('change', 'input.phone-number', function () {
 /**
  * Fizetési igény kezelés
  */
-$(document).on('keyup', 'input.salary', function (e) {
-	$(this).change();
-});
+(function () {
+	const selectors = 'input.salary';
+	const thousandSeparator = '.';
+	const postCurrencyTag = ' Ft';
+	const formatValue = function (element, postTag) {
+		const numberWithThousands = function (number) {
+			return number.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, ("$1" + thousandSeparator));
+		}
 
-$(document).on('change', 'input.salary', function (e) {
-	const numberWithThousands = function (number) {
-		return number.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1.");
+		cleanFormat(element);
+		let value = element.val().replaceAll('.', '');
+		value = numberWithThousands(value);
+		element.val(value + (value != '' && postTag != undefined ? postTag : ''));
+	};
+	const cleanFormat = function (element) {
+		let value = element.val();
+		if (value.lastIndexOf(postCurrencyTag) > -1) {
+			value = value.replaceAll(postCurrencyTag, '');
+			element.val(value);
+		}
 	}
 
-	let value = $(this).val().replaceAll('.', '');
+	$(document).on('keyup', selectors, function (e) {
+		formatValue($(this));
+	});
 
-	$(this).val(numberWithThousands(value));
-});
+	$(document).on('focus', selectors, function (e) {
+		cleanFormat($(this));
+	});
 
-$('input.salary').change();
+	$(document).on('blur', selectors, function (e) {
+		formatValue($(this), postCurrencyTag);
+	});
+
+	$(document).on('change', selectors, function (e) {
+		formatValue($(this), postCurrencyTag);
+	});
+
+	$(selectors).change();
+})();
+
+/**
+ * Százalék input kezelés
+ */
+(function () {
+	const selectors = 'input.percent';
+	const postTag = '%';
+	const cleanFormat = function (element) {
+		let value = element.val();
+		if (value.lastIndexOf(postTag) > -1) {
+			value = value.replaceAll(postTag, '');
+			element.val(value);
+		}
+	}
+	const formatValue = function (element) {
+		cleanFormat(element);
+		let value = element.val();
+		if (value != '') {
+			element.val(value + postTag);
+		}
+	};
+
+	$(document).on('focus', selectors, function (e) {
+		cleanFormat($(this));
+	});
+
+	$(document).on('blur', selectors, function (e) {
+		formatValue($(this));
+	});
+
+	$(document).on('change', selectors, function (e) {
+		formatValue($(this));
+	});
+
+	$(selectors).change();
+})();

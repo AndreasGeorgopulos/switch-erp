@@ -34,7 +34,7 @@
 							<div class="col-md-6">
 								<div class="form-group">
 									<label>{{trans('Sikerdíj mértéke')}} (%)*</label>
-									<input type="text" name="success_award" class="form-control only-numbers" value="{{old('success_award', $model->success_award)}}" maxlength="3" />
+									<input type="text" name="success_award" class="form-control only-numbers percent" value="{{old('success_award', $model->success_award)}}" maxlength="3" />
 								</div>
 							</div>
 							<div class="col-md-6">
