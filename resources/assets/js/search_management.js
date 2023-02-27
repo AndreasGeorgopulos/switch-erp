@@ -14,21 +14,41 @@ if ($('#search-table').length) {
 			$this.table.find('.input-data').on('change', function (e) {
 				e.preventDefault();
 				const element = $(this);
-				const tr = $(this).parents().closest('tr');
-				const data = {
-					applicant_id: tr.data('applicant'),
-					job_position_id: tr.data('job'),
-					status: tr.find('select[name="status"] option:selected').val(),
-					send_date: tr.find('input[name="send_date"]').val(),
-					information: tr.find('textarea[name="information"]').val(),
-					interview_time: tr.find('input[name="interview_time"]').val(),
-				};
+				if (element.prop('type') == 'date' || element.prop('type') == 'datetime-local') {
+					return false;
+				}
 
-				element.prop('disabled', true);
+				$this.sendData(element);
+			});
 
-				$.post('/search_management/save_data', data, function () {
-					element.prop('disabled', false);
-				});
+			$this.table.find('input.input-data[type=date]').off('blur');
+			$this.table.find('input.input-data[type=date]').on('blur', function (e) {
+				e.preventDefault();
+				$this.sendData($(this));
+			});
+
+			$this.table.find('input.input-data[type=datetime-local]').off('blur');
+			$this.table.find('input.input-data[type=datetime-local]').on('blur', function (e) {
+				e.preventDefault();
+				$this.sendData($(this));
+			});
+		},
+
+		sendData: function (element) {
+			const tr = element.parents().closest('tr');
+			const data = {
+				applicant_id: tr.data('applicant'),
+				job_position_id: tr.data('job'),
+				status: tr.find('select[name="status"] option:selected').val(),
+				send_date: tr.find('input[name="send_date"]').val(),
+				information: tr.find('textarea[name="information"]').val(),
+				interview_time: tr.find('input[name="interview_time"]').val(),
+			};
+
+			element.prop('disabled', true);
+
+			$.post('/search_management/save_data', data, function () {
+				element.prop('disabled', false);
 			});
 		}
 	};

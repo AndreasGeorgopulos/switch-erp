@@ -57,13 +57,13 @@
 							<div class="col-md-3">
 								<div class="form-group">
 									<label>{{trans('Utolsó kapcsolat')}}</label>
-									<input type="date" name="last_contact_date" class="form-control" value="{{old('last_contact_date', $model->last_contact_date)}}" tabindex="7" />
+									<input type="date" name="last_contact_date" max="2999-12-31" class="form-control" value="{{old('last_contact_date', $model->last_contact_date)}}" tabindex="7" />
 								</div>
 							</div>
 							<div class="col-md-3">
 								<div class="form-group">
 									<label>{{trans('Visszahívás')}}</label>
-									<input type="date" name="last_callback_date" class="form-control" value="{{old('last_callback_date', $model->last_callback_date)}}" tabindex="8" />
+									<input type="date" name="last_callback_date" max="2999-12-31" class="form-control" value="{{old('last_callback_date', $model->last_callback_date)}}" tabindex="8" />
 								</div>
 							</div>
 

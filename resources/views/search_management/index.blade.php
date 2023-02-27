@@ -54,7 +54,7 @@
 						<tr data-applicant="{{$m->applicant_id}}" data-job="{{$m->job_position_id}}">
 							<td>{{$m->applicant->name}}</td>
 							<td>
-								<input type="date" name="send_date" value="{{$m->send_date}}" class="form-control input-sm input-data" />
+								<input type="date" max="2999-12-31" name="send_date" value="{{$m->send_date}}" class="form-control input-sm input-data" />
 							</td>
 							<td>
 								<select name="status" class="form-control input-sm input-data">
