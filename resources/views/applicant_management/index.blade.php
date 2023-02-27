@@ -78,6 +78,7 @@
 							<th>{{trans('Technológia')}}</th>
 							<th>{{trans('Cég')}}</th>
 							<th>{{trans('Információ')}}</th>
+							<th>{{trans('Utolsó kapcsolat')}}</th>
 							<th>{{trans('E-mail')}}</th>
 							<th>{{trans('Telefon')}}</th>
 							<th>{{trans('Intézte')}}</th>
@@ -143,6 +144,7 @@
 								<td>{{$applicant->skills->pluck('name')->implode(', ')}}</td>
 								<td>{{$companies}}</td>
 								<td>{{$applicant->description}}</td>
+								<td>{{str_replace('-', '.', $applicant->last_contact_date)}}</td>
 								<td>{{$applicant->email}}</td>
 								<td>{{$applicant->phone}}</td>
 								<td>{{$applicant->monogram}}</td>
