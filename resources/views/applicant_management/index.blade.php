@@ -8,7 +8,6 @@
 	<div class="applicant-management">
 		<div class="row">
 			<div class="col-sm-2">
-
 				<ul class="nav" id="applicant-skill-sidebar">
 				@foreach($applicantGroups as $group)
 					<li class="nav-item @if($selectedGroup !== null && $group->id == $selectedGroup->id) active @endif">
@@ -31,6 +30,28 @@
 				</select>
 			</div>
 			<div class="col-sm-10 table-area">
+				<div class="foot-toolbar">
+					<button type="button" class="btn btn-default btn-scroll-left">
+						<i class="fa fa-arrow-left"></i>
+					</button>
+
+					<button type="button" class="btn btn-default btn-reorder" disabled>
+						<i class="fa fa-reorder"></i> {{trans('Sorrend beállítása')}}
+					</button>
+
+					<!--					<button type="button" class="btn btn-success btn-reorder-save" disabled>
+						<i class="fa fa-check"></i> {{trans('Sorrend mentése')}}
+					</button>
+
+					<button type="button" class="btn btn-default btn-reorder-cancel" disabled>
+						<i class="fa"></i> {{trans('Elvetés')}}
+					</button>-->
+
+					<button type="button" class="btn btn-default btn-scroll-right">
+						<i class="fa fa-arrow-right"></i>
+					</button>
+				</div>
+
 				@if($selectedGroup !== null)
 					<h1 class="applicant-group-name">{{$selectedGroup->name}}</h1>
 
@@ -138,7 +159,7 @@
 								$inEnglishOption = collect(\App\Models\Applicant::getInEnglishDropdownOptions($applicant->in_english))->where('selected', true)->first();
 								$inEnglishTitle = !empty($inEnglishOption) ? $inEnglishOption['name'] : '';
 							@endphp
-							<tr>
+							<tr id="{{$applicant->id}}">
 								<td>{{$applicant->name}}</td>
 								<td>{{$applicant->experience_year}}</td>
 								<td>{{$inEnglishTitle}}</td>

@@ -23,6 +23,7 @@
   },
   "dependencies": {
     "http": "*",
-    "select2": "*"
+    "select2": "*",
+    "tablednd": "^1.0.5"
   }
 }

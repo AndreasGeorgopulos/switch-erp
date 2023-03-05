@@ -5,6 +5,9 @@ if ($('#data-applicant-table').length) {
 		save_buttonbar: null,
 		button_add: null,
 		button_cancel: null,
+		button_scroll_left: null,
+		button_scroll_right: null,
+		scroll_step: 700,
 
 		init: function () {
 			this.table_data = $('#data-applicant-table');
@@ -12,6 +15,8 @@ if ($('#data-applicant-table').length) {
 			this.save_buttonbar = this.table_new.find('tfoot td.save-buttonbar');
 			this.button_add = this.table_new.find('tfoot .btn-new');
 			this.button_cancel = this.table_new.find('tfoot .btn-cancel');
+			this.button_scroll_left = $('.applicant-management .btn-scroll-left');
+			this.button_scroll_right = $('.applicant-management .btn-scroll-right');
 			this.eventHandlers();
 		},
 
@@ -43,6 +48,24 @@ if ($('#data-applicant-table').length) {
 				$this.filterRows();
 				return false;
 			});
+
+			$this.button_scroll_left.off('click');
+			$this.button_scroll_left.on('click', function (e) {
+				e.preventDefault();
+				$this.scrollHorizontal($this.scroll_step * -1);
+			});
+
+			$this.button_scroll_right.off('click');
+			$this.button_scroll_right.on('click', function (e) {
+				e.preventDefault();
+				$this.scrollHorizontal($this.scroll_step);
+			});
+		},
+
+		scrollHorizontal: function (scrollStep) {
+			const table_area = $('.applicant-management .table-area');
+			let scrollLeft = table_area.scrollLeft() + scrollStep;
+			table_area.animate({ scrollLeft: scrollLeft }, 800);
 		},
 
 		filterRows: function () {

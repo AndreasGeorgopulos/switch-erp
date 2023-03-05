@@ -6,6 +6,7 @@
  */
 
 require('./bootstrap');
+require('tablednd');
 
 require('select2');
 $('.select2').select2();

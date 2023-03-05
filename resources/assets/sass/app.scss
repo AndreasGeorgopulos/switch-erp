@@ -65,7 +65,30 @@ iframe.cv_viewer {
   }
 
   .table-area {
-    overflow-x: scroll !important;
+    overflow-x: hidden !important;
+    margin-bottom: 50px;
+  }
+
+  .foot-toolbar {
+    position: fixed;
+    bottom: 0px;
+    background-color: #ECF0F5;
+    width: 100%;
+    margin-top: 200px;
+    padding: 8px 50px;
+    border-top: solid 1px #000000;
+
+    .btn-scroll-left {
+      position: absolute;
+      bottom: 8px;
+      left: 5px;
+    }
+
+    .btn-scroll-right {
+      position: fixed;
+      bottom: 8px;
+      right: 5px;
+    }
   }
 }
 
