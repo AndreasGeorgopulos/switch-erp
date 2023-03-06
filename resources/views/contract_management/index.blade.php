@@ -25,11 +25,11 @@
 			@foreach($companies as $model)
 				<tr>
 					<td>{{$model->name}}</td>
-					<td>{{$model->success_award}}</td>
 					<td>
-						@if(!empty($model->payment_deadline))
-						{{\Carbon\Carbon::createFromFormat('Y-m-d', $model->payment_deadline)->format('Y.m.d')}}
-						@endif
+						@if(!empty($model->success_award)){{$model->success_award}} %@endif
+					</td>
+					<td>
+						@if(!empty($model->payment_deadline)){{$model->payment_deadline}} {{trans('nap')}}@endif
 					</td>
 					<td>{{$model->contact_name}}</td>
 					<td>{{$model->contact_email}}</td>
