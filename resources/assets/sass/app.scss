@@ -67,6 +67,15 @@ iframe.cv_viewer {
   .table-area {
     overflow-x: hidden !important;
     margin-bottom: 50px;
+
+    .onDragClass {
+      border: solid 1px #0000F0 !important;
+      background-color: #cccccc !important;
+    }
+
+    .dragHandle {
+      cursor: move;
+    }
   }
 
   .foot-toolbar {
@@ -77,6 +86,7 @@ iframe.cv_viewer {
     margin-top: 200px;
     padding: 8px 50px;
     border-top: solid 1px #000000;
+    height: 53px;
 
     .btn-scroll-left {
       position: absolute;

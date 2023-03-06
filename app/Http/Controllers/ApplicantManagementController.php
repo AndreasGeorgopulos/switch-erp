@@ -13,6 +13,7 @@ use Illuminate\Contracts\View\Factory;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Foundation\Application;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Redirector;
@@ -116,7 +117,7 @@ class ApplicantManagementController extends Controller
 		]))->with( 'form_success_message', [
 			trans( 'Sikeres mentés' ),
 			trans( 'A jelöltek sikeresen rögzítve lettek.' ),
-		] );;
+		] );
 	}
 
 	/**
@@ -236,7 +237,7 @@ class ApplicantManagementController extends Controller
 
 	/**
 	 * @param Request $request
-	 * @return \Illuminate\Http\JsonResponse
+	 * @return JsonResponse
 	 */
 	public function addNote(Request $request)
 	{
@@ -260,7 +261,7 @@ class ApplicantManagementController extends Controller
 
 	/**
 	 * @param $id
-	 * @return \Illuminate\Http\JsonResponse
+	 * @return JsonResponse
 	 * @throws Exception
 	 */
 	public function deleteNote($id)
@@ -276,11 +277,30 @@ class ApplicantManagementController extends Controller
 
 	/**
 	 * @param $company_id
-	 * @return \Illuminate\Http\JsonResponse
+	 * @return JsonResponse
 	 */
 	public function getJobPositionOptions($company_id)
 	{
 		return response()->json(JobPosition::getDropdownItems($company_id));
+	}
+
+	/**
+	 * @param Request $request
+	 * @return JsonResponse
+	 */
+	public function reorder(Request $request): JsonResponse
+	{
+		$ids = array_reverse($request->get('ids', []));
+		foreach ($ids as $sort => $id) {
+			if (!($model = Applicant::where('id', $id)->first())) {
+				continue;
+			}
+
+			$model->sort = ($sort + 1);
+			$model->save();
+		}
+
+		return response()->json(null, 200);
 	}
 
 	/**

@@ -30,30 +30,10 @@
 				</select>
 			</div>
 			<div class="col-sm-10 table-area">
-				<div class="foot-toolbar">
-					<button type="button" class="btn btn-default btn-scroll-left">
-						<i class="fa fa-arrow-left"></i>
-					</button>
-
-					<button type="button" class="btn btn-default btn-reorder" disabled>
-						<i class="fa fa-reorder"></i> {{trans('Sorrend beállítása')}}
-					</button>
-
-					<!--					<button type="button" class="btn btn-success btn-reorder-save" disabled>
-						<i class="fa fa-check"></i> {{trans('Sorrend mentése')}}
-					</button>
-
-					<button type="button" class="btn btn-default btn-reorder-cancel" disabled>
-						<i class="fa"></i> {{trans('Elvetés')}}
-					</button>-->
-
-					<button type="button" class="btn btn-default btn-scroll-right">
-						<i class="fa fa-arrow-right"></i>
-					</button>
-				</div>
-
 				@if($selectedGroup !== null)
 					<h1 class="applicant-group-name">{{$selectedGroup->name}}</h1>
+
+					<input type="hidden" id="hidden_applicant_group_id" value="{{$selectedGroup->id}}" />
 
 					<form method="post" action="{{route('applicant_management_save_rows', ['$selectedGroup' => $selectedGroup])}}">
 						{{csrf_field()}}
@@ -93,6 +73,7 @@
 					<table class="table table-bordered table-striped dataTable" id="data-applicant-table">
 						<thead>
 						<tr role="row">
+							<th></th>
 							<th>{{trans('Név')}}</th>
 							<th>{{trans('Tapasztalat')}}</th>
 							<th>{{trans('Angol')}}</th>
@@ -107,6 +88,7 @@
 							<th>{{trans('Önéletrajz')}}</th>
 						</tr>
 						<tr>
+							<th></th>
 							<th>
 								<select name="applicant" class="form-control search-input select2" style="width: 150px;">
 									<option></option>
@@ -160,6 +142,7 @@
 								$inEnglishTitle = !empty($inEnglishOption) ? $inEnglishOption['name'] : '';
 							@endphp
 							<tr id="{{$applicant->id}}">
+								<td class="dragHandle text-center"><i class="fa fa-reorder"></i></td>
 								<td>{{$applicant->name}}</td>
 								<td>{{$applicant->experience_year}}</td>
 								<td>{{$inEnglishTitle}}</td>
@@ -186,6 +169,24 @@
 						@endforeach
 						</tbody>
 					</table>
+
+					<div class="foot-toolbar">
+						<button type="button" class="btn btn-default btn-scroll-left">
+							<i class="fa fa-arrow-left"></i>
+						</button>
+
+						<button type="button" class="btn btn-success btn-reorder-save hidden">
+							<i class="fa fa-save"></i> {{trans('Sorrend mentése')}}
+						</button>
+
+						<button type="button" class="btn btn-default btn-reorder-cancel hidden">
+							<i class="fa fa-close"></i> {{trans('Elvetés')}}
+						</button>
+
+						<button type="button" class="btn btn-default btn-scroll-right">
+							<i class="fa fa-arrow-right"></i>
+						</button>
+					</div>
 				@endif
 			</div>
 		</div>

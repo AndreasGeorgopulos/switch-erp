@@ -8,6 +8,8 @@ if ($('#data-applicant-table').length) {
 		button_scroll_left: null,
 		button_scroll_right: null,
 		scroll_step: 700,
+		button_reorder_save: null,
+		button_reorder_cancel: null,
 
 		init: function () {
 			this.table_data = $('#data-applicant-table');
@@ -15,8 +17,10 @@ if ($('#data-applicant-table').length) {
 			this.save_buttonbar = this.table_new.find('tfoot td.save-buttonbar');
 			this.button_add = this.table_new.find('tfoot .btn-new');
 			this.button_cancel = this.table_new.find('tfoot .btn-cancel');
-			this.button_scroll_left = $('.applicant-management .btn-scroll-left');
-			this.button_scroll_right = $('.applicant-management .btn-scroll-right');
+			this.button_scroll_left = $('.applicant-management .foot-toolbar .btn-scroll-left');
+			this.button_scroll_right = $('.applicant-management .foot-toolbar .btn-scroll-right');
+			this.button_reorder_save = $('.applicant-management .foot-toolbar .btn-reorder-save');
+			this.button_reorder_cancel = $('.applicant-management .foot-toolbar .btn-reorder-cancel');
 			this.eventHandlers();
 		},
 
@@ -60,6 +64,59 @@ if ($('#data-applicant-table').length) {
 				e.preventDefault();
 				$this.scrollHorizontal($this.scroll_step);
 			});
+
+			$this.button_reorder_save.off('click');
+			$this.button_reorder_save.on('click', function (e) {
+				e.preventDefault();
+				$this.saveReorder();
+			});
+
+			$this.button_reorder_cancel.off('click');
+			$this.button_reorder_cancel.on('click', function (e) {
+				e.preventDefault();
+				$this.cancelReorder();
+			});
+
+			$this.table_data.tableDnD({
+				onDragClass: 'onDragClass',
+				dragHandle: '.dragHandle',
+				onDrop: function(table, row) {
+					$this.button_reorder_save.removeClass('hidden');
+					$this.button_reorder_cancel.removeClass('hidden');
+				}
+			});
+		},
+
+		saveReorder: function () {
+			const $this = this;
+			const url = '/applicant_management/reorder/' + $('#hidden_applicant_group_id').val();
+			let data = {
+				_token: $('input[name="_token"]').val(),
+				ids: []
+			};
+
+			$.each($this.table_data.find('tbody tr'), function (index, row) {
+				data.ids.push($(row).attr('id'));
+			});
+
+			$this.button_reorder_save.prop('disabled', true);
+			$this.button_reorder_cancel.prop('disabled', true);
+
+			$.post(url, data, function () {
+				$this.button_reorder_save.addClass('hidden');
+				$this.button_reorder_cancel.addClass('hidden');
+				document.location.reload();
+			});
+		},
+
+		cancelReorder: function () {
+			const $this = this;
+			const table_area = $('.applicant-management .table-area');
+
+			$this.button_reorder_save.prop('disabled', true);
+			$this.button_reorder_cancel.prop('disabled', true);
+
+			document.location.reload();
 		},
 
 		scrollHorizontal: function (scrollStep) {
