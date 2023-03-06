@@ -296,8 +296,12 @@ class ApplicantManagementController extends Controller
 				continue;
 			}
 
-			$model->sort = ($sort + 1);
-			$model->save();
+			$model->update([
+				'sort' => ($sort + 1),
+			]);
+
+			/*$model->sort = ($sort + 1);
+			$model->save();*/
 		}
 
 		return response()->json(null, 200);
