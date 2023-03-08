@@ -191,12 +191,12 @@ class Applicant extends Model implements IModelRules, IModelSortable
 				'max:4',
 			],
 			'email' => [
-				'required',
 				'email',
+				'nullable',
 			],
 			'phone' => [
-				'required',
 				'regex:' . config('app.input_formats.phone_number'),
+				'nullable',
 			],
 			'linked_in' => [
 				'max:255',
@@ -214,12 +214,15 @@ class Applicant extends Model implements IModelRules, IModelSortable
 				'integer',
 				'min:1970',
 				'max:' . date('Y'),
+				'nullable',
 			],
 			'last_contact_date' => [
 				'date',
+				'nullable',
 			],
 			'last_callback_date' => [
 				'date',
+				'nullable',
 			],
 			'is_subcontractor' => [
 				'boolean',

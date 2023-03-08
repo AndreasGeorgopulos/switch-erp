@@ -131,24 +131,24 @@ class Company extends Model implements IModelRules, IModelDeletable
 				'required',
 				'max:100',
 			],
-			'success_award' => [
+			/*'success_award' => [
 				'required',
-			],
+			],*/
 			'payment_deadline' => [
-				'required',
 				'numeric',
+				'nullable',
 			],
 			'contact_name' => [
-				'required',
 				'max:100',
+				'nullable',
 			],
 			'contact_email' => [
-				'required',
 				'email',
+				'nullable',
 			],
 			'contact_phone' => [
-				'required',
 				'regex:' . config('app.input_formats.phone_number'),
+				'nullable',
 			],
 			'is_active' => [
 				'boolean',

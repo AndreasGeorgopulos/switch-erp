@@ -21,13 +21,13 @@
 							</div>
 							<div class="col-md-6">
 								<div class="form-group">
-									<label>{{trans('E-mail cím')}}*</label>
+									<label>{{trans('E-mail cím')}}</label>
 									<input type="text" name="email" class="form-control" value="{{old('email', $model->email)}}" tabindex="2" />
 								</div>
 							</div>
 							<div class="col-md-6">
 								<div class="form-group">
-									<label>{{trans('Telefon')}}*</label>
+									<label>{{trans('Telefon')}}</label>
 									<input type="text" name="phone" class="form-control phone-number only-numbers" value="{{old('phone', $model->phone)}}" maxlength="11" placeholder="##/###-####" tabindex="3" />
 								</div>
 							</div>
@@ -105,8 +105,8 @@
 
 							<div class="col-md-12">
 								<div class="form-group">
-									<label>{{trans('Technológiák, készségek')}}*</label>
-									<select required="required" name="applicant[skills][]" class="form-control select2" multiple tabindex="13">
+									<label>{{trans('Technológiák, készségek')}}</label>
+									<select name="applicant[skills][]" class="form-control select2" multiple tabindex="13">
 										@foreach(\App\Models\Applicant::getSkillDropdownOptions($selectedSkillIds) as $item)
 											<option @if($item['selected']) selected="selected" @endif>{{$item['name']}}</option>
 										@endforeach

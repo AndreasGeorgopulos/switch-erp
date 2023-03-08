@@ -33,13 +33,13 @@
 						<div class="row">
 							<div class="col-md-6">
 								<div class="form-group">
-									<label>{{trans('Sikerdíj mértéke')}} (%)*</label>
+									<label>{{trans('Sikerdíj mértéke')}} (%)</label>
 									<input type="text" name="success_award" class="form-control only-numbers percent" value="{{old('success_award', $model->success_award)}}" maxlength="3" />
 								</div>
 							</div>
 							<div class="col-md-6">
 								<div class="form-group">
-									<label>{{trans('Fizetési határidő')}} (nap)*</label>
+									<label>{{trans('Fizetési határidő')}} (nap)</label>
 									<input type="text" name="payment_deadline" class="form-control only-numbers" value="{{old('payment_deadline', $model->payment_deadline)}}" maxlength="3" />
 								</div>
 							</div>
@@ -47,7 +47,7 @@
 						<div class="row">
 							<div class="col-md-12">
 								<div class="form-group">
-									<label>{{trans('Kapcsolattartó')}}*</label>
+									<label>{{trans('Kapcsolattartó')}}</label>
 									<input type="text" name="contact_name" class="form-control" value="{{old('contact_name', $model->contact_name)}}" />
 								</div>
 							</div>
@@ -55,7 +55,7 @@
 						<div class="row">
 							<div class="col-md-12">
 								<div class="form-group">
-									<label>{{trans('E-mail')}}*</label>
+									<label>{{trans('E-mail')}}</label>
 									<input type="text" name="contact_email" class="form-control" value="{{old('contact_email', $model->contact_email)}}" />
 								</div>
 							</div>
@@ -63,7 +63,7 @@
 						<div class="row">
 							<div class="col-md-12">
 								<div class="form-group">
-									<label>{{trans('Telefon')}}*</label>
+									<label>{{trans('Telefon')}}</label>
 									<input type="text" name="contact_phone" class="form-control phone-number only-numbers" value="{{old('contact_phone', $model->contact_phone)}}" maxlength="11" placeholder="##/###-####" />
 								</div>
 							</div>
