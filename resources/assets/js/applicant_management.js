@@ -152,10 +152,10 @@ if ($('#data-applicant-table').length) {
 			const tr = $('<tr>');
 			tr.addClass('new-row');
 			tr.append($('<td><input type="text" required="required" class="form-control input-sm" name="applicant[' + rowIndex + '][name]" /></td>'))
-			tr.append($('<td><input type="number" required="required" class="form-control input-sm" name="applicant[' + rowIndex + '][experience_year]" /></td>'))
-			tr.append($('<td><select required="required" name="applicant[' + rowIndex + '][in_english]" class="form-control select2 in_english"></select></td>'))
-			tr.append($('<td><select required="required" name="applicant[' + rowIndex + '][skills][]" class="form-control select2 skills" multiple></select></td>'))
-			tr.append($('<td><input type="email" required="required" class="form-control input-sm" name="applicant[' + rowIndex + '][email]" /></td>'))
+			tr.append($('<td><input type="number" class="form-control input-sm" name="applicant[' + rowIndex + '][experience_year]" /></td>'))
+			tr.append($('<td><select name="applicant[' + rowIndex + '][in_english]" class="form-control select2 in_english"></select></td>'))
+			tr.append($('<td><select name="applicant[' + rowIndex + '][skills][]" class="form-control select2 skills" multiple></select></td>'))
+			tr.append($('<td><input type="email" class="form-control input-sm" name="applicant[' + rowIndex + '][email]" /></td>'))
 			tr.append($('<td colspan="2"><input type="text" class="form-control input-sm" name="applicant[' + rowIndex + '][linked_in]" /></td>'))
 
 			this.table_new.find('tbody').append(tr);

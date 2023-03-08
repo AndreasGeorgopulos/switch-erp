@@ -106,6 +106,30 @@ class ContractManagementController extends Controller
 		] );
 	}
 
+	public function saveRows(Request $request)
+	{
+		$contracts = $request->get('contract', []);
+		foreach ($contracts as $item) {
+			if (empty($item['name'])) {
+				continue;
+			}
+			$companyName = trim(strip_tags($item['name']));
+			if (!Company::where('name', $companyName)->first()) {
+				(new Company())->fill(['name' => $item['name']])->save();
+			}
+		}
+
+		return redirect(route('contract_management_index', [
+			'form_success_message' => [
+				trans( 'Sikeres mentés' ),
+				trans( 'A cégek sikeresen rögzítve lettek.' ),
+			],
+		])/*->with( 'form_success_message', [
+			trans( 'Sikeres mentés' ),
+			trans( 'A cégek sikeresen rögzítve lettek.' ),
+		])*/);
+	}
+
 	/**
 	 * @param $id
 	 * @return Company|Company[]|Collection|Model|mixed

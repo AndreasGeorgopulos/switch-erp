@@ -97,7 +97,6 @@ class ApplicantManagementController extends Controller
 	public function saveRows(Request $request, $selectedGroup)
 	{
 		$selectedGroup = ApplicantGroup::find($selectedGroup);
-//dd($request->all());
 		if ( ( $applicants = $request->get('applicant', null) ) === null ) {
 			throw new NotFoundHttpException('Model not found');
 		}
@@ -108,7 +107,9 @@ class ApplicantManagementController extends Controller
 			$model->is_active = true;
 			$model->fill($item)->save();
 
-			$this->setSkills($model, $item['skills']);
+			if (!empty($item['skills'])) {
+				$this->setSkills($model, $item['skills']);
+			}
 			$this->setGroups($model, [$selectedGroup->name]);
 		}
 
