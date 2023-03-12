@@ -19,7 +19,9 @@
 		</li>
 	@endif
 
-	<li class="nav-item disabled">
-		<a href="#" class="nav-link">{{trans('Sales')}}</a>
-	</li>
+	@if(hasRole('sales_module'))
+		<li class="nav-item @if(\Illuminate\Support\Str::startsWith($routeName, 'sales_management')) active @endif">
+			<a href="{{url( route( 'sales_management_index' ) )}}" class="nav-link">{{trans('Sales')}}</a>
+		</li>
+	@endif
 </ul>

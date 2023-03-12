@@ -35,6 +35,12 @@ Route::group(['middleware' => ['acl', 'locale']], function () {
 	Route::match(['get', 'post'], '/contract_management/edit/{id}', 'ContractManagementController@edit')->name('contract_management_edit');
 	Route::match(['get'], '/contract_management/delete/{id}', 'ContractManagementController@delete')->name('contract_management_delete');
 
+	// Sales management
+	Route::match(['get'], '/sales_management', 'SalesManagementController@index')->name('sales_management_index');
+	Route::match(['post'], '/sales_management/add', 'SalesManagementController@add')->name('sales_management_add');
+	Route::match(['post'], '/sales_management/update', 'SalesManagementController@update')->name('sales_management_update');
+	Route::match(['post'], '/sales_management/reorder', 'SalesManagementController@reorder')->name('sales_management_reorder');
+
 	// users
 	Route::match(['get', 'post'], '/users/list', 'UserController@index')->name('users_list');
 	Route::match(['get', 'post', 'put'], '/users/edit/{id?}', 'UserController@edit')->name('users_edit');

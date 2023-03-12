@@ -15,9 +15,11 @@ class DatabaseSeeder extends Seeder
         //$this->call(DefaultDataSeeder::class);
 	    //$this->call(SkillSeeder::class);
 
-        $this->call(CleanApplicantDataSeeder::class);
+        /*$this->call(CleanApplicantDataSeeder::class);
         $this->call(ApplicantGroupSeeder::class);
         $this->call(ApplicantSeeder::class);
-        $this->call(SortSeeder::class);
+        $this->call(SortSeeder::class);*/
+
+	    $this->call(SalesSeeder::class);
     }
 }

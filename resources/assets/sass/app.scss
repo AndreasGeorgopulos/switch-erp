@@ -57,7 +57,8 @@ iframe.cv_viewer {
   width: 100px;
 }
 
-.applicant-management {
+.applicant-management,
+.sales-management {
   h1.applicant-group-name {
     font-size: 30px;
     padding: 0px 0px 0px 0px !important;
@@ -68,14 +69,29 @@ iframe.cv_viewer {
     overflow-x: hidden !important;
     margin-bottom: 50px;
 
-    .onDragClass {
+    .onDragClass td {
       border: solid 1px #0000F0 !important;
+      background-color: #cccccc !important;
+    }
+
+    .selectedRow td {
       background-color: #cccccc !important;
     }
 
     .dragHandle {
       cursor: move;
     }
+
+    .modified-input {
+      background-color: #0012FF !important;
+      color: #ffffff;
+    }
+
+    .w-150 { width: 150px; }
+    .w-200 { width: 200px; }
+    .w-300 { width: 300px; }
+    .w-400 { width: 400px; }
+    .w-500 { width: 500px; }
   }
 
   .foot-toolbar {
