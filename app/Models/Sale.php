@@ -23,6 +23,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property string $information
  * @property string $last_contact_date
  * @property string $web
+ * @property string $monogram
  */
 class Sale extends Model implements IModelRules
 {
@@ -47,6 +48,7 @@ class Sale extends Model implements IModelRules
 		'information',
 		'last_contact_date',
 		'web',
+		'monogram',
 	];
 
 	/**
@@ -66,6 +68,7 @@ class Sale extends Model implements IModelRules
 			'last_contact_date' => 'date|nullable',
 			'sort' => 'numeric|nullable',
 			'status' => 'numeric|nullable',
+			'monogram' => 'max:4|nullable',
 		];
 	}
 
@@ -85,6 +88,7 @@ class Sale extends Model implements IModelRules
 			'callback_date' => trans('Visszahívás dátuma'),
 			'last_contact_date' => trans('Utolsó kapcsolat'),
 			'status' => trans('Státusz'),
+			'monogram' => trans('Intézte'),
 		];
 	}
 

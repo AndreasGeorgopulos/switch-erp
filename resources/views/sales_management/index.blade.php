@@ -23,12 +23,13 @@
 							<th>{{trans('Információ')}}</th>
 							<th>{{trans('Utolsó kapcsolat')}}</th>
 							<th>{{trans('Weboldal')}}</th>
+							<th>{{trans('Intézte')}}</th>
 						</tr>
 						</thead>
 						<tbody></tbody>
 						<tfoot>
 						<tr>
-							<td colspan="8">
+							<td colspan="9">
 								<button type="button" class="btn btn-default btn-sm btn-new">
 									<i class="fa fa-plus"></i> {{trans('Új cég hozzáadása')}}
 								</button>
@@ -60,6 +61,7 @@
 							<th>{{trans('Információ')}}</th>
 							<th>{{trans('Utolsó kapcsolat')}}</th>
 							<th>{{trans('Weboldal')}}</th>
+							<th>{{trans('Intézte')}}</th>
 						</tr>
 						<tr role="row">
 							<th></th>
@@ -135,6 +137,14 @@
 								<select name="web" class="form-control select2 search-input w-300">
 									<option></option>
 									@foreach(\App\Models\Sale::getFilterDropdownOptions('web', $getParams['web']) as $item)
+										<option value="{{$item['value']}}" @if($item['selected']) selected="selected" @endif>{{$item['title']}}</option>
+									@endforeach
+								</select>
+							</th>
+							<th>
+								<select name="monogram" class="form-control select2 search-input w-300">
+									<option></option>
+									@foreach(\App\Models\Sale::getFilterDropdownOptions('monogram', $getParams['monogram']) as $item)
 										<option value="{{$item['value']}}" @if($item['selected']) selected="selected" @endif>{{$item['title']}}</option>
 									@endforeach
 								</select>
@@ -218,6 +228,13 @@
 								       class="form-control input-sm"
 								       value="{{$model->web}}"
 								       data-value="{{$model->web}}" />
+							</td>
+							<td>
+								<input type="text"
+								       name="monogram"
+								       class="form-control input-sm"
+								       value="{{$model->monogram}}"
+								       data-value="{{$model->monogram}}" />
 							</td>
 						</tr>
 					@endforeach

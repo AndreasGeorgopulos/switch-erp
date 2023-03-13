@@ -276,6 +276,7 @@ if ($('#data-sales-table').length) {
 			tr.append($('<td><input type="text" class="form-control input-sm" name="sales[' + rowIndex + '][information]" /></td>'));
 			tr.append($('<td><input type="date" class="form-control input-sm" name="sales[' + rowIndex + '][last_contact_date]" max="2999-12-31" /></td>'));
 			tr.append($('<td><input type="text" class="form-control input-sm" name="sales[' + rowIndex + '][web]" /></td>'));
+			tr.append($('<td><input type="text" class="form-control input-sm" name="sales[' + rowIndex + '][monogram]" /></td>'));
 
 			this.table_new.find('tbody').append(tr);
 

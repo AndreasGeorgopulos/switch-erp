@@ -4,15 +4,18 @@ namespace App\Http\Controllers;
 
 use App\Models\Sale;
 use Exception;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Foundation\Application;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\View\View;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class SalesManagementController extends Controller
 {
 	/**
 	 * @param Request $request
-	 * @return \Illuminate\Contracts\View\Factory|\Illuminate\Foundation\Application|\Illuminate\View\View
+	 * @return Factory|Application|View
 	 */
 	public function index(Request $request)
     {
@@ -27,6 +30,7 @@ class SalesManagementController extends Controller
 		    'information' => $request->get('information', null),
 		    'last_contact_date' => $request->get('last_contact_date', null),
 		    'web' => $request->get('web', null),
+		    'monogram' => $request->get('monogram', null),
 	    ];
 
 	    $sales = Sale::where(function ($q) use ($getParams) {
