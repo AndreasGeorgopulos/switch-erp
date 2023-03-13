@@ -31,11 +31,12 @@ class ApplicantController extends Controller implements ICrudController
 			$length = $request->get( 'length', config( 'adminlte.paginator.default_length' ) );
 			$sort = $request->get( 'sort', 'id' );
 			$direction = $request->get( 'direction', 'asc' );
-			$searchtext = $request->get( 'searchtext', '' );
+			$searchText = $request->get( 'searchtext', '' );
 
-			if ( $searchtext != '' ) {
-				$list = Applicant::where( 'id', 'like', '%' . $searchtext . '%' )
-					->orWhere( 'name', 'like', '%' . $searchtext . '%' )
+			if ( $searchText != '' ) {
+				$list = Applicant::where( 'id', 'like', '%' . $searchText . '%' )
+					->orWhere( 'name', 'like', '%' . $searchText . '%' )
+					->orWhere( 'email', 'like', '%' . $searchText . '%' )
 					->orderby( $sort, $direction )
 					->paginate( $length );
 			}
@@ -47,7 +48,7 @@ class ApplicantController extends Controller implements ICrudController
 				'list' => $list,
 				'sort' => $sort,
 				'direction' => $direction,
-				'searchtext' => $searchtext
+				'searchtext' => $searchText
 			] );
 		}
 

@@ -8,6 +8,7 @@
 					<tr role="row">
 						<th class="@if($sort == 'id') sorting_{{$direction}} @else sorting @endif" data-column="id">#</th>
 						<th data-column="name">{{trans('Név')}}</th>
+						<th data-column="email">{{trans('E-mail')}}</th>
 						<th data-column="group">{{trans('Csoport')}}</th>
 						<th data-column="is_active" class="text-center">{{trans('Aktív')}}</th>
 						<th>
@@ -20,6 +21,7 @@
 						<tr role="row" class="odd">
 							<td>{{$model->id}}</td>
 							<td>{{$model->name}}</td>
+							<td>{{$model->email}}</td>
 							<td>{{$model->groups()->pluck('name')->implode(', ')}}</td>
 							<td class="text-center"><i class="fa {{$model->is_active ? 'fa-check text-green' : 'fa-ban text-red'}}"></i></td>
 							<td>
