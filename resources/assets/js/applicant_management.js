@@ -85,6 +85,14 @@ if ($('#data-applicant-table').length) {
 					$this.button_reorder_cancel.removeClass('hidden');
 				}
 			});
+
+			this.table_data.find('form.delete-applicant').off('submit');
+			this.table_data.find('form.delete-applicant').on('submit', function (e) {
+				if (confirm('Biztos, hogy törölni akarja ezt a jelöltet?')) {
+					return true;
+				}
+				return false;
+			});
 		},
 
 		saveReorder: function () {

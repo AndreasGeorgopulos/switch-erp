@@ -18,6 +18,7 @@ Route::group(['middleware' => ['acl', 'locale']], function () {
 	// Applicant Management
 	Route::match(['get'], '/applicant_management/{selectedGroup?}', 'ApplicantManagementController@index')->name('applicant_management_index');
 	Route::match(['post'], '/applicant_management/save_rows/{selectedGroup?}', 'ApplicantManagementController@saveRows')->name('applicant_management_save_rows');
+	Route::match(['delete'], '/applicant_management/delete/{selectedGroup}/{id}', 'ApplicantManagementController@delete')->name('applicant_management_delete');
 	Route::match(['get', 'post'], '/applicant_management/edit/{id}/{selectedGroup?}', 'ApplicantManagementController@edit')->name('applicant_management_edit');
 	Route::match(['post'], '/applicant_management/add-note', 'ApplicantManagementController@addNote')->name('applicant_management_add_note');
 	Route::match(['get'], '/applicant_management/get-notes/{applicant_id}', 'ApplicantManagementController@getNotes')->name('applicant_management_get_notes');

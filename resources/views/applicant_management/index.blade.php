@@ -86,6 +86,7 @@
 							<th>{{trans('Intézte')}}</th>
 							<th>{{trans('LinkedIn')}}</th>
 							<th>{{trans('Önéletrajz')}}</th>
+							<th>{{trans('Törlés')}}</th>
 						</tr>
 						<tr>
 							<th></th>
@@ -115,6 +116,7 @@
 									@endforeach
 								</select>
 							</th>
+							<th></th>
 							<th></th>
 							<th></th>
 							<th></th>
@@ -164,6 +166,17 @@
 									<a href="{{url(route('applicant_management_edit', ['id' => $applicant->id, 'selectedGroup' => $selectedGroup]))}}">
 										<i class="fa @if($applicant->hasCv()) fa-edit @else fa-plus @endif"></i>
 									</a>
+								</td>
+								<td class="text-center">
+									<form method="post"
+									      class="delete-applicant"
+									      action="{{url(route('applicant_management_delete', ['selectedGroup' => $selectedGroup->id, 'id' => $applicant->id]))}}" >
+										{{ csrf_field() }}
+										{{ method_field('DELETE') }}
+										<button type="submit" class="btn btn-sm btn-danger">
+											<i class="fa fa-minus"></i>
+										</button>
+									</form>
 								</td>
 							</tr>
 						@endforeach

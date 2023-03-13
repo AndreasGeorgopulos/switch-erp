@@ -194,16 +194,17 @@ class ApplicantManagementController extends Controller
 	}
 
 	/**
-	 * @param $selectedGroup
+	 * @param int $selectedGroup
+	 * @param int $id
 	 * @return Application|RedirectResponse|Redirector
 	 * @throws Exception
 	 */
-	public function delete($selectedGroup = null)
+	public function delete($selectedGroup, $id)
 	{
-		$model = $this->findModel();
+		$model = $this->findModel($id);
 		$model->deleteCV();
 		$model->delete();
-		return redirect(route('index', [
+		return redirect(route('applicant_management_index', [
 			'selectedGroup' => $selectedGroup,
 		]));
 	}
