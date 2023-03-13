@@ -40,6 +40,7 @@ Route::group(['middleware' => ['acl', 'locale']], function () {
 	Route::match(['get'], '/sales_management', 'SalesManagementController@index')->name('sales_management_index');
 	Route::match(['post'], '/sales_management/add', 'SalesManagementController@add')->name('sales_management_add');
 	Route::match(['post'], '/sales_management/update', 'SalesManagementController@update')->name('sales_management_update');
+	Route::match(['delete'], '/sales_management/delete/{id}', 'SalesManagementController@delete')->name('sales_management_delete');
 	Route::match(['post'], '/sales_management/reorder', 'SalesManagementController@reorder')->name('sales_management_reorder');
 
 	// users

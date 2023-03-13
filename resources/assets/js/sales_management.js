@@ -112,6 +112,14 @@ if ($('#data-sales-table').length) {
 				e.preventDefault();
 				$this.selectRow($(this).parents('tr'));
 			});
+
+			this.table_data.find('form.delete-sale').off('submit');
+			this.table_data.find('form.delete-sale').on('submit', function (e) {
+				if (confirm('Biztos, hogy törölni akarja ezt a céget?')) {
+					return true;
+				}
+				return false;
+			});
 		},
 
 		selectRow: function (element) {

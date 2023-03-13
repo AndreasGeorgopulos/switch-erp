@@ -62,6 +62,7 @@
 							<th>{{trans('Utolsó kapcsolat')}}</th>
 							<th>{{trans('Weboldal')}}</th>
 							<th>{{trans('Intézte')}}</th>
+							<th>{{trans('Törlés')}}</th>
 						</tr>
 						<tr role="row">
 							<th></th>
@@ -149,6 +150,7 @@
 									@endforeach
 								</select>
 							</th>
+							<th></th>
 						</tr>
 					</thead>
 
@@ -235,6 +237,17 @@
 								       class="form-control input-sm"
 								       value="{{$model->monogram}}"
 								       data-value="{{$model->monogram}}" />
+							</td>
+							<td class="text-center">
+								<form method="post"
+								      class="delete-sale"
+								      action="{{url(route('sales_management_delete', ['id' => $model->id]))}}" >
+									{{ csrf_field() }}
+									{{ method_field('DELETE') }}
+									<button type="submit" class="btn btn-sm btn-danger">
+										<i class="fa fa-minus"></i>
+									</button>
+								</form>
 							</td>
 						</tr>
 					@endforeach

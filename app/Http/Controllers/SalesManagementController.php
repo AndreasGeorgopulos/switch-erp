@@ -114,6 +114,16 @@ class SalesManagementController extends Controller
 		return response()->json($result, 200);
 	}
 
+	public function delete($id)
+	{
+		if (!($model = Sale::where('id', $id)->first())) {
+			throw new Exception('The sale model not found. #' . $id);
+		}
+		$model->delete();
+
+		return redirect(route('sales_management_index'));
+	}
+
 	/**
 	 * @param Request $request
 	 * @return JsonResponse
