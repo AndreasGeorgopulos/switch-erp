@@ -104,7 +104,7 @@ class Company extends Model implements IModelRules, IModelDeletable
 		if ( !file_exists( $path . '/' . $this->contract_file ) ) {
 			throw new Exception( trans('A szerződés feltöltése sikertelen. Kérjük, ellenőrizze a file írási jogosultságokat!') );
 		}
-		chmod($path . '/' . $this->contract_file, 0775);
+		chmod($path . '/' . $this->contract_file, 0777);
 		$this->save();
 	}
 

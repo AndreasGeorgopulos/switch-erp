@@ -160,7 +160,7 @@ class Applicant extends Model implements IModelRules, IModelSortable
 		if ( !file_exists( $path . '/' . $this->cv_file ) ) {
 			throw new Exception( trans('Az önéletrajz feltöltése sikertelen. Kérjük, ellenőrizze a file írási jogosultságokat!') );
 		}
-		chmod($path . '/' . $this->cv_file, 0775);
+		chmod($path . '/' . $this->cv_file, 0777);
 		$this->save();
 	}
 
