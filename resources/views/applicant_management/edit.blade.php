@@ -158,7 +158,17 @@
 							<input type="file" class="form-control" name="cv_file" accept="application/pdf" />
 						</div>
 						@if($model->hasCV())
-							<iframe src="{{route('applicants_download_cv', ['id' => $model->id])}}" class="pdf_viewer" width="100%" height="1045"></iframe>
+							@php($cvUrl = url(route('applicants_download_cv', ['id' => $model->id])) . '?ts=' . time())
+							<div class="form-group">
+								<a href="{{$cvUrl}}" target="_blank">
+									{{$model->cv_file}}
+								</a>
+
+								<label class="pull-right">
+									<input type="checkbox" name="delete_cv_file" /> {{trans('Feltöltött file törlése')}}
+								</label>
+							</div>
+							<iframe src="{{$cvUrl}}" class="pdf_viewer" width="100%" height="1045"></iframe>
 						@endif
 					</div>
 				</div>

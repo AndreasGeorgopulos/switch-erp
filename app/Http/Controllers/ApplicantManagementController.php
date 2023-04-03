@@ -158,9 +158,13 @@ class ApplicantManagementController extends Controller
 			$this->setCompanies($model, $inputCompanies);
 			//$this->setGroups($model, $inputGroups);
 
-			if ( $file = $request->file('cv_file') ) {
+			if ( ( $file = $request->file('cv_file') ) || $request->get('delete_cv_file') ) {
+				$model->deleteCV();
 				try {
-					$model->uploadCV( $file );
+					$model->deleteCV();
+					if ( $file ) {
+						$model->uploadCV($file);
+					}
 				} catch ( Exception $exception ) {
 					return redirect( route( 'applicant_management_edit', ['id' => $id, 'selectedGroup' => $selectedGroup] ) )
 						->withErrors( $exception->getMessage() )
@@ -170,10 +174,6 @@ class ApplicantManagementController extends Controller
 							trans( $exception->getMessage() ),
 						] );
 				}
-
-			} elseif ( $request->get('delete_cv_file') ) {
-				$model->deleteCV();
-
 			}
 
 			return redirect( route( 'applicant_management_edit', ['id' => $model->id, 'selectedGroup' => $selectedGroup] ) )
