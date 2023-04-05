@@ -335,19 +335,18 @@ class Applicant extends Model implements IModelRules, IModelSortable
 		];
 	}
 
-	public static function getNameDropdownOptions($selectedGroupId)
+	public static function getFieldDropdownOptions($selectedGroupId, $field)
 	{
-		return static::select(['id', 'name'])->join('applicant_applicant_group', 'applicant_applicant_group.applicant_id', '=', 'applicants.id', 'inner')->where(function ($q) use($selectedGroupId) {
-			$q->where('is_active', true);
-			$q->where('applicant_applicant_group.applicant_group_id', '=', $selectedGroupId);
-		})->orderBy('name', 'asc')->get()->toArray();
-
-		/*return static::with('groups')->where(function ($q) use($selectedGroupId) {
-			$q->where('is_active', true);
-			//$q;
-		})->whereHas('groups', function ($q) use($selectedGroupId) {
-			$q->where('applicant_groups.id', '=', $selectedGroupId);
-		})->orderBy('name', 'asc')->get()->toArray();*/
+		return static::select(['id', $field])
+			->join('applicant_applicant_group', 'applicant_applicant_group.applicant_id', '=', 'applicants.id', 'inner')
+			->where(function ($q) use($selectedGroupId, $field) {
+				$q->where('is_active', true);
+				$q->where('applicant_applicant_group.applicant_group_id', '=', $selectedGroupId);
+				$q->where($field, '<>', '');
+				$q->whereNotNull($field);
+			})
+			->groupBy($field)
+			->orderBy($field, 'asc')->get()->toArray();
 	}
 
 	/**

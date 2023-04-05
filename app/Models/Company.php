@@ -181,6 +181,9 @@ class Company extends Model implements IModelRules, IModelDeletable
 		$models = static::select(['id', 'name'])
 			->where(function ($q) use($onlyHasJobPositions) {
 				$q->where('is_active', 1);
+				if ($onlyHasJobPositions) {
+					$q->whereHas('job_positions');
+				}
 			})
 			->orderBy('name', 'asc')
 			->get()

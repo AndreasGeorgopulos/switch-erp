@@ -7,7 +7,7 @@ if ($('#data-applicant-table').length) {
 		button_cancel: null,
 		button_scroll_left: null,
 		button_scroll_right: null,
-		scroll_step: 700,
+		scroll_step: 800,
 		button_reorder_save: null,
 		button_reorder_cancel: null,
 

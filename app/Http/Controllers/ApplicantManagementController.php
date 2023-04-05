@@ -40,6 +40,9 @@ class ApplicantManagementController extends Controller
 		    'experience_year' => intval($request->get('experience_year')) ?: '',
 		    'in_english' => intval($request->get('in_english')) ?: '',
 		    'skill' => intval($request->get('skill')) ?: '',
+		    'company' => intval($request->get('company')) ?: null,
+		    'email' => $request->get('email') ?: '',
+		    'monogram' => $request->get('monogram') ?: '',
 	    ];
 
 	    $applicantGroups = ApplicantGroup::select(['id', 'name'])
@@ -67,11 +70,21 @@ class ApplicantManagementController extends Controller
 				if (!empty($getParams['in_english'])) {
 					$q->where('in_english', '>=', $getParams['in_english']);
 				}
+				if (!empty($getParams['email'])) {
+					$q->where('email', '=', $getParams['email']);
+				}
+				if (!empty($getParams['monogram'])) {
+					$q->where('monogram', '=', $getParams['monogram']);
+				}
 			});
 
 			if (!empty($getParams['skill'])) {
 				$query->join('applicant_skill', 'applicant_skill.applicant_id', '=', 'applicants.id', 'inner', false);
 				$query->where('applicant_skill.skill_id', '=', $getParams['skill']);
+			}
+
+			if (!empty($getParams['company'])) {
+
 			}
 
 			$applicants = $query->orderBy('sort', 'desc')->get();

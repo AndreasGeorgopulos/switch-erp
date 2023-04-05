@@ -93,7 +93,7 @@
 							<th>
 								<select name="applicant" class="form-control search-input select2" style="width: 150px;">
 									<option></option>
-									@foreach(\App\Models\Applicant::getNameDropdownOptions($selectedGroup->id) as $item)
+									@foreach(\App\Models\Applicant::getFieldDropdownOptions($selectedGroup->id, 'name') as $item)
 										<option value="{{$item['id']}}" @if($item['id'] == $getParams['applicant']) selected="selected" @endif>{{$item['name']}}</option>
 									@endforeach
 								</select>
@@ -116,12 +116,33 @@
 									@endforeach
 								</select>
 							</th>
+							<th>
+								<select name="company" class="form-control search-input select2" style="width: 210px;">
+									<option></option>
+									@foreach(\App\Models\Company::getDropdownItems($getParams['company'], true) as $item)
+										<option value="{{$item['value']}}" @if($item['selected']) selected="selected" @endif>{{$item['title']}}</option>
+									@endforeach
+								</select>
+							</th>
 							<th></th>
 							<th></th>
+							<th>
+								<select name="email" class="form-control search-input select2" style="width: 150px;">
+									<option></option>
+									@foreach(\App\Models\Applicant::getFieldDropdownOptions($selectedGroup->id, 'email') as $item)
+										<option value="{{$item['email']}}" @if($item['email'] == $getParams['email']) selected="selected" @endif>{{$item['email']}}</option>
+									@endforeach
+								</select>
+							</th>
 							<th></th>
-							<th></th>
-							<th></th>
-							<th></th>
+							<th>
+								<select name="monogram" class="form-control search-input select2" style="width: 150px;">
+									<option></option>
+									@foreach(\App\Models\Applicant::getFieldDropdownOptions($selectedGroup->id, 'monogram') as $item)
+										<option value="{{$item['monogram']}}" @if($item['monogram'] === $getParams['monogram']) selected="selected" @endif>{{$item['monogram']}}</option>
+									@endforeach
+								</select>
+							</th>
 							<th></th>
 							<th></th>
 							<th></th>
