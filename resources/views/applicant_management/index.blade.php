@@ -127,7 +127,7 @@
 							<th></th>
 							<th></th>
 							<th>
-								<select name="email" class="form-control search-input select2" style="width: 150px;">
+								<select name="email" class="form-control search-input select2" style="width: 210px;">
 									<option></option>
 									@foreach(\App\Models\Applicant::getFieldDropdownOptions($selectedGroup->id, 'email') as $item)
 										<option value="{{$item['email']}}" @if($item['email'] == $getParams['email']) selected="selected" @endif>{{$item['email']}}</option>
