@@ -44,6 +44,7 @@
 						<th class="status-col">{{trans('Státusz')}}</th>
 						<th class="">{{trans('Információ')}}</th>
 						<th class="date-col">{{trans('Interjú időpont')}}</th>
+						<th class="date-col">{{trans('Utolsó kapcsolat')}}</th>
 						<th class="text-center">{{trans('Bérigény')}}</th>
 						<th class="text-center">{{trans('Önéletrajz')}}</th>
 					</tr>
@@ -68,6 +69,9 @@
 							</td>
 							<td>
 								<input type="datetime-local" name="interview_time" value="{{$m->interview_time}}" class="form-control input-sm input-data" />
+							</td>
+							<td>
+								<input type="date" name="last_contact_date" value="{{$m->applicant->last_contact_date}}" max="2999-12-31" class="form-control input-sm input-data" />
 							</td>
 							<td class="text-center">
 								@if(is_numeric($m->applicant->salary)){{number_format($m->applicant->salary, 0, '', '.')}} Ft

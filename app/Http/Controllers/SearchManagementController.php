@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\ApplicantCompany;
-use App\Models\ApplicantJobPosition;
 use App\Models\Company;
 use App\Models\JobPosition;
 use Exception;
@@ -43,18 +42,21 @@ class SearchManagementController extends Controller
 				throw new Exception('Model not found');
 			}
 
-			$model->status = $request->get('status');
-			$model->information = $request->get('information');
-			$model->interview_time = $request->get('interview_time');
-			if (!empty($request->get('send_date'))) {
-				$model->send_date = $request->get('send_date');
+			$updateFields = [];
+			foreach(['status', 'information', 'interview_time', 'send_date'] as $field) {
+				if ($field === 'send_date' && empty($request->get($field))) {
+					continue;
+				}
+				$updateFields[$field] = $request->get($field);
 			}
 
-			if (!$model->save()) {
-				throw new Exception(implode(';', $model->errors));
-			}
+			$model->update($updateFields);
 
-			return response()->json(['success' => true], 200);
+			$model->applicant->update([
+				'last_contact_date' => $request->get('last_contact_date'),
+			]);
+
+			return response()->json(['success' => true]);
 
 		} catch (Exception $exception) {
 			return response()->json(['success' => false, 'error' => $exception->getMessage()], 500);

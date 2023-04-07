@@ -43,6 +43,7 @@ if ($('#search-table').length) {
 				send_date: tr.find('input[name="send_date"]').val(),
 				information: tr.find('textarea[name="information"]').val(),
 				interview_time: tr.find('input[name="interview_time"]').val(),
+				last_contact_date: tr.find('input[name="last_contact_date"]').val(),
 			};
 
 			element.prop('disabled', true);
