@@ -3,13 +3,13 @@
 <ul class="nav nav-tabs" id="management-tabs">
 	@if(hasRole('database_module'))
 		<li class="nav-item @if(\Illuminate\Support\Str::startsWith($routeName, 'applicant_management')) active @endif">
-			<a href="{{url( route( 'applicant_management_index' ) )}}" class="nav-link">{{trans('Adatbázis')}}</a>
+			<a href="{{url( route( 'applicant_management_index' ) )}}" class="nav-link">{{trans('Jelöltek')}}</a>
 		</li>
 	@endif
 
 	@if(hasRole('search_module'))
 		<li class="nav-item @if(\Illuminate\Support\Str::startsWith($routeName, 'search_management')) active @endif">
-			<a href="{{url( route( 'search_management_index' ) )}}" class="nav-link">{{trans('Keresés')}}</a>
+			<a href="{{url( route( 'search_management_index' ) )}}" class="nav-link">{{trans('Pozíciók')}}</a>
 		</li>
 	@endif
 
