@@ -1,9 +1,14 @@
 if ($('#search-table').length) {
 	const SearchManagement = {
 		table: null,
+		button_scroll_left: null,
+		button_scroll_right: null,
+		scroll_step: 800,
 
 		init: function () {
 			this.table = $('#search-table');
+			this.button_scroll_left = $('.search-management .foot-toolbar .btn-scroll-left');
+			this.button_scroll_right = $('.search-management .foot-toolbar .btn-scroll-right');
 			this.eventHandlers();
 		},
 
@@ -32,6 +37,18 @@ if ($('#search-table').length) {
 				e.preventDefault();
 				$this.sendData($(this));
 			});
+
+			$this.button_scroll_left.off('click');
+			$this.button_scroll_left.on('click', function (e) {
+				e.preventDefault();
+				$this.scrollHorizontal($this.scroll_step * -1);
+			});
+
+			$this.button_scroll_right.off('click');
+			$this.button_scroll_right.on('click', function (e) {
+				e.preventDefault();
+				$this.scrollHorizontal($this.scroll_step);
+			});
 		},
 
 		sendData: function (element) {
@@ -51,7 +68,13 @@ if ($('#search-table').length) {
 			$.post('/search_management/save_data', data, function () {
 				element.prop('disabled', false);
 			});
-		}
+		},
+
+		scrollHorizontal: function (scrollStep) {
+			const table_area = $('.search-management .table-area');
+			let scrollLeft = table_area.scrollLeft() + scrollStep;
+			table_area.animate({ scrollLeft: scrollLeft }, 800);
+		},
 	};
 
 	SearchManagement.init();

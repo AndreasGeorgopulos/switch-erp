@@ -58,7 +58,8 @@ iframe.cv_viewer {
 }
 
 .applicant-management,
-.sales-management {
+.sales-management,
+.search-management {
   h1.applicant-group-name {
     font-size: 30px;
     padding: 0px 0px 0px 0px !important;
@@ -87,11 +88,11 @@ iframe.cv_viewer {
       color: #ffffff;
     }
 
-    .w-150 { width: 150px; }
-    .w-200 { width: 200px; }
-    .w-300 { width: 300px; }
-    .w-400 { width: 400px; }
-    .w-500 { width: 500px; }
+    .w-150 { width: 150px !important; }
+    .w-200 { width: 200px !important;; }
+    .w-300 { width: 300px !important;; }
+    .w-400 { width: 400px !important;; }
+    .w-500 { width: 500px !important;; }
   }
 
   .foot-toolbar {
