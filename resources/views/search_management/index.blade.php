@@ -53,7 +53,7 @@
 
 						<tbody>
 						@foreach($models as $index => $m)
-							<tr data-applicant="{{$m->applicant_id}}" data-job="{{$m->job_position_id}}">
+							<tr data-applicant="{{$m->applicant_id}}" data-job="{{$m->job_position_id}}" class="status-{{$m->status}}">
 								<td>
 									<span class="w-200" style="display: block;">{{$m->applicant->name}}</span>
 								</td>

@@ -67,6 +67,11 @@ if ($('#search-table').length) {
 
 			$.post('/search_management/save_data', data, function () {
 				element.prop('disabled', false);
+
+				for(let i = 1; i <= 7; i++) {
+					tr.removeClass('status-' + i);
+				}
+				tr.addClass('status-' + tr.find('select[name="status"] option:selected').val());
 			});
 		},
 

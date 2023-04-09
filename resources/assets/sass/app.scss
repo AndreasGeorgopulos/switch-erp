@@ -93,6 +93,11 @@ iframe.cv_viewer {
     .w-300 { width: 300px !important;; }
     .w-400 { width: 400px !important;; }
     .w-500 { width: 500px !important;; }
+
+    tr.status-2,
+    tr.status-3 {
+      opacity: 0.3;
+    }
   }
 
   .foot-toolbar {
