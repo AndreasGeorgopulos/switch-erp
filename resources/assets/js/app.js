@@ -18,6 +18,7 @@ require('./applicant_management_notes');
 require('./contract_management');
 require('./search_management');
 require('./sales_management');
+require('./work_management');
 
 /**
  * Törlés gombok click esemény kezelése

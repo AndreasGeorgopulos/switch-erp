@@ -30,6 +30,10 @@ Route::group(['middleware' => ['acl', 'locale']], function () {
 	Route::match(['get'], '/search_management/{company?}/{job?}', 'SearchManagementController@index')->name('search_management_index');
 	Route::match(['post'], '/search_management/save_data', 'SearchManagementController@saveData')->name('search_management_save_data');
 
+	// Work management
+	Route::match(['get'], '/work_management', 'WorkManagementController@index')->name('work_management_index');
+	Route::match(['post'], '/work_management/save_data', 'WorkManagementController@saveData')->name('work_management_save_data');
+
 	// Contract management
 	Route::match(['get'], '/contract_management', 'ContractManagementController@index')->name('contract_management_index');
 	Route::match(['post'], '/contract_management/save_rows', 'ContractManagementController@saveRows')->name('contract_management_save_rows');

@@ -19,7 +19,7 @@ class SearchManagementController extends Controller
 		$models = !empty($selectedJobPosition) ? ApplicantCompany::getSearchModels($selectedJobPosition->id) : null;
 
 	    return view('search_management.index', [
-		    'site_title' => trans('Keresés'),
+		    'site_title' => trans('Pozíciók'),
 		    'site_subtitle' => 'Version 3.0',
 		    'breadcrumb' => [],
 		    'models' => $models,

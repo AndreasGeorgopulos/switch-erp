@@ -16,7 +16,13 @@ class ApplicantCompany extends Model
 
 	public $incrementing = false;
 
-	protected $fillable = ['applicant_id', 'job_position_id', 'status', 'send_date', 'information', 'interview_time'];
+	protected $fillable = ['applicant_id', 'job_position_id', 'status', 'send_date', 'information', 'interview_time', 'salary', 'work_begin_date', 'follow_up', 'monogram'];
+
+	public function save(array $options = [])
+	{
+		$this->salary = str_replace('.', '', $this->salary);
+		return parent::save($options);
+	}
 
 	/**
 	 * @return HasOne
@@ -100,22 +106,20 @@ class ApplicantCompany extends Model
 	 */
 	public static function getSearchModels($job_position_id)
 	{
-		$applicants = [];
-		foreach (static::where('job_position_id', $job_position_id)->get() as $model) {
-			$companyModel = $model->job_position->company;
-			/*$key = $model->applicant_id . '_' . $model->job_position_id;
-			if (!$companyModel->is_active || isset($applicants[$key])) {
-				continue;
-			}*/
-
-			$applicants[/*$key*/] = $model;
-		}
-
-		return collect($applicants)->sortBy(function ($item) {
+		return collect(static::where('job_position_id', $job_position_id)->get())->sortBy(function ($item) {
 			return $item->applicant->name;
 		}, SORT_REGULAR, false);
 	}
 
+	/**
+	 * @return Collection
+	 */
+	public static function getWorkModels()
+	{
+		return collect(static::where('status', 7)->get())->sortBy(function ($item) {
+			return $item->applicant->name;
+		}, SORT_REGULAR, false);
+	}
 
 	/**
 	 * Set the keys for a save update query.
