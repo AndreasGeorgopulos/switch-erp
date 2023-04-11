@@ -6,6 +6,7 @@ use App\Models\ApplicantCompany;
 use App\Models\Company;
 use App\Models\JobPosition;
 use Exception;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
 class SearchManagementController extends Controller
@@ -17,6 +18,7 @@ class SearchManagementController extends Controller
 		$selectedJobPosition = $job !== null ? JobPosition::where('id', $job)->first() : null;
 	    $job_positions = $selectedCompany !== null ? ApplicantCompany::getJobPositions($selectedCompany->id) : null;
 		$models = !empty($selectedJobPosition) ? ApplicantCompany::getSearchModels($selectedJobPosition->id) : null;
+		$counter = ApplicantCompany::getCouters($job);
 
 	    return view('search_management.index', [
 		    'site_title' => trans('Pozíciók'),
@@ -27,6 +29,7 @@ class SearchManagementController extends Controller
 		    'job_positions' => $job_positions,
 		    'selectedCompany' => $selectedCompany,
 		    'selectedJobPosition' => $selectedJobPosition,
+		    'counter' => $counter,
 	    ]);
     }
 
@@ -62,5 +65,15 @@ class SearchManagementController extends Controller
 			return response()->json(['success' => false, 'error' => $exception->getMessage()], 500);
 
 		}
+	}
+
+	/**
+	 * @return JsonResponse
+	 */
+	public function getCounters($job = null)
+	{
+		return response()->json([
+			'counters' => ApplicantCompany::getCouters($job),
+		]);
 	}
 }

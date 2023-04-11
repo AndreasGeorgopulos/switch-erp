@@ -122,6 +122,34 @@ class ApplicantCompany extends Model
 	}
 
 	/**
+	 * @param int|null $job_position_id
+	 * @return array
+	 */
+	public static function getCouters($job_position_id = null)
+	{
+		$result = [];
+		foreach (['all', 'active', 'inactive', 'ready'] as $key) {
+			$result[$key] = static::where(function ($q) use($job_position_id, $key) {
+				if ($key === 'all') {
+					$q->where('status', '>=', 1);
+				} elseif ($key === 'active') {
+					$q->whereNotIn('status', [2, 3, 7]);
+				} elseif ($key === 'inactive') {
+					$q->whereIn('status', [2, 3]);
+				} elseif ($key === 'ready') {
+					$q->whereIn('status', [7]);
+				}
+
+				if ($job_position_id !== null) {
+					$q->where('job_position_id', $job_position_id);
+				}
+			})->count();
+		}
+
+		return $result;
+	}
+
+	/**
 	 * Set the keys for a save update query.
 	 *
 	 * @param  Builder  $query

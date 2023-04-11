@@ -52,6 +52,7 @@ if ($('#search-table').length) {
 		},
 
 		sendData: function (element) {
+			const $this = this;
 			const tr = element.parents().closest('tr');
 			const data = {
 				applicant_id: tr.data('applicant'),
@@ -64,7 +65,6 @@ if ($('#search-table').length) {
 			};
 
 			element.prop('disabled', true);
-
 			$.post('/search_management/save_data', data, function () {
 				element.prop('disabled', false);
 
@@ -72,6 +72,8 @@ if ($('#search-table').length) {
 					tr.removeClass('status-' + i);
 				}
 				tr.addClass('status-' + tr.find('select[name="status"] option:selected').val());
+
+				$this.loadApplicantCounters(data.job_position_id);
 			});
 		},
 
@@ -80,6 +82,14 @@ if ($('#search-table').length) {
 			let scrollLeft = table_area.scrollLeft() + scrollStep;
 			table_area.animate({ scrollLeft: scrollLeft }, 800);
 		},
+
+		loadApplicantCounters: function (job_position_id) {
+			const url = '/search_management/get_counters' + (job_position_id ? ('/' + job_position_id) : '');
+			$.get(url, function (response) {
+				const htmlStr = '<div class="counter"><span class="all">' + response.counters.all + '</span>/<span class="active">' + response.counters.active + '</span> <span class="ready">(' + response.counters.ready + ')</span>' + '</div>';
+				$('.applicant-counter').html(htmlStr);
+			});
+		}
 	};
 
 	SearchManagement.init();

@@ -36,7 +36,9 @@
 			<div class="col-sm-8 table-area">
 				@if(!empty($models))
 					{{csrf_field()}}
-					<h2>{{trans('Jelöltek')}}</h2>
+
+					<h2>{{trans('Jelöltek')}} @include('search_management._counter')</h2>
+
 					<table class="table table-bordered table-striped" id="search-table">
 						<thead>
 						<tr role="row">

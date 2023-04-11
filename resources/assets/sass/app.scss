@@ -71,6 +71,22 @@ iframe.cv_viewer {
     overflow-x: hidden !important;
     margin-bottom: 50px;
 
+    h2 {
+      .applicant-counter {
+        font-size: 16px !important;
+        display: inline-block;
+        margin-bottom: 5px !important;
+        margin-left: 20px !important;
+        padding-left: 10px !important;
+        padding-right: 10px !important;
+        padding-bottom: 5px !important;
+
+        .ready {
+          color: greenyellow;
+        }
+      }
+    }
+
     .onDragClass td {
       border: solid 1px #0000F0 !important;
       background-color: #cccccc !important;
