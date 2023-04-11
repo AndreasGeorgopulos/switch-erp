@@ -37,7 +37,7 @@
 				@if(!empty($models))
 					{{csrf_field()}}
 
-					<h2>{{trans('Jelöltek')}} @include('search_management._counter')</h2>
+					<h2>{{trans('Jelöltek')}} @include('search_management._counter') <div class="active-applicants"><label><input type="checkbox" class="ch-active-applicants" /> {{trans('Aktív jelöltek')}}</label></div></h2>
 
 					<table class="table table-bordered table-striped" id="search-table">
 						<thead>
@@ -60,7 +60,7 @@
 									<span class="w-200" style="display: block;">{{$m->applicant->name}}</span>
 								</td>
 								<td>
-									<input type="date" max="2999-12-31" name="send_date" value="{{$m->send_date}}" class="form-control input-sm input-data w-100" />
+									<input type="date" max="2999-12-31" name="send_date" value="{{$m->send_date}}" class="form-control input-sm input-data w-150" />
 								</td>
 								<td>
 									<select name="status" class="form-control input-sm input-data w-150">

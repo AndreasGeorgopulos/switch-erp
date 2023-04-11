@@ -85,6 +85,16 @@ iframe.cv_viewer {
           color: greenyellow;
         }
       }
+
+      .active-applicants {
+        display: inline-block;
+        font-size: 16px !important;
+        margin-left: 30px !important;
+
+        label {
+          font-weight: normal !important;
+        }
+      }
     }
 
     .onDragClass td {

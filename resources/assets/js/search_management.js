@@ -4,11 +4,13 @@ if ($('#search-table').length) {
 		button_scroll_left: null,
 		button_scroll_right: null,
 		scroll_step: 800,
+		active_checkbox: null,
 
 		init: function () {
 			this.table = $('#search-table');
 			this.button_scroll_left = $('.search-management .foot-toolbar .btn-scroll-left');
 			this.button_scroll_right = $('.search-management .foot-toolbar .btn-scroll-right');
+			this.active_checkbox = $('.search-management .active-applicants input[type="checkbox"]');
 			this.eventHandlers();
 		},
 
@@ -48,6 +50,15 @@ if ($('#search-table').length) {
 			$this.button_scroll_right.on('click', function (e) {
 				e.preventDefault();
 				$this.scrollHorizontal($this.scroll_step);
+			});
+
+			$this.active_checkbox.off('change');
+			$this.active_checkbox.on('change', function (e) {
+				if ($(this).prop('checked')) {
+					$this.showOnlyActiveApplicants();
+				} else {
+					$this.showAllApplicants();
+				}
 			});
 		},
 
@@ -89,7 +100,17 @@ if ($('#search-table').length) {
 				const htmlStr = '<div class="counter"><span class="all">' + response.counters.all + '</span>/<span class="active">' + response.counters.active + '</span> <span class="ready">(' + response.counters.ready + ')</span>' + '</div>';
 				$('.applicant-counter').html(htmlStr);
 			});
-		}
+		},
+
+		showOnlyActiveApplicants: function () {
+			const selectors = 'tr.status-2, tr.status-3, tr.status-7';
+			this.table.find(selectors).hide();
+		},
+
+		showAllApplicants: function () {
+			const selectors = 'tr';
+			this.table.find(selectors).show();
+		},
 	};
 
 	SearchManagement.init();
