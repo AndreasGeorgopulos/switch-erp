@@ -309,13 +309,14 @@ class ApplicantSeeder extends Seeder
 			'group_id' => 20,
 			'filename' => '20_hegesztomernokok.csv',
 			'columnIndexes' => [
-				'name' => 0,
+				'name' => 2,
 				'phone' => 7,
-				'email' => 6,
-				'experience_year' => 1,
-				'description' => 4,
-				'last_contact_date' => 2,
-				'companies' => 3,
+				'email' => 8,
+				'linked_in' => 9,
+				'description' => 5,
+				'last_contact_date' => 0,
+				'last_callback_date' => 1,
+				'companies' => 4,
 			],
 		],
 		[
@@ -856,6 +857,10 @@ class ApplicantSeeder extends Seeder
 		    if (!($fp = fopen(database_path('seeds/data/applicants/') . $data['filename'], 'r'))) {
 				continue;
 		    }
+
+			if ($data['group_id'] !== 20) {
+				continue;
+			}
 
 		    $i = 0;
 		    while($row = fgetcsv($fp, 0, ';')) {
