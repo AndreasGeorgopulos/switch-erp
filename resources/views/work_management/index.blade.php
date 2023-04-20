@@ -16,7 +16,7 @@
 							<th class="">{{trans('Név')}}</th>
 							<th class="">{{trans('Cég')}}</th>
 							<th class="">{{trans('Pozíció')}}</th>
-							<th class="">{{trans('Fizetés')}}</th>
+							<th class="">{{trans('Fizetés')}} ({{trans('bruttó')}})</th>
 							<th class="">{{trans('Kezdés dátuma')}}</th>
 							<th class="">{{trans('Utánkövetés')}}</th>
 							<th class="">{{trans('Elhelyezte')}}</th>

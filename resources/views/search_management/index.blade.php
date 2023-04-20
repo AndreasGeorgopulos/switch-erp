@@ -48,7 +48,7 @@
 							<th class="w-500">{{trans('Információ')}}</th>
 							<th class="w-300 date-col">{{trans('Interjú időpont')}}</th>
 							<th class="w-300 date-col">{{trans('Utolsó kapcsolat')}}</th>
-							<th class="w-200 text-center">{{trans('Bérigény')}}</th>
+							<th class="w-200 text-center">{{trans('Fizetés')}} ({{trans('nettó')}})</th>
 							<th class="text-center">{{trans('Önéletrajz')}}</th>
 						</tr>
 						</thead>
