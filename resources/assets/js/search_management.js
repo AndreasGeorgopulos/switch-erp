@@ -121,11 +121,14 @@ if ($('#search-table').length) {
 
 			$.each([1, 4, 5, 6, 7, 2, 3], function (index, status) {
 				$this.table.find('tr.status-' + status).each(function () {
-					//rows.push($(this));
 					$(this).remove();
 					$this.table.find('tbody').append($(this));
 				});
 			});
+
+			if ($this.active_checkbox.prop('checked') === true) {
+				$this.showOnlyActiveApplicants();
+			}
 		}
 	};
 
