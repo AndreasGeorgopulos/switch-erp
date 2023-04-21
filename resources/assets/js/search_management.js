@@ -11,6 +11,7 @@ if ($('#search-table').length) {
 			this.button_scroll_left = $('.search-management .foot-toolbar .btn-scroll-left');
 			this.button_scroll_right = $('.search-management .foot-toolbar .btn-scroll-right');
 			this.active_checkbox = $('.search-management .active-applicants input[type="checkbox"]');
+			this.reOrderTable();
 			this.eventHandlers();
 		},
 
@@ -85,6 +86,9 @@ if ($('#search-table').length) {
 				tr.addClass('status-' + tr.find('select[name="status"] option:selected').val());
 
 				$this.loadApplicantCounters(data.job_position_id);
+
+				$this.reOrderTable();
+				$this.eventHandlers();
 			});
 		},
 
@@ -111,6 +115,18 @@ if ($('#search-table').length) {
 			const selectors = 'tr';
 			this.table.find(selectors).show();
 		},
+
+		reOrderTable: function () {
+			const $this = this;
+
+			$.each([1, 4, 5, 6, 7, 2, 3], function (index, status) {
+				$this.table.find('tr.status-' + status).each(function () {
+					//rows.push($(this));
+					$(this).remove();
+					$this.table.find('tbody').append($(this));
+				});
+			});
+		}
 	};
 
 	SearchManagement.init();
