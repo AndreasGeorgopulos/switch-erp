@@ -31,7 +31,7 @@ use Illuminate\Http\UploadedFile;
  * @property string $graduation
  * @property int $salary
  * @property int $notice_period
- * @property bool $home_office
+ * @property int $home_office
  * @property string $note
  * @property string $report
  * @property string $cv_file
@@ -72,7 +72,6 @@ class Applicant extends Model implements IModelRules, IModelSortable
 	];
 
 	protected $casts = [
-		'home_office' => 'boolean',
 		'is_subcontractor' => 'boolean',
 		'is_active' => 'boolean',
 	];
@@ -228,7 +227,10 @@ class Applicant extends Model implements IModelRules, IModelSortable
 				'boolean',
 			],
 			'home_office' => [
-				'boolean',
+				'integer',
+				'min:0',
+				'max:5',
+				'nullable',
 			],
 			'is_active' => [
 				'boolean',

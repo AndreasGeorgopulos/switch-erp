@@ -79,7 +79,12 @@
 				</div>
 				<div class="row">
 					<div class="col-sm-5">{{trans('Home office igény')}}</div>
-					<div class="col-sm-7">{{$model->home_office ? trans('Igen') : trans('Nem')}}</div>
+					<div class="col-sm-7">
+						@if($model->home_office === null)-
+						@elseif($model->home_office > 0){{$model->home_office}} {{trans('nap hetente')}}
+						@else{{trans('Nincs')}}
+						@endif
+					</div>
 				</div>
 				<div class="row">
 					<div class="col-sm-5">{{trans('Intézte')}}</div>

@@ -43,6 +43,7 @@ class ApplicantManagementController extends Controller
 		    'company' => intval($request->get('company')) ?: null,
 		    'email' => $request->get('email') ?: '',
 		    'monogram' => $request->get('monogram') ?: '',
+		    'ho' => $request->get('ho', null),
 	    ];
 
 	    $applicantGroups = ApplicantGroup::select(['id', 'name'])
@@ -75,6 +76,9 @@ class ApplicantManagementController extends Controller
 				}
 				if (!empty($getParams['monogram'])) {
 					$q->where('monogram', '=', $getParams['monogram']);
+				}
+				if (is_numeric($getParams['ho'])) {
+					$q->where('home_office', '=', $getParams['ho']);
 				}
 			});
 

@@ -103,6 +103,17 @@
 								</div>
 							</div>
 
+							<div class="col-md-3">
+								<div class="form-group">
+									<label>{{trans('HO')}} ({{trans('nap/hét')}})</label>
+									<select name="home_office" class="form-control select2">
+										@for($i = 0; $i <= 5; $i++)
+											<option value="{{$i}}" @if(old('home_office', $model->home_office) === $i) selected="selected" @endif>{{$i}}</option>
+										@endfor
+									</select>
+								</div>
+							</div>
+
 							<div class="col-md-12">
 								<div class="form-group">
 									<label>{{trans('Technológiák, készségek')}}</label>

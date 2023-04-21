@@ -80,6 +80,7 @@
 							<th>{{trans('Technológia')}}</th>
 							<th>{{trans('Cég')}}</th>
 							<th>{{trans('Információ')}}</th>
+							<th>{{trans('HO')}}</th>
 							<th>{{trans('Utolsó kapcsolat')}}</th>
 							<th>{{trans('E-mail')}}</th>
 							<th>{{trans('Telefon')}}</th>
@@ -125,6 +126,14 @@
 								</select>
 							</th>
 							<th></th>
+							<th>
+								<select name="ho" class="form-control search-input select2" style="width: 60px;">
+									<option></option>
+									@for($i = 0; $i <= 5; $i++)
+										<option value="{{$i}}" @if(is_numeric($getParams['ho']) && intval($getParams['ho']) === $i) selected="selected" @endif>{{$i}}</option>
+									@endfor
+								</select>
+							</th>
 							<th></th>
 							<th>
 								<select name="email" class="form-control search-input select2" style="width: 210px;">
@@ -172,9 +181,10 @@
 								<td>{{$applicant->skills->pluck('name')->implode(', ')}}</td>
 								<td>{{$companies}}</td>
 								<td>{{$applicant->description}}</td>
-								<td>{{str_replace('-', '.', $applicant->last_contact_date)}}</td>
+								<td class="text-center">{{$applicant->home_office}}</td>
+								<td class="w-150 display-block">{{str_replace('-', '.', $applicant->last_contact_date)}}</td>
 								<td>{{$applicant->email}}</td>
-								<td>{{$applicant->phone}}</td>
+								<td class="w-100 display-block">{{$applicant->phone}}</td>
 								<td>{{$applicant->monogram}}</td>
 								<td class="text-center">
 									@if(!empty($applicant->linked_in))

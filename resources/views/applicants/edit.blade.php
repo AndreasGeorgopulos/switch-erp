@@ -169,10 +169,11 @@
 						</div>
 						<div class="col-md-12">
 							<div class="form-group">
-								<label>{{trans('Home office igény')}}*</label>
+								<label>{{trans('Home office igény')}}* ({{trans('nap/hét')}})</label>
 								<select name="home_office" class="form-control select2">
-									<option value="1" @if(old('home_office', $model->home_office)) selected="selected" @endif>{{trans('Igen')}}</option>
-									<option value="0" @if(!old('home_office', $model->home_office)) selected="selected" @endif>{{trans('Nem')}}</option>
+									@for($i = 0; $i <= 5; $i++)
+										<option value="{{$i}}" @if(old('home_office', $model->home_office) === $i) selected="selected" @endif>{{$i}}</option>
+									@endfor
 								</select>
 							</div>
 						</div>
