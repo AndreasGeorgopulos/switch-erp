@@ -7,7 +7,7 @@
 @section('content')
 	<div class="search-management">
 		<div class="row">
-			<div class="col-sm-2">
+			<div class="col-1-5">
 				<h2>{{trans('Cégek')}}</h2>
 				<ul class="nav" id="applicant-skill-sidebar">
 					@foreach($companies as $company)
@@ -33,7 +33,7 @@
 					</ul>
 				@endif
 			</div>
-			<div class="col-sm-8 table-area">
+			<div class="col-8-5 table-area">
 				@if(!empty($models))
 					{{csrf_field()}}
 

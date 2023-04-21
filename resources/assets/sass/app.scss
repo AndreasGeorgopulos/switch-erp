@@ -67,6 +67,26 @@ iframe.cv_viewer {
     margin: 0px 0px 15px 0px !important;
   }
 
+  .extra-col {
+    position: relative;
+    width: 100%;
+    padding-right: 15px;
+    padding-left: 15px;
+    float: left;
+  }
+
+  .col-1-5 {
+    @extend .extra-col;
+    flex: 0 0 12.5%;
+    max-width: 12.5%;
+  }
+
+  .col-8-5 {
+    @extend .extra-col;
+    flex: 0 0 70.833333305%;
+    max-width: 70.833333305%;
+  }
+
   .table-area {
     overflow-x: hidden !important;
     margin-bottom: 50px;
