@@ -116,9 +116,7 @@ class ApplicantCompany extends Model
 	 */
 	public static function getWorkModels()
 	{
-		return collect(static::where('status', 7)->get())->sortBy(function ($item) {
-			return $item->applicant->name;
-		}, SORT_REGULAR, false);
+		return collect(static::where('status', 7)->orderBy('work_begin_date', 'asc')->get());
 	}
 
 	/**
