@@ -54,6 +54,7 @@ class ApplicantCompany extends Model
 			5 => ['value' => 5, 'title' => trans('2. Interjú'), 'selected' => (bool) ($selected === 5)],
 			6 => ['value' => 6, 'title' => trans('Ajánlatot kapott'), 'selected' => (bool) ($selected === 6)],
 			7 => ['value' => 7, 'title' => trans('Elhelyezve'), 'selected' => (bool) ($selected === 7)],
+			8 => ['value' => 8, 'title' => trans('Visszalépett'), 'selected' => (bool) ($selected === 8)],
 		];
 	}
 
@@ -107,7 +108,10 @@ class ApplicantCompany extends Model
 	public static function getSearchModels($job_position_id)
 	{
 		return collect(static::where('job_position_id', $job_position_id)->get())->sortBy(function ($item) {
-			return $item->applicant->name;
+			if (in_array($item->status, [1, 4, 5])) {
+				return $item->applicant->name;
+			}
+			return $item->applicant->last_contact_date;
 		}, SORT_REGULAR, false);
 	}
 

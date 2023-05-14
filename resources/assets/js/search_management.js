@@ -80,7 +80,7 @@ if ($('#search-table').length) {
 			$.post('/search_management/save_data', data, function () {
 				element.prop('disabled', false);
 
-				for(let i = 1; i <= 7; i++) {
+				for(let i = 1; i <= 8; i++) {
 					tr.removeClass('status-' + i);
 				}
 				tr.addClass('status-' + tr.find('select[name="status"] option:selected').val());
@@ -119,12 +119,32 @@ if ($('#search-table').length) {
 		reOrderTable: function () {
 			const $this = this;
 
-			$.each([1, 4, 5, 6, 7, 2, 3], function (index, status) {
+			let tempTable = $('<table>');
+
+			$.each([1, 4, 5, 6], function (index, status) {
 				$this.table.find('tr.status-' + status).each(function () {
 					$(this).remove();
-					$this.table.find('tbody').append($(this));
+					tempTable.append($(this));
 				});
 			});
+			tempTable.find('tr').sort(function(a, b) {
+				var tdA = $(a).find('td:eq(0)').text().toUpperCase();
+				var tdB = $(b).find('td:eq(0)').text().toUpperCase();
+				return tdA.localeCompare(tdB);
+			}).appendTo($this.table.find('tbody'));
+
+			tempTable.html('');
+			$.each([2, 3, 7, 8], function (index, status) {
+				$this.table.find('tr.status-' + status).each(function () {
+					$(this).remove();
+					tempTable.append($(this));
+				});
+			});
+			tempTable.find('tr').sort(function(a, b) {
+				var tdA = $(a).find('td:eq(5)').find('input[type=date]').val();
+				var tdB = $(b).find('td:eq(5)').find('input[type=date]').val();
+				return tdB.localeCompare(tdA);
+			}).appendTo($this.table.find('tbody'));
 
 			if ($this.active_checkbox.prop('checked') === true) {
 				$this.showOnlyActiveApplicants();

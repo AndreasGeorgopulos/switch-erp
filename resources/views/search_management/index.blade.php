@@ -42,13 +42,13 @@
 					<table class="table table-bordered table-striped" id="search-table">
 						<thead>
 						<tr role="row">
-							<th class="w-300">{{trans('Név')}}</th>
-							<th class="w-300">{{trans('Átküldés dátuma')}}</th>
-							<th class="w-300 status-col">{{trans('Státusz')}}</th>
-							<th class="w-500">{{trans('Információ')}}</th>
-							<th class="w-300 date-col">{{trans('Interjú időpont')}}</th>
-							<th class="w-300 date-col">{{trans('Utolsó kapcsolat')}}</th>
-							<th class="w-200 text-center">{{trans('Fizetés')}} ({{trans('nettó')}})</th>
+							<th class="w-300 text-center">{{trans('Név')}}</th>
+							<th class="w-300 text-center">{{trans('Átküldés dátuma')}}</th>
+							<th class="w-320 text-center status-col">{{trans('Státusz')}}</th>
+							<th class="w-500 text-center">{{trans('Információ')}}</th>
+							<th class="w-300 text-center date-col">{{trans('Interjú időpont')}}</th>
+							<th class="w-300 text-center date-col">{{trans('Utolsó kapcsolat')}}</th>
+							<th class="w-200 text-center text-center">{{trans('Fizetés')}} ({{trans('nettó')}})</th>
 							<th class="text-center">{{trans('Önéletrajz')}}</th>
 						</tr>
 						</thead>
@@ -63,9 +63,9 @@
 									<input type="date" max="2999-12-31" name="send_date" value="{{$m->send_date}}" class="form-control input-sm input-data w-150" />
 								</td>
 								<td>
-									<select name="status" class="form-control input-sm input-data w-150">
+									<select name="status" class="form-control input-sm input-data w-180">
 										@foreach(\App\Models\ApplicantCompany::getStatusDropdownItems($m->status) as $item)
-											<option value="{{$item['value']}}" @if($item['selected'] === true) selected="selected" @endif>{{$item['title']}}</option>
+											<option value="{{$item['value']}}" class="text-center" @if($item['selected'] === true) selected="selected" @endif>{{$item['title']}}</option>
 										@endforeach
 									</select>
 								</td>
