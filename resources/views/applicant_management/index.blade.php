@@ -42,11 +42,11 @@
 							<thead class="hidden">
 							<tr>
 								<th>{{trans('Név')}}</th>
-								<th>{{trans('Tapasztalat')}}</th>
-								<th>{{trans('Angol')}}</th>
-								<th>{{trans('Technológia')}}</th>
-								<th>{{trans('E-mail')}}</th>
-								<th>{{trans('LinkedIn')}}</th>
+								<th class="text-center">{{trans('Tapasztalat')}}</th>
+								<th class="text-center">{{trans('Angol')}}</th>
+								<th class="text-center">{{trans('Technológia')}}</th>
+								<th class="text-center">{{trans('E-mail')}}</th>
+								<th class="text-center">{{trans('LinkedIn')}}</th>
 							</tr>
 							</thead>
 							<tbody></tbody>
@@ -75,19 +75,19 @@
 						<tr role="row">
 							<th></th>
 							<th>{{trans('Név')}}</th>
-							<th>{{trans('Tapasztalat')}}</th>
-							<th>{{trans('Angol')}}</th>
-							<th>{{trans('HO')}}</th>
-							<th>{{trans('Technológia')}}</th>
-							<th>{{trans('Cég')}}</th>
-							<th>{{trans('Információ')}}</th>
-							<th>{{trans('Utolsó kapcsolat')}}</th>
-							<th>{{trans('E-mail')}}</th>
-							<th>{{trans('Telefon')}}</th>
-							<th>{{trans('Intézte')}}</th>
-							<th>{{trans('LinkedIn')}}</th>
-							<th>{{trans('Önéletrajz')}}</th>
-							<th>{{trans('Törlés')}}</th>
+							<th class="text-center">{{trans('Tapasztalat')}}</th>
+							<th class="text-center">{{trans('Angol')}}</th>
+							<th class="text-center">{{trans('HO')}}</th>
+							<th class="text-center">{{trans('Technológia')}}</th>
+							<th class="text-center">{{trans('Cég')}}</th>
+							<th class="text-center">{{trans('Információ')}}</th>
+							<th class="text-center">{{trans('Utolsó kapcsolat')}}</th>
+							<th class="text-center">{{trans('E-mail')}}</th>
+							<th class="text-center">{{trans('Telefon')}}</th>
+							<th class="text-center">{{trans('Intézte')}}</th>
+							<th class="text-center">{{trans('LinkedIn')}}</th>
+							<th class="text-center">{{trans('Önéletrajz')}}</th>
+							<th class="text-center">{{trans('Törlés')}}</th>
 						</tr>
 						<tr>
 							<th></th>
