@@ -7,11 +7,7 @@
 
 require('./bootstrap');
 require('tablednd');
-
-require('select2');
-$('.select2').select2();
-
-
+require('./useSelect2');
 require('./listTable');
 require('./applicant_management');
 require('./applicant_management_notes');
