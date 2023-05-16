@@ -19,6 +19,7 @@ require('./contract_management');
 require('./search_management');
 require('./sales_management');
 require('./work_management');
+require('./tableFilter');
 
 /**
  * Törlés gombok click esemény kezelése

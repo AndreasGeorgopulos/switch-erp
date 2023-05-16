@@ -51,7 +51,15 @@
 					<thead>
 						<tr role="row">
 							<th></th>
-							<th>{{trans('Név')}}</th>
+							<th>
+								{{trans('Név')}}
+								<button class="btn btn-default btn-xs pull-right btn-table-filter-open">
+									<i class="fa fa-search"></i>
+								</button>
+								<button class="btn btn-default btn-xs pull-right btn-table-filter-close hidden">
+									<i class="fa fa-close"></i>
+								</button>
+							</th>
 							<th>{{trans('Státusz')}}</th>
 							<th>{{trans('Visszahívás dátuma')}}</th>
 							<th>{{trans('Kapcsolat')}}</th>
@@ -64,7 +72,7 @@
 							<th>{{trans('Intézte')}}</th>
 							<th>{{trans('Törlés')}}</th>
 						</tr>
-						<tr role="row">
+						<tr role="row" class="filter-row hidden">
 							<th></th>
 							<th>
 								<select name="company_name" class="form-control search-input w-400">

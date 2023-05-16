@@ -74,8 +74,16 @@
 						<thead>
 						<tr role="row">
 							<th></th>
-							<th>{{trans('Név')}}</th>
-							<th class="text-center">{{trans('Tapasztalat')}}</th>
+							<th>
+								{{trans('Név')}}
+								<button class="btn btn-default btn-xs pull-right btn-table-filter-open">
+									<i class="fa fa-search"></i>
+								</button>
+								<button class="btn btn-default btn-xs pull-right btn-table-filter-close hidden">
+									<i class="fa fa-close"></i>
+								</button>
+							</th>
+							<th class="text-center" style="width: 90px; max-width: 90px;">{{trans('Tapasztalat')}}</th>
 							<th class="text-center">{{trans('Angol')}}</th>
 							<th class="text-center">{{trans('HO')}}</th>
 							<th class="text-center">{{trans('Technológia')}}</th>
@@ -89,7 +97,7 @@
 							<th class="text-center">{{trans('Önéletrajz')}}</th>
 							<th class="text-center">{{trans('Törlés')}}</th>
 						</tr>
-						<tr>
+						<tr class="filter-row hidden">
 							<th></th>
 							<th>
 								<select name="applicant" class="form-control search-input select2" style="width: 150px;">
