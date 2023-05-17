@@ -36,6 +36,7 @@ use Illuminate\Http\UploadedFile;
  * @property string $report
  * @property string $cv_file
  * @property string $cv_file_mime_type
+ * @property bool $is_marked
  * @property bool $is_active
  * @property string $created_at
  * @property string $updated_at
@@ -74,6 +75,7 @@ class Applicant extends Model implements IModelRules, IModelSortable
 	protected $casts = [
 		'is_subcontractor' => 'boolean',
 		'is_active' => 'boolean',
+		'is_marked' => 'boolean',
 	];
 
 	public function save(array $options = [])

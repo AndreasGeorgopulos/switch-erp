@@ -25,6 +25,7 @@ Route::group(['middleware' => ['acl', 'locale']], function () {
 	Route::match(['get'], '/applicant_management/delete-note/{id}', 'ApplicantManagementController@deleteNote')->name('applicant_management_delete_note');
 	Route::match(['get'], '/applicant_management/get-job-position-options/{company_id}', 'ApplicantManagementController@getJobPositionOptions')->name('applicant_management_get_job_position_options');
 	Route::match(['post'], '/applicant_management/reorder/{selectedGroup}', 'ApplicantManagementController@reorder')->name('applicant_management_reorder');
+	Route::match(['post'], '/applicant_management/set-is-marked', 'ApplicantManagementController@setIsMarked')->name('applicant_management_set_is_marked');
 
 	// Search management
 	Route::match(['get'], '/search_management/get_counters/{job?}', 'SearchManagementController@getCounters')->name('search_management_get_counters');

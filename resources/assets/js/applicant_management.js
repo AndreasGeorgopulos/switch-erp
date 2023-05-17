@@ -10,6 +10,7 @@ if ($('#data-applicant-table').length) {
 		scroll_step: 800,
 		button_reorder_save: null,
 		button_reorder_cancel: null,
+		in_progress: false,
 
 		init: function () {
 			this.table_data = $('#data-applicant-table');
@@ -86,12 +87,40 @@ if ($('#data-applicant-table').length) {
 				}
 			});
 
-			this.table_data.find('form.delete-applicant').off('submit');
-			this.table_data.find('form.delete-applicant').on('submit', function (e) {
+			$this.table_data.find('form.delete-applicant').off('submit');
+			$this.table_data.find('form.delete-applicant').on('submit', function (e) {
 				if (confirm('Biztos, hogy törölni akarja ezt a jelöltet?')) {
 					return true;
 				}
 				return false;
+			});
+
+			$this.table_data.find('td.marker').off('click');
+			$this.table_data.find('td.marker').on('click', function (e) {
+				if ($this.in_progress === false) {
+					$this.setIsMarked($(this));
+				}
+			});
+		},
+
+		setIsMarked: function (element) {
+			const $this = this;
+			const tr = element.parents().closest('tr');
+			const url = '/applicant_management/set-is-marked';
+			let data = {
+				_token: $('input[name="_token"]').val(),
+				id: tr.attr('id')
+			};
+
+			if (tr.hasClass('marked')) {
+				tr.removeClass('marked');
+			} else {
+				tr.addClass('marked');
+			}
+
+			$this.in_progress = true;
+			$.post(url, data, function (response) {
+				$this.in_progress = false;
 			});
 		},
 

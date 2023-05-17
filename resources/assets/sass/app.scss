@@ -135,6 +135,11 @@ iframe.cv_viewer {
       color: #ffffff;
     }
 
+    tr.marked {
+      td {
+        background-color: #FFFF8F;
+      }
+    }
     tr {
       th.name { min-width: 200px !important; }
       th.experience-year { min-width: 90px; padding-left: 0px; padding-right: 0px; }
@@ -158,6 +163,8 @@ iframe.cv_viewer {
       select.company { width: 180px; max-width: 180px; }
       select.email { width: 130px; max-width: 130px; }
       select.monogram { width: 50px; max-width: 50px; }
+
+      td.marker { cursor: pointer; }
     }
 
     .display-block { display: block; }

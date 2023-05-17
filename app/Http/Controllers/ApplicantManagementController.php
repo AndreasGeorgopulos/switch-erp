@@ -322,6 +322,20 @@ class ApplicantManagementController extends Controller
 		return response()->json(null, 200);
 	}
 
+	public function setIsMarked(Request $request): JsonResponse
+	{
+		if (!($model = Applicant::find($request->get('id')))) {
+			abort(404);
+		}
+
+		$model->is_marked = !(bool) $model->is_marked;
+		$model->save();
+
+		return response()->json([
+			'marked' => (bool) $model->is_marked,
+		], 200);
+	}
+
 	/**
 	 * @param $id
 	 * @return Applicant|Applicant[]|Collection|Model|mixed

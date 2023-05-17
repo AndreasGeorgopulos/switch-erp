@@ -181,9 +181,9 @@
 								$inEnglishOption = collect(\App\Models\Applicant::getInEnglishDropdownOptions($applicant->in_english))->where('selected', true)->first();
 								$inEnglishTitle = !empty($inEnglishOption) ? $inEnglishOption['name'] : '';
 							@endphp
-							<tr id="{{$applicant->id}}">
+							<tr id="{{$applicant->id}}" @if($applicant->is_marked) class="marked" @endif >
 								<td class="dragHandle text-center"><i class="fa fa-reorder"></i></td>
-								<td>{{$applicant->name}}</td>
+								<td class="marker">{{$applicant->name}}</td>
 								<td class="text-center">{{$applicant->experience_year}}</td>
 								<td>{{$inEnglishTitle}}</td>
 								<td class="text-center">{{$applicant->home_office}}</td>
