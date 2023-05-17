@@ -63,7 +63,7 @@ class ApplicantCompany extends Model
 	 */
 	public static function getCompanies()
 	{
-		$authJobPositionIds = Auth::user()->job_positions()->pluck('id')->toArray();
+		$authJobPositionIds = Auth::user()->job_positions()->where('is_active', true)->pluck('id')->toArray();
 		$companies = [];
 		$models = !hasRole('superadministrator') && count($authJobPositionIds) ? static::whereIn('job_position_id', $authJobPositionIds)->get() : static::all();
 
@@ -84,7 +84,7 @@ class ApplicantCompany extends Model
 	 */
 	public static function getJobPositions($company_id)
 	{
-		$authJobPositionIds = Auth::user()->job_positions()->pluck('id')->toArray();
+		$authJobPositionIds = Auth::user()->job_positions()->where('is_active', true)->pluck('id')->toArray();
 		$job_positions = [];
 		$companies = [];
 		$models = !hasRole('superadministrator') && count($authJobPositionIds) ? static::whereIn('job_position_id', $authJobPositionIds)->get() : static::all();

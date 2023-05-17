@@ -15,7 +15,7 @@ class SearchManagementController extends Controller
     {
 		$companies = ApplicantCompany::getCompanies();
 		$selectedCompany = $company !== null ? Company::where('id', $company)->first() : null;
-		$selectedJobPosition = $job !== null ? JobPosition::where('id', $job)->first() : null;
+		$selectedJobPosition = $job !== null ? JobPosition::where('id', $job)->where('is_active', true)->first() : null;
 	    $job_positions = $selectedCompany !== null ? ApplicantCompany::getJobPositions($selectedCompany->id) : null;
 		$models = !empty($selectedJobPosition) ? ApplicantCompany::getSearchModels($selectedJobPosition->id) : null;
 		$counter = ApplicantCompany::getCouters($job);
