@@ -135,6 +135,31 @@ iframe.cv_viewer {
       color: #ffffff;
     }
 
+    tr {
+      th.name { min-width: 200px !important; }
+      th.experience-year { min-width: 90px; padding-left: 0px; padding-right: 0px; }
+      th.in-english { min-width: 90px; padding-left: 0px; padding-right: 0px; }
+      th.ho { min-width: 50px; padding-left: 0px; padding-right: 0px; }
+      th.skill { min-width: 300px; padding-left: 0px; padding-right: 0px; }
+      th.company { min-width: 200px; padding-left: 0px; padding-right: 0px; }
+      th.information { min-width: 300px; padding-left: 0px; padding-right: 0px; }
+      th.last-contact { min-width: 120px; padding-left: 0px; padding-right: 0px; }
+      th.email { min-width: 150px; padding-left: 0px; padding-right: 0px; }
+      th.phone { min-width: 100px; padding-left: 0px; padding-right: 0px; }
+      th.monogram { min-width: 70px; padding-left: 0px; padding-right: 0px; }
+      th.linked-in { min-width: 70px; padding-left: 0px; padding-right: 0px; }
+      th.cv { min-width: 70px; padding-left: 0px; padding-right: 0px; }
+
+      select.name { width: 200px; max-width: 200px; }
+      input.experience_year { min-width: 56px; max-width: 50px; }
+      select.in-english { width: 110px; max-width: 110px; }
+      select.ho { width: 50px; max-width: 50px; }
+      select.skill { width: 280px; max-width: 280px; }
+      select.company { width: 180px; max-width: 180px; }
+      select.email { width: 130px; max-width: 130px; }
+      select.monogram { width: 50px; max-width: 50px; }
+    }
+
     .display-block { display: block; }
     .min-w-250 { min-width: 250px !important; }
     .w-100 { width: 100px !important; }

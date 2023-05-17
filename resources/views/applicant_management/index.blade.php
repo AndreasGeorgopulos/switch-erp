@@ -74,7 +74,7 @@
 						<thead>
 						<tr role="row">
 							<th></th>
-							<th>
+							<th class="name">
 								{{trans('Név')}}
 								<button class="btn btn-default btn-xs pull-right btn-table-filter-open">
 									<i class="fa fa-search"></i>
@@ -83,42 +83,42 @@
 									<i class="fa fa-close"></i>
 								</button>
 							</th>
-							<th class="text-center" style="width: 90px; max-width: 90px;">{{trans('Tapasztalat')}}</th>
-							<th class="text-center">{{trans('Angol')}}</th>
-							<th class="text-center">{{trans('HO')}}</th>
-							<th class="text-center">{{trans('Technológia')}}</th>
-							<th class="text-center">{{trans('Cég')}}</th>
-							<th class="text-center">{{trans('Információ')}}</th>
-							<th class="text-center">{{trans('Utolsó kapcsolat')}}</th>
-							<th class="text-center">{{trans('E-mail')}}</th>
-							<th class="text-center">{{trans('Telefon')}}</th>
-							<th class="text-center">{{trans('Intézte')}}</th>
-							<th class="text-center">{{trans('LinkedIn')}}</th>
-							<th class="text-center">{{trans('Önéletrajz')}}</th>
-							<th class="text-center">{{trans('Törlés')}}</th>
+							<th class="experience-year text-center">{{trans('Tapasztalat')}}</th>
+							<th class="in-english text-center">{{trans('Angol')}}</th>
+							<th class="ho text-center">{{trans('HO')}}</th>
+							<th class="skill text-center">{{trans('Technológia')}}</th>
+							<th class="company text-center">{{trans('Cég')}}</th>
+							<th class="information text-center">{{trans('Információ')}}</th>
+							<th class="last-contact text-center">{{trans('Utolsó kapcsolat')}}</th>
+							<th class="email text-center">{{trans('E-mail')}}</th>
+							<th class="phone text-center">{{trans('Telefon')}}</th>
+							<th class="monogram text-center">{{trans('Intézte')}}</th>
+							<th class="linked-in text-center">{{trans('LinkedIn')}}</th>
+							<th class="cv text-center">{{trans('Önéletrajz')}}</th>
+							<th class="delete text-center">{{trans('Törlés')}}</th>
 						</tr>
 						<tr class="filter-row hidden">
 							<th></th>
 							<th>
-								<select name="applicant" class="form-control search-input select2" style="width: 150px;">
+								<select name="applicant" class="name form-control search-input select2">
 									<option></option>
 									@foreach(\App\Models\Applicant::getFieldDropdownOptions($selectedGroup->id, 'name') as $item)
 										<option value="{{$item['id']}}" @if($item['id'] == $getParams['applicant']) selected="selected" @endif>{{$item['name']}}</option>
 									@endforeach
 								</select>
 							</th>
-							<th>
-								<input type="text" name="experience_year" class="form-control search-input" value="{{$getParams['experience_year']}}" style="width: 100px;" />
+							<th class="text-center">
+								<input type="text" name="experience_year" class="experience_year form-control search-input only-numbers" value="{{$getParams['experience_year']}}" maxlength="4" />
 							</th>
-							<th>
-								<select name="in_english" class="form-control search-input select2" style="width: 110px;">
+							<th class="text-center">
+								<select name="in_english" class="in-english form-control search-input select2">
 									@foreach(\App\Models\Applicant::getInEnglishDropdownOptions() as $item)
 										<option value="{{$item['value']}}" @if($item['value'] == $getParams['in_english']) selected="selected" @endif>{{$item['name']}}</option>
 									@endforeach
 								</select>
 							</th>
 							<th>
-								<select name="ho" class="form-control search-input select2" style="width: 60px;">
+								<select name="ho" class="ho form-control search-input select2">
 									<option></option>
 									@for($i = 0; $i <= 5; $i++)
 										<option value="{{$i}}" @if(is_numeric($getParams['ho']) && intval($getParams['ho']) === $i) selected="selected" @endif>{{$i}}</option>
@@ -126,7 +126,7 @@
 								</select>
 							</th>
 							<th>
-								<select name="skill" class="form-control search-input select2" style="width: 210px;">
+								<select name="skill" class="skill form-control search-input select2">
 									<option></option>
 									@foreach(\App\Models\Applicant::getSkillDropdownOptions([$getParams['skill']], $selectedGroup->id) as $item)
 										<option value="{{$item['id']}}" @if($item['selected']) selected="selected" @endif>{{$item['name']}}</option>
@@ -134,7 +134,7 @@
 								</select>
 							</th>
 							<th>
-								<select name="company" class="form-control search-input select2" style="width: 210px;">
+								<select name="company" class="company form-control search-input select2">
 									<option></option>
 									@foreach(\App\Models\Company::getDropdownItems($getParams['company'], true) as $item)
 										<option value="{{$item['value']}}" @if($item['selected']) selected="selected" @endif>{{$item['title']}}</option>
@@ -144,7 +144,7 @@
 							<th></th>
 							<th></th>
 							<th>
-								<select name="email" class="form-control search-input select2" style="width: 210px;">
+								<select name="email" class="email form-control search-input select2">
 									<option></option>
 									@foreach(\App\Models\Applicant::getFieldDropdownOptions($selectedGroup->id, 'email') as $item)
 										<option value="{{$item['email']}}" @if($item['email'] == $getParams['email']) selected="selected" @endif>{{$item['email']}}</option>
@@ -153,7 +153,7 @@
 							</th>
 							<th></th>
 							<th>
-								<select name="monogram" class="form-control search-input select2" style="width: 150px;">
+								<select name="monogram" class="monogram form-control search-input select2">
 									<option></option>
 									@foreach(\App\Models\Applicant::getFieldDropdownOptions($selectedGroup->id, 'monogram') as $item)
 										<option value="{{$item['monogram']}}" @if($item['monogram'] === $getParams['monogram']) selected="selected" @endif>{{$item['monogram']}}</option>
@@ -184,16 +184,16 @@
 							<tr id="{{$applicant->id}}">
 								<td class="dragHandle text-center"><i class="fa fa-reorder"></i></td>
 								<td>{{$applicant->name}}</td>
-								<td>{{$applicant->experience_year}}</td>
+								<td class="text-center">{{$applicant->experience_year}}</td>
 								<td>{{$inEnglishTitle}}</td>
 								<td class="text-center">{{$applicant->home_office}}</td>
 								<td>{{$applicant->skills->pluck('name')->implode(', ')}}</td>
 								<td>{{$companies}}</td>
 								<td>{{$applicant->description}}</td>
-								<td class="w-150 display-block">{{str_replace('-', '.', $applicant->last_contact_date)}}</td>
+								<td class="text-center">{{str_replace('-', '.', $applicant->last_contact_date)}}</td>
 								<td>{{$applicant->email}}</td>
-								<td class="w-100 display-block">{{$applicant->phone}}</td>
-								<td>{{$applicant->monogram}}</td>
+								<td class="text-center">{{$applicant->phone}}</td>
+								<td class="text-center">{{$applicant->monogram}}</td>
 								<td class="text-center">
 									@if(!empty($applicant->linked_in))
 										<a href="{{$applicant->linked_in}}" target="_blank"><i class="fa fa-linkedin"></i></a>
