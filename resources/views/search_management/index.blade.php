@@ -42,8 +42,8 @@
 					<table class="table table-bordered table-striped" id="search-table">
 						<thead>
 						<tr role="row">
-							<th class="w-300 text-center">{{trans('Név')}}</th>
-							<th class="w-300 text-center">{{trans('Átküldés dátuma')}}</th>
+							<th class="name">{{trans('Név')}}</th>
+							<th class="text-center">{{trans('Átküldés dátuma')}}</th>
 							<th class="w-320 text-center status-col">{{trans('Státusz')}}</th>
 							<th class="w-500 text-center">{{trans('Információ')}}</th>
 							<th class="w-300 text-center date-col">{{trans('Interjú időpont')}}</th>
@@ -60,7 +60,7 @@
 									<span class="w-200" style="display: block;">{{$m->applicant->name}}</span>
 								</td>
 								<td>
-									<input type="date" max="2999-12-31" name="send_date" value="{{$m->send_date}}" class="form-control input-sm input-data w-150" />
+									<input type="date" max="2999-12-31" name="send_date" value="{{$m->send_date}}" class="form-control text-center input-sm input-data w-150" />
 								</td>
 								<td>
 									<select name="status" class="form-control input-sm input-data w-180">
@@ -76,7 +76,7 @@
 									<input type="datetime-local" name="interview_time" value="{{$m->interview_time}}" class="form-control input-sm input-data" />
 								</td>
 								<td>
-									<input type="date" name="last_contact_date" value="{{$m->applicant->last_contact_date}}" max="2999-12-31" class="form-control input-sm input-data" />
+									<input type="date" name="last_contact_date" value="{{$m->applicant->last_contact_date}}" max="2999-12-31" class="form-control text-center input-sm input-data" />
 								</td>
 								<td class="text-center">
 									<span class="w-150" style="display: block;">
