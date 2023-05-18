@@ -8,6 +8,7 @@
                     <tr role="row">
                         <th class="@if($sort == 'id') sorting_{{$direction}} @else sorting @endif" data-column="id">#</th>
                         <th class="@if($sort == 'name') sorting_{{$direction}} @else sorting @endif" data-column="name">{{trans('Név')}}</th>
+                        <th class="@if($sort == 'monogram') sorting_{{$direction}} @else sorting @endif" data-column="monogram">{{trans('Monogram')}}</th>
                         <th class="@if($sort == 'email') sorting_{{$direction}} @else sorting @endif" data-column="email">{{trans('E-mail')}}</th>
                         <th>
                             <a href="{{url(route('users_edit'))}}" class="btn btn-primary btn-sm pull-right"><i class="fa fa-plus"></i> {{trans('Új felhasználó')}}</a>
@@ -19,6 +20,7 @@
                         <tr role="row" class="odd">
                             <td>{{$model->id}}</td>
                             <td class="sorting_1">{{$model->name}}</td>
+                            <td class="sorting_1">{{$model->monogram}}</td>
                             <td>{{$model->email}}</td>
                             <td>
                                 <div class="btn-group pull-right">

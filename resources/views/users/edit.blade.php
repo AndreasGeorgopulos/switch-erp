@@ -16,6 +16,10 @@
                             <input type="text" name="name" class="form-control" value="{{old('name', $model->name)}}" />
                         </div>
                         <div class="form-group">
+                            <label>{{trans('Monogram')}}</label>
+                            <input type="text" name="monogram" class="form-control" value="{{old('monogram', $model->monogram)}}" />
+                        </div>
+                        <div class="form-group">
                             <label>{{trans('E-mail cím')}}</label>
                             <input type="email" class="form-control" name="email" value="{{old('email', $model->email)}}" />
                         </div>

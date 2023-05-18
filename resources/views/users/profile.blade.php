@@ -17,6 +17,11 @@
 							<b>{{$model->name}}</b>
 						</div>
 						<div class="form-group">
+							<label>{{trans('Monogram')}}</label>
+							<br />
+							<b>{{$model->monogram}}</b>
+						</div>
+						<div class="form-group">
 							<label>{{trans('E-mail cím')}}</label>
 							<br />
 							<b>{{$model->email}}</b>
