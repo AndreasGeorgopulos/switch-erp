@@ -108,18 +108,16 @@ if ($('#data-applicant-table').length) {
 			const tr = element.parents().closest('tr');
 			const url = '/applicant_management/set-is-marked';
 			let data = {
-				_token: $('input[name="_token"]').val(),
 				id: tr.attr('id')
 			};
 
-			if (tr.hasClass('marked')) {
-				tr.removeClass('marked');
-			} else {
-				tr.addClass('marked');
-			}
-
 			$this.in_progress = true;
 			$.post(url, data, function (response) {
+				if (tr.hasClass('marked')) {
+					tr.removeClass('marked');
+				} else {
+					tr.addClass('marked');
+				}
 				$this.in_progress = false;
 			});
 		},
