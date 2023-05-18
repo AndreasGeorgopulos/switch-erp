@@ -15,5 +15,6 @@ class VerifyCsrfToken extends BaseVerifier
 		'adminer',
 		'search_management/save_data',
 		'work_management/save_data',
+		'work_management/set-is-marked',
 	];
 }
