@@ -185,7 +185,7 @@
 								<td class="dragHandle text-center"><i class="fa fa-reorder"></i></td>
 								<td class="marker">{{$applicant->name}}</td>
 								<td class="text-center">{{$applicant->experience_year}}</td>
-								<td>{{$inEnglishTitle}}</td>
+								<td class="text-center">{{$inEnglishTitle}}</td>
 								<td class="text-center">{{$applicant->home_office}}</td>
 								<td>{{$applicant->skills->pluck('name')->implode(', ')}}</td>
 								<td>{{$companies}}</td>
