@@ -73,9 +73,7 @@
 					<table class="table table-bordered table-striped dataTable" id="data-applicant-table">
 						<thead>
 						<tr role="row">
-							<th></th>
-							<th class="name">
-								{{trans('Név')}}
+							<th class="text-center">
 								<button class="btn btn-default btn-xs pull-right btn-table-filter-open">
 									<i class="fa fa-search"></i>
 								</button>
@@ -83,6 +81,7 @@
 									<i class="fa fa-close"></i>
 								</button>
 							</th>
+							<th class="name">{{trans('Név')}}</th>
 							<th class="experience-year text-center">{{trans('Tapasztalat')}}</th>
 							<th class="in-english text-center">{{trans('Angol')}}</th>
 							<th class="ho text-center">{{trans('HO')}}</th>

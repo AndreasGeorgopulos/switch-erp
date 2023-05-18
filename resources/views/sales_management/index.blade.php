@@ -50,9 +50,7 @@
 				<table class="table table-bordered table-striped dataTable" id="data-sales-table">
 					<thead>
 						<tr role="row">
-							<th></th>
-							<th class="name">
-								{{trans('Név')}}
+							<th class="text-center">
 								<button class="btn btn-default btn-xs pull-right btn-table-filter-open">
 									<i class="fa fa-search"></i>
 								</button>
@@ -60,6 +58,7 @@
 									<i class="fa fa-close"></i>
 								</button>
 							</th>
+							<th class="name">{{trans('Név')}}</th>
 							<th>{{trans('Státusz')}}</th>
 							<th>{{trans('Visszahívás dátuma')}}</th>
 							<th>{{trans('Kapcsolat')}}</th>
