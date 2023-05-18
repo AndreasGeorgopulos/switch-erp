@@ -26,7 +26,7 @@
 
 						<tbody>
 						@foreach($models as $index => $m)
-							<tr data-applicant="{{$m->applicant_id}}" data-job="{{$m->job_position_id}}" class="status-{{$m->status}}">
+							<tr data-applicant="{{$m->applicant_id}}" data-job="{{$m->job_position_id}}" >
 								<td>
 									<span class="w-150 display-block">{{$m->applicant->name}}</span>
 								</td>

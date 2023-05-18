@@ -51,7 +51,7 @@
 					<thead>
 						<tr role="row">
 							<th></th>
-							<th>
+							<th class="name">
 								{{trans('Név')}}
 								<button class="btn btn-default btn-xs pull-right btn-table-filter-open">
 									<i class="fa fa-search"></i>

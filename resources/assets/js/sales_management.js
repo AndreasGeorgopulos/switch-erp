@@ -56,6 +56,12 @@ if ($('#data-sales-table').length) {
 				$this.filterRows();
 			});
 
+			$this.table_data.find('thead input.search-input[type=date]').off('change');
+			$this.table_data.find('thead input.search-input[type=date]').on('change', function (e) {
+				e.preventDefault();
+				$this.filterRows();
+			});
+
 			$this.button_scroll_left.off('click');
 			$this.button_scroll_left.on('click', function (e) {
 				e.preventDefault();
@@ -113,8 +119,8 @@ if ($('#data-sales-table').length) {
 				$this.selectRow($(this).parents('tr'));
 			});
 
-			this.table_data.find('form.delete-sale').off('submit');
-			this.table_data.find('form.delete-sale').on('submit', function (e) {
+			$this.table_data.find('form.delete-sale').off('submit');
+			$this.table_data.find('form.delete-sale').on('submit', function (e) {
 				if (confirm('Biztos, hogy törölni akarja ezt a céget?')) {
 					return true;
 				}
