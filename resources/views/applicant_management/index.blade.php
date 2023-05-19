@@ -9,7 +9,7 @@
 		<div class="row">
 			@if($selectedGroup === null)
 				<div class="col-sm-12">
-					<ul class="nav" id="applicant-skill-sidebar">
+					<ul class="nav columns-3" id="applicant-skill-sidebar">
 					@foreach($applicantGroups as $group)
 						<li class="nav-item @if($selectedGroup !== null && $group->id == $selectedGroup->id) active @endif">
 							<a href="{{url(route('applicant_management_index', ['selectedGroup' => $group->id]))}}" class="nav-link">
