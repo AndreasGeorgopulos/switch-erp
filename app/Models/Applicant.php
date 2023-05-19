@@ -7,7 +7,10 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Database\Query\Builder;
 use Illuminate\Http\UploadedFile;
+use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\Auth;
 
 /**
  * Applicant management model
@@ -78,6 +81,10 @@ class Applicant extends Model implements IModelRules, IModelSortable
 		'is_marked' => 'boolean',
 	];
 
+	/**
+	 * @param array $options
+	 * @return bool
+	 */
 	public function save(array $options = [])
 	{
 		$this->salary = str_replace('.', '', $this->salary);
@@ -108,6 +115,9 @@ class Applicant extends Model implements IModelRules, IModelSortable
 		return $this->belongsToMany( JobPosition::class );
 	}
 
+	/**
+	 * @return BelongsToMany
+	 */
 	public function companies()
 	{
 		return $this->belongsToMany(JobPosition::class, 'applicant_companies', 'applicant_id', 'job_position_id');
@@ -179,7 +189,7 @@ class Applicant extends Model implements IModelRules, IModelSortable
 	}
 
 	/**
-	 * @return \string[][]
+	 * @return string[][]
 	 */
 	public static function rules() :array
 	{
@@ -339,6 +349,11 @@ class Applicant extends Model implements IModelRules, IModelSortable
 		];
 	}
 
+	/**
+	 * @param $selectedGroupId
+	 * @param $field
+	 * @return array
+	 */
 	public static function getFieldDropdownOptions($selectedGroupId, $field)
 	{
 		return static::select(['id', $field])
@@ -351,6 +366,38 @@ class Applicant extends Model implements IModelRules, IModelSortable
 			})
 			->groupBy($field)
 			->orderBy($field, 'asc')->get()->toArray();
+	}
+
+	/**
+	 * @return Applicant[]|\Illuminate\Database\Eloquent\Collection|Builder[]|Collection
+	 */
+	public static function getCallbackApplicants()
+	{
+		return static::where(function ($q) {
+				$q->where('last_callback_date', '<>', '');
+				$q->whereNotNull('last_callback_date');
+
+				if (!hasRole('superadmin') && $monogram = Auth::user()->monogram) {
+					$q->where('monogram', $monogram);
+				}
+			})
+			->orderBy('last_callback_date', 'asc')
+			->get();
+	}
+
+	/**
+	 * @param $date
+	 * @return bool
+	 */
+	public static function hasCallbackSales($date = null): bool
+	{
+		if ($date === null) {
+			$date = date('Y-m-d');
+		}
+
+		return (bool) static::getCallbackApplicants()
+			->where('last_callback_date', $date)
+			->count();
 	}
 
 	/**

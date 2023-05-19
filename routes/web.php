@@ -49,6 +49,13 @@ Route::group(['middleware' => ['acl', 'locale']], function () {
 	Route::match(['delete'], '/sales_management/delete/{id}', 'SalesManagementController@delete')->name('sales_management_delete');
 	Route::match(['post'], '/sales_management/reorder', 'SalesManagementController@reorder')->name('sales_management_reorder');
 
+	// Callback management
+	Route::match(['get'], '/callback_management', 'CallbackManagementController@index')->name('callback_management_index');
+	Route::match(['get'], '/callback_management/applicant', 'CallbackManagementController@indexApplicant')->name('callback_management_index_applicant');
+	Route::match(['post', 'delete'], '/callback_management/applicant/delete', 'CallbackManagementController@deleteApplicant')->name('callback_management_delete_applicant');
+	Route::match(['get'], '/callback_management/sales', 'CallbackManagementController@indexSales')->name('callback_management_index_sales');
+	Route::match(['post', 'delete'], '/callback_management/sales/delete', 'CallbackManagementController@deleteSales')->name('callback_management_delete_sales');
+
 	// users
 	Route::match(['get', 'post'], '/users/list', 'UserController@index')->name('users_list');
 	Route::match(['get', 'post', 'put'], '/users/edit/{id?}', 'UserController@edit')->name('users_edit');

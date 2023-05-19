@@ -30,4 +30,18 @@
 			<a href="{{url( route( 'sales_management_index' ) )}}" class="nav-link">{{trans('Sales')}}</a>
 		</li>
 	@endif
+
+	@if(hasRole('callback_module'))
+		@php
+		$classes = ['nav-item'];
+		if (\App\Models\Applicant::hasCallbackSales() || \App\Models\Sale::hasCallbackSales()) {
+			$classes[] = 'alert-call-flicker';
+		} elseif (\Illuminate\Support\Str::startsWith($routeName, 'callback_management')) {
+			$classes[] = 'active';
+		}
+		@endphp
+		<li class="{{implode(' ', $classes)}}">
+			<a href="{{url( route( 'callback_management_index' ) )}}" class="nav-link">{{trans('Visszahívások')}}</a>
+		</li>
+	@endif
 </ul>

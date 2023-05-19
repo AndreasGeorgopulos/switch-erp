@@ -216,3 +216,19 @@ iframe.cv_viewer {
   margin-top: -16px;
   margin-bottom: 30px;
 }
+
+.alert-call-flicker {
+  @keyframes flicker {
+    0% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+  animation: flicker 1s infinite;
+  background-color: #FFFF8F;
+}

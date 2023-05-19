@@ -4,6 +4,9 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Database\Query\Builder;
+use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\Auth;
 
 /**
  * Sale model
@@ -127,6 +130,38 @@ class Sale extends Model implements IModelRules
 				'selected' => (bool) ($item[$field] == $selected),
 			];
 		}, $models);
+	}
+
+	/**
+	 * @return Sale[]|\Illuminate\Database\Eloquent\Collection|Builder[]|Collection
+	 */
+	public static function getCallbackSales()
+	{
+		return static::where(function ($q) {
+				$q->where('callback_date', '<>', '');
+				$q->whereNotNull('callback_date');
+
+				if (!hasRole('superadmin') && $monogram = Auth::user()->monogram) {
+					$q->where('monogram', $monogram);
+				}
+			})
+			->orderBy('callback_date', 'asc')
+			->get();
+	}
+
+	/**
+	 * @param $date
+	 * @return bool
+	 */
+	public static function hasCallbackSales($date = null): bool
+	{
+		if ($date === null) {
+			$date = date('Y-m-d');
+		}
+
+		return (bool) static::getCallbackSales()
+			->where('callback_date', $date)
+			->count();
 	}
 
 	/**
