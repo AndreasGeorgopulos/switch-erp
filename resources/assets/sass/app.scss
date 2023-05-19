@@ -37,6 +37,12 @@ iframe.cv_viewer {
   border: none;
 }
 
+#applicant-skill-sidebar {
+  columns: 3;
+  -webkit-columns: 3;
+  -moz-columns: 3;
+}
+
 #applicant-skill-sidebar li.active {
   background-color: #f7f7f7;
   font-weight: bold;
