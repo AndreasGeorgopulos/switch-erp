@@ -101,6 +101,29 @@ if ($('#data-applicant-table').length) {
 					$this.setIsMarked($(this));
 				}
 			});
+
+			$this.table_data.find('.btn-sort').off('click');
+			$this.table_data.find('.btn-sort').on('click', function (e) {
+				$this.sortTable($(this), $(this).data('sort'), $(this).data('desc'));
+			});
+		},
+
+		sortTable: function (button, columnIndex, descending) {
+			const $this = this;
+
+			$this.table_data.find('.btn-sort i').removeClass('fa-sort-amount-asc');
+			$this.table_data.find('.btn-sort i').removeClass('fa-sort-amount-desc');
+			$this.table_data.find('.btn-sort i').addClass('fa-sort');
+
+			button.find('i').removeClass('fa-sort');
+			button.find('i').addClass(descending === true ? 'fa-sort-amount-asc' : 'fa-sort-amount-desc');
+			button.data('desc', !descending);
+
+			$this.table_data.find('tbody tr').sort(function(a, b) {
+				const tdA = $(a).find('td:eq(' + columnIndex + ')').html();
+				const tdB = $(b).find('td:eq(' + columnIndex + ')').html();
+				return descending === true ? tdA.localeCompare(tdB) : tdB.localeCompare(tdA);
+			}).appendTo($this.table_data.find('tbody'));
 		},
 
 		setIsMarked: function (element) {

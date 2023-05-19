@@ -88,7 +88,12 @@
 							<th class="skill text-center">{{trans('Technológia')}}</th>
 							<th class="company text-center">{{trans('Cég')}}</th>
 							<th class="information text-center">{{trans('Információ')}}</th>
-							<th class="last-contact text-center">{{trans('Utolsó kapcsolat')}}</th>
+							<th class="last-contact text-center">
+								{{trans('Utolsó kapcsolat')}}
+								<button class="btn btn-default btn-xs btn-sort pull-right " data-sort="8" data-desc="false">
+									<i class="fa fa-sort"></i>
+								</button>
+							</th>
 							<th class="email text-center">{{trans('E-mail')}}</th>
 							<th class="phone text-center">{{trans('Telefon')}}</th>
 							<th class="monogram text-center">{{trans('Intézte')}}</th>
