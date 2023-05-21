@@ -71,7 +71,7 @@ return [
     |
     */
 
-    'collapse_sidebar' => true,
+    'collapse_sidebar' => false,
 
     /*
     |--------------------------------------------------------------------------
@@ -105,7 +105,7 @@ return [
 	
 	'menu' => [
 		'FŐMENÜ',
-		[
+		/*[
 			'text' => 'Menedzsment',
 			'route' => 'applicant_management_index',
 			'role' => 'login',
@@ -118,9 +118,9 @@ return [
 			'role' => 'login',
 			'icon' => 'user-o',
 			'active' => ['users_profile'],
-		],
+		],*/
 		[
-			'text'    => 'Adminsztráció',
+			'text'    => 'Beállítások',
 			'icon'    => 'cog',
 			'submenu' => [
 				[

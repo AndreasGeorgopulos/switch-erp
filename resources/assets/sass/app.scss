@@ -11,6 +11,9 @@
 // Select2
 @import "node_modules/select2/dist/css/select2.min";
 
+// AdminLTE overrides
+@import "adminlte";
+
 .select2-container--default .select2-selection--multiple .select2-selection__choice__remove {
   border-right: none !important;
 }
