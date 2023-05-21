@@ -59,17 +59,17 @@
 								</button>
 							</th>
 							<th class="name">{{trans('Név')}}</th>
-							<th>{{trans('Státusz')}}</th>
-							<th>{{trans('Visszahívás dátuma')}}</th>
-							<th>{{trans('Kapcsolat')}}</th>
-							<th>{{trans('Pozíció')}}</th>
-							<th>{{trans('Telefonszám')}}</th>
-							<th>{{trans('E-mail')}}</th>
-							<th>{{trans('Információ')}}</th>
-							<th>{{trans('Utolsó kapcsolat')}}</th>
-							<th>{{trans('Weboldal')}}</th>
-							<th>{{trans('Intézte')}}</th>
-							<th>{{trans('Törlés')}}</th>
+							<th class="status text-center">{{trans('Státusz')}}</th>
+							<th class="last-callback-date text-center">{{trans('Visszahívás dátuma')}}</th>
+							<th class="contact text-center">{{trans('Kapcsolat')}}</th>
+							<th class="job text-center">{{trans('Pozíció')}}</th>
+							<th class="phone text-center">{{trans('Telefonszám')}}</th>
+							<th class="email text-center">{{trans('E-mail')}}</th>
+							<th class="information text-center">{{trans('Információ')}}</th>
+							<th class="last-contact text-center">{{trans('Utolsó kapcsolat')}}</th>
+							<th class="web text-center">{{trans('Weboldal')}}</th>
+							<th class="monogram text-center">{{trans('Intézte')}}</th>
+							<th class="delete text-center">{{trans('Törlés')}}</th>
 						</tr>
 						<tr role="row" class="filter-row hidden">
 							<th></th>
@@ -93,7 +93,7 @@
 								<input type="date"
 								       name="callback_date"
 								       value="{{$getParams['callback_date']}}"
-								       class="form-control search-input w-150"
+								       class="form-control search-input w-150 text-center"
 								       max="2999-12-31" />
 							</th>
 							<th>
@@ -168,7 +168,7 @@
 							<td>
 								<input type="text"
 								       name="company_name"
-								       class="form-control input-sm"
+								       class="name form-control input-sm"
 								       value="{{$model->company_name}}"
 								       data-value="{{$model->company_name}}" />
 							</td>
