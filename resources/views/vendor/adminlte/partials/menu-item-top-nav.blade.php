@@ -41,7 +41,7 @@
                                 @endif
                             @else
                             <li class="{{ $subitem['top_nav_class'] }}">
-                                <a href="{{ !empty($item['route']) ? url(route($item['route'])) : '#' }}">
+                                <a href="{{ !empty($subitem['route']) ? url(route($subitem['route'])) : '#' }}">
                                     <i class="fa fa-{{ $subitem['icon'] or 'circle-o' }} {{ isset($subitem['icon_color']) ? 'text-' . $subitem['icon_color'] : '' }}"></i>
                                     {{ trans($subitem['text']) }}
                                     @if (isset($subitem['label']))

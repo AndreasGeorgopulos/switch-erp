@@ -1,6 +1,6 @@
 @extends('index')
 @section('content_header')
-	<h1>{{trans('Jelölt csoportok')}}</h1>
+	<h1><i class="fa fa-cog"></i> {{trans('Beállítások')}} / {{trans('Jelölt csoportok')}}</h1>
 @stop
 
 @section('content')

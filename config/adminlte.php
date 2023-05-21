@@ -104,8 +104,8 @@ return [
     */
 	
 	'menu' => [
-		'FŐMENÜ',
-		/*[
+		/*'FŐMENÜ',
+		[
 			'text' => 'Menedzsment',
 			'route' => 'applicant_management_index',
 			'role' => 'login',
