@@ -236,6 +236,18 @@ ul.columns-3 {
   }
 }
 
+.applicant-management,
+.sales-management,
+.work-management {
+  .table-area {
+    position: fixed;
+    top: 130px;
+    bottom: 3px;
+    overflow-x: scroll !important;
+    overflow-y: auto;
+  }
+}
+
 .form-group .hint {
   font-size: 12px;
   margin-top: -16px;
