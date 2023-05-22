@@ -215,6 +215,9 @@ class UserController extends Controller
 			if (!empty($request->input('password'))) {
 				$model->password = bcrypt($request->input('password'));
 			}
+
+			$model->fix_applicants = !empty($request->input('fix_applicants')) ? 1 : 0;
+			$model->theme_id = !empty($request->input('theme_id')) ? $request->input('theme_id') : null;
 			$model->save();
 
 			$model->job_positions()->sync($request->get('job_positions', []));
