@@ -13,14 +13,14 @@
 					<table class="table table-bordered table-striped" id="work-table">
 						<thead>
 						<tr role="row">
-							<th class="">{{trans('Név')}}</th>
-							<th class="">{{trans('Cég')}}</th>
-							<th class="">{{trans('Pozíció')}}</th>
-							<th class="">{{trans('Fizetés')}} ({{trans('bruttó')}})</th>
-							<th class="">{{trans('Kezdés dátuma')}}</th>
-							<th class="">{{trans('Utánkövetés')}}</th>
-							<th class="">{{trans('Elhelyezte')}}</th>
-							<th class="text-center">{{trans('Önéletrajz')}}</th>
+							<th class="name">{{trans('Név')}}</th>
+							<th class="name text-center">{{trans('Cég')}}</th>
+							<th class="job text-center">{{trans('Pozíció')}}</th>
+							<th class="last-contact text-center">{{trans('Fizetés')}} ({{trans('bruttó')}})</th>
+							<th class="last-contact text-center">{{trans('Kezdés dátuma')}}</th>
+							<th class="last-contact text-center">{{trans('Utánkövetés')}}</th>
+							<th class="monogram text-center">{{trans('Elhelyezte')}}</th>
+							<th class="cv text-center">{{trans('Önéletrajz')}}</th>
 						</tr>
 						</thead>
 
@@ -30,23 +30,23 @@
 								<td>
 									<span class="w-150 display-block">{{$m->applicant->name}}</span>
 								</td>
-								<td>
-									<span class="w-150 display-block">{{$m->job_position->company->name}}</span>
-								</td>
-								<td>
-									<span class="w-150 display-block">{{$m->job_position->title}}</span>
+								<td class="text-center">
+									<span class="w-150 display-block center-block">{{$m->job_position->company->name}}</span>
 								</td>
 								<td class="text-center">
-									<input type="text" name="salary" class="form-control input-sm input-data salary only-numbers w-100" value="{{$m->salary}}" tabindex="10" />
+									<span class="w-150 display-block center-block">{{$m->job_position->title}}</span>
 								</td>
-								<td>
-									<input type="date" max="2999-12-31" name="work_begin_date" value="{{$m->work_begin_date}}" class="form-control input-sm input-data w-110" />
+								<td class="text-center">
+									<input type="text" name="salary" class="form-control input-sm input-data salary only-numbers center-block w-100" value="{{$m->salary}}" tabindex="10" />
 								</td>
-								<td>
-									<textarea name="follow_up" class="form-control input-data min-w-250">{{$m->follow_up}}</textarea>
+								<td class="text-center">
+									<input type="date" max="2999-12-31" name="work_begin_date" value="{{$m->work_begin_date}}" class="form-control text-center center-block input-sm input-data w-110" />
 								</td>
-								<td>
-									<input type="text" maxlength="4" name="monogram" value="{{$m->monogram}}" class="form-control input-sm input-data w-100" />
+								<td class="text-center">
+									<textarea name="follow_up" class="form-control text-center input-data min-w-250">{{$m->follow_up}}</textarea>
+								</td>
+								<td class="text-center">
+									<input type="text" maxlength="4" name="monogram" value="{{$m->monogram}}" class="form-control text-center center-block input-sm input-data w-100" />
 								</td>
 								<td class="text-center">
 									<a href="{{url(route('applicant_management_edit', ['id' => $m->applicant->id]))}}">

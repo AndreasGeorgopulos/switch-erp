@@ -154,8 +154,8 @@ ul.columns-3 {
       th.information { min-width: 300px; padding-left: 0px; padding-right: 0px; }
       th.phone { min-width: 120px; padding-left: 0px; padding-right: 0px; }
       th.web { min-width: 220px; padding-left: 0px; padding-right: 0px; }
-      th.monogram { min-width: 70px; padding-left: 0px; padding-right: 0px; }
-      th.delete { min-width: 70px; padding-left: 0px; padding-right: 0px; }
+      th.monogram { min-width: 70px; max-width: 70px; padding-left: 0px; padding-right: 0px; }
+      th.delete { min-width: 70px;; max-width: 70px; padding-left: 0px; padding-right: 0px; }
 
       input, select option { text-align: center; }
       input.name { text-align: left; }
