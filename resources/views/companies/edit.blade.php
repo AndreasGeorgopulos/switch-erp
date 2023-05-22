@@ -99,7 +99,7 @@
 
 			<div class="box-footer">
 				<a href="{{url(route('companies_list'))}}" class="btn btn-default">{{trans('Vissza')}}</a>
-				<button type="submit" class="btn btn-info pull-right">{{trans('Mentés')}}</button>
+				<button type="submit" class="btn btn-primary pull-right">{{trans('Mentés')}}</button>
 			</div>
 		</div>
 	</form>

@@ -63,7 +63,7 @@
 			</div>
 
 			<div class="box-footer">
-				<button type="submit" class="btn btn-info pull-right">{{trans('Mentés')}}</button>
+				<button type="submit" class="btn btn-primary pull-right">{{trans('Mentés')}}</button>
 			</div>
 		</div>
 	</form>

@@ -40,7 +40,7 @@
 
 		<div class="box-footer">
 			<a href="{{url(route('job_positions_list'))}}" class="btn btn-default">{{trans('Vissza')}}</a>
-			<a href="{{url(route('job_positions_edit', ['id' => $model->id]))}}" class="btn btn-info pull-right">{{trans('Szerkesztés')}}</a>
+			<a href="{{url(route('job_positions_edit', ['id' => $model->id]))}}" class="btn btn-primary pull-right">{{trans('Szerkesztés')}}</a>
 		</div>
 	</div>
 @endsection

@@ -99,4 +99,9 @@ Route::group(['middleware' => ['acl', 'locale']], function () {
 	Route::match(['get'], '/job_positions/view/{id}', 'JobPositionController@view')->name('job_positions_view');
 	Route::match(['get', 'post', 'put'], '/job_positions/edit/{id?}', 'JobPositionController@edit')->name('job_positions_edit');
 	Route::match(['get'], '/job_positions/delete/{id?}', 'JobPositionController@delete')->name('job_positions_delete');
+
+	// themes
+	Route::match(['get', 'post'], '/themes/list', 'ThemeController@index')->name('themes_list');
+	Route::match(['get', 'post', 'put'], '/themes/edit/{id?}', 'ThemeController@edit')->name('themes_edit');
+	Route::match(['get'], '/themes/delete/{id?}', 'ThemeController@delete')->name('themes_delete');
 });

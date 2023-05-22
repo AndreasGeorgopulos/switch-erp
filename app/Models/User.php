@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -54,6 +55,14 @@ class User extends Authenticatable
 	public function applicant_groups()
 	{
 		return $this->belongsToMany(ApplicantGroup::class);
+	}
+
+	/**
+	 * @return HasOne
+	 */
+	public function theme(): HasOne
+	{
+		return $this->hasOne(Theme::class, 'id', 'theme_id');
 	}
 
 	/**
