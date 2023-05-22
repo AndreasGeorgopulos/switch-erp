@@ -15,6 +15,7 @@ require('./contract_management');
 require('./search_management');
 require('./sales_management');
 require('./work_management');
+require('./callback_management');
 require('./tableFilter');
 
 /**

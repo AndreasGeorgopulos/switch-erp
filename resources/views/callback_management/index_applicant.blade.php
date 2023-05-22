@@ -12,12 +12,13 @@
 
 				@if(!empty($models))
 					{{csrf_field()}}
-					<table class="table table-bordered table-striped" id="callback-table">
+					<table class="table table-bordered table-striped" id="callback-applicants-table">
 						<thead>
 						<tr>
 							<th class="name">{{trans('Név')}}</th>
-							<th class="last-contact text-center">{{trans('Jelölt csoport')}}</th>
-							<th class="last-contact text-center">{{trans('Visszahívás dátuma')}}</th>
+							<th class="name text-center">{{trans('Jelölt csoport')}}</th>
+							<th class="description text-center">{{trans('Információ a jelöltről')}}</th>
+							<th class="text-center">{{trans('Visszahívás dátuma')}}</th>
 							<th class="cv text-center">{{trans('Önéletrajz')}}</th>
 							<th class="delete text-center">{{trans('Törlés')}}</th>
 						</tr>
@@ -27,6 +28,7 @@
 							<tr>
 								<td>{{$model->name}}</td>
 								<td class="text-center">{{$model->groups()->pluck('name')->implode(', ')}}</td>
+								<td class="text-center">{{$model->description}}</td>
 								<td class="text-center">
 									<span class="@if($model->last_callback_date == date('Y-m-d')) alert-call-flicker @endif">{{str_replace('-', '.', $model->last_callback_date)}}</span>
 								</td>
@@ -50,6 +52,8 @@
 						@endforeach
 						</tbody>
 					</table>
+
+					@include('callback_management._footbar')
 				@endif
 			</div>
 		</div>
