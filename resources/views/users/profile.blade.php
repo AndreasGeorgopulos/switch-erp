@@ -58,6 +58,16 @@
 							</select>
 							<div class="hint">{{trans('Ha nincs egy elem sem kiválasztva, az Adatbázis modulban az összes jelölt csoport megjelenik.')}}</div>
 						</div>
+
+						<div class="form-group">
+							<label>{{trans('Téma')}}</label>
+							<select name="theme_id" class="form-control select2">
+								<option>{{trans('Alapértelmezett beállítások')}}</option>
+								@foreach(\App\Models\Theme::getDropdownItems($model->theme_id) as $item)
+									<option value="{{$item['value']}}" @if($item['selected']) selected="selected" @endif>{{$item['title']}}</option>
+								@endforeach
+							</select>
+						</div>
 					</div>
 				</div>
 			</div>

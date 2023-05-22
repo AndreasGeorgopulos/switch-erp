@@ -38,6 +38,15 @@
                                 <option value="0" @if(old('active', $model->active) == 0) selected="selected" @endif>{{trans('Nem')}}</option>
                             </select>
                         </div>
+                        <div class="form-group">
+                            <label>{{trans('Téma')}}</label>
+                            <select name="theme_id" class="form-control select2">
+                                <option>{{trans('Alapértelmezett beállítások')}}</option>
+                                @foreach(\App\Models\Theme::getDropdownItems($model->theme_id) as $item)
+                                    <option value="{{$item['value']}}" @if($item['selected']) selected="selected" @endif>{{$item['title']}}</option>
+                                @endforeach
+                            </select>
+                        </div>
                     </div>
 
                     <div class="col-md-8">
