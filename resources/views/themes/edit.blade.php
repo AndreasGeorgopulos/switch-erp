@@ -38,6 +38,7 @@
 									<th style="width: 250px;">{{trans('Megnevezés')}}</th>
 									<th class="text-center">{{trans('CSS selector')}}</th>
 									<th class="text-center" style="width: 100px;">{{trans('Érték')}}</th>
+									<th class="text-center" style="width: 130px;">{{trans('Alapértelmezett')}}</th>
 								</tr>
 								</thead>
 
@@ -52,6 +53,7 @@
 											       value="{{ $css_data[$item['css_selector']][$item['property']] ?? ($item['default_value'] ?? '')  }}"
 											/>
 										</td>
+										<td class="text-center">{{$item['default_value'] ?? ''}}</td>
 									</tr>
 								@endforeach
 								</tbody>
