@@ -4,7 +4,7 @@
     <link rel="stylesheet"
           href="{{ asset('vendor/adminlte/dist/css/skins/skin-' . config('adminlte.skin', 'blue') . '.min.css')}} ">
 
-    @if($theme = \Illuminate\Support\Facades\Auth::user()->theme && $theme->is_active)
+    @if(($theme = \Illuminate\Support\Facades\Auth::user()->theme) && !empty($theme->is_active))
         <style>
             {{$theme->generateCss()}}
         </style>
