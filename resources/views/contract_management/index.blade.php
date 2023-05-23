@@ -35,7 +35,7 @@
 					<td>{{$model->contact_email}}</td>
 					<td>{{$model->contact_phone}}</td>
 					<td class="text-center">
-						<a href="{{url(route('contract_management_edit', ['id' => $model->id]))}}">
+						<a href="{{url(route('contract_management_edit', ['id' => $model->id]))}}" class="btn btn-secondary btn-sm">
 							<i class="fa @if($model->hasContract()) fa-edit @else fa-plus @endif"></i>
 						</a>
 					</td>

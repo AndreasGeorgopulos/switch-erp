@@ -208,7 +208,7 @@
 										@endif
 									</td>
 									<td class="text-center">
-										<a href="{{url(route('applicant_management_edit', ['id' => $applicant->id, 'selectedGroup' => $selectedGroup]))}}">
+										<a href="{{url(route('applicant_management_edit', ['id' => $applicant->id, 'selectedGroup' => $selectedGroup]))}}" class="btn btn-secondary btn-sm">
 											<i class="fa @if($applicant->hasCv()) fa-edit @else fa-plus @endif"></i>
 										</a>
 									</td>

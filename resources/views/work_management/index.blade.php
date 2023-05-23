@@ -49,7 +49,7 @@
 									<input type="text" maxlength="4" name="monogram" value="{{$m->monogram}}" class="form-control text-center center-block input-sm input-data w-100" />
 								</td>
 								<td class="text-center">
-									<a href="{{url(route('applicant_management_edit', ['id' => $m->applicant->id]))}}">
+									<a href="{{url(route('applicant_management_edit', ['id' => $m->applicant->id]))}}" class="btn btn-secondary btn-sm">
 										<i class="fa @if($m->applicant->hasCv()) fa-edit @else fa-plus @endif"></i>
 									</a>
 								</td>

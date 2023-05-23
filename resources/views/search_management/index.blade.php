@@ -86,7 +86,7 @@
 									</span>
 								</td>
 								<td class="text-center">
-									<a href="{{url(route('applicant_management_edit', ['id' => $m->applicant->id]))}}">
+									<a href="{{url(route('applicant_management_edit', ['id' => $m->applicant->id]))}}" class="btn btn-secondary btn-sm">
 										<i class="fa @if($m->applicant->hasCv()) fa-edit @else fa-plus @endif"></i>
 									</a>
 								</td>

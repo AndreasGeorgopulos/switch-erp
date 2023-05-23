@@ -33,7 +33,7 @@
 									<span class="@if($model->last_callback_date == date('Y-m-d')) alert-call-flicker @endif">{{str_replace('-', '.', $model->last_callback_date)}}</span>
 								</td>
 								<td class="text-center">
-									<a href="{{url(route('applicant_management_edit', ['id' => $model->id]))}}">
+									<a href="{{url(route('applicant_management_edit', ['id' => $model->id]))}}" class="btn btn-secondary btn-sm">
 										<i class="fa @if($model->hasCv()) fa-edit @else fa-plus @endif"></i>
 									</a>
 								</td>

@@ -86,6 +86,27 @@ return [
 			'title' => 'Táblázatok',
 			'items' => [
 				[
+					'title' => 'Fejléc háttérszíne',
+					'css_selector' => '.table-striped thead tr th',
+					'property' => 'background-color',
+					'input_type' => 'color',
+					'default_value' => '#ECF0F5',
+				],
+				[
+					'title' => 'Fejléc betűszíne',
+					'css_selector' => '.table-striped thead tr th',
+					'property' => 'color',
+					'input_type' => 'color',
+					'default_value' => '#000000',
+				],
+				[
+					'title' => 'Fejléc keretszíne',
+					'css_selector' => '.table-striped thead tr th',
+					'property' => 'border-color',
+					'input_type' => 'color',
+					'default_value' => '#F4F4F4',
+				],
+				[
 					'title' => 'Páros sorok háttérszíne',
 					'css_selector' => '.table-striped tbody tr:nth-of-type(even) td',
 					'property' => 'background-color',
@@ -112,6 +133,13 @@ return [
 					'property' => 'color',
 					'input_type' => 'color',
 					'default_value' => '#000000',
+				],
+				[
+					'title' => 'Keretszín',
+					'css_selector' => '.table-striped tbody tr td',
+					'property' => 'border-color',
+					'input_type' => 'color',
+					'default_value' => '#F4F4F4',
 				],
 			],
 		],
@@ -169,6 +197,25 @@ return [
 					'property' => 'color',
 					'input_type' => 'color',
 					'default_value' => '#ffffff',
+				],
+			],
+		],
+		[
+			'title' => 'Bootstrap secondary gombok (cv gombok, alapértelmezett átlátszó)',
+			'items' => [
+				[
+					'title' => 'Háttérszín',
+					'css_selector' => '.content-wrapper .btn.btn-secondary',
+					'property' => 'background-color',
+					'input_type' => 'color',
+					'default_value' => '#ffffff',
+				],
+				[
+					'title' => 'Betűszín',
+					'css_selector' => '.content-wrapper .btn.btn-secondary',
+					'property' => 'color',
+					'input_type' => 'color',
+					'default_value' => '#000000',
 				],
 			],
 		],
