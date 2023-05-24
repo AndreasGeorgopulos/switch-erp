@@ -91,7 +91,7 @@ class ApplicantManagementController extends Controller
 
 			}
 
-			$applicants = $query->orderBy('sort', 'desc')->get();
+			$applicants = $query->orderBy('last_contact_date', 'desc')->get();
 		}
 
 	    return view('applicant_management.index', [

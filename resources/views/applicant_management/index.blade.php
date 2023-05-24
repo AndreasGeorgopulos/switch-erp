@@ -92,8 +92,8 @@
 								<th class="information text-center">{{trans('Információ')}}</th>
 								<th class="last-contact text-center">
 									{{trans('Utolsó kapcsolat')}}
-									<button class="btn btn-default btn-xs btn-sort pull-right " data-sort="8" data-desc="false">
-										<i class="fa fa-sort"></i>
+									<button class="btn btn-default btn-xs btn-sort pull-right " data-sort="8" data-desc="true">
+										<i class="fa fa-sort-amount-desc"></i>
 									</button>
 								</th>
 								<th class="email text-center">{{trans('E-mail')}}</th>
@@ -188,7 +188,8 @@
 									$inEnglishTitle = !empty($inEnglishOption) ? $inEnglishOption['name'] : '';
 								@endphp
 								<tr id="{{$applicant->id}}" @if($applicant->is_marked) class="marked" @endif >
-									<td class="dragHandle text-center"><i class="fa fa-reorder"></i></td>
+<!--									<td class="dragHandle text-center"><i class="fa fa-reorder"></i></td>-->
+									<td class="text-center"></td>
 									<td class="marker">{{$applicant->name}}</td>
 									<td class="text-center">{{$applicant->experience_year}}</td>
 									<td class="text-center">{{$inEnglishTitle}}</td>
