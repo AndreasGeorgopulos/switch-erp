@@ -2,14 +2,18 @@
 
 namespace App\Models;
 
+use Exception;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasOne;
+use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Auth;
 
 class ApplicantCompany extends Model
 {
+	const STORAGE_PATH = 'app/public/tig';
+
 	protected $table = 'applicant_companies';
 
 	protected $primaryKey = ['applicant_id', 'job_position_id'];
@@ -188,5 +192,62 @@ class ApplicantCompany extends Model
 		}
 
 		return $this->getAttribute($keyName);
+	}
+
+	/**
+	 * @return bool
+	 */
+	public function hasTIG(): bool
+	{
+		$path = storage_path( static::STORAGE_PATH ) . '/' . $this->tig_file;
+		if ( empty( $this->tig_file ) || !file_exists( $path ) ) {
+			return false;
+		}
+
+		return true;
+	}
+
+	/**
+	 * @return string|null
+	 */
+	public function getTIGPath(): ?string
+	{
+		return $this->hasTIG() ? ( storage_path( static::STORAGE_PATH ) . '/' . $this->tig_file ) : null;
+	}
+
+	/**
+	 * @param UploadedFile $file
+	 * @return void
+	 * @throws Exception
+	 */
+	public function uploadTIG(UploadedFile $file )
+	{
+		$path = storage_path( static::STORAGE_PATH );
+		if ( !file_exists( $path) ) {
+			mkdir( $path, 0775, true );
+		}
+
+		$this->tig_file = $this->applicant_id . '-' . $this->job_position_id . '-' . $file->getClientOriginalName();
+		$this->tig_file_mime_type = $file->getClientMimeType();
+
+		$file->move( $path, $this->tig_file );
+		if ( !file_exists( $path . '/' . $this->tig_file ) ) {
+			throw new Exception( trans('Az tig feltöltése sikertelen. Kérjük, ellenőrizze a file írási jogosultságokat!') );
+		}
+		chmod($path . '/' . $this->tig_file, 0777);
+		$this->save();
+	}
+
+	/**
+	 * @return void
+	 */
+	public function deleteTIG()
+	{
+		if ( $path = $this->getTIGPath() ) {
+			unlink( $path );
+		}
+		$this->tig_file = null;
+		$this->tig_file_mime_type = null;
+		$this->save();
 	}
 }

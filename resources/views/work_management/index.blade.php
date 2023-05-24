@@ -20,6 +20,7 @@
 							<th class="last-contact text-center">{{trans('Kezdés dátuma')}}</th>
 							<th class="last-contact text-center">{{trans('Utánkövetés')}}</th>
 							<th class="monogram text-center">{{trans('Elhelyezte')}}</th>
+							<th class="cv text-center">{{trans('TIG')}}</th>
 							<th class="cv text-center">{{trans('Önéletrajz')}}</th>
 						</tr>
 						</thead>
@@ -47,6 +48,9 @@
 								</td>
 								<td class="text-center">
 									<input type="text" maxlength="4" name="monogram" value="{{$m->monogram}}" class="form-control text-center center-block input-sm input-data w-100" />
+								</td>
+								<td class="text-center">
+									@include('work_management._tig')
 								</td>
 								<td class="text-center">
 									<a href="{{url(route('applicant_management_edit', ['id' => $m->applicant->id]))}}" class="btn btn-secondary btn-sm">

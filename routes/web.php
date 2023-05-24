@@ -35,6 +35,9 @@ Route::group(['middleware' => ['acl', 'locale']], function () {
 	// Work management
 	Route::match(['get'], '/work_management', 'WorkManagementController@index')->name('work_management_index');
 	Route::match(['post'], '/work_management/save_data', 'WorkManagementController@saveData')->name('work_management_save_data');
+	Route::match(['post'], '/work_management/upload_tig/{applicant_id}/{job_position_id}', 'WorkManagementController@uploadTig')->name('work_management_upload_tig');
+	Route::match(['get'], '/work_management/delete_tig/{applicant_id}/{job_position_id}', 'WorkManagementController@deleteTig')->name('work_management_delete_tig');
+	Route::match(['get'], '/work_management/download_tig/{applicant_id}/{job_position_id}', 'WorkManagementController@downloadTig')->name('work_management_download_tig');
 
 	// Contract management
 	Route::match(['get'], '/contract_management', 'ContractManagementController@index')->name('contract_management_index');
