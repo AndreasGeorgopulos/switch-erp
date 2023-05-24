@@ -69,9 +69,9 @@
 							</select>
 						</div>
 
-						<div class="form-group">
+<!--						<div class="form-group">
 							<label><input type="checkbox" name="fix_applicants" value="1" @if($model->fix_applicants) checked="checked" @endif /> {{trans('Jelöltek fix')}}</label>
-						</div>
+						</div>-->
 					</div>
 				</div>
 			</div>
