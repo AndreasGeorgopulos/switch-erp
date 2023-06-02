@@ -9,6 +9,11 @@
 		{{csrf_field()}}
 		@include('layout.messages')
 		<div class="box">
+			<div class="box-header">
+				<a href="{{url(route('applicant_management_index', ['selectedGroup' => $selectedGroup]))}}" class="btn btn-default">{{trans('Vissza')}}</a>
+				<button type="submit" class="btn btn-primary pull-right">{{trans('Mentés')}}</button>
+			</div>
+
 			<div class="box-body">
 				<div class="row">
 					<div class="col-sm-6">
