@@ -55,9 +55,12 @@
 								<tfoot>
 								<tr>
 									<td colspan="5">
-										<button type="button" class="btn btn-default btn-sm btn-new">
+										<a href="{{url(route('applicant_management_edit', ['id' => 0, 'selectedGroup' => $selectedGroup->id]))}}" class="btn btn-default btn-sm">
 											<i class="fa fa-plus"></i> {{trans('Új jelölt hozzáadása')}}
-										</button>
+										</a>
+<!--										<button type="button" class="btn btn-default btn-sm btn-new">
+											<i class="fa fa-plus"></i> {{trans('Új jelölt hozzáadása')}}
+										</button>-->
 									</td>
 									<td colspan="2" class="text-right hidden save-buttonbar">
 										<button type="submit" class="btn btn-success btn-sm btn-save">

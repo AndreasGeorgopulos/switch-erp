@@ -21,6 +21,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\View\View;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Symfony\Component\Translation\Exception\NotFoundResourceException;
 use function foo\func;
 
 /**
@@ -145,7 +146,12 @@ class ApplicantManagementController extends Controller
 	 */
 	public function edit(Request $request, int $id, int $selectedGroup = null)
 	{
-		$model = $this->findModel($id);
+		try {
+			$model = $this->findModel($id);
+		} catch (NotFoundHttpException $exception) {
+			$model = new Applicant();
+		}
+
 		$skills = Skill::where('is_active', true)->orderBy('name', 'asc')->get();
 		$groups = ApplicantGroup::where('is_active', true)->orderBy('name', 'asc')->get();
 
@@ -168,8 +174,17 @@ class ApplicantManagementController extends Controller
 			}
 
 			// data save
+			$isNewApplicant = empty($model->id);
+			if ($isNewApplicant) {
+				$model->is_active = true;
+			}
 			$model->fill( $request->all() );
 			$model->save();
+
+			if ($isNewApplicant) {
+				$model->groups()->sync([$selectedGroup]);
+				$model->setNextSortValue($selectedGroup);
+			}
 
 			$this->setSkills($model, $inputSkills);
 			$this->setCompanies($model, $inputCompanies);

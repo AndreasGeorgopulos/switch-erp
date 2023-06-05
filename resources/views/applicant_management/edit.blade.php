@@ -140,7 +140,7 @@
 								<div class="form-group">
 									<label>{{trans('Cégeknek átküldve')}}</label>
 									<select name="applicant[companies][]" class="form-control select2" multiple tabindex="15">
-										@foreach(\App\Models\JobPosition::getCompanyDropdownItems() as $item)
+										@foreach(\App\Models\JobPosition::getCompanyDropdownItems(false) as $item)
 											<option value="{{$item->id}}"
 												@if(in_array($item->id, $model->companies()->pluck('id')->toArray())) selected="selected" @endif
 											>{{$item->company->name}} - {{$item->title}}</option>

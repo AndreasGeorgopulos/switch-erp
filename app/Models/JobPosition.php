@@ -142,11 +142,13 @@ class JobPosition extends Model implements IModelRules, IModelDeletable
 	/**
 	 * @return JobPosition[]|\Illuminate\Database\Eloquent\Builder[]|\Illuminate\Database\Eloquent\Collection|Builder[]|Collection
 	 */
-	public static function getCompanyDropdownItems()
+	public static function getCompanyDropdownItems(bool $onlyActive = true)
 	{
 		$models = static::with('company')
-			->where(function ($q) {
-				$q->where('is_active', 1);
+			->where(function ($q) use($onlyActive) {
+				if ($onlyActive) {
+					$q->where('is_active', 1);
+				}
 			})
 			->orderBy('title', 'asc')
 			->get();
