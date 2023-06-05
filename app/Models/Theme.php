@@ -95,4 +95,12 @@ class Theme extends Model implements IModelRules, IModelDeletable
 			];
 		}, $models);
 	}
+
+	/**
+	 * @return array
+	 */
+	public static function customMessages(): array
+	{
+		return [];
+	}
 }

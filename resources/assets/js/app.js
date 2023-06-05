@@ -16,6 +16,7 @@ require('./search_management');
 require('./sales_management');
 require('./work_management');
 require('./callback_management');
+require('./profile_vacation');
 require('./tableFilter');
 
 /**

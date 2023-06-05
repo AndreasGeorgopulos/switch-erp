@@ -34,6 +34,15 @@
 							<label>{{trans('Új jelszó megerősítése')}}</label>
 							<input type="password" class="form-control" name="password_confirmation" placeholder="" />
 						</div>
+						<div class="form-group">
+							<label>{{trans('Téma')}}</label>
+							<select name="theme_id" class="form-control select2">
+								<option value="0">{{trans('Alapértelmezett beállítások')}}</option>
+								@foreach(\App\Models\Theme::getDropdownItems($model->theme_id) as $item)
+									<option value="{{$item['value']}}" @if($item['selected']) selected="selected" @endif>{{$item['title']}}</option>
+								@endforeach
+							</select>
+						</div>
 					</div>
 
 					<div class="col-md-8">
@@ -59,15 +68,7 @@
 							<div class="hint">{{trans('Ha nincs egy elem sem kiválasztva, az Adatbázis modulban az összes jelölt csoport megjelenik.')}}</div>
 						</div>
 
-						<div class="form-group">
-							<label>{{trans('Téma')}}</label>
-							<select name="theme_id" class="form-control select2">
-								<option value="0">{{trans('Alapértelmezett beállítások')}}</option>
-								@foreach(\App\Models\Theme::getDropdownItems($model->theme_id) as $item)
-									<option value="{{$item['value']}}" @if($item['selected']) selected="selected" @endif>{{$item['title']}}</option>
-								@endforeach
-							</select>
-						</div>
+						@include('users.vacations.index')
 
 <!--						<div class="form-group">
 							<label><input type="checkbox" name="fix_applicants" value="1" @if($model->fix_applicants) checked="checked" @endif /> {{trans('Jelöltek fix')}}</label>

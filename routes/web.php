@@ -8,6 +8,10 @@ Route::match(['get', 'post'], '/', 'MainController@Login')->name('index');
 Route::match(['get', 'post'], '/login', 'MainController@Login')->name('login');
 Route::match(['get', 'post'], '/logout', 'MainController@Logout')->name('logout');
 
+Route::match(['get'], '/ajax_load_profile_vacations', 'VacationController@ajaxLoadProfileVacations')->name('ajax_load_profile_vacations');
+Route::match(['post'], '/ajax_delete_profile_vacation', 'VacationController@ajaxDeleteProfileVacation')->name('ajax_delete_profile_vacation');
+Route::match(['post'], '/ajax_save_profile_vacation', 'VacationController@ajaxSaveProfileVacation')->name('ajax_save_profile_vacation');
+
 Route::group(['middleware' => ['acl', 'locale']], function () {
 	// Kezdőlap
 	Route::match(['get'], '/', function () {

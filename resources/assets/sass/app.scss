@@ -271,3 +271,17 @@ ul.columns-3 {
   animation: flicker 1s infinite;
   background-color: #FFFF8F;
 }
+
+#vacation-area {
+  .table-area {
+    tr.vacation-status-1 td {
+    }
+    tr.vacation-status-2 td {
+      color: green;
+    }
+    tr.vacation-status-3 td {
+      color: red;
+      text-decoration: line-through;
+    }
+  }
+}

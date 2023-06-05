@@ -171,4 +171,12 @@ class Sale extends Model implements IModelRules
 	{
 		$this->sort = static::count() + 1;
 	}
+
+	/**
+	 * @return array
+	 */
+	public static function customMessages(): array
+	{
+		return [];
+	}
 }
