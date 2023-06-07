@@ -156,8 +156,9 @@ if (calendarArea.length) {
 				dayGridPlugin,
 			],
 			headerToolbar: {
-				center: "title",
-				right: "prev,today,next",
+				left: '',
+				center: 'title',
+				right: 'prev,today,next',
 			},
 			locale: huLocale,
 			initialView: 'dayGridMonth',

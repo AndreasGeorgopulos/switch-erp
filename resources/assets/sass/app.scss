@@ -293,6 +293,9 @@ ul.columns-3 {
 }
 
 #calendar {
+  /*position: absolute;*/
+  margin-top: -56px;
+
   .vacation {
     padding: 3px 3px 3px 3px !important;
     cursor: pointer !important;
@@ -309,16 +312,16 @@ ul.columns-3 {
   }
 
   .vacation-status-2 {
-    background-color: #00a65a !important;
-    border: solid 3px green !important;
+    background-color: #cfeadb !important;
+    border: solid 1px #cfeadb !important;
     .fc-event-title {
-      color: #ffffff !important;
+      color: green !important;
     }
   }
 
   .vacation-status-3 {
     background-color: #cccccc !important;
-    border: solid 3px #cccccc !important;
+    border: solid 1px #cccccc !important;
     .fc-event-title {
       text-decoration: line-through;
       color: #000000 !important;

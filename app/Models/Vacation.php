@@ -6,6 +6,7 @@ use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Facades\Auth;
 
 /**
  * Vacation model
@@ -97,8 +98,37 @@ class Vacation extends Model implements IModelDeletable, IModelRules, IModelEdit
 	{
 		$notExpired = $this->begin_date > Carbon::now()->format('Y-m-d');
 		$isNotApproved = $this->status !== self::STATUS_APPROVED;
+		$isPermitted = $this->user_id === Auth::user()->id || hasRole('superadmin') || hasRole('calendar');
 
-		return $notExpired && $isNotApproved;
+		return $notExpired && $isNotApproved && $isPermitted;
+	}
+
+	/**
+	 * Check if the vacation is approvable.
+	 *
+	 * @return bool
+	 */
+	public function isApprovable(): bool
+	{
+		$notExpired = $this->begin_date > Carbon::now()->format('Y-m-d');
+		$isNotApproved = $this->status !== self::STATUS_APPROVED;
+		$isPermitted = hasRole('superadmin') || hasRole('calendar');
+
+		return $notExpired && $isNotApproved && $isPermitted;
+	}
+
+	/**
+	 * Check if the vacation is rejectable.
+	 *
+	 * @return bool
+	 */
+	public function isRejectable(): bool
+	{
+		$notExpired = $this->begin_date > Carbon::now()->format('Y-m-d');
+		$isNotApproved = $this->status !== self::STATUS_REJECTED;
+		$isPermitted = hasRole('superadmin') || hasRole('calendar');
+
+		return $notExpired && $isNotApproved && $isPermitted;
 	}
 
 	/**
@@ -138,7 +168,7 @@ class Vacation extends Model implements IModelDeletable, IModelRules, IModelEdit
 		return [
 			'begin_date.required' => trans('A szabadság kezdő dátumának megadása kötelező.'),
 			'begin_date.date' => trans('A szabadság kezdő dátumának formátuma nem megfelelő.'),
-			'begin_date.after' => trans('A szabadság kezdete legkorábban holnapkezdődhet.'),
+			'begin_date.after' => trans('A szabadság kezdete legkorábban holnap kezdődhet.'),
 			'end_date.required' => 'A szabadság befejező dátumának megadása kötelező.',
 			'end_date.date' => 'A szabadság befejező dátumának formátuma nem megfelelő.',
 			'end_date.after_or_equal' => 'A szabadság befejező dátumának azonosnak vagy későbbinek kell lennie, mint a megadott kezdő dátum.',

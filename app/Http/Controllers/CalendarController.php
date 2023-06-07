@@ -52,8 +52,8 @@ class CalendarController extends Controller
 				'extendedProps' => [
 					'notice' => $item->notice,
 					'is_deletable' => (int) $item->isDeletable(),
-					'is_approvable' => (int) ($item->status !== Vacation::STATUS_APPROVED),
-					'is_rejectable' => (int) ($item->status !== Vacation::STATUS_REJECTED),
+					'is_approvable' => (int) $item->isApprovable(),
+					'is_rejectable' => (int) $item->isRejectable(),
 				],
 			];
 		})->toArray();
