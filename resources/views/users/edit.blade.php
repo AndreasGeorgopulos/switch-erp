@@ -32,6 +32,10 @@
                             <input type="password" class="form-control" name="password_confirmation" placeholder="" />
                         </div>
                         <div class="form-group">
+                            <label>{{trans('Éves szabadnapok száma')}}</label>
+                            <input type="number" min="0" max="365" class="form-control" name="vacation_days_per_year" value="{{old('vacation_days_per_year', $model->vacation_days_per_year)}}" placeholder="" />
+                        </div>
+                        <div class="form-group">
                             <label>{{trans('Aktív')}}</label>
                             <select class="form-control select2" name="active">
                                 <option value="1" @if(old('active', $model->active) == 1) selected="selected" @endif>{{trans('Igen')}}</option>

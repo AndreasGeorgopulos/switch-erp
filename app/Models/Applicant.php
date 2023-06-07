@@ -416,4 +416,12 @@ class Applicant extends Model implements IModelRules, IModelSortable
 
 		$this->sort = $model->applicants()->count() + 1;
 	}
+
+	/**
+	 * @return array
+	 */
+	public static function customMessages(): array
+	{
+		return [];
+	}
 }

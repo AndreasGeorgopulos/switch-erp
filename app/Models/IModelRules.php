@@ -13,4 +13,9 @@ interface IModelRules
 	 * @return array
 	 */
 	public static function niceNames(): array;
+
+	/**
+	 * @return array
+	 */
+	public static function customMessages(): array;
 }

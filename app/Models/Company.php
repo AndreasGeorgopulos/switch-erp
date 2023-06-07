@@ -217,4 +217,12 @@ class Company extends Model implements IModelRules, IModelDeletable
 		}
 		return parent::delete();
 	}
+
+	/**
+	 * @return array
+	 */
+	public static function customMessages(): array
+	{
+		return [];
+	}
 }

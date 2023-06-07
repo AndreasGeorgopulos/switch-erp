@@ -14,6 +14,12 @@
 // AdminLTE overrides
 @import "adminlte";
 
+// Fullcalendar
+@fullcalendar/core/main.css;
+@fullcalendar/daygrid/main.css;
+@fullcalendar/timegrid/main.css;
+@fullcalendar/list/main.css;
+
 .select2-container--default .select2-selection--multiple .select2-selection__choice__remove {
   border-right: none !important;
 }
@@ -270,4 +276,52 @@ ul.columns-3 {
   }
   animation: flicker 1s infinite;
   background-color: #FFFF8F;
+}
+
+#vacation-area {
+  .table-area {
+    tr.vacation-status-1 td {
+    }
+    tr.vacation-status-2 td {
+      color: green;
+    }
+    tr.vacation-status-3 td {
+      color: red;
+      text-decoration: line-through;
+    }
+  }
+}
+
+#calendar {
+  .vacation {
+    padding: 3px 3px 3px 3px !important;
+    cursor: pointer !important;
+    font-size: 14px;
+    margin-bottom: 5px;
+  }
+
+  .vacation-status-1 {
+    background-color: #ffffff !important;
+    border: solid 1px #cccccc !important;
+    .fc-event-title {
+      color: #000000 !important;
+    }
+  }
+
+  .vacation-status-2 {
+    background-color: #00a65a !important;
+    border: solid 3px green !important;
+    .fc-event-title {
+      color: #ffffff !important;
+    }
+  }
+
+  .vacation-status-3 {
+    background-color: #cccccc !important;
+    border: solid 3px #cccccc !important;
+    .fc-event-title {
+      text-decoration: line-through;
+      color: #000000 !important;
+    }
+  }
 }

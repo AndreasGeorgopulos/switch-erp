@@ -22,6 +22,11 @@
     "vue": "^2.1.10"
   },
   "dependencies": {
+    "@fullcalendar/core": "^6.1.8",
+    "@fullcalendar/daygrid": "^6.1.8",
+    "@fullcalendar/list": "^6.1.8",
+    "@fullcalendar/timegrid": "^6.1.8",
+    "fullcalendar": "^6.1.8",
     "http": "*",
     "select2": "*",
     "tablednd": "^1.0.5"
