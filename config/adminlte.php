@@ -104,21 +104,13 @@ return [
     */
 	
 	'menu' => [
-		/*'FŐMENÜ',
 		[
-			'text' => 'Menedzsment',
-			'route' => 'applicant_management_index',
+			'text' => 'Naptár',
+			'route' => 'calendar',
 			'role' => 'login',
-			'icon' => 'user',
-			'active' => ['admin'],
+			'icon' => 'calendar',
+			'active' => ['calendar'],
 		],
-		[
-			'text' => 'Profilom',
-			'route' => 'users_profile',
-			'role' => 'login',
-			'icon' => 'user-o',
-			'active' => ['users_profile'],
-		],*/
 		[
 			'text'    => 'Beállítások',
 			'icon'    => 'cog',
@@ -177,15 +169,6 @@ return [
 				],
 			],
 		],
-		/*[
-			'text' => 'Fordítások',
-			'route' => 'translation_getindex',
-			'role' => 'translates',
-			'icon' => 'language',
-			'active' => ['translation/*'],
-		],
-		'NYELV VÁLASZTÁS',*/
-		
 	],
 
     /*

@@ -39,7 +39,7 @@ class Vacation extends Model implements IModelDeletable, IModelRules, IModelEdit
 	}
 
 	/**
-	 * Get the difference in days between begin_date and end_date.
+	 * Get the difference in days between begin_date and end_date except weekend days.
 	 *
 	 * @return int
 	 */
@@ -48,7 +48,17 @@ class Vacation extends Model implements IModelDeletable, IModelRules, IModelEdit
 		$beginDate = Carbon::parse($this->begin_date);
 		$endDate = Carbon::parse($this->end_date)->addDay();
 
-		return (int)$endDate->diffInDays($beginDate);
+		$diffDays = $endDate->diffInDays($beginDate);
+
+		$weekendDays = 0;
+		for ($i = 0; $i < $diffDays; $i++) {
+			$date = $beginDate->copy()->addDays($i);
+			if ($date->isWeekend()) {
+				$weekendDays++;
+			}
+		}
+
+		return (int) $diffDays - $weekendDays;
 	}
 
 	/**

@@ -16,11 +16,11 @@
 	<div class="col-sm-3"></div>
 	<div class="col-sm-3">
 		<label>{{trans('Kezdete')}}</label>
-		<input type="date" name="begin_date" class="form-control" required="required" max="2999-12-31" />
+		<input type="date" name="begin_date" class="form-control" max="2999-12-31" />
 	</div>
 	<div class="col-sm-3">
 		<label>{{trans('Vége')}}</label>
-		<input type="date" name="end_date" class="form-control" required="required" max="2999-12-31" />
+		<input type="date" name="end_date" class="form-control" max="2999-12-31" />
 	</div>
 </div>
 <div class="row">

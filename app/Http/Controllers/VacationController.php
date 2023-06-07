@@ -26,7 +26,7 @@ class VacationController extends Controller
 	{
 		$this->validateAjaxRequest($request);
 
-		$userModel = User::findOrFail(Auth::user()->id ?? null);
+		$userModel = $this->findUserModel();
 
 		return view('users.vacations._list', [
 			'userModel' => $userModel,
@@ -82,7 +82,7 @@ class VacationController extends Controller
 		$this->validateAjaxRequest($request);
 
 		$id = $request->get('id');
-		$vacationModel = Vacation::findOrFail($id);
+		$vacationModel = $this->findVacationModel($id);
 		if (!$vacationModel->isDeletable()) {
 			throw new NotFoundResourceException('Model not deletable: ' . Vacation::class . ' #' . $id);
 		}
@@ -100,6 +100,48 @@ class VacationController extends Controller
 	}
 
 	/**
+	 * @param Request $request
+	 * @return JsonResponse
+	 */
+	public function ajaxApproveVacation(Request $request): JsonResponse
+	{
+		$this->validateAjaxRequest($request);
+
+		$id = $request->get('id');
+		$vacationModel = $this->findVacationModel($id);
+
+		$vacationModel->status = Vacation::STATUS_APPROVED;
+		if (!$vacationModel->save()) {
+			throw new RuntimeException('Model save failed: ' . Vacation::class . ' #' . $vacationModel->id);
+		}
+
+		return response()->json([
+			'success' => true,
+		]);
+	}
+
+	/**
+	 * @param Request $request
+	 * @return JsonResponse
+	 */
+	public function ajaxRejectVacation(Request $request): JsonResponse
+	{
+		$this->validateAjaxRequest($request);
+
+		$id = $request->get('id');
+		$vacationModel = $this->findVacationModel($id);
+
+		$vacationModel->status = Vacation::STATUS_REJECTED;
+		if (!$vacationModel->save()) {
+			throw new RuntimeException('Model save failed: ' . Vacation::class . ' #' . $vacationModel->id);
+		}
+
+		return response()->json([
+			'success' => true,
+		]);
+	}
+
+	/**
 	 * Validate that the request is an AJAX call.
 	 *
 	 * @param Request $request
@@ -111,5 +153,26 @@ class VacationController extends Controller
 		if (!$request->ajax()) {
 			throw new NotAcceptableHttpException('This HTTP request is not an AJAX call.');
 		}
+	}
+
+	/**
+	 * Find Vacation model by id
+	 *
+	 * @param int $id
+	 * @return Vacation
+	 */
+	private function findVacationModel(int $id): Vacation
+	{
+		return Vacation::findOrFail($id);
+	}
+
+	/**
+	 * Find logged user model
+	 *
+	 * @return User
+	 */
+	private function findUserModel(): User
+	{
+		return User::findOrFail(Auth::user()->id ?? null);
 	}
 }
