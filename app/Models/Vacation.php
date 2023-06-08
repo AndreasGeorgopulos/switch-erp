@@ -29,6 +29,18 @@ class Vacation extends Model implements IModelDeletable, IModelRules, IModelEdit
 
 	protected $fillable = ['begin_date', 'end_date', 'notice'];
 
+	public function save(array $options = [])
+	{
+		if (empty($this->user_id)) {
+			$this->user_id = Auth::user()->id ?? null;
+		}
+		if ($this->notice === null) {
+			$this->notice = '';
+		}
+
+		return parent::save($options);
+	}
+
 	/**
 	 * Define the "user" relationship.
 	 *
@@ -141,7 +153,7 @@ class Vacation extends Model implements IModelDeletable, IModelRules, IModelEdit
 		return [
 			'begin_date' => 'required|date|after:' . Carbon::now()->format('Y-m-d'),
 			'end_date' => ['required', 'date', 'after_or_equal:begin_date'],
-			'notice' => 'required|min:3|max:255',
+			'notice' => 'max:255',
 		];
 	}
 

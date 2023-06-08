@@ -21,7 +21,7 @@ class CreateVacationsTable extends Migration
 	        $table->integer('user_id')->unsigned();
 			$table->date('begin_date');
 			$table->date('end_date');
-			$table->text('notice');
+			$table->text('notice')->nullable();
 			$table->tinyInteger('status')->default(1)->comment('1 - Requested, 2 - Approved, 3 - Rejected');
             $table->timestamps();
 			$table->softDeletes();

@@ -54,9 +54,6 @@ class VacationController extends Controller
 
 		$vacationModel = Vacation::findOrNew($request->get('id'));
 		$vacationModel->fill($request->all());
-		if (empty($vacationModel->user_id)) {
-			$vacationModel->user_id = Auth::user()->id ?? null;
-		}
 
 		if (!$vacationModel->save()) {
 			throw new RuntimeException('Model save failed: ' . Vacation::class . ' #' . $vacationModel->id);
