@@ -23,20 +23,13 @@
                             <td>{{$model->key}}</td>
                             <td>{{!empty($translate->name) ? $translate->name : ''}}</td>
                             <td>{{!empty($translate->description) ? $translate->description : ''}}</td>
-                            <td>
-                                <div class="btn-group pull-right">
-                                    <button type="button" class="btn btn-primary btn-sm">{{trans('Műveletek')}}</button>
-                                    <button type="button" class="btn btn-primary btn-sm dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                                        <span class="caret"></span>
-                                        <span class="sr-only">Toggle Dropdown</span>
-                                    </button>
-                                    <ul class="dropdown-menu" role="menu">
-                                        <li><a href="{{url(route('roles_edit', ['id' => $model->id]))}}"><i class="fa fa-edit"></i> {{trans('Szerkesztés')}}</a></li>
-                                        <li class="divider"></li>
-                                        <li><a href="{{url(route('roles_delete', ['id' => $model->id]))}}" class="confirm"><i class="fa fa-trash"></i> {{trans('Törlés')}}</a></li>
-                                    </ul>
-                                </div>
-
+                            <td class="text-right" style="width: 150px;">
+                                <a href="{{url(route('roles_edit', ['id' => $model->id]))}}" class="btn btn-primary btn-sm">
+                                    <i class="fa fa-edit"></i>
+                                </a>
+                                <a href="{{url(route('roles_delete', ['id' => $model->id]))}}" class="btn btn-danger btn-sm confirm">
+                                    <i class="fa fa-trash"></i>
+                                </a>
                             </td>
                         </tr>
                     @endforeach
