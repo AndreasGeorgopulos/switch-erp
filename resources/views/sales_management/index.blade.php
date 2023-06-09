@@ -164,7 +164,7 @@
 					<tbody>
 					@foreach($sales as $model)
 						<tr id="{{$model->id}}" data-sort="{{$model->id}}">
-							<td class="dragHandle text-center"><i class="fa fa-reorder"></i></td>
+							<td></td>
 							<td>
 								<input type="text"
 								       name="company_name"

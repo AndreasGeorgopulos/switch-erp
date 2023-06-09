@@ -45,7 +45,7 @@ class SalesManagementController extends Controller
 					$q->where($k, $v);
 				}
 			}
-	    })->orderBy('sort', 'desc')->get();
+	    })->orderBy('last_contact_date', 'desc')->get();
 
 	    return view('sales_management.index', [
 		    'site_title' => trans('Sales'),
