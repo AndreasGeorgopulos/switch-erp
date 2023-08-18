@@ -16,6 +16,9 @@ RUN apt install -y libfreetype6-dev
 RUN apt install -y libzip-dev
 RUN apt install -y g++
 RUN apt install -y nodejs
+
+RUN apt update
+RUN apt upgrade -y --fix-missing
 RUN apt install -y npm
 #RUN apt install -y oniguruma
 
