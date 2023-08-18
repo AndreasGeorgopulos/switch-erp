@@ -139,7 +139,7 @@ class ApplicantCompany extends Model
 				if ($key === 'all') {
 					$q->where('status', '>=', 1);
 				} elseif ($key === 'active') {
-					$q->whereNotIn('status', [2, 3, 7]);
+					$q->whereNotIn('status', [2, 3, 7, 8]);
 				} elseif ($key === 'inactive') {
 					$q->whereIn('status', [2, 3]);
 				} elseif ($key === 'ready') {

@@ -107,7 +107,7 @@ if ($('#search-table').length) {
 		},
 
 		showOnlyActiveApplicants: function () {
-			const selectors = 'tr.status-2, tr.status-3, tr.status-7';
+			const selectors = 'tr.status-2, tr.status-3, tr.status-7, tr.status-8';
 			this.table.find(selectors).hide();
 		},
 
