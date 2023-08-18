@@ -36,8 +36,11 @@ class JobPositionController extends Controller implements ICrudController
 			$searchtext = $request->get( 'searchtext', '' );
 
 			if ( $searchtext != '' ) {
-				$list = JobPosition::where( 'id', 'like', '%' . $searchtext . '%' )
-					->orWhere( 'name', 'like', '%' . $searchtext . '%' )
+				$list = JobPosition::whereHas('company', function ($q) use($searchtext) {
+                        $q->where( 'name', 'like', '%' . $searchtext . '%' );
+                    })
+                    ->orWhere( 'id', 'like', '%' . $searchtext . '%' )
+					->orWhere( 'title', 'like', '%' . $searchtext . '%' )
 					->orderby( $sort, $direction )
 					->paginate( $length );
 			}
