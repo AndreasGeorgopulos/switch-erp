@@ -41,7 +41,7 @@
 	};
 
 	$(document).ready(function () {
-		$.each(['#data-applicant-table', '#data-sales-table'], function (index, table_id) {
+		$.each(['#data-applicant-table', '#data-sales-table', '#contract-table'], function (index, table_id) {
 			if (!$(table_id).length) {
 				return;
 			}

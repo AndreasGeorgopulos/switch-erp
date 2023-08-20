@@ -10,7 +10,15 @@
 		<table class="table table-bordered table-striped dataTable" id="contract-table">
 			<thead>
 			<tr role="row">
-				<th>{{trans('Név')}}</th>
+				<th>
+					{{trans('Név')}}
+					<button type="button" class="btn btn-default btn-xs pull-right btn-table-filter-open">
+						<i class="fa fa-search"></i>
+					</button>
+					<button type="button" class="btn btn-default btn-xs pull-right btn-table-filter-close hidden">
+						<i class="fa fa-close"></i>
+					</button>
+				</th>
 				<th>{{trans('Sikerdíj mértéke')}}</th>
 				<th>{{trans('Fizetési határidő')}}</th>
 				<th>{{trans('Kapcsolattartó')}}</th>
@@ -18,6 +26,17 @@
 				<th>{{trans('Telefonszám')}}</th>
 				<th class="text-center">{{trans('Szerződés')}}</th>
 				<th class="text-center">{{trans('Cég törlése')}}</th>
+			</tr>
+			<tr role="row" class="filter-row hidden">
+				<th>
+					<select name="id" class="form-control select2 search-input" style="width: 100%;">
+						<option></option>
+						@foreach(\App\Models\Company::getDropdownItems($getParams['id'], false, false) as $item)
+							<option value="{{$item['value']}}" @if($item['selected']) selected="selected" @endif>{{$item['title']}}</option>
+						@endforeach
+					</select>
+				</th>
+				<th colspan="7"></th>
 			</tr>
 			</thead>
 

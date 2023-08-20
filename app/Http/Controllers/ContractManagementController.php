@@ -19,15 +19,28 @@ class ContractManagementController extends Controller
 	/**
 	 * @return Factory|Application|View
 	 */
-	public function index()
+	public function index(Request $request)
 	{
-		$companies = Company::orderBy('name', 'asc')->get();
+        $getParams = [
+            'id' => $request->get('id', null),
+        ];
+
+        $companies = Company::where(function ($q) use ($getParams) {
+            foreach ($getParams as $k => $v) {
+                if (empty($v)) {
+                    continue;
+                }
+
+                $q->where($k, $v);
+            }
+        })->orderBy('name', 'asc')->get();
 
 		return view('contract_management.index', [
 			'site_title' => trans('Szerződések'),
 			'site_subtitle' => 'Version 3.0',
 			'breadcrumb' => [],
 			'companies' => $companies,
+            'getParams' => $getParams,
 		]);
 	}
 

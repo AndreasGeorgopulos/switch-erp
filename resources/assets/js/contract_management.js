@@ -24,6 +24,18 @@ if ($('#contract-table').length) {
 			$this.table.find('tfoot .btn-cancel').on('click', function () {
 				$this.cancelRows();
 			});
+
+			$this.table.find('thead select.search-input').off('change');
+			$this.table.find('thead select.search-input').on('change', function (e) {
+				e.preventDefault();
+				$this.filterRows();
+			});
+
+			$this.table.find('thead input.search-input[type=date]').off('change');
+			$this.table.find('thead input.search-input[type=date]').on('change', function (e) {
+				e.preventDefault();
+				$this.filterRows();
+			});
 		},
 
 		addNewRow: function () {
@@ -42,6 +54,22 @@ if ($('#contract-table').length) {
 		cancelRows: function () {
 			this.table.find('tbody tr.new-row').remove();
 			this.save_buttonbar.addClass('hidden');
+		},
+
+		filterRows: function () {
+			const $this = this;
+			let getItems = [];
+			$.each($this.table.find('thead .search-input'), function (index, item) {
+				if ($(item).val() != '') {
+					const option = $(item).attr('name') + '=' + $(item).val();
+					if (getItems.lastIndexOf(option) == -1) {
+						getItems.push(option);
+					}
+				}
+			});
+
+			let urlParts = document.location.href.split('?');
+			document.location.replace(urlParts[0] + (getItems.length ? ('?' + getItems.join('&')) : '') );
 		},
 	};
 
