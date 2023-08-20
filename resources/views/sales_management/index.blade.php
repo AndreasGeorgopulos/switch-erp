@@ -74,7 +74,7 @@
 						<tr role="row" class="filter-row hidden">
 							<th></th>
 							<th>
-								<select name="company_name" class="form-control search-input w-400">
+								<select name="company_name" class="form-control select2 search-input w-400">
 									<option></option>
 									@foreach(\App\Models\Sale::getFilterDropdownOptions('company_name', $getParams['company_name']) as $item)
 										<option value="{{$item['value']}}" @if($item['selected']) selected="selected" @endif>{{$item['title']}}</option>
