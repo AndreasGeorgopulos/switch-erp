@@ -16,5 +16,6 @@ class VerifyCsrfToken extends BaseVerifier
 		'search_management/save_data',
 		'work_management/save_data',
 		'applicant_management/set-is-marked',
+		'sales_management/set-is-marked',
 	];
 }
