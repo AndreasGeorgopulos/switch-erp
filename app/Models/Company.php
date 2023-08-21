@@ -23,6 +23,7 @@ use Illuminate\Http\UploadedFile;
  * @property string $contact_phone
  * @property string $contract_file
  * @property string $contract_file_mime_type
+ * @property string $contract_date
  * @property bool $is_active
  * @property string $created_at
  * @property string $updated_at
@@ -43,6 +44,7 @@ class Company extends Model implements IModelRules, IModelDeletable
 		'contact_name',
 		'contact_email',
 		'contact_phone',
+        'contract_date',
 		'is_active',
 	];
 

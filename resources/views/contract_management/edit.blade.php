@@ -31,16 +31,22 @@
 						</div>
 
 						<div class="row">
-							<div class="col-md-6">
+							<div class="col-md-4">
 								<div class="form-group">
 									<label>{{trans('Sikerdíj mértéke')}} (%)</label>
 									<input type="text" name="success_award" class="form-control only-numbers percent" value="{{old('success_award', $model->success_award)}}" maxlength="3" />
 								</div>
 							</div>
-							<div class="col-md-6">
+							<div class="col-md-4">
 								<div class="form-group">
 									<label>{{trans('Fizetési határidő')}} (nap)</label>
 									<input type="text" name="payment_deadline" class="form-control only-numbers" value="{{old('payment_deadline', $model->payment_deadline)}}" maxlength="3" />
+								</div>
+							</div>
+							<div class="col-md-4">
+								<div class="form-group">
+									<label>{{trans('Szerződés dátuma')}}</label>
+									<input type="date" name="contract_date" max="2999-12-31" class="form-control" value="{{old('contract_date', $model->contract_date)}}" />
 								</div>
 							</div>
 						</div>

@@ -24,6 +24,7 @@
 				<th>{{trans('Kapcsolattartó')}}</th>
 				<th>{{trans('E-mail')}}</th>
 				<th>{{trans('Telefonszám')}}</th>
+				<th>{{trans('Dátum')}}</th>
 				<th class="text-center">{{trans('Szerződés')}}</th>
 				<th class="text-center">{{trans('Cég törlése')}}</th>
 			</tr>
@@ -53,6 +54,7 @@
 					<td>{{$model->contact_name}}</td>
 					<td>{{$model->contact_email}}</td>
 					<td>{{$model->contact_phone}}</td>
+					<td>{{!empty($model->contract_date) ? \Carbon\Carbon::parse($model->contract_date)->format('Y.m.d.') : ''}}</td>
 					<td class="text-center">
 						<a href="{{url(route('contract_management_edit', ['id' => $model->id]))}}" class="btn btn-secondary btn-sm">
 							<i class="fa @if($model->hasContract()) fa-edit @else fa-plus @endif"></i>
