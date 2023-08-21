@@ -27,6 +27,7 @@ use Illuminate\Support\Facades\Auth;
  * @property string $last_contact_date
  * @property string $web
  * @property string $monogram
+ * @property bool $is_marked
  */
 class Sale extends Model implements IModelRules
 {

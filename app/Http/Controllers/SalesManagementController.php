@@ -153,4 +153,22 @@ class SalesManagementController extends Controller
 
 		return response()->json(null, 200);
 	}
+
+    /**
+     * @param Request $request
+     * @return JsonResponse
+     */
+    public function setIsMarked(Request $request): JsonResponse
+    {
+        if (!($model = Sale::find($request->get('id')))) {
+            abort(404);
+        }
+
+        $model->is_marked = !(bool) $model->is_marked;
+        $model->save();
+
+        return response()->json([
+            'marked' => (bool) $model->is_marked,
+        ], 200);
+    }
 }

@@ -59,6 +59,7 @@ Route::group(['middleware' => ['acl', 'locale']], function () {
 	Route::match(['post'], '/sales_management/update', 'SalesManagementController@update')->name('sales_management_update');
 	Route::match(['delete'], '/sales_management/delete/{id}', 'SalesManagementController@delete')->name('sales_management_delete');
 	Route::match(['post'], '/sales_management/reorder', 'SalesManagementController@reorder')->name('sales_management_reorder');
+    Route::match(['post'], '/sales_management/set-is-marked', 'SalesManagementController@setIsMarked')->name('sales_management_set_is_marked');
 
 	// Callback management
 	Route::match(['get'], '/callback_management', 'CallbackManagementController@index')->name('callback_management_index');

@@ -163,8 +163,8 @@
 
 					<tbody>
 					@foreach($sales as $model)
-						<tr id="{{$model->id}}" data-sort="{{$model->id}}">
-							<td></td>
+						<tr id="{{$model->id}}" data-sort="{{$model->id}}" @if($model->is_marked) class="marked" @endif>
+							<td class="marker"></td>
 							<td>
 								<input type="text"
 								       name="company_name"

@@ -12,6 +12,7 @@ if ($('#data-sales-table').length) {
 		button_reorder_cancel: null,
 		button_modify_save: null,
 		button_modify_cancel: null,
+		in_progress: false,
 
 		init: function () {
 			this.table_data = $('#data-sales-table');
@@ -60,6 +61,13 @@ if ($('#data-sales-table').length) {
 			$this.table_data.find('thead input.search-input[type=date]').on('change', function (e) {
 				e.preventDefault();
 				$this.filterRows();
+			});
+
+			$this.table_data.find('td.marker').off('click');
+			$this.table_data.find('td.marker').on('click', function (e) {
+				if ($this.in_progress === false) {
+					$this.setIsMarked($(this));
+				}
 			});
 
 			$this.button_scroll_left.off('click');
@@ -204,6 +212,26 @@ if ($('#data-sales-table').length) {
 			$this.button_modify_save.addClass('hidden');
 			$this.button_modify_cancel.addClass('hidden');
 			$this.deSelectRows();
+		},
+
+		setIsMarked: function (element) {
+			const $this = this;
+			const tr = element.parents().closest('tr');
+			const url = '/sales_management/set-is-marked';
+			let data = {
+				_token: $('input[name="_token"]').val(),
+				id: tr.attr('id')
+			};
+
+			$this.in_progress = true;
+			$.post(url, data, function (response) {
+				if (response.marked) {
+					tr.addClass('marked');
+				} else {
+					tr.removeClass('marked');
+				}
+				$this.in_progress = false;
+			});
 		},
 
 		saveReorder: function () {
