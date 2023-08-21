@@ -7,10 +7,13 @@
 @section('content')
 	<form method="post" enctype="multipart/form-data">
 		{{csrf_field()}}
+
+		<input type="hidden" name="backUrl" value="{{$backUrl}}" />
+
 		@include('layout.messages')
 		<div class="box">
 			<div class="box-header">
-				<a href="{{url(route('applicant_management_index', ['selectedGroup' => $selectedGroup]))}}" class="btn btn-default">{{trans('Vissza')}}</a>
+				<a href="{{$backUrl}}" class="btn btn-default">{{trans('Vissza')}}</a>
 				<button type="submit" class="btn btn-primary pull-right">{{trans('Mentés')}}</button>
 			</div>
 
@@ -191,7 +194,7 @@
 			</div>
 
 			<div class="box-footer">
-				<a href="{{url(route('applicant_management_index', ['selectedGroup' => $selectedGroup]))}}" class="btn btn-default">{{trans('Vissza')}}</a>
+				<a href="{{$backUrl}}" class="btn btn-default">{{trans('Vissza')}}</a>
 				<button type="submit" class="btn btn-primary pull-right">{{trans('Mentés')}}</button>
 			</div>
 		</div>

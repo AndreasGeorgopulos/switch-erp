@@ -404,10 +404,11 @@ class Applicant extends Model implements IModelRules, IModelSortable
 			->count();
 	}
 
-	/**
-	 * @param int $applicantGroupId
-	 * @return void
-	 */
+    /**
+     * @param int $applicantGroupId
+     * @return void
+     * @throws Exception
+     */
 	public function setNextSortValue(int $applicantGroupId)
 	{
 		if (!($model = ApplicantGroup::find($applicantGroupId))) {

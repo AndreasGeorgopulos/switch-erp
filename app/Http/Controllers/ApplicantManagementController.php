@@ -152,6 +152,7 @@ class ApplicantManagementController extends Controller
 			$model = new Applicant();
 		}
 
+        $backUrl = $this->getBackUrl();
 		$skills = Skill::where('is_active', true)->orderBy('name', 'asc')->get();
 		$groups = ApplicantGroup::where('is_active', true)->orderBy('name', 'asc')->get();
 
@@ -222,6 +223,7 @@ class ApplicantManagementController extends Controller
 			'selectedGroup' => $selectedGroup,
 			'selectedGroupIds' => $model->groups()->pluck('id')->toArray(),
 			'selectedSkillIds' => $model->skills()->pluck('id')->toArray(),
+            'backUrl' => $backUrl,
 		] );
 	}
 
@@ -337,7 +339,11 @@ class ApplicantManagementController extends Controller
 		return response()->json(null, 200);
 	}
 
-	public function setIsMarked(Request $request): JsonResponse
+    /**
+     * @param Request $request
+     * @return JsonResponse
+     */
+    public function setIsMarked(Request $request): JsonResponse
 	{
 		if (!($model = Applicant::find($request->get('id')))) {
 			abort(404);
@@ -415,4 +421,19 @@ class ApplicantManagementController extends Controller
 
 		$model->groups()->sync($ids);
 	}
+
+    /**
+     * @return array|Application|mixed|string
+     */
+    private function getBackUrl()
+    {
+        $backUrl = session('applicant_back_url');
+        $referer = request()->header('referer');
+        $current = url()->current();
+        if (empty($backUrl) || (!empty($referer) && $referer != $current && $referer != $backUrl)) {
+            $backUrl = $referer;
+            session(['applicant_back_url' => $backUrl]);
+        }
+        return $backUrl;
+    }
 }
