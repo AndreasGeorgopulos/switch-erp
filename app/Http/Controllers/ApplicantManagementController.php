@@ -19,6 +19,7 @@ use Illuminate\Http\Request;
 use Illuminate\Routing\Redirector;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Str;
 use Illuminate\View\View;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Translation\Exception\NotFoundResourceException;
@@ -430,7 +431,8 @@ class ApplicantManagementController extends Controller
         $backUrl = session('applicant_back_url');
         $referer = request()->header('referer');
         $current = url()->current();
-        if (empty($backUrl) || (!empty($referer) && $referer != $current && $referer != $backUrl)) {
+
+        if (empty($backUrl) || (!empty($referer) && !in_array($referer, [$current, $backUrl])) && !Str::contains($referer, 'applicant_management/edit')) {
             $backUrl = $referer;
             session(['applicant_back_url' => $backUrl]);
         }
