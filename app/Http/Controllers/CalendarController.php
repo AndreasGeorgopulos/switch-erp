@@ -40,7 +40,7 @@ class CalendarController extends Controller
 	 */
 	private function getVacationEvents(): array
 	{
-		$models = Vacation::orderBy('begin_date', 'asc')->get();
+		$models = Vacation::whereHas('user')->orderBy('begin_date', 'asc')->get();
 
 		return $models->map(function ($item) {
 			return [
@@ -64,7 +64,7 @@ class CalendarController extends Controller
 	 * @return string
 	 */
 	private function getVacationTitle(Vacation $vacation): string
-	{
+    {
 		$name = $vacation->user->name;
 		$beginDate = Carbon::parse($vacation->begin_date)->format('Y.m.d');
 		$endDate = Carbon::parse($vacation->end_date)->format('Y.m.d');
