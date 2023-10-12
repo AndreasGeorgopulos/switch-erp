@@ -54,7 +54,7 @@ class WorkManagementController extends Controller
 			}
 
 			$updateFields = [];
-			foreach(['salary', 'work_begin_date', 'follow_up', 'monogram'] as $field) {
+			foreach(['salary', 'work_begin_date', 'follow_up', 'monogram', 'source'] as $field) {
 				$updateFields[$field] = $request->get($field);
 			}
 

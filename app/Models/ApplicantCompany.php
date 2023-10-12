@@ -20,7 +20,19 @@ class ApplicantCompany extends Model
 
 	public $incrementing = false;
 
-	protected $fillable = ['applicant_id', 'job_position_id', 'status', 'send_date', 'information', 'interview_time', 'salary', 'work_begin_date', 'follow_up', 'monogram'];
+	protected $fillable = [
+        'applicant_id',
+        'job_position_id',
+        'status',
+        'send_date',
+        'information',
+        'interview_time',
+        'salary',
+        'work_begin_date',
+        'follow_up',
+        'monogram',
+        'source',
+    ];
 
 	public function save(array $options = [])
 	{
@@ -250,4 +262,17 @@ class ApplicantCompany extends Model
 		$this->tig_file_mime_type = null;
 		$this->save();
 	}
+
+    public static function getSourceOptions()
+    {
+        return [
+            'Profession',
+            'LinkedIn hirdetés',
+            'LinkedIn közvetlen',
+            'Facebook csoport',
+            'Facebook hirdetés',
+            'Adatbázis',
+            'Saját weboldal',
+        ];
+    }
 }

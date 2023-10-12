@@ -82,6 +82,7 @@ if ($('#work-table').length) {
 				work_begin_date: tr.find('input[name="work_begin_date"]').val(),
 				follow_up: tr.find('textarea[name="follow_up"]').val(),
 				monogram: tr.find('input[name="monogram"]').val(),
+				source: tr.find('select[name="source"] option:selected').val(),
 			};
 
 			element.prop('disabled', true);

@@ -16,6 +16,7 @@
 							<th class="name">{{trans('Név')}}</th>
 							<th class="name text-center">{{trans('Cég')}}</th>
 							<th class="job text-center">{{trans('Pozíció')}}</th>
+							<th class="job text-center">{{trans('Forrás')}}</th>
 							<th class="last-contact text-center">{{trans('Fizetés')}} ({{trans('bruttó')}})</th>
 							<th class="last-contact text-center">{{trans('Kezdés dátuma')}}</th>
 							<th class="last-contact text-center">{{trans('Utánkövetés')}}</th>
@@ -36,6 +37,14 @@
 								</td>
 								<td class="text-center">
 									<span class="w-150 display-block center-block">{{$m->job_position->title}}</span>
+								</td>
+								<td class="text-center">
+									<select name="source" class="form-control input-sm input-data">
+										<option></option>
+										@foreach(\App\Models\ApplicantCompany::getSourceOptions() as $source)
+											<option value="{{$source}}" @if($source == $m->source) selected="selected" @endif>{{$source}}</option>
+										@endforeach
+									</select>
 								</td>
 								<td class="text-center">
 									<input type="text" name="salary" class="form-control input-sm input-data salary only-numbers center-block w-100" value="{{$m->salary}}" tabindex="10" />
