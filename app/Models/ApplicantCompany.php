@@ -267,6 +267,7 @@ class ApplicantCompany extends Model
     {
         return [
             'Profession',
+            'Indeed',
             'LinkedIn hirdetés',
             'LinkedIn közvetlen',
             'Facebook csoport',
