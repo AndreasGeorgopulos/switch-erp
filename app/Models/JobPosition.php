@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Exception;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
@@ -21,6 +22,7 @@ use Illuminate\Support\Collection;
  * @property string $description
  * @property string $contact_name
  * @property string $contact_email
+ * @property string $contact_email_2
  * @property string $contact_phone
  * @property bool $is_active
  * @property string $created_at
@@ -33,45 +35,55 @@ class JobPosition extends Model implements IModelRules, IModelDeletable
 
 	protected $table = 'job_positions';
 
-	protected $fillable = ['company_id', 'title', 'description', 'contact_name', 'contact_email', 'contact_phone', 'is_active'];
+	protected $fillable = ['company_id', 'title', 'description', 'contact_name', 'contact_email', 'contact_email_2', 'contact_phone', 'is_active'];
 
 	protected $casts = ['is_active' => 'boolean'];
 
 	protected $dates = ['created_at', 'updated_at', 'deleted_at'];
 
 	/**
+     * Relations of applicants
+     *
 	 * @return BelongsToMany
 	 */
-	public function applicants()
-	{
+	public function applicants(): BelongsToMany
+    {
 		return $this->belongsToMany( Applicant::class );
 	}
 
 	/**
+     * Relations of skills
+     *
 	 * @return BelongsToMany
 	 */
-	public function skills()
-	{
+	public function skills(): BelongsToMany
+    {
 		return $this->belongsToMany( Skill::class );
 	}
 
 	/**
+     * Relation of company
+     *
 	 * @return HasOne
 	 */
-	public function company()
-	{
+	public function company(): HasOne
+    {
 		return $this->hasOne(Company::class, 'id', 'company_id');
 	}
 
 	/**
+     * Relations of users
+     *
 	 * @return BelongsToMany
 	 */
-	public function users()
-	{
+	public function users(): BelongsToMany
+    {
 		return $this->belongsToMany(User::class);
 	}
 
 	/**
+     * Implementation of validation rules
+     *
 	 * @return array
 	 */
 	public static function rules(): array
@@ -92,6 +104,10 @@ class JobPosition extends Model implements IModelRules, IModelDeletable
 				'required',
 				'email',
 			],
+            'contact_email_2' => [
+                'nullable',
+                'email',
+            ],
 			'contact_phone' => [
 				'required',
 				'regex:' . config('app.input_formats.phone_number'),
@@ -103,6 +119,8 @@ class JobPosition extends Model implements IModelRules, IModelDeletable
 	}
 
 	/**
+     * Implementation of validation nice names
+     *
 	 * @return array
 	 */
 	public static function niceNames(): array
@@ -112,6 +130,7 @@ class JobPosition extends Model implements IModelRules, IModelDeletable
 			'description' => trans('Leírás'),
 			'contact_name' => trans('Kapcsolattartó név'),
 			'contact_email' => trans('Kapcsolattartó email'),
+            'contact_email_2' => trans('További kapcsolattartó email'),
 			'contact_phone' => trans('Kapcsolattartó telefon'),
 		];
 	}
@@ -120,8 +139,8 @@ class JobPosition extends Model implements IModelRules, IModelDeletable
 	 * @param int $company_id
 	 * @return array|array[]
 	 */
-	public static function getDropdownItems($company_id)
-	{
+	public static function getDropdownItems(int $company_id): array
+    {
 		$models = static::select(['id', 'title'])
 			->where(function ($q) use($company_id) {
 				$q->where('is_active', 1);
@@ -159,6 +178,8 @@ class JobPosition extends Model implements IModelRules, IModelDeletable
 	}
 
 	/**
+     * Implement isDeletable method
+     *
 	 * @return bool
 	 */
 	public function isDeletable(): bool
@@ -167,6 +188,8 @@ class JobPosition extends Model implements IModelRules, IModelDeletable
 	}
 
 	/**
+     * Override delete method
+     *
 	 * @return bool|null
 	 * @throws Exception
 	 */
@@ -179,6 +202,8 @@ class JobPosition extends Model implements IModelRules, IModelDeletable
 	}
 
 	/**
+     * Implement of validation custom messages
+     *
 	 * @return array
 	 */
 	public static function customMessages(): array

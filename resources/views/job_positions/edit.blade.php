@@ -95,6 +95,14 @@
 							<div class="row">
 								<div class="col-sm-12">
 									<div class="form-group">
+										<label>{{trans('További e-mail')}}</label>
+										<input type="email" name="contact_email_2" class="form-control" value="{{old('contact_email_2', $model->contact_email_2)}}" />
+									</div>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-sm-12">
+									<div class="form-group">
 										<label>{{trans('Telefon')}}*</label>
 										<input type="text" name="contact_phone" class="form-control phone-number only-numbers" value="{{old('contact_phone', $model->contact_phone)}}" maxlength="11" placeholder="##/###-####" />
 									</div>
