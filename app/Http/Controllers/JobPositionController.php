@@ -31,8 +31,8 @@ class JobPositionController extends Controller implements ICrudController
 	{
 		if ( $request->isMethod( 'post' ) ) {
 			$length = $request->get( 'length', config( 'adminlte.paginator.default_length' ) );
-			$sort = $request->get( 'sort', 'id' );
-			$direction = $request->get( 'direction', 'asc' );
+			$sort = $request->get( 'sort', 'is_active' );
+			$direction = $request->get( 'direction', 'desc' );
 			$searchtext = $request->get( 'searchtext', '' );
 
 			if ( $searchtext != '' ) {

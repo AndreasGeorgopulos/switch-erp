@@ -7,11 +7,11 @@
 					<thead>
 					<tr role="row">
 						<th class="@if($sort == 'id') sorting_{{$direction}} @else sorting @endif" data-column="id">#</th>
-						<th data-column="title">{{trans('Megnevezés')}}</th>
+						<th class="@if($sort == 'title') sorting_{{$direction}} @else sorting @endif" data-column="title">{{trans('Megnevezés')}}</th>
 						<th>{{trans('Cég')}}</th>
 						<th>{{trans('Technológiák')}}</th>
 						<th>{{trans('Felhasználók')}}</th>
-						<th data-column="is_active" class="text-center">{{trans('Aktív')}}</th>
+						<th class="@if($sort == 'is_active') sorting_{{$direction}} @else sorting @endif" data-column="is_active" class="text-center">{{trans('Aktív')}}</th>
 						<th class="text-center">{{trans('Utolsó módosítás')}}</th>
 						<th>
 							<a href="{{url(route('job_positions_edit'))}}" class="btn btn-primary btn-sm pull-right"><i class="fa fa-plus"></i> {{trans('Új pozíció')}}</a>

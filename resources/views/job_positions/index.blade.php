@@ -4,5 +4,9 @@
 @stop
 
 @section('content')
+	@php
+		$data_init_sort = 'is_active';
+		$data_init_direction = 'desc';
+	@endphp
 	@include('layout.table.index')
 @endsection

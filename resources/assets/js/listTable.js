@@ -1,10 +1,12 @@
 const ListTable = function (table_id) {
-	var currentPage = 1;
-	var sort = 'id';
-	var direction = 'asc';
+	const tableElement = $(table_id);
+
+	let currentPage = tableElement.data('init-current_page') !== undefined ? tableElement.data('init-current_page') : 1;
+	let sort = tableElement.data('init-sort') !== undefined ? tableElement.data('init-sort') : 'id';
+	let direction = tableElement.data('init-direction') !== undefined ? tableElement.data('init-direction') : 'asc';
 
 	this.load = function () {
-		var $this = this;
+		const $this = this;
 		$.ajax({
 			url: document.location.href + '?page=' + currentPage,
 			data: {
@@ -17,7 +19,7 @@ const ListTable = function (table_id) {
 			dataType: 'html',
 			type: 'post',
 			success: function (response) {
-				if (response == '' && currentPage > 1) {
+				if (response === '' && currentPage > 1) {
 					currentPage = 1;
 					$this.load();
 				} else {
@@ -46,7 +48,7 @@ const ListTable = function (table_id) {
 
 					$(table_id + ' input[name="searchtext"]').off('keyup');
 					$(table_id + ' input[name="searchtext"]').on('keyup', function (event) {
-						if (event.keyCode == 13 || $(table_id + ' input[name="searchtext"]').val() == '') {
+						if (event.keyCode === 13 || $(table_id + ' input[name="searchtext"]').val() === '') {
 							$this.load();
 						}
 					});
@@ -57,10 +59,11 @@ const ListTable = function (table_id) {
 					});
 
 					$(table_id + ' a.confirm').on('click', function () {
-						var href = $(this).attr('href');
+						let href = $(this).attr('href');
+						let yes_btn = $('#confirm_modal .yes_btn');
 						$('#confirm_modal').modal();
-						$('#confirm_modal .yes_btn').off('click');
-						$('#confirm_modal .yes_btn').on('click', function () {
+						yes_btn.off('click');
+						yes_btn.on('click', function () {
 							document.location.replace(href);
 						});
 						return false;
@@ -68,7 +71,7 @@ const ListTable = function (table_id) {
 				}
 			},
 			errors: function (response) {
-				console(JSON.stringify(response));
+				console.log(JSON.stringify(response));
 			}
 		});
 	};
