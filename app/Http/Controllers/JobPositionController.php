@@ -33,26 +33,42 @@ class JobPositionController extends Controller implements ICrudController
 			$length = $request->get( 'length', config( 'adminlte.paginator.default_length' ) );
 			$sort = $request->get( 'sort', 'is_active' );
 			$direction = $request->get( 'direction', 'desc' );
-			$searchtext = $request->get( 'searchtext', '' );
+			$searchText = $request->get( 'searchtext', '' );
 
-			if ( $searchtext != '' ) {
-				$list = JobPosition::whereHas('company', function ($q) use($searchtext) {
-                        $q->where( 'name', 'like', '%' . $searchtext . '%' );
+            if ($searchText != '') {
+                $list = JobPosition::with('company')
+                    ->whereHas('company', function ($q) use($searchText) {
+                        $q->where('name', 'like', '%' . $searchText . '%');
                     })
-                    ->orWhere( 'id', 'like', '%' . $searchtext . '%' )
-					->orWhere( 'title', 'like', '%' . $searchtext . '%' )
-					->orderby( $sort, $direction )
-					->paginate( $length );
-			}
-			else {
-				$list = JobPosition::orderby( $sort, $direction )->paginate( $length );
-			}
+                    ->orWhere('job_positions.id', 'like', '%' . $searchText . '%')
+                    ->orWhere('title', 'like', '%' . $searchText . '%');
+
+                if ($sort == 'company_name') {
+                    $list->join('companies', 'job_positions.company_id', '=', 'companies.id')
+                        ->select('job_positions.*')
+                        ->orderBy('companies.name', $direction);
+                } else {
+                    $list->orderBy($sort, $direction);
+                }
+            } else {
+                $list = JobPosition::with('company');
+
+                if ($sort == 'company_name') {
+                    $list->join('companies', 'job_positions.company_id', '=', 'companies.id')
+                        ->select('job_positions.*') // Csak a JobPosition mezőket választjuk ki
+                        ->orderBy('companies.name', $direction);
+                } else {
+                    $list->orderBy($sort, $direction);
+                }
+            }
+
+            $list = $list->paginate($length);
 
 			return view( 'job_positions.list', [
 				'list' => $list,
 				'sort' => $sort,
 				'direction' => $direction,
-				'searchtext' => $searchtext
+				'searchtext' => $searchText
 			] );
 		}
 

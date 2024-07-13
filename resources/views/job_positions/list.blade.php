@@ -8,7 +8,7 @@
 					<tr role="row">
 						<th class="@if($sort == 'id') sorting_{{$direction}} @else sorting @endif" data-column="id">#</th>
 						<th class="@if($sort == 'title') sorting_{{$direction}} @else sorting @endif" data-column="title">{{trans('Megnevezés')}}</th>
-						<th>{{trans('Cég')}}</th>
+						<th class="@if($sort == 'company_name') sorting_{{$direction}} @else sorting @endif" data-column="company_name">{{trans('Cég')}}</th>
 						<th>{{trans('Technológiák')}}</th>
 						<th>{{trans('Felhasználók')}}</th>
 						<th class="@if($sort == 'is_active') sorting_{{$direction}} @else sorting @endif" data-column="is_active" class="text-center">{{trans('Aktív')}}</th>
