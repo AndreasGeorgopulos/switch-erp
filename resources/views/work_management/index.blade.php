@@ -10,6 +10,18 @@
 			<div class="col-sm-12 table-area">
 				@if(!empty($models))
 					{{csrf_field()}}
+
+					<form class="work-management-year-form">
+						<div class="input-group center-block">
+							<label>Év:</label>
+							<select name="year" class="input-sm" onchange="this.form.submit()">
+								@foreach(\App\Models\ApplicantCompany::getYearDropdownItems($year) as $item)
+									<option value="{{$item['value']}}" @if($item['selected']) selected="selected" @endif>{{$item['value']}}</option>
+								@endforeach
+							</select>
+						</div>
+					</form>
+
 					<table class="table table-bordered table-striped" id="work-table">
 						<thead>
 						<tr role="row">

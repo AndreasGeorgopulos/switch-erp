@@ -23,17 +23,15 @@ class WorkManagementController extends Controller
 	 */
 	public function index()
     {
-		$models = ApplicantCompany::getWorkModels();
+        $year = request()->get('year', date('Y'));
+		$models = ApplicantCompany::getWorkModels($year);
 
 	    return view('work_management.index', [
 		    'site_title' => trans('Elhelyezések'),
 		    'site_subtitle' => 'Version 3.0',
 		    'breadcrumb' => [],
 		    'models' => $models,
-		    /*'companies' => $companies,
-		    'job_positions' => $job_positions,
-		    'selectedCompany' => $selectedCompany,
-		    'selectedJobPosition' => $selectedJobPosition,*/
+            'year' => $year,
 	    ]);
     }
 

@@ -134,12 +134,16 @@ class ApplicantCompany extends Model
 	/**
 	 * @return Collection
 	 */
-	public static function getWorkModels()
-	{
-		return collect(static::where('status', 7)->orderBy('work_begin_date', 'asc')->get());
-	}
+    public static function getWorkModels(int $selectedYear)
+    {
+        return static::where('status', 7)
+            ->whereYear('work_begin_date', $selectedYear)
+            ->orderBy('work_begin_date', 'asc')
+            ->get();
+    }
 
-	/**
+
+    /**
 	 * @param int|null $job_position_id
 	 * @return array
 	 */
@@ -275,5 +279,17 @@ class ApplicantCompany extends Model
             'Adatbázis',
             'Saját weboldal',
         ];
+    }
+
+    public static function getYearDropdownItems(int $selectedYear): array
+    {
+        $items = [];
+        for ($year = 2023; $year <= date('Y'); $year++) {
+            $items[] = [
+                'value' => $year,
+                'selected' => $year === $selectedYear,
+            ];
+        }
+        return $items;
     }
 }
