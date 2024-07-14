@@ -232,11 +232,18 @@
 								       data-value="{{$model->last_contact_date != '0000-00-00' ? $model->last_contact_date : null}}" />
 							</td>
 							<td>
-								<input type="text"
-								       name="web"
-								       class="form-control input-sm"
-								       value="{{$model->web}}"
-								       data-value="{{$model->web}}" />
+								<div class="input-group input-group-sm input-group-web">
+									<input type="text"
+										   name="web"
+										   class="form-control"
+										   value="{{$model->web}}"
+										   data-value="{{$model->web}}" />
+									<span class="input-group-btn">
+										<a href="{{$model->web}}" target="_blank" class="btn btn-default @if(empty($model->web)) disabled @endif" type="button">
+											<i class="fa fa-external-link"></i>
+										</a>
+									</span>
+								</div>
 							</td>
 							<td>
 								<input type="text"

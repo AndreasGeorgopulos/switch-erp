@@ -188,6 +188,19 @@ if ($('#data-sales-table').length) {
 						$.each($(row).find('.modified-input'), function (item, element) {
 							$(element).data('value', $(element).val());
 							$(element).removeClass('modified-input');
+
+							if ($(element).parent().hasClass('input-group-web')) {
+								let input = $(element).parent().find('input');
+								let button = $(element).parent().find('a');
+
+								if (input.val() == '') {
+									button.addClass('disabled');
+									button.attr('href', '#');
+								} else {
+									button.removeClass('disabled');
+									button.attr('href', input.val());
+								}
+							}
 						});
 						$(row).removeClass('modified-row');
 					});
