@@ -8,6 +8,7 @@ use Illuminate\Contracts\View\Factory;
 use Illuminate\Foundation\Application;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cookie;
 use Illuminate\View\View;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
@@ -19,6 +20,13 @@ class SalesManagementController extends Controller
 	 */
 	public function index(Request $request)
     {
+        $paginatorConfig = config('app.paginator');
+
+        if (($paginator_per_page = $request->get('paginator_per_page')) !== null) {
+            Cookie::queue(Cookie::make('paginator_per_page', $paginator_per_page));
+            return redirect(route('sales_management_index'));
+        }
+
 	    $getParams = [
 		    'company_name' => $request->get('company_name', null),
 		    'status' => $request->get('status', null),
@@ -33,25 +41,34 @@ class SalesManagementController extends Controller
 		    'monogram' => $request->get('monogram', null),
 	    ];
 
+        $perPage = Cookie::get('paginator_per_page', $paginatorConfig['default_length']);
 	    $sales = Sale::where(function ($q) use ($getParams) {
-			foreach ($getParams as $k => $v) {
-				if (empty($v)) {
-					continue;
-				}
+                foreach ($getParams as $k => $v) {
+                    if (empty($v)) {
+                        continue;
+                    }
 
-				if ($k == 'information') {
-					$q->where($k, 'like', '%' . $v . '%');
-				} else {
-					$q->where($k, $v);
-				}
-			}
-	    })->orderBy('last_contact_date', 'desc')->get();
+                    if ($k == 'information') {
+                        $q->where($k, 'like', '%' . $v . '%');
+                    } else {
+                        $q->where($k, $v);
+                    }
+                }
+            })
+            ->orderBy('last_contact_date', 'desc')
+            ->paginate($perPage);
+
+        if ($sales->currentPage() > $sales->lastPage()) {
+            return redirect(route('sales_management_index'));
+        }
 
 	    return view('sales_management.index', [
 		    'site_title' => trans('Sales'),
 		    'site_subtitle' => 'Version 3.0',
 		    'breadcrumb' => [],
 		    'sales' => $sales,
+            'paginator' => $sales,
+            'paginator_config' => $paginatorConfig,
 		    'getParams' => $getParams,
 	    ]);
     }
@@ -82,8 +99,8 @@ class SalesManagementController extends Controller
 	 * @param Request $request
 	 * @return JsonResponse
 	 */
-	public function update(Request $request)
-	{
+	public function update(Request $request): JsonResponse
+    {
 		$result = [
 			'success' => true,
 		];

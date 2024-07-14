@@ -282,6 +282,8 @@
 						<i class="fa fa-close"></i> {{trans('Elvetés')}}
 					</button>
 
+					@if($paginator->hasPages()) @include('layout.paginator') @endif
+
 					<button type="button" class="btn btn-default btn-scroll-right">
 						<i class="fa fa-arrow-right"></i>
 					</button>

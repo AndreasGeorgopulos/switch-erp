@@ -18,6 +18,7 @@ require('./work_management');
 require('./callback_management');
 require('./profile_vacation');
 require('./tableFilter');
+require('./paginator');
 
 require('fullcalendar');
 require('./calendar');

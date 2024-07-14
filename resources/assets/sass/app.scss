@@ -328,3 +328,40 @@ ul.columns-3 {
     }
   }
 }
+
+.paginator {
+  float: right;
+  margin-right: 40px;
+
+  .total, .items_per_page, .pages, .navigator {
+    display: inline;
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+
+  .navigator a, .navigator select {
+    font-size: 14px;
+    display: inline-block;
+  }
+
+  .navigator {
+    .btn-first, .btn-prev, .btn-next, .btn-last {
+      padding: 4px 14px;
+    }
+    .btn-first {
+      margin-right: 5px;
+    }
+    .btn-prev {
+      margin-right: 5px;
+    }
+    .btn-next {
+      margin-left: 5px;
+    }
+    .btn-last {
+      margin-left: 5px;
+    }
+  }
+}
+
+
+
