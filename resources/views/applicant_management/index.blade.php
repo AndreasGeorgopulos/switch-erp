@@ -102,7 +102,8 @@
 								<th class="email text-center">{{trans('E-mail')}}</th>
 								<th class="phone text-center">{{trans('Telefon')}}</th>
 								<th class="monogram text-center">{{trans('Intézte')}}</th>
-								<th class="linked-in text-center">{{trans('LinkedIn')}}</th>
+<!--								<th class="linked-in text-center">{{trans('LinkedIn')}}</th>-->
+								<th class="text-center">{{trans('Munkaviszony')}}</th>
 								<th class="cv text-center">{{trans('Önéletrajz')}}</th>
 								<th class="delete text-center">{{trans('Törlés')}}</th>
 							</tr>
@@ -206,10 +207,8 @@
 									<td class="text-center">{{$applicant->phone}}</td>
 									<td class="text-center">{{$applicant->monogram}}</td>
 									<td class="text-center">
-										@if(!empty($applicant->linked_in))
-											<a href="{{$applicant->linked_in}}" target="_blank"><i class="fa fa-linkedin"></i></a>
-										@else
-											<i class="fa fa-can"></i>
+										@if(!is_null($applicant->employment_relationship))
+											{{ \App\Models\Applicant::getEmploymentRelationshipDropdownOptions()[$applicant->employment_relationship]['name'] }}
 										@endif
 									</td>
 									<td class="text-center">

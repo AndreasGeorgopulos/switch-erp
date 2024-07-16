@@ -102,9 +102,9 @@
 
 							<div class="col-md-3">
 								<div class="form-group">
-									<label>{{trans('Alkalmazott')}}/{{trans('Alvállalkozó')}}</label>
-									<select name="is_subcontractor" class="form-control select2" tabindex="12">
-										@foreach(\App\Models\Applicant::getIsSubcontractorDropdownOptions($model->is_subcontractor) as $key => $item)
+									<label>{{trans('Munkaviszony')}}</label>
+									<select name="employment_relationship" class="form-control select2" tabindex="12">
+										@foreach(\App\Models\Applicant::getEmploymentRelationshipDropdownOptions($model->employment_relationship) as $key => $item)
 											<option value="{{$item['value']}}" @if($item['selected']) selected="selected" @endif>{{$item['name']}}</option>
 										@endforeach
 									</select>

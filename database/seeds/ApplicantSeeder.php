@@ -78,7 +78,7 @@ class ApplicantSeeder extends Seeder
 				'technologies' => 1,
 				'companies' => 6,
 				'monogram' => 8,
-				'is_subcontractor' => 2,
+				'employment_relationship' => 2,
 			],
 		],
 		[
@@ -909,7 +909,7 @@ class ApplicantSeeder extends Seeder
 							$value = '';
 						}
 
-					} elseif ($field == 'is_subcontractor') {
+					} elseif ($field == 'employment_relationship') {
 						$value = 1;
 
 					} elseif ($field == 'technologies') {

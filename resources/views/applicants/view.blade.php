@@ -74,8 +74,12 @@
 					<div class="col-sm-7">{{$model->notice_period}}</div>
 				</div>
 				<div class="row">
-					<div class="col-sm-5">{{trans('Alkalmazott')}}/{{trans('Alvállalkozó')}}</div>
-					<div class="col-sm-7">{{$model->is_subcontractor ? trans('Alvállalkozó') : trans('Alkalmazott')}}</div>
+					<div class="col-sm-5">{{trans('Munkaviszony')}}</div>
+					<div class="col-sm-7">
+						@if(!is_null($model->employment_relationship))
+							{{ \App\Models\Applicant::getEmploymentRelationshipDropdownOptions()[$model->employment_relationship]['name'] }}
+						@endif
+					</div>
 				</div>
 				<div class="row">
 					<div class="col-sm-5">{{trans('Home office igény')}}</div>

@@ -66,7 +66,7 @@ class Applicant extends Model implements IModelRules, IModelSortable
 		'last_callback_date',
 		'in_english',
 		'forwarded_to_companies',
-		'is_subcontractor',
+		'employment_relationship',
 		'graduation',
 		'salary',
 		'notice_period',
@@ -77,7 +77,6 @@ class Applicant extends Model implements IModelRules, IModelSortable
 	];
 
 	protected $casts = [
-		'is_subcontractor' => 'boolean',
 		'is_active' => 'boolean',
 		'is_marked' => 'boolean',
 	];
@@ -239,9 +238,6 @@ class Applicant extends Model implements IModelRules, IModelSortable
 				'date',
 				'nullable',
 			],
-			'is_subcontractor' => [
-				'boolean',
-			],
 			'home_office' => [
 				'integer',
 				'min:0',
@@ -295,12 +291,12 @@ class Applicant extends Model implements IModelRules, IModelSortable
 	 * @param int|null $selected
 	 * @return array[]
 	 */
-	public static function getIsSubcontractorDropdownOptions(int $selected = null): array
+	public static function getEmploymentRelationshipDropdownOptions(int $selected = null): array
     {
 		return [
-			['value' => 0, 'name' => trans('Alkalmazott'), 'selected' => $selected == 0],
-			['value' => 1, 'name' => trans('Alvállalkozó'), 'selected' => $selected == 1],
-            ['value' => 2, 'name' => trans('Mindkettőre nyitott'), 'selected' => $selected == 2],
+			0 => ['value' => 0, 'name' => trans('Alkalmazott'), 'selected' => $selected == 0],
+			1 => ['value' => 1, 'name' => trans('Alvállalkozó'), 'selected' => $selected == 1],
+            2 => ['value' => 2, 'name' => trans('Mindkettőre nyitott'), 'selected' => $selected == 2],
 		];
 	}
 
