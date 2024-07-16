@@ -8,31 +8,21 @@
 	<div class="search-management">
 		<div class="row">
 			<div class="col-1-5">
-				<h2>{{trans('Cégek')}}</h2>
-				<ul class="nav" id="applicant-skill-sidebar">
-					@foreach($companies as $company)
-						<li class="nav-item @if($selectedCompany !== null && $company->id == $selectedCompany->id) active @endif">
-							<a href="{{url(route('search_management_index', ['company' => $company->id]))}}" class="nav-link">
-								{{$company->name}}
-							</a>
-						</li>
-					@endforeach
-				</ul>
-			</div>
-			<div class="col-sm-2">
 				@if(!empty($job_positions))
 					<h2>{{trans('Pozíciók')}}</h2>
 					<ul class="nav" id="applicant-skill-sidebar">
 						@foreach($job_positions as $jp)
+							@php($_counter = \App\Models\ApplicantCompany::getCouters($jp->id))
 							<li class="nav-item @if($selectedJobPosition !== null && $jp->id == $selectedJobPosition->id) active @endif">
-								<a href="{{url(route('search_management_index', ['company' => $selectedCompany->id, 'job' => $jp->id]))}}" class="nav-link">
-									{{$jp->title}}
+								<a href="{{url(route('search_management_index', ['job' => $jp->id]))}}" class="nav-link">
+									{{$jp->company->name}} - {{$jp->title}} <span class="all">{{$_counter['all']}}</span>/<span class="active">{{$_counter['active']}}</span> <span class="ready">({{$_counter['ready']}})</span>
 								</a>
 							</li>
 						@endforeach
 					</ul>
 				@endif
 			</div>
+
 			<div class="col-8-5 table-area">
 				@if(!empty($models))
 					{{csrf_field()}}

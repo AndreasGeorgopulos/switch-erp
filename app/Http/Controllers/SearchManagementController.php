@@ -12,38 +12,10 @@ use Illuminate\Support\Facades\Auth;
 
 class SearchManagementController extends Controller
 {
-    public function index($company = null, $job = null)
+    public function index($job = null)
     {
-	    $selectedCompany = $company !== null ? Company::where('id', $company)->first() : null;
 	    $selectedJobPosition = $job !== null ? JobPosition::where('id', $job)->where('is_active', true)->first() : null;
-	    $job_positions = null;
-
-		$companies = Company::where(function ($q) {
-				$q->where('is_active', true);
-				$q->whereHas('job_positions', function ($q2) {
-					$q2->where('is_active', true);
-					if (!hasRole('super_administrator')) {
-						$authJobPositionIds = Auth::user()->job_positions()->where('is_active', true)->pluck('id')->toArray();
-						$q2->whereIn('id', $authJobPositionIds);
-					}
-				});
-			})
-			->orderBy('name', 'asc')
-			->get();
-
-		if ($selectedCompany) {
-			$job_positions = JobPosition::where(function ($q) use($selectedCompany) {
-					$q->where('is_active', true);
-					$q->where('company_id', $selectedCompany->id);
-					if (!hasRole('super_administrator')) {
-						$authJobPositionIds = Auth::user()->job_positions()->where('is_active', true)->pluck('id')->toArray();
-						$q->whereIn('id', $authJobPositionIds);
-					}
-				})
-				->orderBy('title', 'asc')
-				->get();
-		}
-
+        $job_positions = $this->getJobPositions();
 		$models = !empty($selectedJobPosition) ? ApplicantCompany::getSearchModels($selectedJobPosition->id) : null;
 		$counter = ApplicantCompany::getCouters($job);
 
@@ -52,9 +24,7 @@ class SearchManagementController extends Controller
 		    'site_subtitle' => 'Version 3.0',
 		    'breadcrumb' => [],
 		    'models' => $models,
-		    'companies' => $companies,
 		    'job_positions' => $job_positions,
-		    'selectedCompany' => $selectedCompany,
 		    'selectedJobPosition' => $selectedJobPosition,
 		    'counter' => $counter,
 	    ]);
@@ -103,4 +73,21 @@ class SearchManagementController extends Controller
 			'counters' => ApplicantCompany::getCouters($job),
 		]);
 	}
+
+    private function getJobPositions()
+    {
+        return JobPosition::with('company')
+            ->join('companies', 'job_positions.company_id', '=', 'companies.id')
+            ->where(function ($q) {
+                $q->where('job_positions.is_active', true);
+                if (!hasRole('super_administrator')) {
+                    $authJobPositionIds = Auth::user()->job_positions()->where('is_active', true)->pluck('job_positions.id')->toArray();
+                    $q->whereIn('job_positions.id', $authJobPositionIds);
+                }
+            })
+            ->orderBy('companies.name', 'asc')
+            ->orderBy('job_positions.title', 'asc')
+            ->select('job_positions.*')  // Ez biztosítja, hogy a JobPosition modellek kerülnek visszaadásra
+            ->get();
+    }
 }

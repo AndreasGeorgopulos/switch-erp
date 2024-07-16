@@ -37,7 +37,7 @@ Route::group(['middleware' => ['acl', 'locale']], function () {
 
 	// Search management
 	Route::match(['get'], '/search_management/get_counters/{job?}', 'SearchManagementController@getCounters')->name('search_management_get_counters');
-	Route::match(['get'], '/search_management/{company?}/{job?}', 'SearchManagementController@index')->name('search_management_index');
+	Route::match(['get'], '/search_management/{job?}', 'SearchManagementController@index')->name('search_management_index');
 	Route::match(['post'], '/search_management/save_data', 'SearchManagementController@saveData')->name('search_management_save_data');
 
 	// Work management

@@ -93,14 +93,14 @@ ul.columns-3 {
 
   .col-1-5 {
     @extend .extra-col;
-    flex: 0 0 12.5%;
-    max-width: 12.5%;
+    flex: 0 0 25%;
+    max-width: 25%;
   }
 
   .col-8-5 {
     @extend .extra-col;
-    flex: 0 0 70.833333305%;
-    max-width: 70.833333305%;
+    flex: 0 0 75%;
+    max-width: 75%;
   }
 
   .table-area {
