@@ -109,7 +109,10 @@ if ($('#data-applicant-table').length) {
 		},
 
 		sortTable: function (button, columnIndex, descending) {
-			const $this = this;
+			let element = $('input.search-input[name="direction"]')
+			element.val(element.val() == 'desc' ? 'asc' : 'desc');
+			this.filterRows();
+			/*const $this = this;
 
 			$this.table_data.find('.btn-sort i').removeClass('fa-sort-amount-asc');
 			$this.table_data.find('.btn-sort i').removeClass('fa-sort-amount-desc');
@@ -123,7 +126,7 @@ if ($('#data-applicant-table').length) {
 				const tdA = $(a).find('td:eq(' + columnIndex + ')').html();
 				const tdB = $(b).find('td:eq(' + columnIndex + ')').html();
 				return descending === true ? tdA.localeCompare(tdB) : tdB.localeCompare(tdA);
-			}).appendTo($this.table_data.find('tbody'));
+			}).appendTo($this.table_data.find('tbody'));*/
 		},
 
 		setIsMarked: function (element) {

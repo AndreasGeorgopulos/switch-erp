@@ -292,14 +292,15 @@ class Applicant extends Model implements IModelRules, IModelSortable
 	/**
 	 * Dropdown options of subcontractor status
 	 *
-	 * @param int $selected
+	 * @param int|null $selected
 	 * @return array[]
 	 */
-	public static function getIsSubcontractorDropdownOptions($selected = null)
-	{
+	public static function getIsSubcontractorDropdownOptions(int $selected = null): array
+    {
 		return [
 			['value' => 0, 'name' => trans('Alkalmazott'), 'selected' => $selected == 0],
 			['value' => 1, 'name' => trans('Alvállalkozó'), 'selected' => $selected == 1],
+            ['value' => 2, 'name' => trans('Mindkettőre nyitott'), 'selected' => $selected == 2],
 		];
 	}
 

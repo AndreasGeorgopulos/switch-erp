@@ -58,9 +58,11 @@ class SalesManagementController extends Controller
             ->orderBy('last_contact_date', 'desc')
             ->paginate($perPage);
 
-        if ($sales->currentPage() > $sales->lastPage()) {
+        if ($sales->lastPage() > 0 && $sales->currentPage() > $sales->lastPage()) {
             return redirect(route('sales_management_index'));
         }
+
+        $sales->appends(request()->query())->links();
 
 	    return view('sales_management.index', [
 		    'site_title' => trans('Sales'),

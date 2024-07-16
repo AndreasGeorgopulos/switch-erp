@@ -9,15 +9,18 @@ use App\Models\JobPosition;
 use App\Models\Skill;
 use App\Models\User;
 use Exception;
+use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Query\Builder;
 use Illuminate\Foundation\Application;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Redirector;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
 use Illuminate\View\View;
@@ -37,63 +40,28 @@ class ApplicantManagementController extends Controller
 	 */
 	public function index(Request $request, int $selectedGroup = null)
     {
-	    $getParams = [
-		    'applicant' => intval($request->get('applicant')) ?: null,
-		    'experience_year' => intval($request->get('experience_year')) ?: '',
-		    'in_english' => intval($request->get('in_english')) ?: '',
-		    'skill' => intval($request->get('skill')) ?: '',
-		    'company' => intval($request->get('company')) ?: null,
-		    'email' => $request->get('email') ?: '',
-		    'monogram' => $request->get('monogram') ?: '',
-		    'ho' => $request->get('ho', null),
-	    ];
-
-	    $applicantGroups = ApplicantGroup::select(['id', 'name'])
-		    ->where(function ($q) {
-		        $applicantGroupIds = Auth::user()->applicant_groups()->pluck('id')->toArray();
-				$q->where('is_active', true);
-				if (!hasRole('superadmin') && count($applicantGroupIds)) {
-					$q->whereIn('id', $applicantGroupIds);
-				}
-			})
-		    ->orderBy('name', 'asc')
-		    ->get();
-
+        $paginatorConfig = config('app.paginator');
+        $getParams = $this->getRequestParams($request);
+        $applicantGroups = $this->getApplicantGroups();
 	    $applicants = [];
 
 		if ($selectedGroup !== null) {
+            if (($paginator_per_page = $request->get('paginator_per_page')) !== null) {
+                Cookie::queue(Cookie::make('paginator_per_page', $paginator_per_page));
+                return redirect(route('applicant_management_index', [
+                    'selectedGroup' => $selectedGroup,
+                ]));
+            }
+
+            $perPage = Cookie::get('paginator_per_page', $paginatorConfig['default_length']);
 			$selectedGroup = ApplicantGroup::find($selectedGroup);
-			$query = $selectedGroup->applicants()->where(function ($q) use($getParams) {
-				if (!empty($getParams['applicant'])) {
-					$q->where('id', '=', $getParams['applicant']);
-				}
-				if (!empty($getParams['experience_year'])) {
-					$q->where('experience_year', '<=', $getParams['experience_year']);
-				}
-				if (!empty($getParams['in_english'])) {
-					$q->where('in_english', '>=', $getParams['in_english']);
-				}
-				if (!empty($getParams['email'])) {
-					$q->where('email', '=', $getParams['email']);
-				}
-				if (!empty($getParams['monogram'])) {
-					$q->where('monogram', '=', $getParams['monogram']);
-				}
-				if (is_numeric($getParams['ho'])) {
-					$q->where('home_office', '=', $getParams['ho']);
-				}
-			});
+            $applicants = $this->getApplicantsPaginator($selectedGroup, $getParams, $perPage);
 
-			if (!empty($getParams['skill'])) {
-				$query->join('applicant_skill', 'applicant_skill.applicant_id', '=', 'applicants.id', 'inner', false);
-				$query->where('applicant_skill.skill_id', '=', $getParams['skill']);
-			}
-
-			if (!empty($getParams['company'])) {
-
-			}
-
-			$applicants = $query->orderBy('last_contact_date', 'desc')->get();
+            if ($applicants->lastPage() > 0 && $applicants->currentPage() > $applicants->lastPage()) {
+                return redirect(route('applicant_management_index', [
+                    'selectedGroup' => $selectedGroup,
+                ]));
+            }
 		}
 
 	    return view('applicant_management.index', [
@@ -103,6 +71,8 @@ class ApplicantManagementController extends Controller
 		    'selectedGroup' => $selectedGroup,
 		    'applicantGroups' => $applicantGroups,
 		    'applicants' => $applicants,
+            'paginator' => $applicants,
+            'paginator_config' => $paginatorConfig,
 		    'getParams' => $getParams,
 	    ]);
     }
@@ -140,11 +110,13 @@ class ApplicantManagementController extends Controller
 		] );
 	}
 
-	/**
-	 * @param Request $request
-	 * @param $id
-	 * @return void
-	 */
+    /**
+     * @param Request $request
+     * @param int $id
+     * @param int|null $selectedGroup
+     * @return Application|RedirectResponse|Redirector|void
+     * @throws Exception
+     */
 	public function edit(Request $request, int $id, int $selectedGroup = null)
 	{
 		try {
@@ -437,5 +409,93 @@ class ApplicantManagementController extends Controller
             session(['applicant_back_url' => $backUrl]);
         }
         return $backUrl;
+    }
+
+    /**
+     * @return ApplicantGroup[]|Collection|Builder[]|\Illuminate\Support\Collection
+     */
+    private function getApplicantGroups()
+    {
+        return ApplicantGroup::select(['id', 'name'])
+            ->where(function ($q) {
+                $applicantGroupIds = Auth::user()->applicant_groups()->pluck('id')->toArray();
+                $q->where('is_active', true);
+                if (!hasRole('superadmin') && count($applicantGroupIds)) {
+                    $q->whereIn('id', $applicantGroupIds);
+                }
+            })
+            ->orderBy('name', 'asc')
+            ->get();
+    }
+
+    /**
+     * @param ApplicantGroup $selectedGroup
+     * @param array $getParams
+     * @param int $perPage
+     * @return LengthAwarePaginator
+     */
+    private function getApplicantsPaginator(ApplicantGroup $selectedGroup, array $getParams, int $perPage): LengthAwarePaginator
+    {
+        $query = $selectedGroup->applicants()->where(function ($q) use($getParams) {
+            if (!empty($getParams['applicant'])) {
+                $q->where('id', '=', $getParams['applicant']);
+            }
+            if (!empty($getParams['experience_year'])) {
+                $q->where('experience_year', '<=', $getParams['experience_year']);
+            }
+            if (!empty($getParams['in_english'])) {
+                $q->where('in_english', '>=', $getParams['in_english']);
+            }
+            if (!empty($getParams['email'])) {
+                $q->where('email', '=', $getParams['email']);
+            }
+            if (!empty($getParams['monogram'])) {
+                $q->where('monogram', '=', $getParams['monogram']);
+            }
+            if (is_numeric($getParams['ho'])) {
+                $q->where('home_office', '=', $getParams['ho']);
+            }
+        });
+
+        if (!empty($getParams['skill'])) {
+            $query->join('applicant_skill', 'applicant_skill.applicant_id', '=', 'applicants.id', 'inner', false);
+            $query->where('applicant_skill.skill_id', '=', $getParams['skill']);
+        }
+
+        if (!empty($getParams['company'])) {
+            $query->join('applicant_companies', 'applicant_companies.applicant_id', '=', 'applicants.id');
+            $query->join('job_positions', 'job_positions.id', '=', 'applicant_companies.job_position_id');
+            $query->where('job_positions.company_id', '=', $getParams['company']);
+        }
+
+        $applicants = $query->orderBy($getParams['sort_by'], $getParams['direction'])->paginate($perPage);
+        $applicants->appends(request()->query())->links();
+
+        return $applicants;
+    }
+
+    /**
+     * @param Request $request
+     * @return array
+     */
+    public function getRequestParams(Request $request): array
+    {
+        $getParams = [
+            'applicant' => intval($request->get('applicant')) ?: null,
+            'experience_year' => intval($request->get('experience_year')) ?: '',
+            'in_english' => intval($request->get('in_english')) ?: '',
+            'skill' => intval($request->get('skill')) ?: '',
+            'company' => intval($request->get('company')) ?: null,
+            'email' => $request->get('email') ?: '',
+            'monogram' => $request->get('monogram') ?: '',
+            'ho' => $request->get('ho', null),
+            'sort_by' => $request->get('sort_by', 'last_contact_date'),
+            'direction' => $request->get('direction', 'desc'),
+        ];
+        if (!in_array($getParams['direction'], ['asc', 'desc'])) {
+            $getParams['direction'] = 'desc';
+        }
+
+        return $getParams;
     }
 }

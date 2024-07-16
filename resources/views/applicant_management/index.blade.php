@@ -95,8 +95,8 @@
 								<th class="information text-center">{{trans('Információ')}}</th>
 								<th class="last-contact text-center">
 									{{trans('Utolsó kapcsolat')}}
-									<button class="btn btn-default btn-xs btn-sort pull-right " data-sort="8" data-desc="true">
-										<i class="fa fa-sort-amount-desc"></i>
+									<button class="btn btn-default btn-xs btn-sort pull-right " data-sort="8" data-desc="{{$getParams['direction']=='desc'}}">
+										<i class="fa fa-sort-amount-{{$getParams['direction']}}"></i>
 									</button>
 								</th>
 								<th class="email text-center">{{trans('E-mail')}}</th>
@@ -109,6 +109,7 @@
 							<tr class="filter-row hidden">
 								<th></th>
 								<th>
+									<input type="hidden" class="search-input" name="direction" value="{{$getParams['direction']}}" />
 									<select name="applicant" class="name form-control search-input select2">
 										<option></option>
 										@foreach(\App\Models\Applicant::getFieldDropdownOptions($selectedGroup->id, 'name') as $item)
@@ -244,6 +245,8 @@
 							<button type="button" class="btn btn-default btn-reorder-cancel hidden">
 								<i class="fa fa-close"></i> {{trans('Elvetés')}}
 							</button>
+
+							@if($paginator->hasPages()) @include('layout.paginator') @endif
 
 							<button type="button" class="btn btn-default btn-scroll-right">
 								<i class="fa fa-arrow-right"></i>
