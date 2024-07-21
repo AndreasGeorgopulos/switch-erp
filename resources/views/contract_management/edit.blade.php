@@ -84,7 +84,7 @@
 							<div class="form-group">
 								<label>{{trans('Feltöltve')}}</label>
 								<p>
-									<a href="{{route('companies_download_contract', ['id' => $model->id])}}" target="_blank">{{$model->contract_file}}</a>
+									<a href="{{route('contract_management_download', ['id' => $model->id])}}" target="_blank">{{$model->contract_file}}</a>
 								</p>
 								<p>
 									<input type="checkbox" name="delete_contract_file" /> {{trans('Feltöltött file törlése')}}

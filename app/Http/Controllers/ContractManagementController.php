@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Company;
+use Carbon\Carbon;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
@@ -10,6 +11,8 @@ use Illuminate\Foundation\Application;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\View\View;
+use Symfony\Component\HttpFoundation\BinaryFileResponse;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 /**
  *
@@ -44,9 +47,14 @@ class ContractManagementController extends Controller
 		]);
 	}
 
-	public function edit(Request $request, int $id)
+	public function edit(Request $request, int $id = 0)
 	{
-		$model = $this->findModel($id);
+        $model = Company::findOrNew( $id );
+
+        if (!$model->id) {
+            $model->is_active = 1;
+            $model->contract_date = Carbon::now()->format('Y-m-d');
+        }
 
 		if ( $request->isMethod( 'post' ) ) {
 			// validate
@@ -142,6 +150,19 @@ class ContractManagementController extends Controller
 			trans( 'A cégek sikeresen rögzítve lettek.' ),
 		])*/);
 	}
+
+    /**
+     * @param int $id
+     * @return BinaryFileResponse
+     */
+    public function downloadContract(int $id ): BinaryFileResponse
+    {
+        if ( ($model = Company::find( $id) ) == null ) {
+            throw new NotFoundHttpException('Contract file not found.');
+        }
+
+        return response()->download($model->getContractPath(), $model->contract_file, [], 'inline');
+    }
 
 	/**
 	 * @param $id

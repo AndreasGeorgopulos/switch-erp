@@ -134,13 +134,13 @@ return [
 					'role' => 'admin_skills',
 					'active' => ['skills/*'],
 				],
-				[
+				/*[
 					'text' => 'Cégek',
 					'route' => 'companies_list',
 					'role' => 'admin_companies',
 					'active' => ['companies/*'],
 					'icon' => 'building',
-				],
+				],*/
 				[
 					'text' => 'Pozíciók',
 					'route' => 'job_positions_list',

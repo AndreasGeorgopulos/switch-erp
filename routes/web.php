@@ -50,8 +50,9 @@ Route::group(['middleware' => ['acl', 'locale']], function () {
 	// Contract management
 	Route::match(['get'], '/contract_management', 'ContractManagementController@index')->name('contract_management_index');
 	Route::match(['post'], '/contract_management/save_rows', 'ContractManagementController@saveRows')->name('contract_management_save_rows');
-	Route::match(['get', 'post'], '/contract_management/edit/{id}', 'ContractManagementController@edit')->name('contract_management_edit');
+	Route::match(['get', 'post'], '/contract_management/edit/{id?}', 'ContractManagementController@edit')->name('contract_management_edit');
 	Route::match(['get'], '/contract_management/delete/{id}', 'ContractManagementController@delete')->name('contract_management_delete');
+    Route::match(['get'], '/contract_management/download_contract/{id}', 'ContractManagementController@downloadContract')->name('contract_management_download');
 
 	// Sales management
 	Route::match(['get'], '/sales_management', 'SalesManagementController@index')->name('sales_management_index');

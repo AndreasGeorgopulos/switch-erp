@@ -7,6 +7,13 @@
 @section('content')
 	<form method="post" action="{{route('contract_management_save_rows')}}">
 		{{csrf_field()}}
+
+		<div class="text-right">
+			<a class="btn btn-primary" href="{{url(route('contract_management_edit'))}}">
+				<i class="fa fa-plus"></i> {{trans('Új cég')}}
+			</a>
+		</div>
+
 		<table class="table table-bordered table-striped dataTable" id="contract-table">
 			<thead>
 			<tr role="row">
@@ -74,7 +81,7 @@
 			@endforeach
 			</tbody>
 
-			<tfoot>
+<!--			<tfoot>
 			<tr>
 				<td colspan="1">
 					<button type="button" class="btn btn-default btn-sm btn-new">
@@ -90,7 +97,7 @@
 					</button>
 				</td>
 			</tr>
-			</tfoot>
+			</tfoot>-->
 		</table>
 	</form>
 @endsection
