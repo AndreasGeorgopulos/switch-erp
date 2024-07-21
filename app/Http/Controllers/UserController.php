@@ -68,6 +68,8 @@ class UserController extends Controller
 
     	if (!$model->id) {
     		$model->active = 1;
+            $model->add_for_new_job_position = false;
+            $model->deletable_from_job_position = true;
 		}
   
 		// post request
