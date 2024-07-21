@@ -31,11 +31,29 @@
 						<div class="col-sm-8">
 							<div class="form-group">
 								<label>{{trans('Cég')}}*</label>
-								<select name="company_id" class="form-control select2">
+								<select id="job_position_form_company_id" name="company_id" class="form-control select2">
 									@foreach(\App\Models\Company::getDropdownItems($model->company_id) as $item)
-										<option value="{{$item['value']}}" @if($item['selected']) selected="selected" @endif>{{$item['title']}}</option>
+										<option value="{{$item['value']}}"
+												data-description="{{$item['description']}}"
+												@if($item['selected']) selected="selected" @endif>{{$item['title']}}</option>
 									@endforeach
 								</select>
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-sm-12">
+							<div class="form-group">
+								<label>{{trans('Cég bemutató')}}</label>
+								<textarea id="job_position_form_company_description" name="company_description" class="form-control" rows="6" placeholder="{{trans('A kiválasztott cég bemutató szövege fog itt megjelenni, ha az meg van adva!')}}" readonly>{{old('company_description', $model->company ? $model->company->description : '')}}</textarea>
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-sm-12">
+							<div class="form-group">
+								<label>{{trans('Pozíció leírás')}}*</label>
+								<textarea name="description" class="form-control" rows="6">{{old('description', $model->description)}}</textarea>
 							</div>
 						</div>
 					</div>
@@ -60,14 +78,6 @@
 										<option value="{{$item['value']}}" @if($item['selected']) selected="selected" @endif>{{$item['title']}}</option>
 									@endforeach
 								</select>
-							</div>
-						</div>
-					</div>
-					<div class="row">
-						<div class="col-sm-12">
-							<div class="form-group">
-								<label>{{trans('Leírás')}}*</label>
-								<textarea name="description" class="form-control" rows="12">{{old('description', $model->description)}}</textarea>
 							</div>
 						</div>
 					</div>

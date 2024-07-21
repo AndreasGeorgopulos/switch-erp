@@ -16,6 +16,7 @@ use Illuminate\Http\UploadedFile;
  *
  * @property int $id
  * @property string $name
+ * @property string $description
  * @property double $success_award
  * @property string $payment_deadline
  * @property string $contact_name
@@ -39,6 +40,7 @@ class Company extends Model implements IModelRules, IModelDeletable
 
 	protected $fillable = [
 		'name',
+		'description',
 		'success_award',
 		'payment_deadline',
 		'contact_name',
@@ -133,6 +135,9 @@ class Company extends Model implements IModelRules, IModelDeletable
 				'required',
 				'max:100',
 			],
+            'description' => [
+                'max:65535',
+            ],
 			/*'success_award' => [
 				'required',
 			],*/
@@ -165,6 +170,7 @@ class Company extends Model implements IModelRules, IModelDeletable
 	{
 		return [
 			'name' => trans( 'Név' ),
+			'description' => trans( 'Cég bemutató' ),
 			'success_award' => trans( 'Sikerdíj mértéke' ),
 			'payment_deadline' => trans( 'Fizetési határidő' ),
 			'contact_name' => trans( 'Kapcsolattartó' ),
@@ -181,7 +187,7 @@ class Company extends Model implements IModelRules, IModelDeletable
      */
 	public static function getDropdownItems( int $selected = null, bool $onlyHasJobPositions = false, bool $onlyIsActive = true ): array
 	{
-		$models = static::select(['id', 'name'])
+		$models = static::select(['id', 'name', 'description'])
 			->where(function ($q) use($onlyHasJobPositions, $onlyIsActive) {
                 if ($onlyIsActive) {
                     $q->where('is_active', 1);
@@ -200,6 +206,7 @@ class Company extends Model implements IModelRules, IModelDeletable
 			return [
 				'value' => $item['id'],
 				'title' => $item['name'],
+				'description' => $item['description'],
 				'selected' => $item['id'] == $selected,
 			];
 		}, $models);

@@ -74,6 +74,14 @@
 								</div>
 							</div>
 						</div>
+						<div class="row">
+							<div class="col-md-12">
+								<div class="form-group">
+									<label>{{trans('Cég bemutató')}}</label>
+									<textarea name="description" class="form-control height-200" maxlength="65535">{{old('description', $model->description)}}</textarea>
+								</div>
+							</div>
+						</div>
 					</div>
 					<div class="col-sm-6">
 						<div class="form-group">

@@ -31,9 +31,15 @@
 					<div class="col-sm-5">{{trans('Technológiák')}}</div>
 					<div class="col-sm-7">{{$model->skills()->orderBy('name', 'asc')->pluck('name')->implode(', ')}}</div>
 				</div>
+				<hr />
 				<div class="row">
-					<div class="col-sm-5">{{trans('Leírás')}}</div>
-					<div class="col-sm-7">{!! $model->description !!}</div>
+					<div class="col-sm-5">{{trans('Cég bemutató')}}</div>
+					<div class="col-sm-7">{!! nl2br($model->company->description) !!}</div>
+				</div>
+				<hr />
+				<div class="row">
+					<div class="col-sm-5">{{trans('Pozíció')}}</div>
+					<div class="col-sm-7">{!! nl2br($model->description) !!}</div>
 				</div>
 			</div>
 		</div>
