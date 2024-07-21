@@ -43,6 +43,20 @@
                             </select>
                         </div>
                         <div class="form-group">
+                            <label>{{trans('Hozzáadás új pozíció felvételekor')}}</label>
+                            <select class="form-control select2" name="add_for_new_job_position">
+                                <option value="1" @if(old('add_for_new_job_position', $model->add_for_new_job_position) === true) selected="selected" @endif>{{trans('Igen')}}</option>
+                                <option value="0" @if(old('add_for_new_job_position', $model->add_for_new_job_position) === false) selected="selected" @endif>{{trans('Nem')}}</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>{{trans('Eltávolítható pozíciókből')}}</label>
+                            <select class="form-control select2" name="deletable_from_job_position">
+                                <option value="1" @if(old('deletable_from_job_position', $model->deletable_from_job_position) === true) selected="selected" @endif>{{trans('Igen')}}</option>
+                                <option value="0" @if(old('deletable_from_job_position', $model->deletable_from_job_position) === false) selected="selected" @endif>{{trans('Nem')}}</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
                             <label>{{trans('Téma')}}</label>
                             <select name="theme_id" class="form-control select2">
                                 <option value="0">{{trans('Alapértelmezett beállítások')}}</option>

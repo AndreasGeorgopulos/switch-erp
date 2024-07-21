@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\JobPosition;
 use App\Models\Skill;
+use App\Models\User;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
@@ -96,6 +97,7 @@ class JobPositionController extends Controller implements ICrudController
 	public function edit(Request $request, int $id = 0)
 	{
 		$model = JobPosition::findOrNew($id);
+        $isNewModel = !$model->id;
 
 		if ( $request->isMethod( 'post' ) ) {
 			// validate
@@ -116,7 +118,7 @@ class JobPositionController extends Controller implements ICrudController
 			$model->save();
 
 			$this->setSkills($model, $request->input('skills'));
-			$this->setUsers($model, $request->input('users'));
+			$this->setUsers($model, $request->input('users'), $isNewModel);
 
 			return redirect( route( 'job_positions_edit', ['id' => $model->id] ) )
 				->with( 'form_success_message', [
@@ -125,12 +127,16 @@ class JobPositionController extends Controller implements ICrudController
 				] );
 		}
 
-		$selectedSkillIds = [];
+		$selectedSkillIds = $model->skills()->pluck('id')->toArray();
+        $selectedUserIds = $model->users()->pluck('id')->toArray();
+        if ($isNewModel) {
+            $selectedUserIds = $this->mergeAutoAddUserIds($selectedUserIds);
+        }
 
 		return view( 'job_positions.edit', [
 			'model' => $model,
-			'selectedSkillIds' => $model->skills()->pluck('id')->toArray(),
-			'selectedUserIds' => $model->users()->pluck('id')->toArray(),
+			'selectedSkillIds' => $selectedSkillIds,
+			'selectedUserIds' => $selectedUserIds,
 		] );
 	}
 
@@ -186,8 +192,21 @@ class JobPositionController extends Controller implements ICrudController
 		$model->skills()->sync($ids);
 	}
 
-	private function setUsers($model, $items)
+	private function setUsers($model, $items, $isNewModel)
 	{
+        $items = $isNewModel ? $this->mergeAutoAddUserIds($items) : $this->mergeNotRemovableUserIds($items);
 		$model->users()->sync($items);
 	}
+
+    private function mergeAutoAddUserIds(array $items): array
+    {
+        $autoUserIds = User::where('add_for_new_job_position', true)->pluck('id')->toArray();
+        return collect($items)->merge($autoUserIds)->unique()->toArray();
+    }
+
+    private function mergeNotRemovableUserIds(array $items): array
+    {
+        $autoUserIds = User::where('deletable_from_job_position', false)->pluck('id')->toArray();
+        return collect($items)->merge($autoUserIds)->unique()->toArray();
+    }
 }

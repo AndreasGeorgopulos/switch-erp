@@ -24,7 +24,7 @@ class User extends Authenticatable
      *
      * @var array
      */
-    protected $fillable = ['name', 'email', 'active', 'monogram', 'vacation_days_per_year'];
+    protected $fillable = ['name', 'email', 'active', 'monogram', 'vacation_days_per_year', 'add_for_new_job_position', 'deletable_from_job_position'];
 
     /**
      * The attributes that should be hidden for arrays.
@@ -33,6 +33,11 @@ class User extends Authenticatable
      */
     protected $hidden = [
         'password', 'remember_token',
+    ];
+
+    protected $casts = [
+        'add_for_new_job_position' => 'boolean',
+        'deletable_from_job_position' => 'boolean',
     ];
 
 	/**
@@ -46,16 +51,16 @@ class User extends Authenticatable
 	/**
 	 * @return BelongsToMany
 	 */
-	public function job_positions()
-	{
+	public function job_positions(): BelongsToMany
+    {
 		return $this->belongsToMany(JobPosition::class);
 	}
 
 	/**
 	 * @return BelongsToMany
 	 */
-	public function applicant_groups()
-	{
+	public function applicant_groups(): BelongsToMany
+    {
 		return $this->belongsToMany(ApplicantGroup::class);
 	}
 
@@ -70,9 +75,9 @@ class User extends Authenticatable
 	/**
 	 * @return array|array[]
 	 */
-	public static function getDropdownItems($selectedIds = [])
-	{
-		$models = static::select(['id', 'name'])
+	public static function getDropdownItems($selectedIds = []): array
+    {
+		$models = static::select(['id', 'name', 'deletable_from_job_position'])
 			->where('active', true)
 			/*->whereHas('roles', function ($q) {
 				$q->where('roles.key', '<>', 'superadmin');
@@ -80,13 +85,14 @@ class User extends Authenticatable
 			->orderBy('name', 'asc')
 			->get();
 
-		return array_map(function ($item) use($selectedIds) {
-			return [
-				'value' => $item['id'],
-				'title' => $item['name'],
-				'selected' => (bool) (in_array($item['id'], $selectedIds)),
+        return collect($models)->map(function ($item) use($selectedIds) {
+            return [
+                'value' => $item['id'],
+                'title' => $item['name'],
+                'selected' => (bool) (in_array($item['id'], $selectedIds)),
+                'deletable_from_job_position' => $item['deletable_from_job_position'],
 			];
-		}, collect($models)->toArray());
+        })->toArray();
 	}
 
 	/**
