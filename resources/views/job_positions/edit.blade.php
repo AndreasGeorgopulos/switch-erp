@@ -61,7 +61,7 @@
 						<div class="col-sm-12">
 							<div class="form-group">
 								<label>{{trans('Technológiák')}}*</label>
-								<select required="required" name="skills[]" class="form-control select2" multiple>
+								<select required="required" name="skills[]" class="select2 skill" multiple>
 									@foreach(\App\Models\Applicant::getSkillDropdownOptions($selectedSkillIds) as $item)
 										<option @if($item['selected']) selected="selected" @endif>{{$item['name']}}</option>
 									@endforeach

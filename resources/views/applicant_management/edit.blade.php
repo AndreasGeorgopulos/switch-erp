@@ -125,7 +125,7 @@
 							<div class="col-md-12">
 								<div class="form-group">
 									<label>{{trans('Technológiák, készségek')}}</label>
-									<select name="applicant[skills][]" class="form-control select2" multiple tabindex="13">
+									<select name="applicant[skills][]" class="form-control select2 skill" multiple tabindex="13">
 										@foreach(\App\Models\Applicant::getSkillDropdownOptions($selectedSkillIds) as $item)
 											<option @if($item['selected']) selected="selected" @endif>{{$item['name']}}</option>
 										@endforeach
