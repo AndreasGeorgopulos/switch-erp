@@ -31,7 +31,7 @@ use Illuminate\Support\Str;
  * @property string $last_callback_date
  * @property string $in_english
  * @property string $forwarded_to_companies
- * @property bool $is_subcontractor
+ * @property bool $employment_relationship
  * @property string $graduation
  * @property int $salary
  * @property int $notice_period
@@ -286,7 +286,7 @@ class Applicant extends Model implements IModelRules, IModelSortable
 	}
 
 	/**
-	 * Dropdown options of subcontractor status
+	 * Dropdown options of employment relationships
 	 *
 	 * @param int|null $selected
 	 * @return array[]

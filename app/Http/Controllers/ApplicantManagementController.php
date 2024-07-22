@@ -459,6 +459,9 @@ class ApplicantManagementController extends Controller
             if (is_numeric($getParams['ho'])) {
                 $q->where('home_office', '=', $getParams['ho']);
             }
+            if (is_numeric($getParams['employment_relationship'])) {
+                $q->where('employment_relationship', '=', $getParams['employment_relationship']);
+            }
         });
 
         if (!empty($getParams['skill'])) {
@@ -495,6 +498,7 @@ class ApplicantManagementController extends Controller
             'ho' => $request->get('ho', null),
             'sort_by' => $request->get('sort_by', 'last_contact_date'),
             'direction' => $request->get('direction', 'desc'),
+            'employment_relationship' => $request->get('employment_relationship', null),
         ];
         if (!in_array($getParams['direction'], ['asc', 'desc'])) {
             $getParams['direction'] = 'desc';

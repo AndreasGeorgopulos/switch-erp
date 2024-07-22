@@ -171,7 +171,14 @@
 										@endforeach
 									</select>
 								</th>
-								<th></th>
+								<th>
+									<select name="employment_relationship" class="employment_relationship form-control search-input select2">
+										<option></option>
+										@foreach(\App\Models\Applicant::getEmploymentRelationshipDropdownOptions($getParams['employment_relationship']) as $item)
+											<option value="{{$item['value']}}" @if($item['value'] == $getParams['employment_relationship']) selected="selected" @endif>{{$item['name']}}</option>
+										@endforeach
+									</select>
+								</th>
 								<th></th>
 								<th></th>
 							</tr>
