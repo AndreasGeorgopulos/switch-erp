@@ -10,8 +10,9 @@ $(function() {
         eventHandlers: function () {
             const $this = this;
 
-            $this.select_company_id.off('change');
-            $this.select_company_id.on('change', function () {
+            //$this.select_company_id.off('change');
+            $this.select_company_id.on('change', function (e) {
+                e.preventDefault();
                 let selected_option = $(this).find('option:selected');
                 $this.textarea_company_description.val('');
                 if (selected_option !== undefined) {

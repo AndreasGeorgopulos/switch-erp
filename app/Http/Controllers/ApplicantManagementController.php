@@ -350,16 +350,20 @@ class ApplicantManagementController extends Controller
 	 */
 	private function setSkills($model, $items)
 	{
-		$ids = array_map(function ($skillName) {
-			$skillName = trim($skillName);
-			if (($skill = Skill::where('name', $skillName)->first()) === null) {
-				$skill = new Skill();
-				$skill->name = $skillName;
-				$skill->is_active = true;
-				$skill->save();
-			}
-			return $skill->id;
-		}, $items);
+        if ($items === null) {
+            $ids = [];
+        } else {
+            $ids = array_map(function ($skillName) {
+                $skillName = trim($skillName);
+                if (($skill = Skill::where('name', $skillName)->first()) === null) {
+                    $skill = new Skill();
+                    $skill->name = $skillName;
+                    $skill->is_active = true;
+                    $skill->save();
+                }
+                return $skill->id;
+            }, $items);
+        }
 
 		$model->skills()->sync($ids);
 	}
