@@ -129,7 +129,7 @@ return [
 					'active' => ['applicant_groups/*'],
 				],
 				[
-					'text' => 'Technológiák, készségek',
+					'text' => 'Technológiák',
 					'route' => 'skills_list',
 					'role' => 'admin_skills',
 					'active' => ['skills/*'],

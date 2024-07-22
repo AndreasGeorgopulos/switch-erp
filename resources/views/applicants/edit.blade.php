@@ -140,7 +140,7 @@
 
 						<div class="col-md-12">
 							<div class="form-group">
-								<label>{{trans('Technológiák, készségek')}}*</label>
+								<label>{{trans('Technológiák')}}*</label>
 								<div class="columns-count-3">
 									@foreach(\App\Models\Skill::where('is_active', 1)->get() as $skill)
 										<div class="">

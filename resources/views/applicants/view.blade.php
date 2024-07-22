@@ -114,7 +114,7 @@
 					</div>
 				</div>
 				<div class="row">
-					<div class="col-sm-5">{{trans('Technológiák, készségek')}}</div>
+					<div class="col-sm-5">{{trans('Technológiák')}}</div>
 					<div class="col-sm-7">
 						<ul>
 							@foreach($model->skills()->orderBy('name', 'asc')->get() as $skill)
