@@ -39,7 +39,7 @@ class ContractManagementController extends Controller
         })->orderBy('name', 'asc')->get();
 
 		return view('contract_management.index', [
-			'site_title' => trans('Szerződések'),
+			'site_title' => trans('Partnereink'),
 			'site_subtitle' => 'Version 3.0',
 			'breadcrumb' => [],
 			'companies' => $companies,
@@ -99,7 +99,7 @@ class ContractManagementController extends Controller
 		}
 
 		return view('contract_management.edit', [
-			'site_title' => trans('Szerződések'),
+			'site_title' => trans('Partnereink'),
 			'site_subtitle' => 'Version 3.0',
 			'breadcrumb' => [],
 			'model' => $model,

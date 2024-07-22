@@ -21,7 +21,7 @@
 
 	@if(hasRole('contract_module'))
 		<li class="nav-item @if(\Illuminate\Support\Str::startsWith($routeName, 'contract_management')) active @endif">
-			<a href="{{url( route( 'contract_management_index' ) )}}" class="nav-link">{{trans('Szerződések')}}</a>
+			<a href="{{url( route( 'contract_management_index' ) )}}" class="nav-link">{{trans('Partnereink')}}</a>
 		</li>
 	@endif
 
