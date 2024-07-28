@@ -144,8 +144,11 @@ $(function() {
 
 			resetForm: function() {
 				const $this = this;
+				const user_id = $this.formArea.find('input[name="user_id"]').val();
+
 				$this.formArea.addClass('hidden');
 				$this.formArea.find('input').val(null);
+				$this.formArea.find('input[name="user_id"]').val(user_id);
 				$this.formArea.find('textarea').val(null);
 				$this.formArea.find('.btn-form-save').prop('disabled', false);
 				$this.formArea.find('.btn-form-cancel').prop('disabled', false);

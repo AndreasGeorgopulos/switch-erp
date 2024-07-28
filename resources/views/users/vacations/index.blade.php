@@ -4,8 +4,8 @@ $vacationModels = $model->vacations()->whereYear('begin_date', date('Y'))->get()
 
 <hr />
 <div class="form-group" id="vacation-area"
-     data-load-url="{{url(route('ajax_load_profile_vacations'))}}"
-     data-save-url="{{url(route('ajax_save_profile_vacation'))}}"
+     data-load-url="{{url(route('ajax_load_profile_vacations')) . '?user_id=' . $model->id}}"
+     data-save-url="{{url(route('ajax_save_profile_vacation')) . '?user_id=' . $model->id}}"
      data-delete-url="{{url(route('ajax_delete_profile_vacation'))}}"
      data-user-id="{{$model->id}}"
      data-days-per-year="{{$model->vacation_days_per_year}}"

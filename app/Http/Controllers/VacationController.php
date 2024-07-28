@@ -26,7 +26,8 @@ class VacationController extends Controller
 	{
 		$this->validateAjaxRequest($request);
 
-		$userModel = $this->findUserModel();
+        $user_id = $request->input('user_id', (Auth::user()->id ?? null));
+		$userModel = $this->findUserModel($user_id);
 
 		return view('users.vacations._list', [
 			'userModel' => $userModel,
@@ -52,8 +53,10 @@ class VacationController extends Controller
 			]);
 		}
 
+        $user_id = $request->get('user_id', (Auth::user()->id ?? null));
 		$vacationModel = Vacation::findOrNew($request->get('id'));
 		$vacationModel->fill($request->all());
+        $vacationModel->user_id = $user_id;
 
 		if (!$vacationModel->save()) {
 			throw new RuntimeException('Model save failed: ' . Vacation::class . ' #' . $vacationModel->id);
@@ -163,13 +166,14 @@ class VacationController extends Controller
 		return Vacation::findOrFail($id);
 	}
 
-	/**
-	 * Find logged user model
-	 *
-	 * @return User
-	 */
-	private function findUserModel(): User
+    /**
+     * Find logged user model
+     *
+     * @param int $user_id
+     * @return User
+     */
+	private function findUserModel(int $user_id): User
 	{
-		return User::findOrFail(Auth::user()->id ?? null);
+		return User::findOrFail($user_id);
 	}
 }

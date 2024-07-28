@@ -27,7 +27,7 @@ class Vacation extends Model implements IModelDeletable, IModelRules, IModelEdit
 
 	protected $table = 'vacations';
 
-	protected $fillable = ['begin_date', 'end_date', 'notice'];
+	protected $fillable = ['begin_date', 'end_date', 'notice', 'user_id'];
 
 	public function save(array $options = [])
 	{
@@ -97,8 +97,9 @@ class Vacation extends Model implements IModelDeletable, IModelRules, IModelEdit
 	{
 		$notExpired = $this->begin_date > Carbon::now()->format('Y-m-d');
 		$isNotApproved = $this->status === self::STATUS_REQUESTED;
+        $isPermitted = /*$this->user_id === Auth::user()->id ||*/ hasRole('superadmin') || hasRole('calendar');
 
-		return $notExpired && $isNotApproved;
+		return ($notExpired && $isNotApproved) || $isPermitted;
 	}
 
 	/**
@@ -108,11 +109,12 @@ class Vacation extends Model implements IModelDeletable, IModelRules, IModelEdit
 	 */
 	public function isDeletable(): bool
 	{
-		$notExpired = $this->begin_date > Carbon::now()->format('Y-m-d');
+		//$notExpired = $this->begin_date > Carbon::now()->format('Y-m-d');
 		$isNotApproved = $this->status !== self::STATUS_APPROVED;
-		$isPermitted = $this->user_id === Auth::user()->id || hasRole('superadmin') || hasRole('calendar');
+        $isOwn = $this->user_id === Auth::user()->id;
+		$isAdmin = hasRole('superadmin') || hasRole('calendar');
 
-		return $notExpired && $isNotApproved && $isPermitted;
+		return $isAdmin || ($isOwn && $isNotApproved);
 	}
 
 	/**
@@ -122,11 +124,10 @@ class Vacation extends Model implements IModelDeletable, IModelRules, IModelEdit
 	 */
 	public function isApprovable(): bool
 	{
-		$notExpired = $this->begin_date > Carbon::now()->format('Y-m-d');
 		$isNotApproved = $this->status !== self::STATUS_APPROVED;
-		$isPermitted = hasRole('superadmin') || hasRole('calendar');
+        $isAdmin = hasRole('superadmin') || hasRole('calendar');
 
-		return $notExpired && $isNotApproved && $isPermitted;
+		return $isAdmin && $isNotApproved;
 	}
 
 	/**
@@ -136,11 +137,11 @@ class Vacation extends Model implements IModelDeletable, IModelRules, IModelEdit
 	 */
 	public function isRejectable(): bool
 	{
-		$notExpired = $this->begin_date > Carbon::now()->format('Y-m-d');
+		//$notExpired = $this->begin_date > Carbon::now()->format('Y-m-d');
 		$isNotApproved = $this->status !== self::STATUS_REJECTED;
-		$isPermitted = hasRole('superadmin') || hasRole('calendar');
+		$isAdmin = hasRole('superadmin') || hasRole('calendar');
 
-		return $notExpired && $isNotApproved && $isPermitted;
+		return $isAdmin && $isNotApproved;
 	}
 
 	/**
@@ -151,7 +152,8 @@ class Vacation extends Model implements IModelDeletable, IModelRules, IModelEdit
 	public static function rules(): array
 	{
 		return [
-			'begin_date' => 'required|date|after:' . Carbon::now()->format('Y-m-d'),
+			//'begin_date' => 'required|date|after:' . Carbon::now()->format('Y-m-d'),
+			'begin_date' => 'required|date' . (!hasRole('superadmin') && !hasRole('calendar') ? ('|after:' . Carbon::now()->format('Y-m-d')) : ''),
 			'end_date' => ['required', 'date', 'after_or_equal:begin_date'],
 			'notice' => 'max:255',
 		];

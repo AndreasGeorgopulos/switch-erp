@@ -105,6 +105,10 @@
                             </select>
                             <div class="hint">{{trans('Ha nincs egy elem sem kiválasztva, az Adatbázis modulban az összes jelölt csoport megjelenik.')}}</div>
                         </div>
+
+                        @if(hasRole('calendar'))
+                            @include('users.vacations.index')
+                        @endif
                     </div>
                 </div>
             </div>
