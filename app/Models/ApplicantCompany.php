@@ -137,7 +137,15 @@ class ApplicantCompany extends Model
     public static function getWorkModels(int $selectedYear)
     {
         return static::where('status', 7)
-            ->whereYear('work_begin_date', $selectedYear)
+            ->where(function ($q) use ($selectedYear) {
+                $q->where(function ($q1) use ($selectedYear) {
+                    $q1->whereYear('send_date', $selectedYear);
+                });
+                $q->orWhere(function ($q2) use ($selectedYear) {
+                    $q2->whereYear('work_begin_date', $selectedYear);
+                });
+            })
+
             ->orderBy('work_begin_date', 'asc')
             ->get();
     }
